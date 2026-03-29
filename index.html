@@ -5,101 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>J. Kwon</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <aside class="sidebar">
+  <nav class="nav">
     <div class="name">J. Kwon</div>
-    <nav>
-      <a href="#" class="nav-link active" data-page="home">Home</a>
-      <a href="#" class="nav-link" data-page="about">About</a>
-      <a href="#" class="nav-link" data-page="gear">Gear</a>
-      <a href="#" class="nav-link" data-page="projects">Projects</a>
-      <a href="#" class="nav-link" data-page="videos">Videos</a>
-      <a href="#" class="nav-link" data-page="thoughts">Thoughts</a>
-      <a href="#" class="nav-link" data-page="contact">Contact</a>
-    </nav>
-  </aside>
+    <a href="#" class="link active" data-page="home">Home</a>
+    <a href="#" class="link" data-page="about">About</a>
+    <a href="#" class="link" data-page="gear">Gear</a>
+    <a href="#" class="link" data-page="projects">Projects</a>
+    <a href="#" class="link" data-page="videos">Videos</a>
+    <a href="#" class="link" data-page="thoughts">Thoughts</a>
+    <a href="#" class="link" data-page="contact">Contact</a>
+  </nav>
 
-  <main class="content">
-
+  <main class="main">
+    <!-- HOME -->
     <div class="page active" id="page-home">
-      <img src="image.jpg" alt="Illustration" class="art" />
+      <div class="news">
+        <h2>News</h2>
+        <ul>
+          <li><strong>2.25.25</strong> - <a href="#">website born!</a></li>
+          <li><strong>XX.XX.XX</strong> - XXX XXX</li>
+          <li><strong>XX.XX.XX</strong> - XXX XXX</li>
+          <li><strong>XX.XX.XX</strong> - XXX XXX</li>
+          <li><strong>XX.XX.XX</strong> - XXX XXX</li>
+        </ul>
+      </div>
     </div>
 
+    <!-- ABOUT -->
     <div class="page" id="page-about">
-      <div class="text-block">
-        <p>Photographe et vidéaste basé à Séoul.</p>
-        <p>Je travaille autour des véhicules rétro, des road trips et de la culture coréenne.</p>
-      </div>
+      <p>Photographe et vidéaste basé à Séoul.</p>
     </div>
 
+    <!-- GEAR -->
     <div class="page" id="page-gear">
-      <div class="text-block">
-        <p>Sony A7IV</p>
-        <p>Sony 24-70mm f/2.8 GM II</p>
-        <p>Atomos Ninja V</p>
-        <p>Rode Wireless Pro</p>
-      </div>
+      <p>Sony A7IV — Sony 24-70mm f/2.8</p>
     </div>
 
+    <!-- PROJECTS -->
     <div class="page" id="page-projects">
-      <div class="text-block">
-        <p>Kia Bongo Rétro — Shooting complet</p>
-        <p>Nuits de Séoul — Série nocturne</p>
-        <p>Côte Est — Road trip en van</p>
-      </div>
+      <p>Kia Bongo Rétro — Nuits de Séoul</p>
     </div>
 
+    <!-- VIDEOS -->
     <div class="page" id="page-videos">
-      <div class="text-block">
-        <p>Restauration complète — Kia Bongo 1992 (12:34)</p>
-        <p>Road trip Seoul → Busan en van (08:21)</p>
-      </div>
+      <p>Restauration Kia Bongo 1992</p>
     </div>
 
+    <!-- THOUGHTS -->
     <div class="page" id="page-thoughts">
       <div class="thoughts-list">
-        <a href="#" class="thought" data-thought="bipedality">
-          <span class="thought-date">[2026-03-27]</span> bipedality
-        </a>
-        <a href="#" class="thought" data-thought="oyasumi">
-          <span class="thought-date">[2026-03-24]</span> oyasumi
-        </a>
-        <a href="#" class="thought" data-thought="drifting">
-          <span class="thought-date">[2026-03-19]</span> drifting
-        </a>
-        <a href="#" class="thought" data-thought="slow-morning">
-          <span class="thought-date">[2026-03-12]</span> slow morning
-        </a>
-        <a href="#" class="thought" data-thought="concrete-waves">
-          <span class="thought-date">[2026-03-05]</span> concrete waves
-        </a>
-        <a href="#" class="thought" data-thought="neon-fog">
-          <span class="thought-date">[2026-02-28]</span> neon & fog
-        </a>
-        <a href="#" class="thought" data-thought="rearview">
-          <span class="thought-date">[2026-02-20]</span> rearview mirror
-        </a>
-        <a href="#" class="thought" data-thought="analogue">
-          <span class="thought-date">[2026-02-14]</span> analogue
-        </a>
+        <a href="#" class="thought" data-t="bipedality"><span>[2026-03-27]</span> bipedality</a>
+        <a href="#" class="thought" data-t="oyasumi"><span>[2026-03-24]</span> oyasumi</a>
+        <a href="#" class="thought" data-t="drifting"><span>[2026-03-19]</span> drifting</a>
+        <a href="#" class="thought" data-t="slow"><span>[2026-03-12]</span> slow morning</a>
+        <a href="#" class="thought" data-t="concrete"><span>[2026-03-05]</span> concrete waves</a>
+        <a href="#" class="thought" data-t="neon"><span>[2026-02-28]</span> neon & fog</a>
       </div>
-
-      <div class="page" id="page-thought-detail" style="display:none;">
-        <a href="#" class="back-link" id="backToThoughts">← back</a>
-        <div class="thought-detail" id="thoughtDetail"></div>
+      <div class="thought-detail" id="thoughtDetail" style="display:none">
+        <a href="#" id="backBtn">← back</a>
+        <div id="thoughtContent"></div>
       </div>
     </div>
 
+    <!-- CONTACT -->
     <div class="page" id="page-contact">
-      <div class="text-block">
-        <p>hello@jkwon.studio</p>
-        <p>Séoul, Corée du Sud</p>
-      </div>
+      <p>hello@jkwon.studio</p>
     </div>
-
   </main>
 
   <script src="script.js"></script>
