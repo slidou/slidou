@@ -1,0 +1,30 @@
+body{
+margin:0;
+display:flex;
+background:#111;
+color:white;
+font-family:serif;
+}
+
+.sidebar{
+width:250px;
+padding:40px;
+}
+
+.sidebar a{
+display:block;
+margin:10px 0;
+color:#6aa3ff;
+text-decoration:none;
+}
+
+.content{
+flex:1;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.content img{
+max-width:800px;
+}
