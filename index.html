@@ -1,81 +1,121 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>J. Kwon</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <nav class="nav">
-    <div class="name">J. Kwon</div>
-    <a href="#" class="link active" data-page="home">Home</a>
-    <a href="#" class="link" data-page="about">About</a>
-    <a href="#" class="link" data-page="gear">Gear</a>
-    <a href="#" class="link" data-page="projects">Projects</a>
-    <a href="#" class="link" data-page="videos">Videos</a>
-    <a href="#" class="link" data-page="thoughts">Thoughts</a>
-    <a href="#" class="link" data-page="contact">Contact</a>
-  </nav>
+  <div class="wrapper">
 
-  <main class="main">
-    <!-- HOME -->
-    <div class="page active" id="page-home">
-      <div class="news">
-        <h2>News</h2>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h1><a href="#" data-page="home">J. Kwon</a></h1>
+      <nav>
         <ul>
-          <li><strong>2.25.25</strong> - <a href="#">website born!</a></li>
-          <li><strong>XX.XX.XX</strong> - XXX XXX</li>
-          <li><strong>XX.XX.XX</strong> - XXX XXX</li>
-          <li><strong>XX.XX.XX</strong> - XXX XXX</li>
-          <li><strong>XX.XX.XX</strong> - XXX XXX</li>
+          <li><a href="#" data-page="home" class="active">Home</a></li>
+          <li><a href="#" data-page="about">About</a></li>
+          <li><a href="#" data-page="gear">Gear</a></li>
+          <li><a href="#" data-page="projects">Projects</a></li>
+          <li><a href="#" data-page="videos">Videos</a></li>
+          <li><a href="#" data-page="thoughts">Thoughts</a></li>
+          <li><a href="#" data-page="contact">Contact</a></li>
         </ul>
+      </nav>
+    </div>
+
+    <!-- Main content -->
+    <main class="content" id="content">
+
+      <!-- HOME -->
+      <div class="page active" id="page-home">
+        <img src="image.jpg" alt="" />
       </div>
-    </div>
 
-    <!-- ABOUT -->
-    <div class="page" id="page-about">
-      <p>Photographe et vidéaste basé à Séoul.</p>
-    </div>
-
-    <!-- GEAR -->
-    <div class="page" id="page-gear">
-      <p>Sony A7IV — Sony 24-70mm f/2.8</p>
-    </div>
-
-    <!-- PROJECTS -->
-    <div class="page" id="page-projects">
-      <p>Kia Bongo Rétro — Nuits de Séoul</p>
-    </div>
-
-    <!-- VIDEOS -->
-    <div class="page" id="page-videos">
-      <p>Restauration Kia Bongo 1992</p>
-    </div>
-
-    <!-- THOUGHTS -->
-    <div class="page" id="page-thoughts">
-      <div class="thoughts-list">
-        <a href="#" class="thought" data-t="bipedality"><span>[2026-03-27]</span> bipedality</a>
-        <a href="#" class="thought" data-t="oyasumi"><span>[2026-03-24]</span> oyasumi</a>
-        <a href="#" class="thought" data-t="drifting"><span>[2026-03-19]</span> drifting</a>
-        <a href="#" class="thought" data-t="slow"><span>[2026-03-12]</span> slow morning</a>
-        <a href="#" class="thought" data-t="concrete"><span>[2026-03-05]</span> concrete waves</a>
-        <a href="#" class="thought" data-t="neon"><span>[2026-02-28]</span> neon & fog</a>
+      <!-- ABOUT -->
+      <div class="page" id="page-about">
+        <div class="text-content">
+          <p>hi i'm justin, a sophomore currently majoring in computer engineering with the intention of building software to control interesting hardware</p>
+          <p>my current pursuits are my youtube channel, and research work under the history department.</p>
+        </div>
       </div>
-      <div class="thought-detail" id="thoughtDetail" style="display:none">
-        <a href="#" id="backBtn">← back</a>
-        <div id="thoughtContent"></div>
-      </div>
-    </div>
 
-    <!-- CONTACT -->
-    <div class="page" id="page-contact">
-      <p>hello@jkwon.studio</p>
-    </div>
-  </main>
+      <!-- GEAR -->
+      <div class="page" id="page-gear">
+        <div class="text-content">
+          <p>under construction</p>
+        </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="page" id="page-projects">
+        <div class="text-content">
+          <p>under construction</p>
+        </div>
+      </div>
+
+      <!-- VIDEOS -->
+      <div class="page" id="page-videos">
+        <div class="text-content">
+          <h2>filming brings me happiness</h2>
+          <p>find me over at youtube.com/@jkwonnn</p>
+          <p>niche tech and life</p>
+        </div>
+      </div>
+
+      <!-- THOUGHTS (liste) -->
+      <div class="page" id="page-thoughts">
+        <div class="text-content">
+          <ul class="blog-list">
+            <li><a href="#" data-slug="bipedality">[2026-03-27] bipedality</a></li>
+            <li><a href="#" data-slug="oyasumi">[2026-03-24] oyasumi</a></li>
+            <li><a href="#" data-slug="oysters">[2026-01-18] oysters with a squeeze of lemon</a></li>
+            <li><a href="#" data-slug="the-one">[2026-01-19] searching for the one</a></li>
+            <li><a href="#" data-slug="nanimo">[2026-01-25] nanimo</a></li>
+            <li><a href="#" data-slug="cs-majors">[2026-01-26] the state of the cs major</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- THOUGHT (détail) -->
+      <div class="page" id="page-thought">
+        <div class="text-content">
+          <a href="#" id="backToThoughts" class="back-arrow">← back</a>
+          <h2 id="thoughtTitle"></h2>
+          <p class="blog-date" id="thoughtDate"></p>
+          <div class="blog-content" id="thoughtBody"></div>
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="page" id="page-contact">
+        <div class="text-content">
+          <h2>get in touch</h2>
+          <ul>
+            <li>justin[at]jkwon[dot]co</li>
+            <li>discord - jk.won</li>
+          </ul>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- News (right panel) -->
+    <aside class="news">
+      <h2>News</h2>
+      <ul>
+        <li><strong>2.25.25</strong> - website born!</li>
+        <li><strong>XX.XX.XX</strong> - XXX XXX</li>
+        <li><strong>XX.XX.XX</strong> - XXX XXX</li>
+        <li><strong>XX.XX.XX</strong> - XXX XXX</li>
+        <li><strong>XX.XX.XX</strong> - XXX XXX</li>
+      </ul>
+    </aside>
+
+  </div>
 
   <script src="script.js"></script>
 </body>
