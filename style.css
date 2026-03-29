@@ -1,20 +1,28 @@
 body{
 margin:0;
-display:flex;
-background:#111;
+background:#0b0f11;
 color:white;
-font-family:serif;
+font-family: Georgia, serif;
+}
+
+.container{
+display:flex;
+height:100vh;
 }
 
 .sidebar{
-width:250px;
-padding:40px;
+width:260px;
+padding:60px;
+}
+
+.sidebar h1{
+margin-bottom:30px;
 }
 
 .sidebar a{
 display:block;
 margin:10px 0;
-color:#6aa3ff;
+color:#5da9ff;
 text-decoration:none;
 }
 
@@ -26,5 +34,6 @@ justify-content:center;
 }
 
 .content img{
-max-width:800px;
+max-width:900px;
+width:70%;
 }
