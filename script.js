@@ -1,99 +1,41 @@
-const thoughts = {
-  bipedality: {
-    title: 'bipedality',
-    date: '2026-03-27',
-    body: 'Standing upright changes everything — perspective, balance, the way light hits the face at golden hour. I keep coming back to this idea that the way we carry our body shapes the way we see the world.\n\nToday I shot a whole roll walking through Gangnam with the camera at chest height. No looking through the viewfinder. Just walking, pressing the shutter when something felt right.'
-  },
-  oyasumi: {
-    title: 'oyasumi',
-    date: '2026-03-24',
-    body: 'Started reading before sleep again. No phone, just a book and the small lamp. It changes the quality of rest completely.\n\nThere\'s a parallel to making work — the more noise you remove, the clearer the signal becomes.'
-  },
-  drifting: {
-    title: 'drifting',
-    date: '2026-03-19',
-    body: 'Not the car kind. The mind kind. Letting a thought go without following it. Sitting in the van parked somewhere in Gapyeong, engine off, windows down, just listening.'
-  },
-  'slow-morning': {
-    title: 'slow morning',
-    date: '2026-03-12',
-    body: 'Coffee, open window, no schedule. The light at 7am in March in Seoul has a specific quality — still cold but with warmth underneath. Like the city is half-asleep and half-awake at the same time.'
-  },
-  'concrete-waves': {
-    title: 'concrete waves',
-    date: '2026-03-05',
-    body: 'The expressway at night from the passenger seat looks like an ocean. Reflective road markings, headlights streaking, the guard rail cutting through like a horizon line. Shot it on 1/4 second handheld.'
-  },
-  'neon-fog': {
-    title: 'neon & fog',
-    date: '2026-02-28',
-    body: 'Found a pocket of fog near the Han River last night. The neon from the bridges dissolved into it like watercolor. Stood there for an hour in the cold.'
-  },
-  rearview: {
-    title: 'rearview mirror',
-    date: '2026-02-20',
-    body: 'Looking back at work from two years ago. Some of it holds up, most doesn\'t. The gap between what you see and what you can make is where all the energy comes from.'
-  },
-  analogue: {
-    title: 'analogue',
-    date: '2026-02-14',
-    body: 'Picked up an FM2 again. No meter, no autofocus, no chimping. 36 frames, that\'s it. Digital makes you loose. Film makes you choose.'
-  }
+const data = {
+  bipedality: { title: 'bipedality', date: '2026-03-27', text: 'Standing upright changes everything. Perspective, balance, the way light hits the face at golden hour.' },
+  oyasumi: { title: 'oyasumi', date: '2026-03-24', text: 'Started reading before sleep again. No phone, just a book and the small lamp.' },
+  drifting: { title: 'drifting', date: '2026-03-19', text: 'Not the car kind. The mind kind. Sitting in the van, engine off, windows down.' },
+  slow: { title: 'slow morning', date: '2026-03-12', text: 'Coffee, open window, no schedule. The light at 7am in March has a specific quality.' },
+  concrete: { title: 'concrete waves', date: '2026-03-05', text: 'The expressway at night from the passenger seat looks like an ocean.' },
+  neon: { title: 'neon & fog', date: '2026-02-28', text: 'Found a pocket of fog near the Han River. The neon dissolved into it like watercolor.' }
 };
 
-const navLinks = document.querySelectorAll('.nav-link');
-
-navLinks.forEach(link => {
-  link.addEventListener('click', e => {
+document.querySelectorAll('.link').forEach(l => {
+  l.addEventListener('click', e => {
     e.preventDefault();
-    const target = link.dataset.page;
-
-    navLinks.forEach(l => l.classList.remove('active'));
-    link.classList.add('active');
-
-    document.querySelectorAll('.content > .page').forEach(p => {
-      p.classList.remove('active');
-      p.style.display = 'none';
-    });
-
-    const page = document.getElementById('page-' + target);
-    if (page) {
-      page.style.display = '';
-      page.classList.add('active');
-    }
-
-    if (target === 'thoughts') {
+    document.querySelectorAll('.link').forEach(x => x.classList.remove('active'));
+    l.classList.add('active');
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + l.dataset.page).classList.add('active');
+    if (l.dataset.page === 'thoughts') {
       document.querySelector('.thoughts-list').style.display = 'flex';
-      document.getElementById('page-thought-detail').style.display = 'none';
+      document.getElementById('thoughtDetail').style.display = 'none';
     }
-
-    document.querySelector('.content').scrollTop = 0;
+    document.querySelector('.main').scrollTop = 0;
   });
 });
 
-document.querySelectorAll('.thought').forEach(el => {
-  el.addEventListener('click', e => {
+document.querySelectorAll('.thought').forEach(t => {
+  t.addEventListener('click', e => {
     e.preventDefault();
-    const key = el.dataset.thought;
-    const data = thoughts[key];
-    if (!data) return;
-
+    const d = data[t.dataset.t];
     document.querySelector('.thoughts-list').style.display = 'none';
-    const detail = document.getElementById('page-thought-detail');
-    detail.style.display = 'block';
-    detail.classList.add('active');
-
-    document.getElementById('thoughtDetail').innerHTML =
-      '<h2>' + data.title + '</h2>' +
-      '<div class="detail-date">[' + data.date + ']</div>' +
-      data.body.split('\n\n').map(p => '<p>' + p + '</p>').join('');
-
-    document.querySelector('.content').scrollTop = 0;
+    document.getElementById('thoughtDetail').style.display = 'block';
+    document.getElementById('thoughtContent').innerHTML =
+      '<h2>' + d.title + '</h2><div class="d">[' + d.date + ']</div><p>' + d.text + '</p>';
+    document.querySelector('.main').scrollTop = 0;
   });
 });
 
-document.getElementById('backToThoughts').addEventListener('click', e => {
+document.getElementById('backBtn').addEventListener('click', e => {
   e.preventDefault();
-  document.getElementById('page-thought-detail').style.display = 'none';
+  document.getElementById('thoughtDetail').style.display = 'none';
   document.querySelector('.thoughts-list').style.display = 'flex';
 });
