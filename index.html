@@ -5,31 +5,113 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>J. Kwon</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
 
   <aside class="sidebar">
     <div class="name">J. Kwon</div>
     <nav>
-      <a href="#" class="link active">Home</a>
-      <a href="#" class="link">About</a>
-      <a href="#" class="link">Gear</a>
-      <a href="#" class="link">Projects</a>
-      <a href="#" class="link">Videos</a>
-      <a href="#" class="link">Thoughts</a>
-      <a href="#" class="link">Contact</a>
+      <a href="#home" class="nav-link active" data-page="home">Home</a>
+      <a href="#about" class="nav-link" data-page="about">About</a>
+      <a href="#gear" class="nav-link" data-page="gear">Gear</a>
+      <a href="#projects" class="nav-link" data-page="projects">Projects</a>
+      <a href="#videos" class="nav-link" data-page="videos">Videos</a>
+      <a href="#thoughts" class="nav-link" data-page="thoughts">Thoughts</a>
+      <a href="#contact" class="nav-link" data-page="contact">Contact</a>
     </nav>
   </aside>
 
   <main class="content">
-    <div class="image-wrapper">
-      <img src="image.jpg" alt="Van rétro" />
-      <span class="badge-new">신제품</span>
-      <div class="caption">
-        <span>기아오스타 복고 코치/루트</span>
+
+    <!-- HOME -->
+    <div class="page active" id="page-home">
+      <div class="image-container">
+        <img src="image.jpg" alt="Van rétro" />
+        <span class="badge-new">신제품</span>
+        <div class="image-caption">기아오스타 복고 고지/루트</div>
       </div>
     </div>
+
+    <!-- ABOUT -->
+    <div class="page" id="page-about">
+      <div class="text-block">
+        <p>Photographe et vidéaste basé à Séoul.</p>
+        <p>Je travaille autour des véhicules rétro, des road trips et de la culture coréenne.</p>
+      </div>
+    </div>
+
+    <!-- GEAR -->
+    <div class="page" id="page-gear">
+      <div class="text-block">
+        <p>Sony A7IV</p>
+        <p>Sony 24-70mm f/2.8 GM II</p>
+        <p>Atomos Ninja V</p>
+        <p>Rode Wireless Pro</p>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="page" id="page-projects">
+      <div class="text-block">
+        <p>Kia Bongo Rétro — Shooting complet</p>
+        <p>Nuits de Séoul — Série nocturne</p>
+        <p>Côte Est — Road trip en van</p>
+      </div>
+    </div>
+
+    <!-- VIDEOS -->
+    <div class="page" id="page-videos">
+      <div class="text-block">
+        <p>Restauration complète — Kia Bongo 1992 (12:34)</p>
+        <p>Road trip Seoul → Busan en van (08:21)</p>
+      </div>
+    </div>
+
+    <!-- THOUGHTS -->
+    <div class="page" id="page-thoughts">
+      <div class="thoughts-list">
+        <a href="#" class="thought" data-thought="bipedality">
+          <span class="thought-date">[2026-03-27]</span> bipedality
+        </a>
+        <a href="#" class="thought" data-thought="oyasumi">
+          <span class="thought-date">[2026-03-24]</span> oyasumi
+        </a>
+        <a href="#" class="thought" data-thought="drifting">
+          <span class="thought-date">[2026-03-19]</span> drifting
+        </a>
+        <a href="#" class="thought" data-thought="slow-morning">
+          <span class="thought-date">[2026-03-12]</span> slow morning
+        </a>
+        <a href="#" class="thought" data-thought="concrete-waves">
+          <span class="thought-date">[2026-03-05]</span> concrete waves
+        </a>
+        <a href="#" class="thought" data-thought="neon-fog">
+          <span class="thought-date">[2026-02-28]</span> neon & fog
+        </a>
+        <a href="#" class="thought" data-thought="rearview">
+          <span class="thought-date">[2026-02-20]</span> rearview mirror
+        </a>
+        <a href="#" class="thought" data-thought=" analogue">
+          <span class="thought-date">[2026-02-14]</span> analogue
+        </a>
+      </div>
+
+      <!-- Vue détail d'une thought -->
+      <div class="page" id="page-thought-detail" style="display:none;">
+        <a href="#" class="back-link" id="backToThoughts">← back</a>
+        <div class="thought-detail" id="thoughtDetail"></div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="page" id="page-contact">
+      <div class="text-block">
+        <p>hello@jkwon.studio</p>
+        <p>Séoul, Corée du Sud</p>
+      </div>
+    </div>
+
   </main>
 
   <script src="script.js"></script>
