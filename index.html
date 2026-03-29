@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Portfolio</title>
+<title>slidou</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,20 +13,60 @@
 <div class="sidebar">
 <h1>slidou</h1>
 
-<a href="#">Home</a>
-<a href="#">About</a>
-<a href="#">Gear</a>
-<a href="#">Projects</a>
-<a href="#">Videos</a>
-<a href="#">Thoughts</a>
-<a href="#">Contact</a>
+<a onclick="show('home')">Home</a>
+<a onclick="show('about')">About</a>
+<a onclick="show('gear')">Gear</a>
+<a onclick="show('projects')">Projects</a>
+<a onclick="show('videos')">Videos</a>
+<a onclick="show('thoughts')">Thoughts</a>
+<a onclick="show('contact')">Contact</a>
 </div>
 
 <div class="content">
+
+<div id="home" class="section active">
 <img src="image.jpg">
 </div>
 
+<div id="about" class="section">
+<h2>About</h2>
+<p>Bienvenue sur mon site.</p>
+<p>Tu peux écrire ce que tu veux ici.</p>
 </div>
+
+<div id="gear" class="section">
+<h2>Gear</h2>
+<ul>
+<li>Camera</li>
+<li>Micro</li>
+<li>Lens</li>
+</ul>
+</div>
+
+<div id="projects" class="section">
+<h2>Projects</h2>
+<p>Liste de projets ici.</p>
+</div>
+
+<div id="videos" class="section">
+<h2>Videos</h2>
+<p>Liens YouTube etc.</p>
+</div>
+
+<div id="thoughts" class="section">
+<h2>Thoughts</h2>
+<p>Blog / réflexions.</p>
+</div>
+
+<div id="contact" class="section">
+<h2>Contact</h2>
+<p>Email : exemple@email.com</p>
+</div>
+
+</div>
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
