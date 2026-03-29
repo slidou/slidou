@@ -1,72 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>slidou</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J. Kwon</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <div class="container">
+        <nav class="sidebar">
+            <h1>J. Kwon</h1>
+            <ul>
+                <li><a href="#" class="menu-link active" data-section="home">Home</a></li>
+                <li><a href="#" class="menu-link" data-section="about">About</a></li>
+                <li><a href="#" class="menu-link" data-section="gear">Gear</a></li>
+                <li><a href="#" class="menu-link" data-section="projects">Projects</a></li>
+                <li><a href="#" class="menu-link" data-section="videos">Videos</a></li>
+                <li><a href="#" class="menu-link" data-section="thoughts">Thoughts</a></li>
+                <li><a href="#" class="menu-link" data-section="contact">Contact</a></li>
+            </ul>
+        </nav>
 
-<div class="container">
+        <main class="content">
+            <!-- Home -->
+            <section id="home" class="section active">
+                <img src="image.jpg" alt="Kia Bongo">
+            </section>
 
-<div class="sidebar">
-<h1>slidou</h1>
+            <!-- About -->
+            <section id="about" class="section">
+                <h2>About</h2>
+                <p>Ton texte de présentation ici...</p>
+            </section>
 
-<a onclick="show('home')">Home</a>
-<a onclick="show('about')">About</a>
-<a onclick="show('gear')">Gear</a>
-<a onclick="show('projects')">Projects</a>
-<a onclick="show('videos')">Videos</a>
-<a onclick="show('thoughts')">Thoughts</a>
-<a onclick="show('contact')">Contact</a>
-</div>
+            <!-- Gear -->
+            <section id="gear" class="section">
+                <h2>Gear</h2>
+                <p>Liste de ton équipement...</p>
+            </section>
 
-<div class="content">
+            <!-- Projects -->
+            <section id="projects" class="section">
+                <h2>Projects</h2>
+                <p>Tes projets ici...</p>
+            </section>
 
-<div id="home" class="section active">
-<img src="image.jpg">
-</div>
+            <!-- Videos -->
+            <section id="videos" class="section">
+                <h2>Videos</h2>
+                <p>Tes vidéos ici...</p>
+            </section>
 
-<div id="about" class="section">
-<h2>About</h2>
-<p>Bienvenue sur mon site.</p>
-<p>Tu peux écrire ce que tu veux ici.</p>
-</div>
+            <!-- Thoughts -->
+            <section id="thoughts" class="section">
+                <h2>Thoughts</h2>
+                <p>Tes réflexions ici...</p>
+            </section>
 
-<div id="gear" class="section">
-<h2>Gear</h2>
-<ul>
-<li>Camera</li>
-<li>Micro</li>
-<li>Lens</li>
-</ul>
-</div>
+            <!-- Contact -->
+            <section id="contact" class="section">
+                <h2>Contact</h2>
+                <p>email@exemple.com</p>
+            </section>
+        </main>
+    </div>
 
-<div id="projects" class="section">
-<h2>Projects</h2>
-<p>Liste de projets ici.</p>
-</div>
-
-<div id="videos" class="section">
-<h2>Videos</h2>
-<p>Liens YouTube etc.</p>
-</div>
-
-<div id="thoughts" class="section">
-<h2>Thoughts</h2>
-<p>Blog / réflexions.</p>
-</div>
-
-<div id="contact" class="section">
-<h2>Contact</h2>
-<p>Email : exemple@email.com</p>
-</div>
-
-</div>
-</div>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
