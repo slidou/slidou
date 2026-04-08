@@ -395,3 +395,20 @@ a:hover, a.active {
     max-height: 50vh;
   }
 }
+
+.books {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.books img {
+  height: 180px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.books img:hover {
+  transform: scale(1.05);
+}
