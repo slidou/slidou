@@ -1,26 +1,3 @@
-// ── Bibliography data ──
-const books = {
-  "Fiodor Dostoïevski": [
-    {
-      title: "Le Rêve d'un homme ridicule",
-      cover: "covers/ridicule.jpg",
-      link: "https://www.goodreads.com/book/show/..."
-    },
-    {
-      title: "Crime et Châtiment",
-      cover: "covers/crime-chatiment.jpg",
-      link: "https://www.goodreads.com/book/show/..."
-    }
-  ],
-  "Albert Camus": [
-    {
-      title: "L'Étranger",
-      cover: "covers/letranger.jpg",
-      link: "https://www.goodreads.com/book/show/..."
-    }
-  ]
-};
-
 // ── Navigation ──
 document.querySelectorAll('[data-page]').forEach(link => {
   link.addEventListener('click', e => {
@@ -31,48 +8,49 @@ document.querySelectorAll('[data-page]').forEach(link => {
     link.classList.add('active');
 
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
 
-    const target = document.getElementById('page-' + page);
-    if (target) {
-      target.classList.add('active');
-    }
-
-    // Générer bibliographie quand on clique dessus
-    if (page === 'bibliography') {
-      generateBibliography();
-    }
-
-    document.querySelector('.content').scrollTop = 0;
+    if (page === 'bibliography') generateBibliography();
   });
 });
 
-// ── Génération Bibliographie ──
+// ── Bibliography data ──
+const books = {
+  "Fiodor Dostoïevski": [
+    { title:"Le Rêve d'un homme ridicule", year:1888, note:9, cover:"covers/ridicule.jpg", link:"https://www.goodreads.com/book/show/..." },
+    { title:"Crime et Châtiment", year:1866, note:10, cover:"covers/crime-chatiment.jpg", link:"https://www.goodreads.com/book/show/..." }
+  ],
+  "Albert Camus": [
+    { title:"L'Étranger", year:1942, note:9, cover:"covers/letranger.jpg", link:"https://www.goodreads.com/book/show/..." }
+  ]
+};
+
+// ── Generate Bibliography ──
 function generateBibliography() {
   const container = document.getElementById('bibliographyContent');
-  container.innerHTML = ''; // reset
+  container.innerHTML = '';
 
   for (const author in books) {
     const h2 = document.createElement('h2');
     h2.textContent = author;
     container.appendChild(h2);
 
-    const bookContainer = document.createElement('div');
-    bookContainer.className = 'books';
+    const booksDiv = document.createElement('div');
+    booksDiv.className = 'books';
 
     books[author].forEach(book => {
-      const a = document.createElement('a');
-      a.href = book.link;
-      a.target = '_blank';
-      a.title = book.title;
-
-      const img = document.createElement('img');
-      img.src = book.cover;
-      img.alt = book.title;
-
-      a.appendChild(img);
-      bookContainer.appendChild(a);
+      const card = document.createElement('a');
+      card.href = book.link;
+      card.target = "_blank";
+      card.className = 'book-card';
+      card.innerHTML = `
+        <img src="${book.cover}" alt="${book.title}">
+        <div class="book-title">${book.title}</div>
+        <div class="book-meta">${book.year} • Note: ${book.note}/10</div>
+      `;
+      booksDiv.appendChild(card);
     });
 
-    container.appendChild(bookContainer);
+    container.appendChild(booksDiv);
   }
 }
