@@ -181,3 +181,19 @@ body {
 }
 
 #page-jeux.active { display: block; padding-top: 40px; }
+
+#page-musique.active { display: block; padding-top: 40px; }
+#musiqueContent .book-card { width: 180px; }
+#musiqueContent .book-card img { 
+  width: 100%; 
+  height: 180px; /* Format carré */
+  object-fit: cover; 
+  object-position: center; 
+  border-radius: 2px; 
+  box-shadow: 0 4px 8px var(--shadow-color); 
+}
+
+@media(max-width:768px) {
+  #musiqueContent .book-card { width: 45%; }
+  #musiqueContent .book-card img { height: 140px; }
+}

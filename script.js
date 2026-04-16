@@ -43,6 +43,7 @@ document.querySelectorAll('[data-page]').forEach(link => {
     if (page === 'bibliographie') generateBibliography();
     if (page === 'ecrans') generateFilms();
     if (page === 'jeux') generateGames();
+    if (page === 'musique') generateMusique();
   });
 });
 
@@ -298,17 +299,32 @@ const books = {
 
 // ── Data Jeux vidéo ──
 const games = {
-  "Valve": [
-    { title: "Left 4 Dead 2", note: 2.5, cover: "games/l4d2.jpg", link: "https://www.backloggd.com/game/left-4-dead-2/" },
-    { title: "Portal 2", note: null, cover: "games/portal2.jpg", link: "https://www.backloggd.com/game/portal-2/" },
+  "Tarsier Studios": [
+    { title: "Little Nightmares", note: 5, cover: "games/ln1.jpg", link: "https://backloggd.com/games/little-nightmares/" },
+    { title: "Little Nightmares II", note: 5, cover: "games/ln2.jpg", link: "https://backloggd.com/games/little-nightmares-ii/" },
+  ],
+  "VaragtP": [
+    { title: "Plantera", note: 5, cover: "games/plantera1.jpg", link: "https://backloggd.com/games/plantera/" },
+    { title: "Plantera 2: Golden Acorn", note: 5, cover: "games/plantera2.jpg", link: "https://backloggd.com/games/plantera-2-golden-acorn/" },
   ],
   "Nikita Kryukov": [
     { title: "Milk Outside a Bag of Milk Outside a Bag of Milk", note: 3.5, cover: "games/milk.jpg", link: "https://backloggd.com/games/milk-outside-a-bag-of-milk-outside-a-bag-of-milk/" },
     { title: "Milk Inside a Bag of Milk Inside a Bag of Milk", note: 3, cover: "games/milki.jpg", link: "https://backloggd.com/games/milk-inside-a-bag-of-milk-inside-a-bag-of-milk/" },
   ],
+  "Quiet River": [
+    { title: "Zup! X", note: 2, cover: "games/zupx.jpg", link: "https://backloggd.com/games/zup-x/" },
+    { title: "Zup!", note: 2, cover: "games/zup.jpg", link: "https://backloggd.com/games/zup/" },
+  ],
   "Dani": [
     { title: "Muck", note: 3, cover: "games/muck.jpg", link: "https://www.backloggd.com/game/muck/" },
     { title: "Crab Game", note: 3, cover: "games/crabgame.jpg", link: "https://www.backloggd.com/game/crab-game/" },
+  ],
+   "Valve": [
+    { title: "Left 4 Dead 2", note: 2.5, cover: "games/l4d2.jpg", link: "https://www.backloggd.com/game/left-4-dead-2/" },
+    { title: "Portal 2", note: null, cover: "games/portal2.jpg", link: "https://www.backloggd.com/game/portal-2/" },
+  ],
+  "Mojang Studios": [
+    { title: "Minecraft: Java Edition", note: 5, cover: "games/minecraft.jpg", link: "https://backloggd.com/games/minecraft-java-edition/" },
   ],
   "Mega Crit Games": [
     { title: "Slay the Spire", note: 5, cover: "games/slaythespire.jpg", link: "https://www.backloggd.com/game/slay-the-spire/" },
@@ -352,6 +368,12 @@ const games = {
   "Smartly Dressed Games": [
     { title: "Unturned", note: 4, cover: "games/unturned.jpg", link: "https://backloggd.com/games/unturned--1/" },
   ],
+  "Red Barrels": [
+    { title: "Outlast", note: 4, cover: "games/outlast.jpg", link: "https://backloggd.com/games/outlast/" },
+  ],
+  "The Behemoth": [
+    { title: "BattleBlock Theater", note: 3.5, cover: "games/battleblock.jpg", link: "https://backloggd.com/games/battleblock-theater/" },
+  ],
   "The Pixel Hunt": [
     { title: "Wednesdays", note: 3, cover: "games/wednesdays.jpg", link: "https://backloggd.com/games/wednesdays/" },
   ],
@@ -366,6 +388,9 @@ const games = {
   ],
   "ColloseusX": [
     { title: "Creature Clicker: Capture, Train, Ascend!", note: 3, cover: "games/creatureclicker.jpg", link: "https://backloggd.com/games/creature-clicker-capture-train-ascend/" },
+  ],
+  "borgia mango": [
+    { title: "Inland", note: 3, cover: "games/inland.jpg", link: "https://backloggd.com/games/inland/" },
   ],
   "GOGOGOBATO": [
     { title: "Little Girl On Earth Asking Why She Asking Why", note: 2.5, cover: "games/littlegirl.jpg", link: "https://backloggd.com/games/little-girl-on-earth-asking-why-she-asking-why/" },
@@ -382,9 +407,6 @@ const games = {
   "Anegar Games": [
     { title: "Chained Together", note: 2.5, cover: "games/chainedtogether.jpg", link: "https://backloggd.com/games/chained-together/" },
   ],
-  "Quiet River": [
-    { title: "Zup! X", note: 2, cover: "games/zupx.jpg", link: "https://backloggd.com/games/zup-x/" },
-  ],
   "Tbjbu2": [
     { title: "Pet Lands", note: 1.5, cover: "games/petlands.jpg", link: "https://backloggd.com/games/pet-lands/" },
   ],
@@ -400,6 +422,9 @@ const games = {
   "Nikita Ghost_RUS": [
     { title: "Anime girl or Bottle?", note: 1, cover: "games/animegirl.jpg", link: "https://backloggd.com/games/anime-girl-or-bottle/" },
   ],
+  "Snkl Studio": [
+    { title: "Znkl: 177", note: 1, cover: "games/znkl.jpg", link: "https://backloggd.com/games/znkl-177/" },
+  ],
   "NipoBox": [
     { title: "Away", note: 0.5, cover: "games/away.jpg", link: "https://backloggd.com/games/away/" },
   ],
@@ -414,6 +439,13 @@ const games = {
   ],
   "SKH Apps": [
     { title: "Pacify", note: null, cover: "games/pacify.jpg", link: "https://backloggd.com/games/pacify/" },
+  ],
+};
+
+// ── Data Musique ──
+const musique = {
+  "Lupe Fiasco": [
+    { title: "Samurai", note: 5, cover: "games/samurai.webp", link: "https://rateyourmusic.com/release/album/lupe-fiasco/samurai/" },
   ],
 };
 
@@ -954,6 +986,46 @@ function generateGames(data = games) {
   }
 }
 
+// ── Generate Musique ──
+function generateMusique(data = musique) {
+  let totalAlbums = 0;
+  for (const artist in musique) totalAlbums += musique[artist].length;
+  document.getElementById('musique-counter').textContent = totalAlbums + " albums écoutés";
+
+  const container = document.getElementById('musiqueContent');
+  container.innerHTML = '';
+
+  for (const artist in data) {
+    const h2 = document.createElement('h2');
+    h2.textContent = artist + " ( " + data[artist].length + " )";
+    container.appendChild(h2);
+
+    const notesValides = data[artist].map(m => m.note).filter(n => n !== null);
+    if (notesValides.length > 1) {
+      const moyenne = (notesValides.reduce((acc, note) => acc + note, 0) / notesValides.length).toFixed(1);
+      const avgDiv = document.createElement('div');
+      avgDiv.className = 'show-average';
+      avgDiv.textContent = "moyenne : " + moyenne;
+      container.appendChild(avgDiv);
+    }
+
+    const div = document.createElement('div');
+    div.className = 'books';
+    data[artist].forEach(album => {
+      const card = document.createElement('a');
+      card.href = album.link;
+      card.target = "_blank";
+      card.className = 'book-card';
+
+      const starsHtml = album.note !== null ? `<div class="book-meta">${getStars(album.note)}</div>` : '';
+
+      card.innerHTML = `<img src="${album.cover}" alt="${album.title}"><div class="book-title">${album.title}</div>${starsHtml}`;
+      div.appendChild(card);
+    });
+    container.appendChild(div);
+  }
+}
+
 // ── Événements de Recherche ──
 document.getElementById('search-biblio').addEventListener('input', e => {
   const query = e.target.value;
@@ -978,4 +1050,10 @@ document.getElementById('search-jeux').addEventListener('input', e => {
   const query = e.target.value;
   const filteredGames = filterData(games, query);
   generateGames(filteredGames);
+});
+
+document.getElementById('search-musique').addEventListener('input', e => {
+  const query = e.target.value;
+  const filteredMusique = filterData(musique, query);
+  generateMusique(filteredMusique);
 });
