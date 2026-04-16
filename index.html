@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slidou</title>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h1>Slidou</h1>
+      <button id="theme-toggle">🌙</button>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#" data-page="home" class="active">Home</a></li>
+        <li><a href="#" data-page="bibliographie">Bibliographie</a></li>
+        <li><a href="#" data-page="ecrans">Écrans</a></li>
+        <li><a href="#" data-page="jeux">Jeux vidéo</a></li>
+        <li><a href="#" data-page="apropos">À propos</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Main content -->
+  <main class="content">
+
+    <!-- HOME -->
+    <div class="page active" id="page-home">
+      <img src="image.jpg" alt="Home Image">
+    </div>
+
+    <!-- BIBLIOGRAPHIE -->
+    <div class="page" id="page-bibliographie">
+      <div class="counter" id="biblio-counter"></div>
+      <input type="text" id="search-biblio" class="search-bar" placeholder="Rechercher un livre, un auteur...">
+      <div id="bibliographyContent" class="text-content"></div>
+    </div>
+
+    <!-- ÉCRANS -->
+    <div class="page" id="page-ecrans">
+      <div class="ecrans-content">
+        <div class="counter" id="ecrans-counter"></div>
+        <input type="text" id="search-ecrans" class="search-bar" placeholder="Rechercher un film, un réalisateur...">
+        
+        <!-- Sous-navigation -->
+        <div class="sub-nav">
+          <a href="#" class="sub-nav-link active" data-subpage="films">Films</a>
+          <a href="#" class="sub-nav-link" data-subpage="series">Séries</a>
+        </div>
+
+        <!-- Conteneur Films -->
+        <div class="sub-page active" id="subpage-films">
+          <div id="filmsContent"></div>
+        </div>
+
+        <!-- Conteneur Séries -->
+        <div class="sub-page" id="subpage-series">
+          <div id="seriesContent"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- JEUX VIDÉO -->
+<div class="page" id="page-jeux">
+  <div class="counter" id="jeux-counter"></div>
+  <input type="text" id="search-jeux" class="search-bar" placeholder="Rechercher un jeu, un développeur...">
+  <div id="jeuxContent" class="text-content"></div>
+</div>
+
+            <!-- À PROPOS -->
+    <div class="page" id="page-apropos">
+      <div class="apropos-layout">
+        
+        <!-- COLONNE 1 : Photo et Nom -->
+        <div class="apropos-col photo-col">
+          <img src="pfp.jpg" alt="Photo de profil" class="apropos-pfp">
+          <h2 class="apropos-username">slidou</h2>
+        </div>
+
+        <!-- COLONNE 2 : Biographie -->
+        <div class="apropos-col bio-col">
+          <h3 class="carrd-title">à propos</h3>
+          <ul class="carrd-list">
+            <li>- .</li>
+            <li>- .</li>
+            <li>- .</li>
+            <li>- .</li>
+          </ul>
+        </div>
+
+        <!-- COLONNE 3 : Liens -->
+        <div class="apropos-col links-col">
+          <h3 class="carrd-title">mes liens</h3>
+          <div class="carrd-links-verticaux">
+            <a href="https://www.goodreads.com/user/show/156552407-slidou">goodreads</a>
+            <a href="https://www.senscritique.com/Slidou">senscritique</a>
+            <a href="https://myanimelist.net/profile/Slidou">myanimelist</a>
+            <a href="https://backloggd.com/u/slidou/games/">backloggd</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
