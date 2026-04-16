@@ -443,7 +443,7 @@ const games = {
 // ── Data Musique ──
 const musique = {
   "Lupe Fiasco": [
-    { title: "Samurai", note: 5, cover: "games/samurai.webp", link: "https://rateyourmusic.com/release/album/lupe-fiasco/samurai/" },
+    { title: "Samurai", note: 5, cover: "music/samurai.webp", link: "https://rateyourmusic.com/release/album/lupe-fiasco/samurai/" },
   ],
 };
 
