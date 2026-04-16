@@ -197,3 +197,5 @@ body {
   #musiqueContent .book-card { width: 45%; }
   #musiqueContent .book-card img { height: 140px; }
 }
+
+#page-musique.active { display: block; padding-top: 40px; }

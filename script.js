@@ -323,6 +323,10 @@ const games = {
     { title: "Left 4 Dead 2", note: 2.5, cover: "games/l4d2.jpg", link: "https://www.backloggd.com/game/left-4-dead-2/" },
     { title: "Portal 2", note: null, cover: "games/portal2.jpg", link: "https://www.backloggd.com/game/portal-2/" },
   ],
+  "Snkl Studio": [
+    { title: "JQ: countries", note: 1, cover: "games/jqcountries.jpg", link: "https://backloggd.com/games/jq-countries/" },
+    { title: "Znkl: 177", note: 1, cover: "games/znkl.jpg", link: "https://backloggd.com/games/znkl-177/" },
+  ],
   "Mojang Studios": [
     { title: "Minecraft: Java Edition", note: 5, cover: "games/minecraft.jpg", link: "https://backloggd.com/games/minecraft-java-edition/" },
   ],
@@ -413,17 +417,11 @@ const games = {
   "Ocular Interactive": [
     { title: "Redactem", note: 1.5, cover: "games/redactem.jpg", link: "https://backloggd.com/games/redactem/" },
   ],
-  "Snkl Studio": [
-    { title: "JQ: countries", note: 1, cover: "games/jqcountries.jpg", link: "https://backloggd.com/games/jq-countries/" },
-  ],
   "8Floor": [
     { title: "Business Tour", note: 1, cover: "games/businesstour.jpg", link: "https://backloggd.com/games/business-tour/" },
   ],
   "Nikita Ghost_RUS": [
     { title: "Anime girl or Bottle?", note: 1, cover: "games/animegirl.jpg", link: "https://backloggd.com/games/anime-girl-or-bottle/" },
-  ],
-  "Snkl Studio": [
-    { title: "Znkl: 177", note: 1, cover: "games/znkl.jpg", link: "https://backloggd.com/games/znkl-177/" },
   ],
   "NipoBox": [
     { title: "Away", note: 0.5, cover: "games/away.jpg", link: "https://backloggd.com/games/away/" },
