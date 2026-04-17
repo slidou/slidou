@@ -29,21 +29,28 @@ function getStars(note) {
 }
 
 // ── Navigation ──
+function navigateTo(page) {
+  document.querySelectorAll('[data-page]').forEach(l => l.classList.remove('active'));
+  document.querySelector(`[data-page="${page}"]`).classList.add('active');
+
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+
+  localStorage.setItem('activePage', page);
+
+  if (page === 'home') initHome();
+  if (page === 'bibliographie') generateBibliography();
+  if (page === 'ecrans') generateFilms();
+  if (page === 'jeux') generateGames();
+  if (page === 'musique') generateMusique();
+  if (page === 'apropos') updateTamagotchiUI();
+  
+}
+
 document.querySelectorAll('[data-page]').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
-    const page = link.dataset.page;
-
-    document.querySelectorAll('[data-page]').forEach(l => l.classList.remove('active'));
-    link.classList.add('active');
-
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('page-' + page).classList.add('active');
-
-    if (page === 'bibliographie') generateBibliography();
-    if (page === 'ecrans') generateFilms();
-    if (page === 'jeux') generateGames();
-    if (page === 'musique') generateMusique();
+    navigateTo(link.dataset.page);
   });
 });
 
@@ -311,13 +318,13 @@ const games = {
     { title: "Milk Outside a Bag of Milk Outside a Bag of Milk", note: 3.5, cover: "games/milk.jpg", link: "https://backloggd.com/games/milk-outside-a-bag-of-milk-outside-a-bag-of-milk/" },
     { title: "Milk Inside a Bag of Milk Inside a Bag of Milk", note: 3, cover: "games/milki.jpg", link: "https://backloggd.com/games/milk-inside-a-bag-of-milk-inside-a-bag-of-milk/" },
   ],
-  "Quiet River": [
-    { title: "Zup! X", note: 2, cover: "games/zupx.jpg", link: "https://backloggd.com/games/zup-x/" },
-    { title: "Zup!", note: 2, cover: "games/zup.jpg", link: "https://backloggd.com/games/zup/" },
-  ],
   "Dani": [
     { title: "Muck", note: 3, cover: "games/muck.jpg", link: "https://www.backloggd.com/game/muck/" },
     { title: "Crab Game", note: 3, cover: "games/crabgame.jpg", link: "https://www.backloggd.com/game/crab-game/" },
+  ],
+  "Quiet River": [
+    { title: "Zup! X", note: 2, cover: "games/zupx.jpg", link: "https://backloggd.com/games/zup-x/" },
+    { title: "Zup!", note: 2, cover: "games/zup.jpg", link: "https://backloggd.com/games/zup/" },
   ],
    "Valve": [
     { title: "Left 4 Dead 2", note: 2.5, cover: "games/l4d2.jpg", link: "https://www.backloggd.com/game/left-4-dead-2/" },
@@ -1024,6 +1031,210 @@ function generateMusique(data = musique) {
   }
 }
 
+// ── TAMAGOTCHI PERRUCHES ──
+const TAMAGOTCHI_KEY = 'slidou_budgie_state';
+
+const BIRD_COLORS = {
+  pistachio: { body: '#66BB6A', belly: '#A5D6A7', wing: '#43A047' },
+  cielazur: { body: '#42A5F5', belly: '#90CAF9', wing: '#1E88E5' }
+};
+
+const thoughts = [
+  "Pistachio regarde la pluie tomber sur le rebord de la fenêtre.",
+  "Ciel Azur a fredonné un air de Schumann pendant dix minutes.",
+  "Elles se sont perchées côte à côte en silence.",
+  "Un rayon de soleil traverse la pièce, Pistachio ferme les yeux.",
+  "Ciel Azur donne un petit coup de bec au rebord de l'écran.",
+  "Pistachio s'est endormie en écoutant le clavier cliquer.",
+  "Elles se toiletent mutuellement, très concentrées.",
+  "Ciel Azur a laissé tomber une graine, Pistachio l'a récupérée.",
+  "Pistachio observe les lettres défiler avec curiosité.",
+  "Ciel Azur a écarquillé les yeux en entendant un bruit sourd."
+];
+
+function getDefaultState() {
+  return {
+    pistachio: { faim: 80, bonheur: 80, energie: 80 },
+    cielazur: { faim: 80, bonheur: 80, energie: 80 },
+    friendSince: Date.now(),
+    lastUpdate: Date.now()
+  };
+}
+
+function getBudgieState() {
+  let state = JSON.parse(localStorage.getItem(TAMAGOTCHI_KEY));
+  if (!state) return getDefaultState();
+  if (state.faim !== undefined) state = getDefaultState();
+  if (!state.friendSince) state.friendSince = Date.now();
+
+  const now = Date.now();
+  const elapsedMinutes = (now - state.lastUpdate) / (1000 * 60);
+  const decay = elapsedMinutes * 0.5;
+  
+  ['pistachio', 'cielazur'].forEach(bird => {
+    if(!state[bird]) state[bird] = { faim: 80, bonheur: 80, energie: 80 };
+    state[bird].faim = Math.max(0, state[bird].faim - decay);
+    state[bird].bonheur = Math.max(0, state[bird].bonheur - (decay * 0.8));
+    state[bird].energie = Math.max(0, state[bird].energie - (decay * 0.3));
+  });
+  
+  saveBudgieState(state);
+  return state;
+}
+
+function saveBudgieState(state) {
+  state.lastUpdate = Date.now();
+  localStorage.setItem(TAMAGOTCHI_KEY, JSON.stringify(state));
+}
+
+function drawBudgie(birdId, state) {
+  const container = document.getElementById('wrapper-' + birdId);
+  if (!container) return;
+
+  const birdState = state[birdId];
+  const colors = BIRD_COLORS[birdId];
+  const avgStat = (birdState.faim + birdState.bonheur + birdState.energie) / 3;
+
+  let eye = `<circle cx="54" cy="32" r="3" fill="#333"/>`;
+  let beak = `<polygon points="64,38 58,44 70,44" fill="#FF9800"/>`;
+  let extra = '';
+
+  if (birdState.energie < 20) {
+    eye = `<line x1="51" y1="32" x2="57" y2="32" stroke="#333" stroke-width="2" stroke-linecap="round"/>`;
+    beak = `<polygon points="64,38 59,42 69,42" fill="#FF9800"/>`;
+    extra = `<text x="85" y="25" font-family="Space Grotesk" font-size="10" fill="#999" font-style="italic">Zzz</text>`;
+  } else if (birdState.faim < 30 || avgStat < 40) {
+    eye = `<circle cx="54" cy="32" r="3" fill="#333"/><line x1="50" y1="28" x2="48" y2="26" stroke="${colors.wing}" stroke-width="1.5" stroke-linecap="round"/>`;
+    extra = `<text x="40" y="70" font-family="Space Grotesk" font-size="8" fill="#e57373">...</text>`;
+  } else if (avgStat > 70) {
+    beak = `<polygon points="64,38 58,43 70,43" fill="#FF9800"/>`;
+    extra = `<circle cx="80" cy="35" r="2" fill="#FFD54F" opacity="0.8"/><circle cx="85" cy="30" r="1.5" fill="#FFD54F" opacity="0.6"/>`;
+  }
+
+  container.innerHTML = `
+    <svg width="100" height="100" viewBox="0 0 100 100">
+      <ellipse cx="50" cy="65" rx="22" ry="28" fill="${colors.body}"/>
+      <ellipse cx="50" cy="72" rx="14" ry="18" fill="${colors.belly}"/>
+      <path d="M28,55 Q40,50 35,80 Q40,75 45,75 Q42,60 28,55Z" fill="${colors.wing}"/>
+      <circle cx="50" cy="35" r="18" fill="${colors.body}"/>
+      ${eye}
+      ${beak}
+      ${extra}
+    </svg>
+  `;
+}
+
+function setRandomThought() {
+  const thoughtEl = document.getElementById('bird-thought');
+  const randomThought = thoughts[Math.floor(Math.random() * thoughts.length)];
+  thoughtEl.classList.remove('visible');
+  setTimeout(() => {
+    thoughtEl.textContent = "« " + randomThought + " »";
+    thoughtEl.classList.add('visible');
+  }, 300);
+}
+
+function updateTamagotchiUI() {
+  const state = getBudgieState();
+  
+  const daysSince = Math.floor((Date.now() - state.friendSince) / (1000 * 60 * 60 * 24));
+  document.getElementById('bird-friendship').textContent = "amies depuis " + daysSince + " jour" + (daysSince > 1 ? "s" : "");
+  
+  ['pistachio', 'cielazur'].forEach(bird => {
+    const bs = state[bird];
+    document.getElementById('stat-faim-' + bird).style.width = bs.faim + '%';
+    document.getElementById('stat-bonheur-' + bird).style.width = bs.bonheur + '%';
+    document.getElementById('stat-energie-' + bird).style.width = bs.energie + '%';
+    
+    document.getElementById('stat-faim-' + bird).style.background = bs.faim < 30 ? '#e57373' : 'var(--link-color)';
+    document.getElementById('stat-bonheur-' + bird).style.background = bs.bonheur < 30 ? '#e57373' : 'var(--link-color)';
+    document.getElementById('stat-energie-' + bird).style.background = bs.energie < 30 ? '#e57373' : 'var(--link-color)';
+
+    drawBudgie(bird, state);
+  });
+
+  const harmonyEl = document.getElementById('bird-harmony');
+  if (state.pistachio.bonheur > 70 && state.cielazur.bonheur > 70) {
+    harmonyEl.classList.add('visible');
+  } else {
+    harmonyEl.classList.remove('visible');
+  }
+
+  if (!document.getElementById('bird-thought').classList.contains('visible')) {
+    setRandomThought();
+  }
+}
+
+function petBird(birdId) {
+  const state = getBudgieState();
+  state[birdId].bonheur = Math.min(100, state[birdId].bonheur + 5);
+  saveBudgieState(state);
+  
+  const bs = state[birdId];
+  document.getElementById('stat-bonheur-' + birdId).style.width = bs.bonheur + '%';
+  document.getElementById('stat-bonheur-' + birdId).style.background = bs.bonheur < 30 ? '#e57373' : 'var(--link-color)';
+  
+  drawBudgie(birdId, state);
+  
+  const wrapper = document.getElementById('wrapper-' + birdId);
+  wrapper.classList.remove('bird-jump');
+  void wrapper.offsetWidth; 
+  wrapper.classList.add('bird-jump');
+  
+  const harmonyEl = document.getElementById('bird-harmony');
+  if (state.pistachio.bonheur > 70 && state.cielazur.bonheur > 70) {
+    harmonyEl.classList.add('visible');
+  } else {
+    harmonyEl.classList.remove('visible');
+  }
+  
+  setRandomThought();
+}
+
+document.getElementById('btn-nourrir').addEventListener('click', () => {
+  const state = getBudgieState();
+  ['pistachio', 'cielazur'].forEach(bird => {
+    state[bird].faim = Math.min(100, state[bird].faim + 30);
+    state[bird].energie = Math.max(0, state[bird].energie - 5);
+  });
+  saveBudgieState(state);
+  setRandomThought();
+  updateTamagotchiUI();
+});
+
+document.getElementById('btn-jouer').addEventListener('click', () => {
+  const state = getBudgieState();
+  ['pistachio', 'cielazur'].forEach(bird => {
+    if (state[bird].energie < 10) return; 
+    state[bird].bonheur = Math.min(100, state[bird].bonheur + 30);
+    state[bird].energie = Math.max(0, state[bird].energie - 15);
+    state[bird].faim = Math.max(0, state[bird].faim - 10);
+  });
+  saveBudgieState(state);
+  setRandomThought();
+  updateTamagotchiUI();
+});
+
+document.getElementById('btn-dormir').addEventListener('click', () => {
+  const state = getBudgieState();
+  ['pistachio', 'cielazur'].forEach(bird => {
+    state[bird].energie = Math.min(100, state[bird].energie + 40);
+    state[bird].faim = Math.max(0, state[bird].faim - 5);
+  });
+  saveBudgieState(state);
+  setRandomThought();
+  updateTamagotchiUI();
+});
+
+document.getElementById('cage-pistachio').addEventListener('click', () => petBird('pistachio'));
+document.getElementById('cage-cielazur').addEventListener('click', () => petBird('cielazur'));
+
+['wrapper-pistachio', 'wrapper-cielazur'].forEach(id => {
+  document.getElementById(id).addEventListener('animationend', () => {
+    document.getElementById(id).classList.remove('bird-jump');
+  });
+});
+
 // ── Événements de Recherche ──
 document.getElementById('search-biblio').addEventListener('input', e => {
   const query = e.target.value;
@@ -1054,4 +1265,174 @@ document.getElementById('search-musique').addEventListener('input', e => {
   const query = e.target.value;
   const filteredMusique = filterData(musique, query);
   generateMusique(filteredMusique);
+});
+
+// ── JOURNAL & CALENDRIER ──
+const journal = [
+{ d: "2026-04-16", t: "film", title: "Old Boy", img: "films/oldboy.png", note: "test" },
+];
+
+const typeColors = { film: "dot-film", livre: "dot-livre", jeu: "dot-jeu", musique: "dot-musique" };
+const moisNoms = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+const joursNoms = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
+
+// Variables pour la navigation dans le temps
+let viewedYear = new Date().getFullYear();
+let viewedMonth = new Date().getMonth();
+
+function initHome() {
+  renderDashboard();
+  renderCalendar();
+}
+
+function renderDashboard() {
+  const container = document.getElementById('home-dashboard');
+  
+  // On définit les catégories à chercher et le texte à afficher
+  const categories = ['livre', 'film', 'jeu', 'musique'];
+  const labels = { 
+    livre: 'Dernier lu', 
+    film: 'Dernier vu', 
+    jeu: 'Dernier joué', 
+    musique: 'Dernier écouté' 
+  };
+  
+  let html = `<div class="home-dashboard-title">dernières activités</div><div class="home-dashboard-grid">`;
+  let hasAnyActivity = false;
+
+  categories.forEach(cat => {
+    // On filtre le journal pour ne garder que cette catégorie
+    const catEntries = journal.filter(j => j.t === cat);
+    
+    if (catEntries.length > 0) {
+      hasAnyActivity = true;
+      // On trie par date et on prend le plus récent
+      const latestEntry = catEntries.sort((a, b) => new Date(b.d) - new Date(a.d))[0];
+      
+      html += `
+        <div class="home-dash-card">
+          <img src="${latestEntry.img}" alt="${latestEntry.title}">
+          <span class="dash-label">${labels[cat]}</span>
+          <span class="dash-title">${latestEntry.title}</span>
+        </div>`;
+    }
+  });
+
+  if (!hasAnyActivity) {
+    html += `<div style="font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--secondary-text);">Aucune activité pour le moment.</div>`;
+  }
+
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+function renderCalendar() {
+  const grid = document.getElementById('home-calendar-grid');
+  const title = document.getElementById('home-month-title');
+  
+  title.textContent = moisNoms[viewedMonth] + " " + viewedYear;
+  
+  let html = joursNoms.map(j => `<div class="calendar-day-header">${j}</div>`).join('');
+  
+  const firstDay = new Date(viewedYear, viewedMonth, 1).getDay();
+  const daysInMonth = new Date(viewedYear, viewedMonth + 1, 0).getDate();
+  
+  for (let i = 0; i < firstDay; i++) {
+    html += `<div class="calendar-day empty"></div>`;
+  }
+  
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dateStr = `${viewedYear}-${String(viewedMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    const dayEntries = journal.filter(j => j.d === dateStr);
+    
+    if (dayEntries.length > 0) {
+      const badge = dayEntries.length > 1 ? `<div class="calendar-badge">+${dayEntries.length - 1}</div>` : '';
+      html += `
+        <div class="calendar-day has-data" data-date="${dateStr}">
+          <div class="calendar-day-num">${day}</div>
+          <img src="${dayEntries[0].img}" alt="${dateStr}">
+          ${badge}
+        </div>`;
+    } else {
+      html += `<div class="calendar-day"><div class="calendar-day-num">${day}</div></div>`;
+    }
+  }
+  
+  grid.innerHTML = html;
+  
+  document.querySelectorAll('.calendar-day.has-data').forEach(el => {
+    el.addEventListener('click', (e) => openPopup(el.dataset.date));
+  });
+}
+
+function changeMonth(offset) {
+  viewedMonth += offset;
+  if (viewedMonth > 11) {
+    viewedMonth = 0;
+    viewedYear++;
+  } else if (viewedMonth < 0) {
+    viewedMonth = 11;
+    viewedYear--;
+  }
+  renderCalendar();
+}
+
+function openPopup(dateStr) {
+  const popup = document.getElementById('calendar-popup');
+  const content = document.getElementById('calendar-popup-content');
+  const entries = journal.filter(j => j.d === dateStr);
+  
+  const dateObj = new Date(dateStr + "T00:00:00");
+  const dateFormatee = dateObj.getDate() + " " + moisNoms[dateObj.getMonth()] + " " + dateObj.getFullYear();
+  
+  let html = `
+    <button class="popup-close" id="popup-close-btn">&times;</button>
+    <div class="popup-date">${dateFormatee}</div>
+    <div class="popup-items">
+  `;
+  
+  entries.forEach(item => {
+    const dotClass = typeColors[item.t] || "";
+    const noteHtml = item.note ? `<div class="popup-item-note">${item.note}</div>` : '';
+    html += `
+      <div class="popup-item">
+        <img src="${item.img}" alt="${item.title}">
+        <div class="popup-item-title"><span class="popup-type-dot ${dotClass}"></span>${item.title}</div>
+        ${noteHtml}
+      </div>
+    `;
+  });
+  
+  html += `</div>`;
+  content.innerHTML = html;
+  popup.classList.add('visible');
+}
+
+function closePopup() {
+  document.getElementById('calendar-popup').classList.remove('visible');
+}
+
+// Event Listeners
+document.getElementById('btn-prev-month').addEventListener('click', () => changeMonth(-1));
+document.getElementById('btn-next-month').addEventListener('click', () => changeMonth(1));
+
+document.getElementById('calendar-popup').addEventListener('click', (e) => {
+  if (e.target.id === 'calendar-popup' || e.target.id === 'popup-close-btn') {
+    closePopup();
+  }
+});
+
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+// Au chargement, on restaure la bonne page
+window.addEventListener('load', () => {
+  initHome();
+  const savedPage = localStorage.getItem('activePage');
+  if (savedPage && savedPage !== 'home' && document.getElementById('page-' + savedPage)) {
+    navigateTo(savedPage);
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closePopup();
 });
