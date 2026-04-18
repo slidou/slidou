@@ -36,6 +36,9 @@ function navigateTo(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
 
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  document.querySelector('.content').scrollTo({ top: 0, behavior: 'instant' });
+
   localStorage.setItem('activePage', page);
 
   if (page === 'home') initHome();
@@ -43,6 +46,7 @@ function navigateTo(page) {
   if (page === 'ecrans') generateFilms();
   if (page === 'jeux') generateGames();
   if (page === 'musique') generateMusique();
+  if (page === 'anime') generateAnime();
   if (page === 'apropos') updateTamagotchiUI();
   
 }
@@ -1289,13 +1293,14 @@ function renderDashboard() {
   const container = document.getElementById('home-dashboard');
   
   // On définit les catégories à chercher et le texte à afficher
-  const categories = ['livre', 'film', 'jeu', 'musique'];
-  const labels = { 
-    livre: 'Dernier lu', 
-    film: 'Dernier vu', 
-    jeu: 'Dernier joué', 
-    musique: 'Dernier écouté' 
-  };
+const categories = ['livre', 'film', 'anime', 'jeu', 'musique'];
+const labels = { 
+  livre: 'Dernier lu', 
+  film: 'Dernier vu', 
+  anime: 'Dernier anime', 
+  jeu: 'Dernier joué', 
+  musique: 'Dernier écouté' 
+};
   
   let html = `<div class="home-dashboard-title">dernières activités</div><div class="home-dashboard-grid">`;
   let hasAnyActivity = false;
@@ -1436,3 +1441,271 @@ window.addEventListener('load', () => {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closePopup();
 });
+
+// ── ANIME ──
+const ANIME_BATCH = 50;
+const TAG_BLACKLIST = ['+', '*', 'recap', 'arg', 'music.archived', 'archived', 're-watched', 'bought', 'watched', 'plan to watch', 'dropped', 'on hold', 'watching', 'completed', ''];
+const FORMAT_TAGS = ['normal episode', 'short episode', 'movie', 'short film', 'music', 'short', 'commercial', 'hentai'];
+const QUALITY_TAGS = ['favorite', 'gem'];
+const TAG_REST_LIMIT = 20;
+let animeFiltered = [];
+let animeDisplayed = 0;
+let activeTag = null;
+let tagsExpanded = false;
+let animeSortMode = 'note';
+let _fmtE = [], _quaE = [], _rstE = [];
+
+// ── Images via API Jikan avec cache persistant ──
+const animeImageCache = new Map();
+let imageQueue = [];
+let imageLoading = false;
+let cacheDirty = false;
+
+function loadImageCache() {
+  try {
+    const data = JSON.parse(localStorage.getItem('anime_img_cache'));
+    if (data) Object.entries(data).forEach(([id, url]) => animeImageCache.set(parseInt(id), url));
+  } catch (e) {}
+}
+
+function saveImageCache() {
+  if (!cacheDirty) return;
+  cacheDirty = false;
+  try { localStorage.setItem('anime_img_cache', JSON.stringify(Object.fromEntries(animeImageCache))); } catch (e) {}
+}
+
+function queueImageLoad(animeId) {
+  if (animeImageCache.has(animeId)) return;
+  if (imageQueue.includes(animeId)) return;
+  imageQueue.push(animeId);
+  if (!imageLoading) processImageQueue();
+}
+
+function processImageQueue() {
+  if (imageQueue.length === 0) { imageLoading = false; saveImageCache(); return; }
+  imageLoading = true;
+  const id = imageQueue.shift();
+  fetch('https://api.jikan.moe/v4/anime/' + id)
+    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+    .then(data => {
+      if (data.data && data.data.images) {
+        const url = data.data.images.jpg?.image_url || data.data.images.webp?.image_url;
+        if (url) {
+          animeImageCache.set(id, url);
+          cacheDirty = true;
+          replacePlaceholder(id, url);
+        }
+      }
+    })
+    .catch(() => {})
+    .finally(() => { setTimeout(processImageQueue, 300); saveImageCache(); });
+}
+
+function replacePlaceholder(animeId, url) {
+  const card = document.querySelector('.anime-card[data-id="' + animeId + '"]');
+  if (!card) return;
+  const placeholder = card.querySelector('.anime-placeholder');
+  if (!placeholder) return;
+  const img = document.createElement('img');
+  img.src = url;
+  img.alt = '';
+  img.style.cssText = 'width:100%;height:220px;object-fit:cover;object-position:center;border-radius:2px;box-shadow:0 4px 8px var(--shadow-color);display:block;opacity:0;transition:opacity 0.4s;';
+  img.onload = () => { placeholder.replaceWith(img); requestAnimationFrame(() => { img.style.opacity = '1'; }); };
+  img.onerror = () => { img.remove(); };
+}
+
+// ── Tags ──
+function generateAnime() {
+  if (typeof animeList === 'undefined') {
+    document.getElementById('animeContent').innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px;">Aucune donnée anime trouvée.</p>';
+    return;
+  }
+  loadImageCache();
+  document.getElementById('anime-counter').textContent = animeList.length + " animes terminés";
+
+  var sortContainer = document.getElementById('anime-sort');
+  sortContainer.innerHTML = '<span class="anime-sort-label">tri :</span>';
+  ['note', 'titre'].forEach(function(mode) {
+    var btn = document.createElement('button');
+    btn.className = 'anime-sort-btn' + (animeSortMode === mode ? ' active' : '');
+    btn.textContent = mode;
+    btn.addEventListener('click', function() {
+      animeSortMode = mode;
+      document.querySelectorAll('.anime-sort-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      animeDisplayed = 0;
+      applyAnimeFilter();
+    });
+    sortContainer.appendChild(btn);
+  });
+
+  var tagCount = {};
+  animeList.forEach(function(a) {
+    var hasHentai = a.tags.indexOf('hentai') !== -1;
+    var hasCommercial = a.tags.indexOf('commercial') !== -1;
+    a.tags.forEach(function(t) {
+      if (TAG_BLACKLIST.indexOf(t) !== -1) return;
+      if (hasHentai && (t === 'normal episode' || t === 'short episode')) return;
+      if (hasCommercial && (t === 'short' || t === 'music' || t === 'short episode')) return;
+      tagCount[t] = (tagCount[t] || 0) + 1;
+    });
+  });
+  _fmtE = FORMAT_TAGS.map(function(ft) { return [ft, tagCount[ft] || 0]; }).filter(function(e) { return e[1] > 0; });
+  _quaE = QUALITY_TAGS.map(function(qt) { return [qt, tagCount[qt] || 0]; }).filter(function(e) { return e[1] > 0; });
+  _rstE = Object.entries(tagCount).filter(function(e) { return FORMAT_TAGS.indexOf(e[0]) === -1 && QUALITY_TAGS.indexOf(e[0]) === -1; }).sort(function(a, b) { return b[1] - a[1]; });
+  renderAnimeTags();
+  applyAnimeFilter();
+}
+
+function renderAnimeTags() {
+  var container = document.getElementById('anime-tags');
+  var toggleBtn = document.getElementById('toggle-tags-btn');
+  container.innerHTML = '';
+
+  var allBtn = document.createElement('button');
+  allBtn.className = 'anime-tag-btn' + (activeTag === null ? ' active' : '');
+  allBtn.textContent = 'tous (' + animeList.length + ')';
+  allBtn.addEventListener('click', function() { activeTag = null; animeDisplayed = 0; renderAnimeTags(); applyAnimeFilter(); });
+  container.appendChild(allBtn);
+
+  if (_fmtE.length) buildSection(container, 'format', _fmtE);
+  if (_quaE.length) buildSection(container, 'qualité', _quaE);
+
+  var visRest = tagsExpanded ? _rstE : _rstE.slice(0, TAG_REST_LIMIT);
+  if (visRest.length) buildSection(container, 'autres', visRest);
+
+  if (_rstE.length > TAG_REST_LIMIT) {
+    toggleBtn.style.display = 'inline-block';
+    toggleBtn.textContent = tagsExpanded ? 'moins' : '+' + (_rstE.length - TAG_REST_LIMIT) + ' autres';
+  } else {
+    toggleBtn.style.display = 'none';
+  }
+}
+
+function buildSection(parent, label, entries) {
+  var section = document.createElement('div');
+  section.className = 'anime-tag-section';
+  var lbl = document.createElement('div');
+  lbl.className = 'anime-tag-section-label';
+  lbl.textContent = label;
+  section.appendChild(lbl);
+  var wrap = document.createElement('div');
+  wrap.className = 'anime-tag-section-tags';
+  entries.forEach(function(entry) {
+    var tag = entry[0], count = entry[1];
+    var btn = document.createElement('button');
+    btn.className = 'anime-tag-btn';
+    if (QUALITY_TAGS.indexOf(tag) !== -1) btn.classList.add('quality-tag');
+    if (activeTag === tag) btn.classList.add('active');
+    btn.textContent = tag + ' (' + count + ')';
+    btn.addEventListener('click', function() { activeTag = activeTag === tag ? null : tag; animeDisplayed = 0; renderAnimeTags(); applyAnimeFilter(); });
+    wrap.appendChild(btn);
+  });
+  section.appendChild(wrap);
+  parent.appendChild(section);
+}
+
+// ── Filtre & rendu ──
+function applyAnimeFilter() {
+  var query = document.getElementById('search-anime').value;
+  var norm = function(str) { return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); };
+
+  animeFiltered = animeList.filter(function(a) {
+    if (query) {
+      var q = norm(query);
+      return norm(a.title).indexOf(q) !== -1;
+    }
+    if (activeTag) {
+      if (activeTag === 'normal episode' || activeTag === 'short episode') {
+  if (a.tags.indexOf('hentai') !== -1) return false;
+}
+if (activeTag === 'short') {
+  if (a.tags.indexOf('commercial') !== -1) return false;
+}
+if (activeTag === 'short episode') {
+  if (a.tags.indexOf('hentai') !== -1 || a.tags.indexOf('commercial') !== -1) return false;
+}
+if (activeTag === 'music') {
+  if (a.tags.indexOf('commercial') !== -1) return false;
+}
+      if (a.tags.indexOf(activeTag) === -1) return false;
+    }
+    return true;
+  });
+
+  animeFiltered.sort(function(a, b) {
+    if (animeSortMode === 'note') {
+      if (a.note === null && b.note === null) return a.title.localeCompare(b.title);
+      if (a.note === null) return 1;
+      if (b.note === null) return -1;
+      if (a.note !== b.note) return b.note - a.note;
+      return a.title.localeCompare(b.title);
+    } else {
+      return a.title.localeCompare(b.title);
+    }
+  });
+
+  var displayedIds = {};
+  animeFiltered.forEach(function(a) { displayedIds[a.id] = true; });
+  imageQueue = imageQueue.filter(function(id) { return displayedIds[id]; });
+
+  document.getElementById('anime-counter').textContent = activeTag && !query
+    ? animeFiltered.length + ' / ' + animeList.length + ' animes'
+    : animeList.length + " animes terminés";
+  animeDisplayed = 0;
+  document.getElementById('animeContent').innerHTML = '';
+  renderAnimeBatch();
+}
+
+function renderAnimeBatch() {
+  var container = document.getElementById('animeContent');
+  var btn = document.getElementById('load-more-anime');
+  var end = Math.min(animeDisplayed + ANIME_BATCH, animeFiltered.length);
+
+  for (var i = animeDisplayed; i < end; i++) {
+    var a = animeFiltered[i];
+    var hue = (a.id * 137) % 360;
+    var starsHtml = a.note !== null ? '<div class="book-meta">' + getStars(a.note) + '</div>' : '';
+
+    var hasRw = a.tags.indexOf('re-watched') !== -1;
+    var hasAr = a.tags.indexOf('archived') !== -1;
+    var hasBo = a.tags.indexOf('bought') !== -1;
+    var badges = '';
+    if (hasRw || hasAr || hasBo) {
+      badges = '<div class="anime-badges">';
+      if (hasRw) badges += '<span class="anime-badge" title="re-watched"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></span>';
+      if (hasAr) badges += '<span class="anime-badge" title="archived"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-9 9H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a9 9 0 0 1 9 9z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="9" x2="13" y2="9"/><line x1="9" y1="17" x2="15" y2="17"/></svg></span>';
+      if (hasBo) badges += '<span class="anime-badge" title="bought"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>';
+      badges += '</div>';
+    }
+
+    var imgBlock;
+    if (animeImageCache.has(a.id)) {
+      imgBlock = '<img src="' + animeImageCache.get(a.id) + '" alt="" style="width:100%;height:220px;object-fit:cover;object-position:center;border-radius:2px;box-shadow:0 4px 8px var(--shadow-color);display:block;">';
+    } else {
+      imgBlock = '<div class="anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>';
+      queueImageLoad(a.id);
+    }
+
+    var card = document.createElement('a');
+    card.href = 'https://myanimelist.net/anime/' + a.id;
+    card.target = '_blank';
+    card.className = 'book-card anime-card';
+    if (a.tags.indexOf('hentai') !== -1) card.className += ' hentai-card';
+    card.setAttribute('data-id', a.id);
+    card.innerHTML = imgBlock + badges + '<div class="book-title">' + a.title + '</div>' + starsHtml;
+    container.appendChild(card);
+  }
+
+  animeDisplayed = end;
+  if (animeDisplayed < animeFiltered.length) {
+    btn.style.display = 'inline-block';
+    btn.textContent = 'charger plus (' + (animeFiltered.length - animeDisplayed) + ' restants)';
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
+document.getElementById('toggle-tags-btn').addEventListener('click', function() { tagsExpanded = !tagsExpanded; renderAnimeTags(); });
+document.getElementById('search-anime').addEventListener('input', function() { animeDisplayed = 0; applyAnimeFilter(); });
+document.getElementById('load-more-anime').addEventListener('click', renderAnimeBatch);

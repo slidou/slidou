@@ -24,6 +24,7 @@
         <li><a href="#" data-page="ecrans">Écrans</a></li>
         <li><a href="#" data-page="jeux">Jeux vidéo</a></li>
         <li><a href="#" data-page="musique">Musique</a></li>
+        <li><a href="#" data-page="anime">Anime</a></li>
         <li><a href="#" data-page="apropos">À propos</a></li>
       </ul>
     </nav>
@@ -87,6 +88,21 @@
       <input type="text" id="search-musique" class="search-bar" placeholder="Rechercher un album, un artiste...">
       <div id="musiqueContent" class="text-content"></div>
     </div>
+
+<!-- ANIME -->
+<div class="page" id="page-anime">
+  <div class="anime-top-controls">
+    <div class="counter" id="anime-counter"></div>
+    <div class="anime-sort" id="anime-sort"></div>
+  </div>
+  <input type="text" id="search-anime" class="search-bar" placeholder="Rechercher un anime...">
+  <div class="anime-tags-wrapper">
+    <div class="anime-tags" id="anime-tags"></div>
+    <button id="toggle-tags-btn" class="toggle-tags-btn" style="display:none;">plus de tags</button>
+  </div>
+  <div id="animeContent" class="anime-grid"></div>
+  <button id="load-more-anime" class="load-more-btn" style="display:none;">charger plus</button>
+</div>
 
     <!-- À PROPOS -->
     <div class="page" id="page-apropos">
@@ -152,6 +168,7 @@
 
 </div>
 
+<script src="anime-data.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

@@ -615,3 +615,103 @@ body {
   text-transform: lowercase;
   letter-spacing: 0.5px;
 }
+
+/* ── PAGE ANIME ── */
+#page-anime.active { display: block; padding-top: 40px; }
+
+.anime-tags-wrapper { margin-bottom: 40px; text-align: center; }
+.anime-tags { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+
+.anime-tag-section { width: 100%; }
+.anime-tag-section-label {
+  font-family: 'Space Grotesk', sans-serif; font-size: 10px;
+  color: var(--secondary-text); text-transform: uppercase;
+  letter-spacing: 1.5px; margin-bottom: 10px; opacity: 0.5;
+}
+.anime-tag-section-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+.anime-tag-btn {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+  color: var(--secondary-text); background: transparent;
+  border: 1px solid var(--border-color); border-radius: 20px;
+  padding: 5px 13px; cursor: pointer; transition: all 0.2s; text-transform: lowercase;
+}
+.anime-tag-btn:hover { border-color: var(--link-color); color: var(--link-color); }
+.anime-tag-btn.active { background: var(--link-color); color: #fff; border-color: var(--link-color); }
+.anime-tag-btn.quality-tag { border-style: dashed; }
+.anime-tag-btn.quality-tag.active { border-style: solid; }
+
+.toggle-tags-btn {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+  color: var(--secondary-text); background: none; border: none;
+  cursor: pointer; text-transform: lowercase; text-decoration: underline; transition: color 0.2s;
+}
+.toggle-tags-btn:hover { color: var(--link-color); }
+
+.anime-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 40px; }
+
+.anime-card { position: relative; }
+.anime-card img {
+  width: 100%; height: 220px; object-fit: cover; object-position: center;
+  border-radius: 2px; box-shadow: 0 4px 8px var(--shadow-color); display: block;
+}
+.anime-placeholder {
+  width: 100%; height: 220px; border-radius: 2px;
+  display: flex; align-items: center; justify-content: center;
+  background: hsl(var(--hue), 15%, 90%);
+  color: hsl(var(--hue), 20%, 60%);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color: hsl(var(--hue), 20%, 40%); }
+
+.anime-badges {
+  position: absolute; top: 6px; right: 6px;
+  display: flex; gap: 4px; z-index: 2;
+}
+.anime-badge {
+  width: 18px; height: 18px; padding: 2px;
+  background: rgba(0,0,0,0.65); border-radius: 50%; color: #fff;
+  backdrop-filter: blur(4px);
+}
+
+.load-more-btn {
+  font-family: 'Space Grotesk', sans-serif; font-size: 13px;
+  color: var(--text-color); background: transparent;
+  border: 1px solid var(--border-color); border-radius: 8px;
+  padding: 10px 25px; cursor: pointer; transition: all 0.2s;
+  text-transform: lowercase; margin-bottom: 40px;
+}
+.load-more-btn:hover { border-color: var(--link-color); color: var(--link-color); }
+
+@media(max-width:768px) {
+  .anime-grid { gap: 10px; }
+  .anime-card img, .anime-placeholder { height: 180px; }
+}
+
+.anime-top-controls {
+  display: flex; justify-content: center; align-items: center;
+  gap: 15px; margin-bottom: 10px;
+}
+.anime-sort {
+  display: flex; align-items: center; gap: 8px;
+}
+.anime-sort-label {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+  color: var(--secondary-text); opacity: 0.5; text-transform: lowercase;
+}
+.anime-sort-btn {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+  color: var(--secondary-text); background: none; border: none;
+  cursor: pointer; text-transform: lowercase; transition: color 0.2s;
+}
+.anime-sort-btn:hover, .anime-sort-btn.active { color: var(--link-color); }
+
+.anime-card.hentai-card img,
+.anime-card.hentai-card .anime-placeholder {
+  filter: blur(6px);
+  transition: filter 0.3s;
+}
+.anime-card.hentai-card:hover img,
+.anime-card.hentai-card:hover .anime-placeholder {
+  filter: blur(0);
+}
