@@ -89,9 +89,9 @@ document.querySelectorAll('[data-page]').forEach(link => {
 
 // ── Citations ──
 const quotes = [
-  { text: "Ce que la névrose fait à un homme, elle le dépossède de son être.", author: "Me" },
-  { text: "Lorsque l'homme crée une oeuvre, il s'offre à elle.", author: "Me" },
-  { text: "Le vague à l'âme nous enivre.", author: "Me" },
+  { text: "Ce que la névrose fait à un homme, elle le dépossède de son être.", author: "Moi" },
+  { text: "Lorsque l'homme crée une oeuvre, il s'offre à elle.", author: "Moi" },
+  { text: "Le vague à l'âme nous enivre.", author: "Moi" },
   { text: "Perdre son temps, c'est la plus merveilleuse façon de le gagner.", author: "Bernard Montangero" },
   { text: "Dès l'aurore, dis-toi d'avance : je vais rencontrer un indiscret, un ingrat, un insolent, un fourbe, un envieux, un égoïste.", author: "Marc-Aurèle" },
   { text: "L'ignorant affirme, le savant doute, le sage réfléchit.", author: "Aristote" },
