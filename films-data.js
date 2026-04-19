@@ -287,6 +287,9 @@ const filmsData = {
   "Jérémy Clapin": [
     { title: "J'ai perdu mon corps", note: null, cover: "films/jaiperdumoncorps.png", link: "https://www.senscritique.com/film/j_ai_perdu_mon_corps/39006031" },
   ],
+  "Takeshi Kitano": [
+    { title: "Sonatine - Mélodie mortelle", note: 4, cover: "films/sonatine.webp", link: "https://www.senscritique.com/film/sonatine_melodie_mortelle/432069" },
+  ],
   "David Dufresne": [
     { title: "Un pays qui se tient sage", note: null, cover: "films/unpayssage.jpg", link: "https://www.senscritique.com/film/un_pays_qui_se_tient_sage/42372324" },
   ],
