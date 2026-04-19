@@ -1,15 +1,15 @@
 /* ── VARIABLES DE COULEURS ── */
 :root {
-  --bg-color: #ffffff;
-  --sidebar-bg: #ffffff;
-  --text-color: #333333;
-  --secondary-text: #666666;
-  --author-text: #333333;
-  --border-color: #eeeeee;
+  --bg-color: #f7f6f4;
+  --sidebar-bg: #f0efed;
+  --text-color: #2c2c2c;
+  --secondary-text: #707070;
+  --author-text: #1a1a1a;
+  --border-color: #e0dedb;
   --link-color: #36c;
-  --star-color: #d4a017;
-  --shadow-color: rgba(0,0,0,0.1);
-  --quote-bg: transparent;
+  --star-color: #c89a15;
+  --shadow-color: rgba(0,0,0,0.08);
+  --quote-bg: #f0efed;
 }
 
 /* ── MODE SOMBRE ── */
@@ -707,7 +707,9 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 .anime-sort-btn:hover, .anime-sort-btn.active { color: var(--link-color); }
 
 .anime-card.hentai-card img,
-.anime-card.hentai-card .anime-placeholder {
+.anime-card.hentai-card .anime-placeholder,
+.manga-card.hentai-card img,
+.manga-card.hentai-card .anime-placeholder {
   filter: blur(6px);
   transition: filter 0.3s;
 }
@@ -715,3 +717,32 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 .anime-card.hentai-card:hover .anime-placeholder {
   filter: blur(0);
 }
+.manga-card.hentai-card:hover img,
+.manga-card.hentai-card:hover .anime-placeholder {
+  filter: blur(0);
+}
+
+#page-manga.active { display: block; padding-top: 40px; }
+.manga-filters { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-bottom: 40px; }
+.manga-card { position: relative; }
+
+.top-list { display: flex; flex-direction: column; gap: 20px; max-width: 600px; margin: 0 auto 40px auto; }
+.top-item {
+  display: flex; align-items: center; gap: 20px; text-decoration: none; color: var(--text-color);
+  padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; transition: all 0.2s;
+}
+.top-item:hover { border-color: var(--link-color); transform: translateX(5px); }
+.top-rank {
+  font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 500;
+  color: var(--secondary-text); min-width: 40px; text-align: center; opacity: 0.4;
+}
+.top-item:nth-child(1) .top-rank { opacity: 1; color: var(--link-color); font-size: 32px; }
+.top-item:nth-child(2) .top-rank { opacity: 0.8; font-size: 30px; }
+.top-item:nth-child(3) .top-rank { opacity: 0.6; font-size: 28px; }
+.top-item img, .top-item .anime-placeholder, .top-item .manga-placeholder {
+  width: 60px; height: 85px; object-fit: cover; object-position: top; border-radius: 2px;
+  box-shadow: 0 2px 6px var(--shadow-color); flex-shrink: 0;
+}
+.top-info { flex: 1; }
+.top-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+.top-stars { font-size: 14px; color: var(--star-color); letter-spacing: 1px; }

@@ -1,3 +1,31 @@
+// ── Chargement des données ──
+const books = booksData;
+const films = filmsData;
+const series = seriesData;
+const games = gamesData;
+const musique = musicData;
+const journal = journalData;
+
+// ── Tri utilitaire ──
+function sortDataKeys(data) {
+  return Object.keys(data).sort(function(a, b) {
+    if (data[b].length !== data[a].length) return data[b].length - data[a].length;
+    var aN = data[a].map(function(m) { return m.note; }).filter(function(n) { return n !== null; });
+    var bN = data[b].map(function(m) { return m.note; }).filter(function(n) { return n !== null; });
+    var aA = aN.length ? aN.reduce(function(x, y) { return x + y; }, 0) / aN.length : 0;
+    var bA = bN.length ? bN.reduce(function(x, y) { return x + y; }, 0) / bN.length : 0;
+    return bA - aA || a.localeCompare(b);
+  });
+}
+
+function sortEntriesByNote(entries) {
+  return entries.slice().sort(function(a, b) {
+    if (a.note === null && b.note === null) return a.title.localeCompare(b.title);
+    if (a.note === null) return 1; if (b.note === null) return -1;
+    return b.note - a.note;
+  });
+}
+
 // ── Dark Mode Toggle ──
 const toggleBtn = document.getElementById('theme-toggle');
 const body = document.body;
@@ -47,6 +75,7 @@ function navigateTo(page) {
   if (page === 'jeux') generateGames();
   if (page === 'musique') generateMusique();
   if (page === 'anime') generateAnime();
+  if (page === 'manga') generateManga();
   if (page === 'apropos') updateTamagotchiUI();
   
 }
@@ -129,335 +158,6 @@ const quotes = [
   { text: "La justice sans la force est impuissante, la force sans la justice est tyrannique.", author: "Blaise Pascal" }
 ];
 
-// ── Bibliography data ──
-const books = {
-    "Fyodor Dostoevsky": [
-    { title: "Les nuits blanches", note: 4, cover: "covers/les-nuits-blanches.jpg", link: "https://www.goodreads.com/book/show/1772910.White_Nights" },
-    { title: "Les carnets du sous-sol", note: 4, cover: "covers/carnets-du-sous-sol.jpg", link: "https://www.goodreads.com/book/show/1424502.Les_Carnets_du_sous_sol" },
-    { title: "Le Rêve d'un homme ridicule", note: 4, cover: "covers/reve-homme-ridicule.jpg", link: "https://www.goodreads.com/book/show/1424499.Le_R_ve_d_un_homme_ridicule" },
-    { title: "Un Voleur Honnête", note: 4, cover: "covers/unvoleurhonnete.jpg", link: "https://www.goodreads.com/book/show/2360416.Un_Voleur_Honn_te" },
-    { title: "Un cœur faible", note: 3, cover: "covers/coeurfaible.jpg", link: "https://www.goodreads.com/book/show/3548787-un-c-ur-faible" },
-    { title: "Le joueur", note: 2, cover: "covers/le-joueur-dostoievski.jpg", link: "https://www.goodreads.com/book/show/1389044.Le_Joueur" }
-  ],
-  "Franz Kafka": [
-    { title: "La métamorphose", note: 4, cover: "covers/la-metamorphose.jpg", link: "https://www.goodreads.com/book/show/193988.La_M_tamorphose" },
-    { title: "Lettre au père", note: 3, cover: "covers/lettre-au-pere.jpg", link: "https://www.goodreads.com/book/show/1289568.Lettre_au_p_re" },
-    { title: "Devant la loi", note: 3, cover: "covers/devant-la-loi.jpg", link: "https://www.goodreads.com/book/show/36275000-before-the-law" },
-    { title: "La Sentence - Dans la colonie pénitentiaire", note: 3, cover: "covers/la-sentence.jpg", link: "https://www.goodreads.com/book/show/177198041-la-sentence---dans-la-colonie-p-nitentiaire" },
-    { title: "Le Terrier", note: 2, cover: "covers/le-terrier.jpg", link: "https://www.goodreads.com/book/show/199745510-le-terrier" }
-  ],
-  "Albert Camus": [
-    { title: "La Chute", note: 5, cover: "covers/la-chute.jpg", link: "https://www.goodreads.com/book/show/774027.La_chute" },
-    { title: "L'Étranger", note: 4, cover: "covers/letranger.jpg", link: "https://www.goodreads.com/book/show/15688.L_tranger" },
-    { title: "La Peste", note: 3, cover: "covers/la-peste.jpg", link: "https://www.goodreads.com/book/show/770754.La_peste" },
-    { title: "L'été", note: 3, cover: "covers/lete.jpg", link: "https://www.goodreads.com/book/show/12922533-l-t" },
-    { title: "Le Malentendu", note: 3, cover: "covers/le-malentendu.jpg", link: "https://www.goodreads.com/book/show/168813720-by-albert-camus---le-malentendu-folio-theatre-french-edition-1995-0" }
-  ],
-  "Stefan Zweig": [
-    { title: "Le Joueur d'échecs", note: 4, cover: "covers/joueur-echecs.jpg", link: "https://www.goodreads.com/book/show/1393712.Le_Joueur_d_checs" },
-    { title: "Lettre d'une inconnue", note: 4, cover: "covers/lettre-inconnue.jpg", link: "https://www.goodreads.com/book/show/6427100-lettre-d-une-inconnue" },
-    { title: "La Confusion des sentiments", note: 3, cover: "covers/confusion-sentiments.jpg", link: "https://www.goodreads.com/book/show/1393713.La_Confusion_des_sentiments" }
-  ],
-  "Antoine de Saint-Exupéry": [
-    { title: "Le Petit Prince", note: 5, cover: "covers/petit-prince.jpg", link: "https://www.goodreads.com/book/show/43827544-the-little-prince" },
-    { title: "Lettre à un otage", note: 5, cover: "covers/lettre-otage.jpg", link: "https://www.goodreads.com/book/show/1289991.Lettre_un_otage" }
-  ],
-  "Arthur Schopenhauer": [
-    { title: "L'art d'avoir toujours raison", note: 5, cover: "covers/art-avoir-raison.jpg", link: "https://www.goodreads.com/book/show/36493598-l-art-d-avoir-toujours-raison-suivi-de-la-lecture-et-les-livres-et-pens" },
-    { title: "Essai sur les femmes", note: 5, cover: "covers/essai-femmes.jpg", link: "https://www.goodreads.com/book/show/6779945-essai-sur-les-femmes" }
-  ],
-  "Emil M. Cioran": [
-    { title: "De l'inconvénient d'être né", note: 5, cover: "covers/inconvenient-etre-ne.jpg", link: "https://www.goodreads.com/book/show/1768286.De_l_inconv_nient_d_tre_n_" },
-    { title: "Sur les cimes du désespoir", note: 4, cover: "covers/cimes-desespoir.jpg", link: "https://www.goodreads.com/book/show/117546.Sur_les_cimes_du_d_sespoir" }
-  ],
-  "Victor Hugo": [
-    { title: "Le dernier jour d'un condamné", note: 4, cover: "covers/dernier-jour-condamne.jpg", link: "https://www.goodreads.com/book/show/1638232.Le_Dernier_Jour_d_un_condamn_" },
-    { title: "Claude gueux", note: 4, cover: "covers/claude-gueux.jpg", link: "https://www.goodreads.com/book/show/125527590-claude-gueux" }
-  ],
-  "Jean Racine": [
-    { title: "Phèdre", note: 4, cover: "covers/phedre.jpg", link: "https://www.goodreads.com/book/show/81864.Ph_dre" },
-    { title: "Andromaque", note: 4, cover: "covers/andromaque.jpg", link: "https://www.goodreads.com/book/show/33517073-andromaque" }
-  ],
-  "Osamu Dazai": [
-    { title: "La Déchéance d'un homme", note: 4, cover: "covers/decheance-homme.jpg", link: "https://www.goodreads.com/book/show/11222940-no-longer-human" },
-    { title: "Soleil couchant", note: 4, cover: "covers/soleil-couchant.jpg", link: "https://www.goodreads.com/book/show/194740.The_Setting_Sun" }
-  ],
-  "Jordan Bardella": [
-    { title: "Ce Que Je Cherche", note: 1, cover: "covers/ce-que-je-cherche.jpg", link: "https://www.goodreads.com/book/show/220459830-ce-que-je-cherche" },
-    { title: "Ce que veulent les Français", note: 1, cover: "covers/ce-que-veulent-francais.jpg", link: "https://www.goodreads.com/book/show/237782229-ce-que-veulent-les-fran-ais" }
-  ],
-  "Léo Etchar": [
-    { title: "COVID-19 : Une crise sanitaire névrosée", note: 5, cover: "covers/covid-etchar.jpg", link: "https://www.goodreads.com/book/show/87062089-covid-19" }
-  ],
-  "Sarah Kane": [
-    { title: "4.48 Psychosis", note: 5, cover: "covers/4-48-psychosis.jpg", link: "https://www.goodreads.com/book/show/146548.4_48_Psychosis" }
-  ],
-  "Yoshida Kenkō": [
-    { title: "A Cup of Sake Beneath the Cherry Trees", note: 5, cover: "covers/cup-of-sake.jpg", link: "https://www.goodreads.com/book/show/24874345-a-cup-of-sake-beneath-the-cherry-trees" }
-  ],
-  "Stig Dagerman": [
-    { title: "Notre besoin de consolation est impossible à rassasier", note: 5, cover: "covers/besoin-consolation.jpg", link: "https://www.goodreads.com/book/show/1495836.Notre_besoin_de_consolation_est_impossible_rassasier" }
-  ],
-  "Ivan Turgenev": [
-    { title: "Le Journal d'un homme de trop", note: 5, cover: "covers/journal-homme-de-trop.jpg", link: "https://www.goodreads.com/book/show/2082727.Le_Journal_d_un_homme_de_trop" }
-  ],
-  "Michel Onfray": [
-    { title: "Traité d'athéologie", note: 5, cover: "covers/traite-atheologie.jpg", link: "https://www.goodreads.com/book/show/1838025.Trait_d_ath_ologie" }
-  ],
-  "Khalil Gibran": [
-    { title: "Le Prophète", note: 5, cover: "covers/le-prophete.jpg", link: "https://www.goodreads.com/book/show/59605643-le-proph-te" }
-  ],
-  "Stéphane Michaka": [
-    { title: "La mémoire des couleurs", note: 5, cover: "covers/memoire-couleurs.jpg", link: "https://www.goodreads.com/book/show/42752899-la-m-moire-des-couleurs" }
-  ],
-  "Roald Dahl": [
-    { title: "Charlie et la Chocolaterie", note: 5, cover: "covers/charlie-chocolaterie.jpg", link: "https://www.goodreads.com/book/show/524352.Charlie_et_la_chocolaterie" }
-  ],
-  "Karl Marx": [
-    { title: "Manifeste du parti communiste", note: 4, cover: "covers/manifeste-communiste.jpg", link: "https://www.goodreads.com/book/show/2021781.Manifeste_du_parti_communiste" }
-  ],
-  "Louisa Yousfi": [
-    { title: "Rester barbare", note: 4, cover: "covers/rester-barbare.jpg", link: "https://www.goodreads.com/book/show/60605405-rester-barbare" }
-  ],
-  "Léane Alestra": [
-    { title: "Les Hommes hétéros le sont-ils vraiment ?", note: 4, cover: "covers/hommes-heteros.jpg", link: "https://www.goodreads.com/book/show/123162762-les-hommes-h-t-ros-le-sont-ils-vraiment" }
-  ],
-  "Charles Baudelaire": [
-    { title: "Les Fleurs du Mal", note: 4, cover: "covers/fleurs-du-mal.jpg", link: "https://www.goodreads.com/book/show/207354.Les_Fleurs_du_Mal" }
-  ],
-  "Alfred de Musset": [
-    { title: "On ne badine pas avec l'amour", note: 4, cover: "covers/badine-amour.jpg", link: "https://www.goodreads.com/book/show/570255.On_ne_badine_pas_avec_l_amour" }
-  ],
-  "Michael Morpurgo": [
-    { title: "Soldat Peaceful", note: 4, cover: "covers/soldat-peaceful.jpg", link: "https://www.goodreads.com/book/show/15908589-soldat-peaceful" }
-  ],
-  "Harlan Ellison": [
-    { title: "I Have No Mouth & I Must Scream", note: 4, cover: "covers/i-have-no-mouth.jpg", link: "https://www.goodreads.com/book/show/20813135-i-have-no-mouth-i-must-scream" }
-  ],
-  "Nemo Ramjet": [
-    { title: "All Tomorrows", note: 4, cover: "covers/all-tomorrows.jpg", link: "https://www.goodreads.com/book/show/16143402-all-tomorrows" }
-  ],
-  "Franck Pavloff": [
-    { title: "Matin Brun", note: 4, cover: "covers/matin-brun.jpg", link: "https://www.goodreads.com/book/show/2110174.Matin_Brun" }
-  ],
-  "Stéphane Hessel": [
-    { title: "Indignez-vous !", note: 4, cover: "covers/indignez-vous.jpg", link: "https://www.goodreads.com/book/show/9638101-indignez-vous" }
-  ],
-  "Emile Zola": [
-    { title: "J'accuse!", note: 4, cover: "covers/jaccuse.jpg", link: "https://www.goodreads.com/book/show/816964.J_accuse_" }
-  ],
-  "Frank Elgar": [
-    { title: "Van Gogh", note: 4, cover: "covers/van-gogh-elgar.jpg", link: "https://www.goodreads.com/book/show/181685869-van-gogh-par-frank-elgar-hazan-peinture-beaux-arts-aldine-des-arts-daran" }
-  ],
-  "Jean-Paul Sartre": [
-    { title: "La Nausée", note: 3, cover: "covers/la-nausee.jpg", link: "https://www.goodreads.com/book/show/87302.La_naus_e" }
-  ],
-  "Jean-François Amadieu": [
-    { title: "Le Poids Des Apparences", note: 3, cover: "covers/poids-apparences.jpg", link: "https://www.goodreads.com/book/show/1043993.Le_Poids_Des_Apparences" }
-  ],
-  "Sénèque": [
-    { title: "La Brièveté de la vie", note: 3, cover: "covers/brievete-vie.jpg", link: "https://www.goodreads.com/book/show/200094601-la-bri-vet-de-la-vie-suivi-de-lettres-lucilius" }
-  ],
-  "Hermann Hesse": [
-    { title: "Siddhartha", note: 3, cover: "covers/siddhartha.jpg", link: "https://www.goodreads.com/book/show/42639871-siddharta" }
-  ],
-  "Arthur Rimbaud": [
-    { title: "Les Cahiers de Douai", note: 3, cover: "covers/cahiers-douai.jpg", link: "https://www.goodreads.com/book/show/35377217-les-cahiers-de-douai" }
-  ],
-  "Maxence Fermine": [
-    { title: "Neige", note: 3, cover: "covers/neige-fermine.jpg", link: "https://www.goodreads.com/book/show/107946.Neige_Points_" }
-  ],
-  "Gaël Faye": [
-    { title: "Petit pays", note: 3, cover: "covers/petit-pays.jpg", link: "https://www.goodreads.com/book/show/36075029-petit-pays" }
-  ],
-  "Elsa Marpeau": [
-    { title: "Carpe Diem", note: 3, cover: "covers/carpe-diem-marpeau.jpg", link: "https://www.goodreads.com/book/show/169829072-carpe-diem" }
-  ],
-  "Charles Robin": [
-    { title: "Tous philosophes?", note: 3, cover: "covers/tous-philosophes.jpg", link: "https://www.goodreads.com/book/show/59815825-tous-philosophes" }
-  ],
-  "Eric Bénier-Bürckel": [
-    { title: "Un prof bien sous tout rapport", note: 3, cover: "covers/prof-bien-rapport.jpg", link: "https://www.goodreads.com/book/show/482179.Un_prof_bien_sous_tout_rapport_" }
-  ],
-  "Octave Houdas": [
-    { title: "Ethnographie de l'Algérie", note: 3, cover: "covers/ethnographie-algerie.jpg", link: "https://www.goodreads.com/book/show/22680330-ethnographie-de-l-alg-rie-d-1886-sciences-sociales" }
-  ],
-  "Jean-Jacques Rousseau": [
-    { title: "Les Rêveries du promeneur solitaire", note: 2, cover: "covers/reveries-promeneur.jpg", link: "https://www.goodreads.com/book/show/58698503-les-r-veries-du-promeneur-solitaire" }
-  ],
-  "Jean-Luc Lagarce": [
-    { title: "Juste la fin du monde", note: 2, cover: "covers/juste-fin-monde.jpg", link: "https://www.goodreads.com/book/show/1084444.Juste_la_fin_du_monde" }
-  ],
-  "Niccolò Machiavelli": [
-    { title: "Le Prince", note: 1, cover: "covers/le-prince.jpg", link: "https://www.goodreads.com/book/show/54411076-le-prince-de-machiavel" }
-  ],
-  "Alain Soral": [
-    { title: "Sociologie du dragueur", note: 1, cover: "covers/socio-dragueur.jpg", link: "https://www.goodreads.com/book/show/1484348.Sociologie_du_dragueur" }
-  ],
-  "Matthieu Meriot": [
-    { title: "The Legend of Zelda : souvenirs d'enfance", note: 1, cover: "covers/zelda-souvenirs.jpg", link: "https://www.goodreads.com/book/show/63219063-the-legend-of-zelda" }
-  ],
-  "Éric Zemmour": [
-    { title: "La messe n'est pas dite", note: 1, cover: "covers/messe-pas-dite.jpg", link: "https://www.goodreads.com/book/show/241169518-la-messe-n-est-pas-dite" }
-  ],
-  "Nicolas Sarkozy": [
-    { title: "Le journal d'un prisonnier", note: 1, cover: "covers/journal-prisonnier.jpg", link: "https://www.goodreads.com/book/show/244241204-le-journal-d-un-prisonnier" }
-  ],
-  "Giovanni Boccaccio": [
-    { title: "Mrs Rosie and the Priest", note: 1, cover: "covers/mrs-rosie-priest.jpg", link: "https://www.goodreads.com/book/show/24874328-mrs-rosie-and-the-priest" }
-  ]
-};
-
-// ── Data Jeux vidéo ──
-const games = {
-  "Tarsier Studios": [
-    { title: "Little Nightmares", note: 5, cover: "games/ln1.jpg", link: "https://backloggd.com/games/little-nightmares/" },
-    { title: "Little Nightmares II", note: 5, cover: "games/ln2.jpg", link: "https://backloggd.com/games/little-nightmares-ii/" },
-  ],
-  "VaragtP": [
-    { title: "Plantera", note: 5, cover: "games/plantera1.jpg", link: "https://backloggd.com/games/plantera/" },
-    { title: "Plantera 2: Golden Acorn", note: 5, cover: "games/plantera2.jpg", link: "https://backloggd.com/games/plantera-2-golden-acorn/" },
-  ],
-  "Nikita Kryukov": [
-    { title: "Milk Outside a Bag of Milk Outside a Bag of Milk", note: 3.5, cover: "games/milk.jpg", link: "https://backloggd.com/games/milk-outside-a-bag-of-milk-outside-a-bag-of-milk/" },
-    { title: "Milk Inside a Bag of Milk Inside a Bag of Milk", note: 3, cover: "games/milki.jpg", link: "https://backloggd.com/games/milk-inside-a-bag-of-milk-inside-a-bag-of-milk/" },
-  ],
-  "Dani": [
-    { title: "Muck", note: 3, cover: "games/muck.jpg", link: "https://www.backloggd.com/game/muck/" },
-    { title: "Crab Game", note: 3, cover: "games/crabgame.jpg", link: "https://www.backloggd.com/game/crab-game/" },
-  ],
-  "Quiet River": [
-    { title: "Zup! X", note: 2, cover: "games/zupx.jpg", link: "https://backloggd.com/games/zup-x/" },
-    { title: "Zup!", note: 2, cover: "games/zup.jpg", link: "https://backloggd.com/games/zup/" },
-  ],
-   "Valve": [
-    { title: "Left 4 Dead 2", note: 2.5, cover: "games/l4d2.jpg", link: "https://www.backloggd.com/game/left-4-dead-2/" },
-    { title: "Portal 2", note: null, cover: "games/portal2.jpg", link: "https://www.backloggd.com/game/portal-2/" },
-  ],
-  "Snkl Studio": [
-    { title: "JQ: countries", note: 1, cover: "games/jqcountries.jpg", link: "https://backloggd.com/games/jq-countries/" },
-    { title: "Znkl: 177", note: 1, cover: "games/znkl.jpg", link: "https://backloggd.com/games/znkl-177/" },
-  ],
-  "Mojang Studios": [
-    { title: "Minecraft: Java Edition", note: 5, cover: "games/minecraft.jpg", link: "https://backloggd.com/games/minecraft-java-edition/" },
-  ],
-  "Mega Crit Games": [
-    { title: "Slay the Spire", note: 5, cover: "games/slaythespire.jpg", link: "https://www.backloggd.com/game/slay-the-spire/" },
-  ],
-  "Noio": [
-    { title: "Kingdom: Classic", note: 5, cover: "games/kingdom.jpg", link: "https://backloggd.com/games/kingdom-classic--1/" },
-  ],
-  "WeirdBeard": [
-    { title: "Tricky Towers", note: 5, cover: "games/trickytowers.jpg", link: "https://backloggd.com/games/tricky-towers/" },
-  ],
-  "funl": [
-    { title: "Click to Ten", note: 5, cover: "games/clicktoten.jpg", link: "https://backloggd.com/games/click-to-ten/" },
-  ],
-  "Subset Games": [
-    { title: "FTL: Faster Than Light", note: 5, cover: "games/ftl.jpg", link: "https://backloggd.com/games/ftl-faster-than-light/" },
-  ],
-  "Nicalis, Inc.": [
-    { title: "The Binding of Isaac: Rebirth", note: 5, cover: "games/isaac.jpg", link: "https://backloggd.com/games/the-binding-of-isaac-rebirth/" },
-  ],
-  "KAGAMI WORKs": [
-    { title: "Mirror", note: 5, cover: "games/mirror.jpg", link: "https://backloggd.com/games/mirror/" },
-  ],
-  "Tobias Springer": [
-    { title: "Shapez", note: 5, cover: "games/shapez.jpg", link: "https://backloggd.com/games/shapez/" },
-  ],
-  "Re-Logic": [
-    { title: "Terraria", note: 5, cover: "games/terraria.jpg", link: "https://backloggd.com/games/terraria/" },
-  ],
-  "Poncle": [
-    { title: "Vampire Survivors", note: 5, cover: "games/vampiresurvivors.jpg", link: "https://backloggd.com/games/vampire-survivors/" },
-  ],
-  "Whalefall": [
-    { title: "Poco", note: 4, cover: "games/poco.jpg", link: "https://backloggd.com/games/poco/" },
-  ],
-  "Hop Frog": [
-    { title: "Forager", note: 4, cover: "games/forager.jpg", link: "https://backloggd.com/games/forager/" },
-  ],
-  "Zeekerss": [
-    { title: "Lethal Company", note: 4, cover: "games/lethalcompany.jpg", link: "https://backloggd.com/games/lethal-company/" },
-  ],
-  "Smartly Dressed Games": [
-    { title: "Unturned", note: 4, cover: "games/unturned.jpg", link: "https://backloggd.com/games/unturned--1/" },
-  ],
-  "Red Barrels": [
-    { title: "Outlast", note: 4, cover: "games/outlast.jpg", link: "https://backloggd.com/games/outlast/" },
-  ],
-  "The Behemoth": [
-    { title: "BattleBlock Theater", note: 3.5, cover: "games/battleblock.jpg", link: "https://backloggd.com/games/battleblock-theater/" },
-  ],
-  "The Pixel Hunt": [
-    { title: "Wednesdays", note: 3, cover: "games/wednesdays.jpg", link: "https://backloggd.com/games/wednesdays/" },
-  ],
-  "Londer Software": [
-    { title: "Zort", note: 3, cover: "games/zort.jpg", link: "https://backloggd.com/games/zort/" },
-  ],
-  "AIHASTO": [
-    { title: "Eco Hole", note: 3, cover: "games/ecohole.jpg", link: "https://backloggd.com/games/eco-hole/" },
-  ],
-  "Dominique Grieshofer": [
-    { title: "Refunct", note: 3, cover: "games/refunct.jpg", link: "https://backloggd.com/games/refunct/" },
-  ],
-  "ColloseusX": [
-    { title: "Creature Clicker: Capture, Train, Ascend!", note: 3, cover: "games/creatureclicker.jpg", link: "https://backloggd.com/games/creature-clicker-capture-train-ascend/" },
-  ],
-  "borgia mango": [
-    { title: "Inland", note: 3, cover: "games/inland.jpg", link: "https://backloggd.com/games/inland/" },
-  ],
-  "GOGOGOBATO": [
-    { title: "Little Girl On Earth Asking Why She Asking Why", note: 2.5, cover: "games/littlegirl.jpg", link: "https://backloggd.com/games/little-girl-on-earth-asking-why-she-asking-why/" },
-  ],
-  "tokoronyori": [
-    { title: "Bokura", note: 2.5, cover: "games/bokura.jpg", link: "https://backloggd.com/games/bokura/" },
-  ],
-  "EGAMER": [
-    { title: "Slash It", note: 2.5, cover: "games/slashit.jpg", link: "https://backloggd.com/games/slash-it/" },
-  ],
-  "EM Games": [
-    { title: "Isle of Jura", note: 2.5, cover: "games/isleofjura.jpg", link: "https://backloggd.com/games/isle-of-jura/" },
-  ],
-  "Anegar Games": [
-    { title: "Chained Together", note: 2.5, cover: "games/chainedtogether.jpg", link: "https://backloggd.com/games/chained-together/" },
-  ],
-  "Tbjbu2": [
-    { title: "Pet Lands", note: 1.5, cover: "games/petlands.jpg", link: "https://backloggd.com/games/pet-lands/" },
-  ],
-  "Ocular Interactive": [
-    { title: "Redactem", note: 1.5, cover: "games/redactem.jpg", link: "https://backloggd.com/games/redactem/" },
-  ],
-  "8Floor": [
-    { title: "Business Tour", note: 1, cover: "games/businesstour.jpg", link: "https://backloggd.com/games/business-tour/" },
-  ],
-  "Nikita Ghost_RUS": [
-    { title: "Anime girl or Bottle?", note: 1, cover: "games/animegirl.jpg", link: "https://backloggd.com/games/anime-girl-or-bottle/" },
-  ],
-  "NipoBox": [
-    { title: "Away", note: 0.5, cover: "games/away.jpg", link: "https://backloggd.com/games/away/" },
-  ],
-  "MrFatcat": [
-    { title: "Inside the Backrooms", note: 0.5, cover: "games/backrooms.jpg", link: "https://backloggd.com/games/inside-the-backrooms/" },
-  ],
-  "Synapse Games": [
-    { title: "Spellstone", note: null, cover: "games/spellstone.jpg", link: "https://backloggd.com/games/spellstone/" },
-  ],
-  "Nerial": [
-    { title: "Reigns", note: null, cover: "games/reigns.jpg", link: "https://backloggd.com/games/reigns/" },
-  ],
-  "SKH Apps": [
-    { title: "Pacify", note: null, cover: "games/pacify.jpg", link: "https://backloggd.com/games/pacify/" },
-  ],
-};
-
-// ── Data Musique ──
-const musique = {
-  "Lupe Fiasco": [
-    { title: "Samurai", note: 5, cover: "music/samurai.webp", link: "https://rateyourmusic.com/release/album/lupe-fiasco/samurai/" },
-  ],
-};
-
 // ── Moteur de recherche ──
 function filterData(data, query) {
   if (!query) return data; 
@@ -504,7 +204,7 @@ function generateBibliography(data = books) {
   const listContainer = document.getElementById('authors-list');
   listContainer.innerHTML = '';
 
-  for (const author in data) {
+  sortDataKeys(data).forEach(function(author) {
     const h2 = document.createElement('h2');
     h2.textContent = author + " ( " + data[author].length + " )";
     listContainer.appendChild(h2);
@@ -521,7 +221,7 @@ function generateBibliography(data = books) {
     const booksDiv = document.createElement('div');
     booksDiv.className = 'books';
 
-    data[author].forEach(book => {
+    sortEntriesByNote(data[author]).forEach(function(book) {
       const card = document.createElement('a');
       card.href = book.link;
       card.target = "_blank";
@@ -538,7 +238,7 @@ function generateBibliography(data = books) {
     });
 
     listContainer.appendChild(booksDiv);
-  }
+  });
 }
 
 // ── Sous-navigation Écrans ──
@@ -558,326 +258,6 @@ document.querySelectorAll('.sub-nav-link').forEach(link => {
   });
 });
 
-// ── Data Films ──
-const films = {
-  "Christopher Nolan": [
-    { title: "Interstellar", note: 4.5, cover: "films/interstellar.webp", link: "https://www.senscritique.com/film/interstellar/388583" },
-    { title: "Inception", note: 4.5, cover: "films/inception.jpg", link: "https://www.senscritique.com/film/inception/471143" },
-    { title: "The Dark Knight - Le Chevalier noir", note: 4, cover: "films/thedarkknight.webp", link: "https://www.senscritique.com/film/the_dark_knight_le_chevalier_noir/419456" },
-    { title: "Oppenheimer", note: 3.5, cover: "films/oppenheimer.webp", link: "https://www.senscritique.com/film/oppenheimer/45419890" },
-    { title: "Batman Begins", note: 3.5, cover: "films/batmanbegins.png", link: "https://www.senscritique.com/film/batman_begins/368879" },
-    { title: "Insomnia", note: 3.5, cover: "films/insomnia.jpg", link: "https://www.senscritique.com/film/insomnia/461694" },
-    { title: "Memento", note: 3.5, cover: "films/memento.jpg", link: "https://www.senscritique.com/film/memento/473176" },
-    { title: "Le Prestige", note: 3, cover: "films/leprestige.jpg", link: "https://www.senscritique.com/film/le_prestige/484187" },
-    { title: "Following", note: 2.5, cover: "films/following.jpg", link: "https://www.senscritique.com/film/following_le_suiveur/382251" },
-    { title: "Doodlebug", note: null, cover: "films/doodlebug.jpg", link: "https://www.senscritique.com/film/doodlebug/404551" },
-    { title: "Tarantella", note: null, cover: "films/tarantella.jpg", link: "https://www.senscritique.com/film/tarantella/24971949" },
-  ],
-    "Aleksandr Petrov": [
-    { title: "Le Rêve d'un homme ridicule", note: 4.5, cover: "films/hommeridicule.jpg", link: "https://www.senscritique.com/film/le_reve_d_un_homme_ridicule/485462" },
-    { title: "Le Vieil Homme et la Mer", note: 4, cover: "films/vieilhommeetmer.jpg", link: "https://www.senscritique.com/film/le_vieil_homme_et_la_mer/372930" },
-    { title: "La Sirène", note: 4, cover: "films/lasirene.jpg", link: "https://www.senscritique.com/film/la_sirene/1225870" },
-    { title: "Mon amour", note: 3, cover: "films/monamour.jpg", link: "https://www.senscritique.com/film/mon_amour/470451" },
-    { title: "La Vache", note: 3, cover: "films/lavache.jpg", link: "https://www.senscritique.com/film/la_vache/403933" },
-    { title: "Firebird", note: 3, cover: "films/firebird.jpg", link: "https://www.senscritique.com/film/firebird/39011325" },
-    { title: "Russian Railways", note: 3, cover: "films/russianrailways.jpg", link: "https://www.senscritique.com/film/russian_railways/77841626" },
-    { title: "The Marathon", note: 2.5, cover: "films/themarathon.jpg", link: "https://www.senscritique.com/film/the_marathon/384124" },
-  ],
-  "Peter Foldes": [
-    { title: "On Closer Inspection", note: 3.5, cover: "films/oncloserinspection.png", link: "https://www.senscritique.com/film/on_closer_inspection/39788325" },
-    { title: "La faim", note: null, cover: "films/lafaim.jpg", link: "https://www.senscritique.com/film/la_faim/423152" },
-    { title: "Metadata", note: null, cover: "films/metadata.jpg", link: "https://www.senscritique.com/film/metadata/39783473" },
-    { title: "Plus Vite", note: null, cover: "films/plusvite.jpg", link: "https://www.senscritique.com/film/plus_vite/450266" },
-    { title: "Un garçon plein d'avenir", note: null, cover: "films/ungarconpleindavenir.jpg", link: "https://www.senscritique.com/film/un_garcon_plein_d_avenir/27851836" },
-    { title: "Appétit d'oiseau", note: null, cover: "films/appetitdoiseau.jpg", link: "https://www.senscritique.com/film/appetit_d_oiseau/13020568" },
-    { title: "A Short Vision", note: null, cover: "films/ashortvision.jpg", link: "https://www.senscritique.com/film/a_short_vision/13053528" },
-  ],
-  "Frédéric Back": [
-    { title: "Illusion ?", note: 4, cover: "films/illusion.png", link: "https://www.senscritique.com/film/illusion/453450" },
-    { title: "Tout Rien", note: 4, cover: "films/toutrien.png", link: "https://www.senscritique.com/film/tout_rien/495941" },
-    { title: "Abracadabra", note: 3, cover: "films/abracadabra.png", link: "https://www.senscritique.com/film/abracadabra/387546" },
-    { title: "Inon ou la Conquête du feu", note: 2.5, cover: "films/inon.png", link: "https://www.senscritique.com/film/inon_ou_la_conquete_du_feu/451138" },
-    { title: "Taratata !", note: 2.5, cover: "films/taratata.jpg", link: "https://www.senscritique.com/film/taratata/484860" },
-    { title: "La Création des oiseaux", note: 2, cover: "films/lacreationdesoiseaux.png", link: "https://www.senscritique.com/film/la_creation_des_oiseaux/466433" },
-  ],
-  "René Laloux": [
-    { title: "La Planète sauvage", note: 3.5, cover: "films/laplanetesauvage.png", link: "https://www.senscritique.com/film/la_planete_sauvage/474489" },
-    { title: "La Prisonnière", note: 3.5, cover: "films/laprisonniere.jpg", link: "https://www.senscritique.com/film/la_prisonniere/379335" },
-    { title: "Les Achalunés", note: 0.5, cover: "films/lesachalunes.jpg", link: "https://www.senscritique.com/film/les_achalunes/12110226" },
-    { title: "Tic Tac", note: 0.5, cover: "films/tictac.jpg", link: "https://www.senscritique.com/film/tic_tac/16866395" },
-    { title: "Les Temps morts", note: null, cover: "films/lestempsmorts.jpg", link: "https://www.senscritique.com/film/les_temps_morts/450104" },
-    { title: "Les Dents du singe", note: null, cover: "films/lesdentsdusinge.jpg", link: "https://www.senscritique.com/film/les_dents_du_singe/552178" },
-  ],
-  "Michael Dudok de Wit": [
-    { title: "La Tortue rouge", note: 4, cover: "films/latortuerouge.jpg", link: "https://www.senscritique.com/film/la_tortue_rouge/10900169" },
-    { title: "Père et fille", note: null, cover: "films/pereetfille.jpg", link: "https://www.senscritique.com/film/pere_et_fille/476376" },
-    { title: "Tom Sweep", note: null, cover: "films/tomsweep.jpg", link: "https://www.senscritique.com/film/tom_sweep/433403" },
-    { title: "L'Arôme du thé", note: 0.5, cover: "films/laromeduthe.jpg", link: "https://www.senscritique.com/film/l_arome_du_the/480159" },
-  ],
-  "Jean-Luc Godard": [
-    { title: "Le Petit Soldat", note: 4, cover: "films/lepetitsoldat.jpg", link: "https://www.senscritique.com/film/le_petit_soldat/428321" },
-    { title: "Vivre sa vie", note: 3.5, cover: "films/vivresavie.jpg", link: "https://www.senscritique.com/film/vivre_sa_vie/372817" },
-    { title: "Deux ou trois choses que je sais d'elle", note: 0.5, cover: "films/deuxoutroischoses.jpg", link: "https://www.senscritique.com/film/deux_ou_trois_choses_que_je_sais_d_elle/438890" },
-    { title: "Je vous salue, Sarajevo", note: null, cover: "films/sarajevo.jpg", link: "https://www.senscritique.com/film/je_vous_salue_sarajevo/495688" },
-  ],
-  "Chad Stahelski": [
-    { title: "John Wick", note: 3.5, cover: "films/johnwick.png", link: "https://www.senscritique.com/film/john_wick/11989542" },
-    { title: "John Wick 2", note: 3.5, cover: "films/johnwick2.png", link: "https://www.senscritique.com/film/john_wick_2/13221402" },
-    { title: "John Wick - Parabellum", note: 3.5, cover: "films/johnwick3.png", link: "https://www.senscritique.com/film/john_wick_parabellum/253583030" },
-  ],
-  "Jan Švankmajer": [
-    { title: "Obscurité, lumière, obscurité", note: null, cover: "films/obscurite.jpg", link: "https://www.senscritique.com/film/obscurite_lumiere_obscurite/426157" },
-    { title: "Meat Love", note: null, cover: "films/meatlove.jpg", link: "https://www.senscritique.com/film/meat_love/476726" },
-    { title: "Les Possibilités du dialogue", note: null, cover: "films/lespossibilitesdudialogue.jpg", link: "https://www.senscritique.com/film/les_possibilites_du_dialogue/495460" },
-  ],
-  "Phil Lord": [
-    { title: "21 Jump Street", note: 4, cover: "films/21jumpstreet.jpg", link: "https://www.senscritique.com/film/21_jump_street/405826" },
-    { title: "22 Jump Street", note: 4, cover: "films/22jumpstreet.jpg", link: "https://www.senscritique.com/film/22_jump_street/7937020" },
-  ],
-  "Naoto Yamakawa": [
-    { title: "Attack on the Bakery", note: 4, cover: "films/bakery.jpg", link: "https://www.senscritique.com/film/attack_on_the_bakery/16798354" },
-    { title: "A Girl, She Is 100%", note: 3.5, cover: "films/agirlsheis.jpg", link: "https://www.senscritique.com/film/a_girl_she_is_100/43801189" },
-  ],
-  "Anthony Russo": [
-    { title: "Avengers: Infinity War", note: 4, cover: "films/infinitywar.jpg", link: "https://www.senscritique.com/film/avengers_infinity_war/9008787" },
-    { title: "Avengers: Endgame", note: 3, cover: "films/endgame.jpg", link: "https://www.senscritique.com/film/avengers_endgame/12707585" },
-  ],
-  "Quentin Tarantino": [
-    { title: "Reservoir Dogs", note: 3, cover: "films/reservoirdogs.png", link: "https://www.senscritique.com/film/reservoir_dogs/430335" },
-    { title: "Inglourious Basterds", note: 3, cover: "films/inglourious.webp", link: "https://www.senscritique.com/film/inglourious_basterds/388285" },
-  ],
-  "Park Chan-Wook": [
-    { title: "Old Boy", note: 5, cover: "films/oldboy.png", link: "https://www.senscritique.com/film/old_boy/444625" },
-  ],
-  "Sidney Lumet": [
-    { title: "Douze Hommes en colère", note: 5, cover: "films/douzehommes.jpg", link: "https://www.senscritique.com/film/douze_hommes_en_colere/370894" },
-  ],
-  "Yang Li": [
-    { title: "Escape From the 21st Century", note: 5, cover: "films/escape21.webp", link: "https://www.senscritique.com/film/escape_from_the_21st_century/97622952" },
-  ],
-  "Bernard Queysanne": [
-    { title: "Un homme qui dort", note: 4.5, cover: "films/unhommequidort.jpg", link: "https://www.senscritique.com/film/un_homme_qui_dort/390872" },
-  ],
-  "Jean Cocteau": [
-    { title: "Le Testament d'Orphée", note: 4.5, cover: "films/letestamentdorphee.jpg", link: "https://www.senscritique.com/film/le_testament_d_orphee/397005" },
-  ],
-  "Daniel Kwan": [
-    { title: "Everything Everywhere All at Once", note: 4.5, cover: "films/everything.webp", link: "https://www.senscritique.com/film/everything_everywhere_all_at_once/41357764" },
-  ],
-  "Georges Schwizgebel": [
-    { title: "Fugue", note: 4.5, cover: "films/fugue.jpg", link: "https://www.senscritique.com/film/fugue/456566" },
-  ],
-  "Alain Guiraudie": [
-    { title: "Ce vieux rêve qui bouge", note: 4.5, cover: "films/cevieuxreve.jpg", link: "https://www.senscritique.com/film/ce_vieux_reve_qui_bouge/1333244" },
-  ],
-  "Martin Scorsese": [
-    { title: "Shutter Island", note: 4.5, cover: "films/shutterisland.png", link: "https://www.senscritique.com/film/shutter_island/405140" },
-  ],
-  "Patrick Imbert": [
-    { title: "Le Sommet des dieux", note: 4.5, cover: "films/lesommetdesdieux.jpg", link: "https://www.senscritique.com/film/le_sommet_des_dieux/20012631" },
-  ],
-  "Mathieu Kassovitz": [
-    { title: "La Haine", note: 4.5, cover: "films/lahaine.png", link: "https://www.senscritique.com/film/la_haine/472094" },
-  ],
-  "Joaquim Dos Santos": [
-    { title: "Spider-Man: Across the Spider-Verse", note: 4.5, cover: "films/acrossspiderverse.png", link: "https://www.senscritique.com/film/spider_man_across_the_spider_verse/38465583" },
-  ],
-  "Bob Persichetti": [
-    { title: "Spider-Man : New Generation", note: 4, cover: "films/spidermannewgeneration.webp", link: "https://www.senscritique.com/film/spider_man_new_generation/14954623" },
-  ],
-  "Fabio Scacchioli": [
-    { title: "Miss Candace Hilligoss' Flickering Halo", note: 4, cover: "films/misscandace.jpg", link: "https://www.senscritique.com/film/miss_candace_hilligoss_flickering_halo/24982154" },
-  ],
-  "Caroline Poggi": [
-    { title: "Bébé Colère", note: 4, cover: "films/bebecolere.png", link: "https://www.senscritique.com/film/bebe_colere/43518566" },
-  ],
-  "Tim Egan": [
-    { title: "Curve", note: 4, cover: "films/curve.jpg", link: "https://www.senscritique.com/film/curve/23737037" },
-  ],
-  "Elizabeth Chai Vasarhelyi": [
-    { title: "Free Solo", note: 4, cover: "films/freesolo.jpg", link: "https://www.senscritique.com/film/free_solo/36158361" },
-  ],
-  "Darren Aronofsky": [
-    { title: "Requiem for a Dream", note: 4, cover: "films/requiemforadream.jpg", link: "https://www.senscritique.com/film/requiem_for_a_dream/466346" },
-  ],
-  "Todd Phillips": [
-    { title: "Joker", note: 4, cover: "films/joker.webp", link: "https://www.senscritique.com/film/joker/27059297" },
-  ],
-  "Peter Weir": [
-    { title: "The Truman Show", note: 4, cover: "films/thetrumanshow.jpg", link: "https://www.senscritique.com/film/the_truman_show/415454" },
-  ],
-  "Brad Anderson": [
-    { title: "The Machinist", note: 4, cover: "films/themachinist.jpg", link: "https://www.senscritique.com/film/the_machinist/434608" },
-  ],
-  "David Fincher": [
-    { title: "Fight Club", note: 4, cover: "films/fightclub.webp", link: "https://www.senscritique.com/film/fight_club/363185" },
-  ],
-  "Abbas Kiarostami": [
-    { title: "Le Goût de la cerise", note: 3.5, cover: "films/cerise.jpg", link: "https://www.senscritique.com/film/le_gout_de_la_cerise/470935" },
-  ],
-  "Wim Wenders": [
-    { title: "Perfect Days", note: 3.5, cover: "films/perfectdays.png", link: "https://www.senscritique.com/film/perfect_days/55674665" },
-  ],
-  "Sogo Ishii": [
-    { title: "Mirrored Mind", note: 3.5, cover: "films/mirroredmind.jpg", link: "https://www.senscritique.com/film/mirrored_mind/38280622" },
-  ],
-  "Friedrich Wilhelm Murnau": [
-    { title: "Nosferatu le vampire", note: 3.5, cover: "films/nosferatu.jpg", link: "https://www.senscritique.com/film/nosferatu_le_vampire/470348" },
-  ],
-  "Robert Eggers": [
-    { title: "The Lighthouse", note: 3.5, cover: "films/thelighthouse.jpg", link: "https://www.senscritique.com/film/the_lighthouse/30479044" },
-  ],
-  "Tony Kaye": [
-    { title: "American History X", note: 3.5, cover: "films/americanstoryx.jpg", link: "https://www.senscritique.com/film/american_history_x/392288" },
-  ],
-  "Lorcan Finnegan": [
-    { title: "Vivarium", note: 3.5, cover: "films/vivarium.jpg", link: "https://www.senscritique.com/film/vivarium/39308515" },
-  ],
-  "George Butler": [
-    { title: "Pumping Iron", note: 3.5, cover: "films/pumpingiron.jpg", link: "https://www.senscritique.com/film/pumping_iron_arnold_le_magnifique/465603" },
-  ],
-  "Jerrod Carmichael": [
-    { title: "On the Count of Three", note: 3.5, cover: "films/onthecountofthree.jpg", link: "https://www.senscritique.com/film/on_the_count_of_three/43825064" },
-  ],
-  "Denis Villeneuve": [
-    { title: "Premier Contact", note: 3.5, cover: "films/premiercontact.jpg", link: "https://www.senscritique.com/film/premier_contact/11134569" },
-  ],
-  "Andrew Foerster": [
-    { title: "The God Man", note: 3.5, cover: "films/thegodman.jpg", link: "https://www.senscritique.com/film/the_god_man/112316892" },
-  ],
-  "David Leitch": [
-    { title: "Bullet Train", note: 3.5, cover: "films/bulletrain.png", link: "https://www.senscritique.com/film/bullet_train/42556935" },
-  ],
-  "Hideaki Anno": [
-    { title: "Ryusei Kacho", note: 3.5, cover: "films/ryuseikacho.jpg", link: "https://www.senscritique.com/film/ryusei_kacho/17202295" },
-  ],
-  "Mary Harron": [
-    { title: "American Psycho", note: 3.5, cover: "films/americanpsycho.jpg", link: "https://www.senscritique.com/film/american_psycho/375957" },
-  ],
-  "Steven Soderbergh": [
-    { title: "Paranoïa", note: 3.5, cover: "films/paranoia.jpg", link: "https://www.senscritique.com/film/paranoia/26804240" },
-  ],
-  "Yeon Sang-Ho": [
-    { title: "Dernier train pour Busan", note: 3.5, cover: "films/busan.png", link: "https://www.senscritique.com/film/dernier_train_pour_busan/20666236" },
-  ],
-  "Bong Joon-Ho": [
-    { title: "Parasite", note: 3.5, cover: "films/parasite.png", link: "https://www.senscritique.com/film/parasite/25357970" },
-  ],
-  "Ridley Scott": [
-    { title: "Alien - Le 8ème Passager", note: 3.5, cover: "films/alien.png", link: "https://www.senscritique.com/film/alien_le_8eme_passager/435660" },
-  ],
-  "Seth MacFarlane": [
-    { title: "Ted", note: 3.5, cover: "films/ted.jpg", link: "https://www.senscritique.com/film/ted/435443" },
-  ],
-  "Joel Schumacher": [
-    { title: "Le Nombre 23", note: 3.5, cover: "films/lenombre23.jpg", link: "https://www.senscritique.com/film/le_nombre_23/444473" },
-  ],
-  "Jonathan Demme": [
-    { title: "Le Silence des agneaux", note: 3.5, cover: "films/lesilencedesagneaux.jpg", link: "https://www.senscritique.com/film/le_silence_des_agneaux/380343" },
-  ],
-  "Genki Kawamura": [
-    { title: "Exit 8", note: 3.5, cover: "films/exit8.png", link: "https://www.senscritique.com/film/exit_8/106570232" },
-  ],
-  "Scott Beck": [
-    { title: "Heretic", note: 3, cover: "films/heretic.png", link: "https://www.senscritique.com/film/heretic/85721413" },
-  ],
-  "Jean-Pierre Jeunet": [
-    { title: "Le Fabuleux Destin d'Amélie Poulain", note: 3, cover: "films/ameliepoulain.jpg", link: "https://www.senscritique.com/film/le_fabuleux_destin_d_amelie_poulain/406497" },
-  ],
-  "Elijah Bynum": [
-    { title: "Magazine Dreams", note: 3, cover: "films/magazinedreams.jpg", link: "https://www.senscritique.com/film/magazine_dreams/47765720" },
-  ],
-  "Chris Sanders": [
-    { title: "Le Robot sauvage", note: 3, cover: "films/robotsauvage.webp", link: "https://www.senscritique.com/film/le_robot_sauvage/61044627" },
-  ],
-  "Bruno Dumont": [
-    { title: "France", note: 3, cover: "films/france.jpg", link: "https://www.senscritique.com/film/france/39281781" },
-  ],
-  "Kelly Reichardt": [
-    { title: "Old Joy", note: 3, cover: "films/oldjoy.jpg", link: "https://www.senscritique.com/film/old_joy/415832" },
-  ],
-  "Lilly Wachowski": [
-    { title: "Matrix", note: 3, cover: "films/matrix.png", link: "https://www.senscritique.com/film/matrix/382239" },
-  ],
-  "Spike Jonze": [
-    { title: "Her", note: 3, cover: "films/her.png", link: "https://www.senscritique.com/film/her/1301677" },
-  ],
-  "Wes Anderson": [
-    { title: "Fantastic Mr. Fox", note: 2.5, cover: "films/fantasticmrfox.jpg", link: "https://www.senscritique.com/film/fantastic_mr_fox/450461" },
-  ],
-  "Jared Hess": [
-    { title: "A Minecraft Movie", note: 2, cover: "films/minecraft.png", link: "https://www.senscritique.com/film/minecraft_le_film/10997206" },
-  ],
-  "Bryan Singer": [
-    { title: "Usual Suspects", note: 2, cover: "films/usualsuspects.webp", link: "https://www.senscritique.com/film/usual_suspects/390881" },
-  ],
-  "Emma Tammi": [
-    { title: "Five Nights at Freddy's", note: 2, cover: "films/freddy.png", link: "https://www.senscritique.com/film/five_nights_at_freddys/16778152" },
-  ],
-  "Chris Marker": [
-    { title: "Sans soleil", note: 0.5, cover: "films/sanssoleil.jpg", link: "https://www.senscritique.com/film/sans_soleil/407618" },
-  ],
-  "Aaron Fradkin": [
-    { title: "The Ballerina", note: 0.5, cover: "films/theballerina.jpg", link: "https://www.senscritique.com/film/the_ballerina/63430922" },
-  ],
-  "Christopher Cox": [
-    { title: "Don't Look Away", note: 0.5, cover: "films/dontlookaway.jpg", link: "https://www.senscritique.com/film/don_t_look_away/31960064" },
-  ],
-  "Danièle Huillet": [
-    { title: "Dialogue d'ombres", note: 0.5, cover: "films/dialoguedombres.jpg", link: "https://www.senscritique.com/film/dialogue_d_ombres/12575276" },
-  ],
-  "Sean S. Cunningham": [
-    { title: "Vendredi 13", note: 0.5, cover: "films/vendredi13.png", link: "https://www.senscritique.com/film/vendredi_13/469282" },
-  ],
-  "Toshio Matsumoto": [
-    { title: "Phantom", note: null, cover: "films/phantom.jpg", link: "https://www.senscritique.com/film/phantom/12036583" },
-  ],
-  "Chris Cunningham": [
-    { title: "Rubber Johnny", note: null, cover: "films/rubberjohnny.jpg", link: "https://www.senscritique.com/film/rubber_johnny/4916148" },
-  ],
-  "Harun Farocki": [
-    { title: "Feu inextinguible", note: null, cover: "films/feuinextinguible.jpg", link: "https://www.senscritique.com/film/feu_inextinguible/485078" },
-  ],
-  "Clément Freze": [
-    { title: "Mindliar - Le Dernier Mensonge", note: null, cover: "films/mindliar.jpg", link: "https://www.senscritique.com/film/mindliar_le_dernier_mensonge/103459923" },
-  ],
-  "Simon Shack": [
-    { title: "September Clues", note: null, cover: "films/septemberclues.jpg", link: "https://www.senscritique.com/film/september_clues/39789827" },
-  ],
-  "Jérémy Clapin": [
-    { title: "J'ai perdu mon corps", note: null, cover: "films/jaiperdumoncorps.png", link: "https://www.senscritique.com/film/j_ai_perdu_mon_corps/39006031" },
-  ],
-  "David Dufresne": [
-    { title: "Un pays qui se tient sage", note: null, cover: "films/unpayssage.jpg", link: "https://www.senscritique.com/film/un_pays_qui_se_tient_sage/42372324" },
-  ],
-};
-
-// ── Data Séries ──
-const series = {
-  "Breaking Bad": [
-    { title: "Saison 1", note: 3.5, cover: "series/breakingbad1.jpg", link: "https://www.senscritique.com/serie/breaking_bad/264963" },
-    { title: "Saison 2", note: 3.5, cover: "series/breakingbad2.webp", link: "https://www.senscritique.com/serie/breaking_bad/264963" },
-    { title: "Saison 3", note: 3.5, cover: "series/breakingbad3.jpg", link: "https://www.senscritique.com/serie/breaking_bad/264963" },
-    { title: "Saison 4", note: 3, cover: "series/breakingbad4.webp", link: "https://www.senscritique.com/serie/breaking_bad/264963" },
-    { title: "Saison 5", note: 4, cover: "series/breakingbad5.jpg", link: "https://www.senscritique.com/serie/breaking_bad/264963" }
-  ],
-  "Arcane": [
-    { title: "Saison 1", note: 4.5, cover: "series/arcane.jpg", link: "https://www.senscritique.com/serie/arcane/40487888" },
-  ],
-  "Squid Game": [
-    { title: "Saison 1", note: 4, cover: "series/squidgame.webp", link: "https://www.senscritique.com/serie/squid_game/45353208" },
-  ],
-  "One Piece": [
-    { title: "Saison 1", note: 4, cover: "series/onepiece.png", link: "https://www.senscritique.com/serie/one_piece/26565027" },
-  ],
-  "Inside Jamel Comedy Club": [
-    { title: "Saison 1", note: 3.5, cover: "series/jamel.jpg", link: "https://www.senscritique.com/serie/inside_jamel_comedy_club/441758" },
-  ],
-  "Alice in Borderland": [
-    { title: "Saison 1", note: 2.5, cover: "series/alice.png", link: "https://www.senscritique.com/serie/alice_in_borderland/43182155" },
-  ],
-};
-
 // ── Compteur Écrans ──
 function updateEcransCounter() {
   let totalFilms = Object.values(films).reduce((acc, arr) => acc + arr.length, 0);
@@ -890,7 +270,7 @@ function generateFilms(data = films) {
   updateEcransCounter();
   const container = document.getElementById('filmsContent');
   container.innerHTML = '';
-  for (const director in data) {
+    sortDataKeys(data).forEach(function(director) {
     const h2 = document.createElement('h2');
     h2.textContent = director + " ( " + data[director].length + " )";
     container.appendChild(h2);
@@ -906,7 +286,7 @@ function generateFilms(data = films) {
 
     const div = document.createElement('div');
     div.className = 'books';
-    data[director].forEach(movie => {
+    sortEntriesByNote(data[director]).forEach(function(movie) {
       const card = document.createElement('a');
       card.href = movie.link; 
       card.target = "_blank"; 
@@ -918,7 +298,7 @@ function generateFilms(data = films) {
       div.appendChild(card);
     });
     container.appendChild(div);
-  }
+  });
 }
 
 // ── Generate Séries ──
@@ -926,7 +306,7 @@ function generateSeries(data = series) {
   updateEcransCounter();
   const container = document.getElementById('seriesContent');
   container.innerHTML = '';
-  for (const show in data) {
+    sortDataKeys(data).forEach(function(show) {
     const h2 = document.createElement('h2');
     h2.textContent = show + " ( " + data[show].length + " )";
     container.appendChild(h2);
@@ -942,7 +322,7 @@ function generateSeries(data = series) {
 
     const div = document.createElement('div');
     div.className = 'books';
-    data[show].forEach(season => {
+        sortEntriesByNote(data[show]).forEach(function(season) {
       const card = document.createElement('a');
       card.href = season.link; card.target = "_blank"; card.className = 'book-card';
       
@@ -952,7 +332,7 @@ function generateSeries(data = series) {
       div.appendChild(card);
     });
     container.appendChild(div);
-  }
+  });
 }
 
 // ── Generate Jeux vidéo ──
@@ -964,7 +344,7 @@ function generateGames(data = games) {
   const container = document.getElementById('jeuxContent');
   container.innerHTML = '';
 
-  for (const dev in data) {
+   sortDataKeys(data).forEach(function(dev) {
     const h2 = document.createElement('h2');
     h2.textContent = dev + " ( " + data[dev].length + " )";
     container.appendChild(h2);
@@ -980,7 +360,7 @@ function generateGames(data = games) {
 
     const div = document.createElement('div');
     div.className = 'books';
-    data[dev].forEach(game => {
+    sortEntriesByNote(data[dev]).forEach(function(game) {
       const card = document.createElement('a');
       card.href = game.link;
       card.target = "_blank";
@@ -992,7 +372,7 @@ function generateGames(data = games) {
       div.appendChild(card);
     });
     container.appendChild(div);
-  }
+  });
 }
 
 // ── Generate Musique ──
@@ -1004,7 +384,7 @@ function generateMusique(data = musique) {
   const container = document.getElementById('musiqueContent');
   container.innerHTML = '';
 
-  for (const artist in data) {
+  sortDataKeys(data).forEach(function(artist) {
     const h2 = document.createElement('h2');
     h2.textContent = artist + " ( " + data[artist].length + " )";
     container.appendChild(h2);
@@ -1020,7 +400,7 @@ function generateMusique(data = musique) {
 
     const div = document.createElement('div');
     div.className = 'books';
-    data[artist].forEach(album => {
+    sortEntriesByNote(data[artist]).forEach(function(album) {
       const card = document.createElement('a');
       card.href = album.link;
       card.target = "_blank";
@@ -1032,7 +412,7 @@ function generateMusique(data = musique) {
       div.appendChild(card);
     });
     container.appendChild(div);
-  }
+  });
 }
 
 // ── TAMAGOTCHI PERRUCHES ──
@@ -1271,11 +651,6 @@ document.getElementById('search-musique').addEventListener('input', e => {
   generateMusique(filteredMusique);
 });
 
-// ── JOURNAL & CALENDRIER ──
-const journal = [
-{ d: "2026-04-16", t: "film", title: "Old Boy", img: "films/oldboy.png", note: "test" },
-];
-
 const typeColors = { film: "dot-film", livre: "dot-livre", jeu: "dot-jeu", musique: "dot-musique" };
 const moisNoms = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
 const joursNoms = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
@@ -1444,7 +819,7 @@ document.addEventListener('keydown', e => {
 
 // ── ANIME ──
 const ANIME_BATCH = 50;
-const TAG_BLACKLIST = ['+', '*', 'recap', 'arg', 'music.archived', 'archived', 're-watched', 'bought', 'watched', 'plan to watch', 'dropped', 'on hold', 'watching', 'completed', ''];
+const TAG_BLACKLIST = ['+', '*', 'recap', 'arg', 'music.archived', 'archived', 're-watched', 'bought', 'watched', 'plan to watch', 'dropped', 'on hold', 'watching', 'rank', 'completed', ''];
 const FORMAT_TAGS = ['normal episode', 'short episode', 'movie', 'short film', 'music', 'short', 'commercial', 'hentai'];
 const QUALITY_TAGS = ['favorite', 'gem'];
 const TAG_REST_LIMIT = 20;
@@ -1544,7 +919,7 @@ function generateAnime() {
     var hasHentai = a.tags.indexOf('hentai') !== -1;
     var hasCommercial = a.tags.indexOf('commercial') !== -1;
     a.tags.forEach(function(t) {
-      if (TAG_BLACKLIST.indexOf(t) !== -1) return;
+      if (TAG_BLACKLIST.indexOf(t) !== -1 || t.indexOf('rank:') === 0) return;
       if (hasHentai && (t === 'normal episode' || t === 'short episode')) return;
       if (hasCommercial && (t === 'short' || t === 'music' || t === 'short episode')) return;
       tagCount[t] = (tagCount[t] || 0) + 1;
@@ -1611,24 +986,25 @@ function applyAnimeFilter() {
   var norm = function(str) { return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); };
 
   animeFiltered = animeList.filter(function(a) {
+    if (activeTag === 'favorite') return a.tags.indexOf('favorite') !== -1;
+    if (activeTag) {
+      if (activeTag === 'normal episode' || activeTag === 'short episode') {
+        if (a.tags.indexOf('hentai') !== -1) return false;
+      }
+      if (activeTag === 'short') {
+        if (a.tags.indexOf('commercial') !== -1) return false;
+      }
+      if (activeTag === 'short episode') {
+        if (a.tags.indexOf('hentai') !== -1 || a.tags.indexOf('commercial') !== -1) return false;
+      }
+      if (activeTag === 'music') {
+        if (a.tags.indexOf('commercial') !== -1) return false;
+      }
+      if (a.tags.indexOf(activeTag) === -1) return false;
+    }
     if (query) {
       var q = norm(query);
       return norm(a.title).indexOf(q) !== -1;
-    }
-    if (activeTag) {
-      if (activeTag === 'normal episode' || activeTag === 'short episode') {
-  if (a.tags.indexOf('hentai') !== -1) return false;
-}
-if (activeTag === 'short') {
-  if (a.tags.indexOf('commercial') !== -1) return false;
-}
-if (activeTag === 'short episode') {
-  if (a.tags.indexOf('hentai') !== -1 || a.tags.indexOf('commercial') !== -1) return false;
-}
-if (activeTag === 'music') {
-  if (a.tags.indexOf('commercial') !== -1) return false;
-}
-      if (a.tags.indexOf(activeTag) === -1) return false;
     }
     return true;
   });
@@ -1660,6 +1036,13 @@ if (activeTag === 'music') {
 function renderAnimeBatch() {
   var container = document.getElementById('animeContent');
   var btn = document.getElementById('load-more-anime');
+
+  if (activeTag === 'favorite') {
+    renderTopList(container, animeFiltered, 'anime');
+    btn.style.display = 'none';
+    return;
+  }
+
   var end = Math.min(animeDisplayed + ANIME_BATCH, animeFiltered.length);
 
   for (var i = animeDisplayed; i < end; i++) {
@@ -1706,6 +1089,244 @@ function renderAnimeBatch() {
   }
 }
 
+function renderTopList(container, items, type) {
+  var list = document.createElement('div');
+  list.className = 'top-list';
+
+  var sorted = items.slice().sort(function(a, b) {
+    var aRank = null, bRank = null;
+    a.tags.forEach(function(t) { var m = t.match(/^rank:(\d+)$/); if (m) aRank = parseInt(m[1]); });
+    b.tags.forEach(function(t) { var m = t.match(/^rank:(\d+)$/); if (m) bRank = parseInt(m[1]); });
+    if (aRank !== null && bRank !== null) return aRank - bRank;
+    if (aRank !== null) return -1;
+    if (bRank !== null) return 1;
+    if (a.note === null && b.note === null) return a.title.localeCompare(b.title);
+    if (a.note === null) return 1; if (b.note === null) return -1;
+    return b.note - a.note;
+  });
+
+  sorted.forEach(function(item, i) {
+    var hue = (item.id * 137) % 360;
+    var starsHtml = item.note !== null ? '<div class="top-stars">' + getStars(item.note) + '</div>' : '';
+
+    var imgBlock;
+    var cache = type === 'anime' ? animeImageCache : mangaImageCache;
+    var queueFn = type === 'anime' ? queueImageLoad : queueMangaImage;
+    if (cache.has(item.id)) {
+      imgBlock = '<img src="' + cache.get(item.id) + '" alt="">';
+    } else {
+      imgBlock = '<div class="' + (type === 'manga' ? 'manga-placeholder' : '') + ' anime-placeholder" style="--hue:' + hue + '"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>';
+      queueFn(item.id);
+    }
+
+    var card = document.createElement('a');
+    card.href = 'https://myanimelist.net/' + type + '/' + item.id;
+    card.target = '_blank';
+    card.className = 'top-item';
+    card.innerHTML = '<div class="top-rank">' + (i + 1) + '</div>' + imgBlock + '<div class="top-info"><div class="top-title">' + item.title + '</div>' + starsHtml + '</div>';
+    list.appendChild(card);
+  });
+
+  container.appendChild(list);
+}
+
+// ── MANGA ──
+var MANGA_TAG_BLACKLIST = ['*', 'archived', 're-read', 'bought', 'watched', 'plan to read', 'dropped', 'on hold', 'reading', 'rank', 'completed', ''];
+var MANGA_FILTER_TAGS = ['one-shot', 'hentai', 'favorite', 'gem'];
+var mangaActiveFilter = null;
+var mangaSortMode = 'alpha';
+var mangaImageCache = new Map();
+var mangaImageQueue = [];
+var mangaImageLoading = false;
+var mangaCacheDirty = false;
+
+function loadMangaImageCache() {
+  try { var d = JSON.parse(localStorage.getItem('manga_img_cache')); if (d) Object.entries(d).forEach(function(e) { mangaImageCache.set(parseInt(e[0]), e[1]); }); } catch (e) {}
+}
+function saveMangaImageCache() {
+  if (!mangaCacheDirty) return; mangaCacheDirty = false;
+  try { localStorage.setItem('manga_img_cache', JSON.stringify(Object.fromEntries(mangaImageCache))); } catch (e) {}
+}
+function queueMangaImage(id) {
+  if (mangaImageCache.has(id) || mangaImageQueue.indexOf(id) !== -1) return;
+  mangaImageQueue.push(id); if (!mangaImageLoading) processMangaImageQueue();
+}
+function processMangaImageQueue() {
+  if (mangaImageQueue.length === 0) { mangaImageLoading = false; saveMangaImageCache(); return; }
+  mangaImageLoading = true;
+  var id = mangaImageQueue.shift();
+  fetch('https://api.jikan.moe/v4/manga/' + id)
+    .then(function(r) { if (!r.ok) throw new Error(); return r.json(); })
+    .then(function(data) {
+      if (data.data && data.data.images) {
+        var url = data.data.images.jpg?.image_url || data.data.images.webp?.image_url;
+        if (url) { mangaImageCache.set(id, url); mangaCacheDirty = true; replaceMangaPlaceholder(id, url); }
+      }
+    })
+    .catch(function() {})
+    .finally(function() { setTimeout(processMangaImageQueue, 350); saveMangaImageCache(); });
+}
+function replaceMangaPlaceholder(mangaId, url) {
+  var card = document.querySelector('.manga-card[data-id="' + mangaId + '"]');
+  if (!card) return; var ph = card.querySelector('.manga-placeholder'); if (!ph) return;
+  var img = document.createElement('img'); img.src = url; img.alt = '';
+  img.style.cssText = 'width:100%;height:220px;object-fit:cover;object-position:top;border-radius:2px;box-shadow:0 4px 8px var(--shadow-color);display:block;opacity:0;transition:opacity 0.4s;';
+  img.onload = function() { ph.replaceWith(img); requestAnimationFrame(function() { img.style.opacity = '1'; }); };
+  img.onerror = function() { img.remove(); };
+}
+
+function generateManga() {
+  if (typeof mangaData === 'undefined') {
+    document.getElementById('mangaContent').innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px;">Aucune donnee manga trouvee.</p>';
+    return;
+  }
+  loadMangaImageCache();
+  var total = 0; for (var a in mangaData) total += mangaData[a].length;
+  document.getElementById('manga-counter').textContent = total + " manga lus";
+
+  var fC = document.getElementById('manga-filters'); fC.innerHTML = '';
+  var allBtn = document.createElement('button');
+  allBtn.className = 'anime-tag-btn' + (mangaActiveFilter === null ? ' active' : '');
+  allBtn.textContent = 'tous';
+  allBtn.addEventListener('click', function() { mangaActiveFilter = null; renderMangaFilters(); renderManga(); });
+  fC.appendChild(allBtn);
+
+  var fmtTags = ['one-shot', 'hentai'];
+  var quaTags = ['favorite', 'gem'];
+  var fmtArr = fmtTags.map(function(t) { return t; });
+  var quaArr = quaTags.map(function(t) { return t; });
+
+  if (fmtArr.length) {
+    var s1 = document.createElement('div'); s1.className = 'anime-tag-section';
+    var l1 = document.createElement('div'); l1.className = 'anime-tag-section-label'; l1.textContent = 'format'; s1.appendChild(l1);
+    var w1 = document.createElement('div'); w1.className = 'anime-tag-section-tags';
+    fmtArr.forEach(function(tag) {
+      var btn = document.createElement('button');
+      btn.className = 'anime-tag-btn'; if (mangaActiveFilter === tag) btn.classList.add('active');
+      btn.textContent = tag;
+      btn.addEventListener('click', function() { mangaActiveFilter = mangaActiveFilter === tag ? null : tag; renderMangaFilters(); renderManga(); });
+      w1.appendChild(btn);
+    });
+    s1.appendChild(w1); fC.appendChild(s1);
+  }
+
+  if (quaArr.length) {
+    var s2 = document.createElement('div'); s2.className = 'anime-tag-section';
+    var l2 = document.createElement('div'); l2.className = 'anime-tag-section-label'; l2.textContent = 'qualité'; s2.appendChild(l2);
+    var w2 = document.createElement('div'); w2.className = 'anime-tag-section-tags';
+    quaArr.forEach(function(tag) {
+      var btn = document.createElement('button');
+      btn.className = 'anime-tag-btn quality-tag'; if (mangaActiveFilter === tag) btn.classList.add('active');
+      btn.textContent = tag;
+      btn.addEventListener('click', function() { mangaActiveFilter = mangaActiveFilter === tag ? null : tag; renderMangaFilters(); renderManga(); });
+      w2.appendChild(btn);
+    });
+    s2.appendChild(w2); fC.appendChild(s2);
+  }
+  renderManga();
+}
+
+function renderMangaFilters() {
+  document.querySelectorAll('#manga-filters .anime-tag-btn').forEach(function(btn) {
+    btn.classList.remove('active');
+    if (btn.textContent === 'tous' && mangaActiveFilter === null) btn.classList.add('active');
+    if (btn.textContent === mangaActiveFilter) btn.classList.add('active');
+  });
+}
+
+function renderManga() {
+  var container = document.getElementById('mangaContent'); container.innerHTML = '';
+  var query = document.getElementById('search-manga').value;
+  var norm = function(s) { return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); };
+  var q = query ? norm(query) : '';
+  var keys = Object.keys(mangaData);
+
+  keys.sort(function(a, b) {
+    if (mangaData[b].length !== mangaData[a].length) return mangaData[b].length - mangaData[a].length;
+    var aN = mangaData[a].map(function(m) { return m.note; }).filter(function(n) { return n !== null; });
+    var bN = mangaData[b].map(function(m) { return m.note; }).filter(function(n) { return n !== null; });
+    var aA = aN.length ? aN.reduce(function(x, y) { return x + y; }, 0) / aN.length : 0;
+    var bA = bN.length ? bN.reduce(function(x, y) { return x + y; }, 0) / bN.length : 0;
+    return bA - aA || a.localeCompare(b);
+  });
+
+    if (mangaActiveFilter === 'favorite') {
+    var allFav = [];
+    keys.forEach(function(author) {
+      mangaData[author].forEach(function(m) {
+        if (m.tags.indexOf('favorite') !== -1) {
+          if (q) { if (norm(m.title).indexOf(q) !== -1) allFav.push(m); }
+          else { allFav.push(m); }
+        }
+      });
+    });
+    renderTopList(container, allFav, 'manga');
+    return;
+  }
+
+  keys.forEach(function(author) {
+    var filtered = mangaData[author].filter(function(m) {
+      if (mangaActiveFilter) {
+        if (mangaActiveFilter === 'hentai' && m.tags.indexOf('one-shot') !== -1 && m.tags.indexOf('hentai') !== -1) return true;
+        if (mangaActiveFilter === 'one-shot' && m.tags.indexOf('one-shot') !== -1 && m.tags.indexOf('hentai') !== -1) return false;
+        if (m.tags.indexOf(mangaActiveFilter) === -1) return false;
+      }
+      if (q) { return norm(m.title).indexOf(q) !== -1; }
+      return true;
+    });
+    if (filtered.length === 0) return;
+        filtered.sort(function(a, b) {
+      if (a.note === null && b.note === null) return a.title.localeCompare(b.title);
+      if (a.note === null) return 1; if (b.note === null) return -1;
+      return b.note - a.note;
+    });
+
+    var h2 = document.createElement('h2');
+    h2.textContent = author + ' ( ' + filtered.length + ' )';
+    container.appendChild(h2);
+
+    var nv = filtered.map(function(m) { return m.note; }).filter(function(n) { return n !== null; });
+    if (nv.length > 1) {
+      var avg = document.createElement('div'); avg.className = 'show-average';
+      avg.textContent = 'moyenne : ' + (nv.reduce(function(x, y) { return x + y; }, 0) / nv.length).toFixed(1);
+      container.appendChild(avg);
+    }
+
+    var div = document.createElement('div'); div.className = 'books';
+    filtered.forEach(function(m) {
+      var hue = (m.id * 137) % 360;
+      var stars = m.note !== null ? '<div class="book-meta">' + getStars(m.note) + '</div>' : '';
+      var badges = '';
+      var hasRr = m.tags.indexOf('re-read') !== -1, hasAr = m.tags.indexOf('archived') !== -1, hasBo = m.tags.indexOf('bought') !== -1;
+      if (hasRr || hasAr || hasBo) {
+        badges = '<div class="anime-badges">';
+        if (hasRr) badges += '<span class="anime-badge" title="re-read"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></span>';
+        if (hasAr) badges += '<span class="anime-badge" title="archived"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-9 9H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a9 9 0 0 1 9 9z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="9" x2="13" y2="9"/><line x1="9" y1="17" x2="15" y2="17"/></svg></span>';
+        if (hasBo) badges += '<span class="anime-badge" title="bought"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>';
+        badges += '</div>';
+      }
+
+      var imgBlock;
+      if (mangaImageCache.has(m.id)) {
+        imgBlock = '<img src="' + mangaImageCache.get(m.id) + '" alt="" style="width:100%;height:220px;object-fit:cover;object-position:top;border-radius:2px;box-shadow:0 4px 8px var(--shadow-color);display:block;">';
+      } else {
+        imgBlock = '<div class="manga-placeholder anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>';
+        queueMangaImage(m.id);
+      }
+
+      var card = document.createElement('a');
+      card.href = 'https://myanimelist.net/manga/' + m.id; card.target = '_blank';
+      card.className = 'book-card manga-card';
+      if (m.tags.indexOf('hentai') !== -1) card.classList.add('hentai-card');
+      card.setAttribute('data-id', m.id);
+      card.innerHTML = imgBlock + badges + '<div class="book-title">' + m.title + '</div>'  + stars;
+      div.appendChild(card);
+    });
+    container.appendChild(div);
+  });
+}
+
 document.getElementById('toggle-tags-btn').addEventListener('click', function() { tagsExpanded = !tagsExpanded; renderAnimeTags(); });
 document.getElementById('search-anime').addEventListener('input', function() { animeDisplayed = 0; applyAnimeFilter(); });
 document.getElementById('load-more-anime').addEventListener('click', renderAnimeBatch);
+document.getElementById('search-manga').addEventListener('input', function() { renderManga(); });

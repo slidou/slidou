@@ -6,6 +6,10 @@
   <title>Slidou</title>
   <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="pfp.jpg" type="image/jpeg">
+  <meta property="og:title" content="Slidou — l'antre culturelle">
+<meta property="og:description" content="Bibliographie, écrans, jeux vidéo, musique, anime, manga.">
+<meta property="og:type" content="website">
 </head>
 <body>
 
@@ -25,6 +29,7 @@
         <li><a href="#" data-page="jeux">Jeux vidéo</a></li>
         <li><a href="#" data-page="musique">Musique</a></li>
         <li><a href="#" data-page="anime">Anime</a></li>
+        <li><a href="#" data-page="manga">Manga</a></li>
         <li><a href="#" data-page="apropos">À propos</a></li>
       </ul>
     </nav>
@@ -104,6 +109,16 @@
   <button id="load-more-anime" class="load-more-btn" style="display:none;">charger plus</button>
 </div>
 
+<!-- MANGA -->
+<div class="page" id="page-manga">
+  <div class="anime-top-controls">
+    <div class="counter" id="manga-counter"></div>
+  </div>
+  <input type="text" id="search-manga" class="search-bar" placeholder="Rechercher un manga, un auteur...">
+  <div class="manga-filters" id="manga-filters"></div>
+  <div id="mangaContent" class="text-content"></div>
+</div>
+
     <!-- À PROPOS -->
     <div class="page" id="page-apropos">
       <div class="apropos-layout">
@@ -161,7 +176,7 @@
     </div>
 
     <footer class="site-footer">
-      <p>© slidou — l'antre culturelle <span id="footer-year"></span></p>
+      <p>© slidou — l'antre culturelle — <span id="footer-year"></span></p>
     </footer>
 
   </main>
@@ -169,6 +184,13 @@
 </div>
 
 <script src="anime-data.js"></script>
+<script src="manga-data.js"></script>
+<script src="journal-data.js"></script>
+<script src="books-data.js"></script>
+<script src="films-data.js"></script>
+<script src="series-data.js"></script>
+<script src="games-data.js"></script>
+<script src="music-data.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
