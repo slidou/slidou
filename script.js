@@ -727,8 +727,9 @@ function renderCalendar() {
     
     if (dayEntries.length > 0) {
       const badge = dayEntries.length > 1 ? `<div class="calendar-badge">+${dayEntries.length - 1}</div>` : '';
+      var blurClass = dayEntries[0].blur ? ' blur-entry' : '';
       html += `
-        <div class="calendar-day has-data" data-date="${dateStr}">
+        <div class="calendar-day has-data${blurClass}" data-date="${dateStr}">
           <div class="calendar-day-num">${day}</div>
           <img src="${dayEntries[0].img}" alt="${dateStr}">
           ${badge}
@@ -774,8 +775,9 @@ function openPopup(dateStr) {
   entries.forEach(item => {
     const dotClass = typeColors[item.t] || "";
     const noteHtml = item.note ? `<div class="popup-item-note">${item.note}</div>` : '';
+    var blurClass = item.blur ? ' blur-entry' : '';
     html += `
-      <div class="popup-item">
+      <div class="popup-item${blurClass}">
         <img src="${item.img}" alt="${item.title}">
         <div class="popup-item-title"><span class="popup-type-dot ${dotClass}"></span>${item.title}</div>
         ${noteHtml}

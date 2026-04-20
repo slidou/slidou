@@ -746,3 +746,18 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 .top-info { flex: 1; }
 .top-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 500; margin-bottom: 4px; }
 .top-stars { font-size: 14px; color: var(--star-color); letter-spacing: 1px; }
+
+.calendar-day.blur-entry img {
+  filter: blur(6px);
+  transition: filter 0.3s;
+}
+.calendar-day.blur-entry:hover img {
+  filter: blur(0);
+}
+.popup-item.blur-entry img {
+  filter: blur(6px);
+  transition: filter 0.3s;
+}
+.popup-item.blur-entry:hover img {
+  filter: blur(0);
+}
