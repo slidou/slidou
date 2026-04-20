@@ -7392,5 +7392,6 @@ const animeList = [
   { id: 34895, title: "Zutto Suki Datta", note: 3.5, tags: ["hentai","normal episode"] },
   { id: 56606, title: "Zutto Tomodachi", note: 3, tags: ["music"] },
   { id: 52034, title: "[Oshi no Ko]", note: 4.5, tags: ["normal episode"] },
+  { id: 63974, title: "Dead or Love", note: 3, tags: ["music","archived","+"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
