@@ -689,9 +689,10 @@ const labels = {
       // On trie par date et on prend le plus récent
       const latestEntry = catEntries.sort((a, b) => new Date(b.d) - new Date(a.d))[0];
       
+      var blurStyle = latestEntry.blur ? 'filter:blur(6px);transition:filter 0.3s;' : '';
       html += `
         <div class="home-dash-card">
-          <img src="${latestEntry.img}" alt="${latestEntry.title}">
+          <img src="${latestEntry.img}" alt="${latestEntry.title}" style="${blurStyle}">
           <span class="dash-label">${labels[cat]}</span>
           <span class="dash-title">${latestEntry.title}</span>
         </div>`;
