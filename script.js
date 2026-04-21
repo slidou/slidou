@@ -668,13 +668,15 @@ function renderDashboard() {
   const container = document.getElementById('home-dashboard');
   
   // On définit les catégories à chercher et le texte à afficher
-const categories = ['livre', 'film', 'anime', 'jeu', 'musique'];
+const categories = ['livre', 'film', 'série', 'anime', 'manga', 'jeu', 'musique'];
 const labels = { 
-  livre: 'Dernier lu', 
-  film: 'Dernier vu', 
-  anime: 'Dernier anime', 
-  jeu: 'Dernier joué', 
-  musique: 'Dernier écouté' 
+  livre: 'dernier livre lu', 
+  film: 'dernier film visionné', 
+  série: 'dernière série visionnée', 
+  anime: 'dernier anime visionné', 
+  manga: 'dernier manga lu', 
+  jeu: 'dernier jeu joué', 
+  musique: 'dernier album écouté' 
 };
   
   let html = `<div class="home-dashboard-title">dernières activités</div><div class="home-dashboard-grid">`;
