@@ -7,4 +7,5 @@ const journalData = [
 { d: "2026-04-20", t: "anime", title: "Marriagetoxin", img: "anime/marriagetoxin.jpg", note: "épisode 1" },
 { d: "2026-04-21", t: "anime", title: "Marriagetoxin", img: "anime/marriagetoxin.jpg", note: "épisode 2" },
 { d: "2026-04-21", t: "anime", title: "Dead or Love", img: "anime/deadorlove.jpg", note: "music" },
+{ d: "2026-04-22", t: "anime", title: "Marriagetoxin", img: "anime/marriagetoxin.jpg", note: "épisode 3" },
 ];
