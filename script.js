@@ -651,7 +651,7 @@ document.getElementById('search-musique').addEventListener('input', e => {
   generateMusique(filteredMusique);
 });
 
-const typeColors = { film: "dot-film", livre: "dot-livre", jeu: "dot-jeu", musique: "dot-musique" };
+const typeColors = { film: "dot-film", livre: "dot-livre", jeu: "dot-jeu", musique: "dot-musique", anime: "dot-anime", "série": "dot-serie", manga: "dot-manga" };
 const moisNoms = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
 const joursNoms = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
 

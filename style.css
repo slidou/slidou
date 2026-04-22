@@ -541,6 +541,9 @@ body {
 .dot-livre { background: #ef5350; }
 .dot-jeu { background: #66BB6A; }
 .dot-musique { background: #AB47BC; }
+.dot-anime { background: #EC407A; }
+.dot-serie { background: #26A69A; }
+.dot-manga { background: #FF7043; }
 
 @media(max-width:768px) {
   .home-calendar-grid { gap: 4px; }
