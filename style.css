@@ -376,12 +376,12 @@ body {
 }
 .home-dash-card img { 
   width: 100%; 
-  height: 200px; 
-  object-fit: cover; 
   border-radius: 4px; 
   box-shadow: 0 4px 8px var(--shadow-color); 
   margin-bottom: 8px; 
 }
+.dash-card-cover img { aspect-ratio: 2 / 3; object-fit: cover; }
+.dash-card-square img { aspect-ratio: 1 / 1; object-fit: cover; }
 
 /* Calendrier */
 .home-month-title { 

@@ -782,8 +782,9 @@ const labels = {
       const latestEntry = catEntries.sort((a, b) => new Date(b.d) - new Date(a.d))[0];
       
       var blurStyle = latestEntry.blur ? 'filter:blur(6px);transition:filter 0.3s;' : '';
+      var ratioClass = cat === 'musique' ? ' dash-card-square' : ' dash-card-cover';
       html += `
-        <div class="home-dash-card">
+        <div class="home-dash-card${ratioClass}">
           <img src="${latestEntry.img}" alt="${latestEntry.title}" style="${blurStyle}">
           <span class="dash-label">${labels[cat]}</span>
           <span class="dash-title">${latestEntry.title}</span>
