@@ -10,4 +10,6 @@ const journalData = [
 { d: "2026-04-22", t: "anime", title: "Marriagetoxin", img: "anime/marriagetoxin.jpg", note: "épisode 3" },
 { d: "2026-04-22", t: "livre", title: "Libertés sans expression", img: "covers/libertesansexpression.jpg", note: "commencé le livre, 10 pages" },
 { d: "2026-04-23", t: "musique", title: "Safety in the Sun", img: "music/safetyinthesun.webp", note: "Sea of Dreams est de loin le meilleur son" },
+{ d: "2026-04-23", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "chapitre 1181" },
+{ d: "2026-04-23", t: "anime", title: "Oshikake! Bakunyuu Gal Harem Seikatsu", img: "manga/oshikake.jpg", note: "2 épisodes", blur: true },
 ];

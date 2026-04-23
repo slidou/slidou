@@ -137,7 +137,7 @@ body {
   .sidebar li { margin: 8px 0; }
   .content { padding: 20px 10px; }
   .book-card { width: 45%; }
-  .book-card img { height: 180px; }
+  .book-card img { aspect-ratio: 2 / 3; object-fit: cover; }
 }
 
 /* ── COMPTEURS ── */
@@ -174,11 +174,6 @@ body {
   box-shadow: 0 4px 8px var(--shadow-color); 
 }
 
-@media(max-width:768px) {
-  #jeuxContent .book-card { width: 45%; }
-  #jeuxContent .book-card img { height: 200px; }
-}
-
 /* ── MUSIQUE ── */
 #page-musique.active { display: block; padding-top: 40px; }
 #musiqueContent .book-card { width: 180px; }
@@ -192,8 +187,7 @@ body {
 }
 
 @media(max-width:768px) {
-  #musiqueContent .book-card { width: 45%; }
-  #musiqueContent .book-card img { height: 140px; }
+  #musiqueContent .book-card img { aspect-ratio: 1 / 1; object-fit: cover; }
 }
 
 /* ── TAMAGOTCHI ── */
@@ -556,11 +550,14 @@ body {
 .dot-manga { background: #FF7043; }
 
 @media(max-width:768px) {
+  #filmsContent .book-card, #seriesContent .book-card { width: 45%; }
+  #filmsContent .book-card img, #seriesContent .book-card img { height: auto; aspect-ratio: 2 / 3; object-fit: cover; }
+}
+@media(max-width:768px) {
   .home-calendar-grid { gap: 4px; }
   .calendar-day-num { font-size: 11px; }
   .home-dashboard-grid { gap: 10px; }
   .home-dash-card { width: 80px; }
-  .home-dash-card img { height: 110px; }
 }
 
 .home-calendar-header {
@@ -719,7 +716,7 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 
 @media(max-width:768px) {
   .anime-grid { gap: 10px; }
-  .anime-card img, .anime-placeholder { height: 180px; }
+  .anime-card img, .anime-placeholder { aspect-ratio: 2 / 3; height: auto; }
 }
 
 .anime-top-controls {
