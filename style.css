@@ -717,6 +717,7 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 @media(max-width:768px) {
   .anime-grid { gap: 10px; }
   .anime-card img, .anime-placeholder { aspect-ratio: 2 / 3; height: auto; }
+  .manga-placeholder { aspect-ratio: 2 / 3; height: auto; }
 }
 
 .anime-top-controls {
@@ -756,6 +757,15 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 #page-manga.active { display: block; padding-top: 40px; }
 .manga-filters { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-bottom: 40px; }
 .manga-card { position: relative; }
+.manga-img-render {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  display: block;
+}
 
 .top-list { display: flex; flex-direction: column; gap: 20px; max-width: 600px; margin: 0 auto 40px auto; }
 .top-item {

@@ -1455,7 +1455,7 @@ function renderManga() {
 
       var imgBlock;
       if (mangaImageCache.has(m.id)) {
-        imgBlock = '<img src="' + mangaImageCache.get(m.id) + '" alt="" style="width:100%;height:220px;object-fit:cover;object-position:top;border-radius:2px;box-shadow:0 4px 8px var(--shadow-color);display:block;">';
+                imgBlock = '<img src="' + mangaImageCache.get(m.id) + '" alt="" class="manga-img-render">';
       } else {
         imgBlock = '<div class="manga-placeholder anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>';
         queueMangaImage(m.id);
