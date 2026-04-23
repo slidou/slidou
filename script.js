@@ -1305,23 +1305,35 @@ function generateManga() {
   var fC = document.getElementById('manga-filters'); fC.innerHTML = '';
   var allBtn = document.createElement('button');
   allBtn.className = 'anime-tag-btn' + (mangaActiveFilter === null ? ' active' : '');
-  allBtn.textContent = 'tous';
+  allBtn.textContent = 'tous (' + total + ')';
   allBtn.addEventListener('click', function() { mangaActiveFilter = null; renderMangaFilters(); renderManga(); });
   fC.appendChild(allBtn);
 
   var fmtTags = ['one-shot', 'hentai'];
   var quaTags = ['favorite', 'gem'];
-  var fmtArr = fmtTags.map(function(t) { return t; });
-  var quaArr = quaTags.map(function(t) { return t; });
+
+  var mangaTagCount = {};
+  for (var a in mangaData) {
+    mangaData[a].forEach(function(m) {
+      var isHentai = m.tags.indexOf('hentai') !== -1;
+      m.tags.forEach(function(t) {
+        if (t === 'one-shot' && isHentai) return;
+        mangaTagCount[t] = (mangaTagCount[t] || 0) + 1;
+      });
+    });
+  }
+  var fmtArr = fmtTags.map(function(t) { return [t, mangaTagCount[t] || 0]; }).filter(function(e) { return e[1] > 0; });
+  var quaArr = quaTags.map(function(t) { return [t, mangaTagCount[t] || 0]; }).filter(function(e) { return e[1] > 0; });
 
   if (fmtArr.length) {
     var s1 = document.createElement('div'); s1.className = 'anime-tag-section';
     var l1 = document.createElement('div'); l1.className = 'anime-tag-section-label'; l1.textContent = 'format'; s1.appendChild(l1);
     var w1 = document.createElement('div'); w1.className = 'anime-tag-section-tags';
-    fmtArr.forEach(function(tag) {
+    fmtArr.forEach(function(entry) {
+      var tag = entry[0], count = entry[1];
       var btn = document.createElement('button');
       btn.className = 'anime-tag-btn'; if (mangaActiveFilter === tag) btn.classList.add('active');
-      btn.textContent = tag;
+      btn.textContent = tag + ' (' + count + ')';
       btn.addEventListener('click', function() { mangaActiveFilter = mangaActiveFilter === tag ? null : tag; renderMangaFilters(); renderManga(); });
       w1.appendChild(btn);
     });
@@ -1332,10 +1344,11 @@ function generateManga() {
     var s2 = document.createElement('div'); s2.className = 'anime-tag-section';
     var l2 = document.createElement('div'); l2.className = 'anime-tag-section-label'; l2.textContent = 'qualité'; s2.appendChild(l2);
     var w2 = document.createElement('div'); w2.className = 'anime-tag-section-tags';
-    quaArr.forEach(function(tag) {
+    quaArr.forEach(function(entry) {
+      var tag = entry[0], count = entry[1];
       var btn = document.createElement('button');
       btn.className = 'anime-tag-btn quality-tag'; if (mangaActiveFilter === tag) btn.classList.add('active');
-      btn.textContent = tag;
+      btn.textContent = tag + ' (' + count + ')';
       btn.addEventListener('click', function() { mangaActiveFilter = mangaActiveFilter === tag ? null : tag; renderMangaFilters(); renderManga(); });
       w2.appendChild(btn);
     });
@@ -1387,6 +1400,7 @@ function renderManga() {
       container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
       return;
     }
+    document.getElementById('manga-counter').textContent = allFav.length + ' / ' + total + ' manga';
     renderTopList(container, allFav, 'manga');
     return;
   }
