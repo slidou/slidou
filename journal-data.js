@@ -12,4 +12,5 @@ const journalData = [
 { d: "2026-04-23", t: "musique", title: "Safety in the Sun", img: "music/safetyinthesun.webp", note: "Sea of Dreams est de loin le meilleur son" },
 { d: "2026-04-23", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "chapitre 1181" },
 { d: "2026-04-23", t: "anime", title: "Oshikake! Bakunyuu Gal Harem Seikatsu", img: "anime/oshikake.jpg", note: "2 épisodes", blur: true },
+{ d: "2026-04-23", t: "musique", title: "Half Blood (BloodLuxe)", img: "music/halfblood.webp", note: "Flashout Freestyle >" },
 ];
