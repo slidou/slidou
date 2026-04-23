@@ -54,6 +54,10 @@ body {
 .sidebar a.active { color: var(--link-color); font-weight: 700; }
 .sidebar a:hover { color: var(--link-color); }
 
+/* ── Cacher le hamburger sur PC ── */
+#menu-toggle { display: none; }
+.sidebar-header-actions { display: contents; }
+
 /* ── Zone principale ── */
 .content { flex: 1; overflow-y: auto; padding: 0 20px; }
 .page { display: none; width: 100%; max-width: 900px; margin: 0 auto; text-align: center; }
@@ -123,8 +127,14 @@ body {
 /* ── MOBILE ── */
 @media(max-width:768px) {
   .wrapper { flex-direction: column; }
-  .sidebar { width: 100%; flex-direction: row; justify-content: space-between; padding: 15px; height: auto; position: relative; }
+  .sidebar { width: 100%; flex-direction: column; align-items: flex-start; padding: 15px; height: auto; position: relative; }
   .sidebar-header { margin-bottom: 0; }
+  #menu-toggle { display: block; background: none; border: none; font-size: 22px; cursor: pointer; color: var(--text-color); }
+  .sidebar-header-actions { display: flex; gap: 10px; }
+  .sidebar nav { width: 100%; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .sidebar nav.open { max-height: 400px; }
+  .sidebar ul { padding-top: 15px; width: 100%; }
+  .sidebar li { margin: 8px 0; }
   .content { padding: 20px 10px; }
   .book-card { width: 45%; }
   .book-card img { height: 180px; }
@@ -604,15 +614,6 @@ body {
   margin-top: 4px; 
 }
 
-/* ── TRANSITION DES PAGES ── */
-@keyframes pageFadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.page.active { 
-  animation: pageFadeIn 0.3s ease; 
-}
-
 /* ── FOOTER ── */
 .site-footer {
   text-align: center;
@@ -671,10 +672,31 @@ body {
   width: 100%; height: 220px; border-radius: 2px;
   display: flex; align-items: center; justify-content: center;
   background: hsl(var(--hue), 15%, 90%);
-  color: hsl(var(--hue), 20%, 60%);
+  color: transparent;
   box-shadow: 0 4px 8px var(--shadow-color);
+  position: relative;
 }
-body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color: hsl(var(--hue), 20%, 40%); }
+.anime-placeholder::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border: 2px solid hsl(var(--hue), 20%, 70%);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: placeholderSpin 0.8s linear infinite;
+}
+body.dark-mode .anime-placeholder::after {
+  border-color: hsl(var(--hue), 20%, 40%);
+  border-top-color: transparent;
+}
+@keyframes placeholderSpin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color: transparent; }
 
 .anime-badges {
   position: absolute; top: 6px; right: 6px;
@@ -773,3 +795,10 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 .popup-item.blur-entry:hover img {
   filter: blur(0);
 }
+
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page:focus { outline: none; }

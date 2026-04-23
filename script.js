@@ -1,10 +1,12 @@
 // ── Chargement des données ──
-const books = booksData;
-const films = filmsData;
-const series = seriesData;
-const games = gamesData;
-const musique = musicData;
-const journal = journalData;
+let books, films, series, games, musique, journal;
+try { books = booksData; } catch(e) { books = {}; }
+try { films = filmsData; } catch(e) { films = {}; }
+try { series = seriesData; } catch(e) { series = {}; }
+try { games = gamesData; } catch(e) { games = {}; }
+try { musique = musicData; } catch(e) { musique = {}; }
+try { journal = journalData; } catch(e) { journal = {}; }
+let ecransSearchQuery = '';
 
 // ── Tri utilitaire ──
 function sortDataKeys(data) {
@@ -56,13 +58,29 @@ function getStars(note) {
   return stars;
 }
 
+document.getElementById('menu-toggle').addEventListener('click', () => {
+  document.querySelector('.sidebar nav').classList.toggle('open');
+});
+
 // ── Navigation ──
 function navigateTo(page) {
   document.querySelectorAll('[data-page]').forEach(l => l.classList.remove('active'));
   document.querySelector(`[data-page="${page}"]`).classList.add('active');
 
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + page).classList.add('active');
+  var currentPage = document.querySelector('.page.active');
+  var nextPage = document.getElementById('page-' + page);
+  
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active');
+    p.style.animation = 'none';
+  });
+  
+  nextPage.classList.add('active');
+  nextPage.offsetHeight;
+  nextPage.style.animation = 'pageFadeIn 0.3s ease';
+    nextPage.setAttribute('tabindex', '-1');
+  nextPage.focus({ preventScroll: true });
+  document.querySelector('.sidebar nav').classList.remove('open');
 
   window.scrollTo({ top: 0, behavior: 'instant' });
   document.querySelector('.content').scrollTo({ top: 0, behavior: 'instant' });
@@ -70,14 +88,34 @@ function navigateTo(page) {
   localStorage.setItem('activePage', page);
 
   if (page === 'home') initHome();
-  if (page === 'bibliographie') generateBibliography();
-  if (page === 'ecrans') generateFilms();
-  if (page === 'jeux') generateGames();
-  if (page === 'musique') generateMusique();
-  if (page === 'anime') generateAnime();
-  if (page === 'manga') generateManga();
+  if (page === 'bibliographie') {
+    document.getElementById('bibliographyContent').dataset.initialized = '';
+    document.getElementById('search-biblio').value = '';
+    generateBibliography();
+  }
+  if (page === 'ecrans') {
+    ecransSearchQuery = '';
+    document.getElementById('search-ecrans').value = '';
+    updateEcransCounter();
+    generateFilms();
+  }
+  if (page === 'jeux') {
+    document.getElementById('search-jeux').value = '';
+    generateGames();
+  }
+  if (page === 'musique') {
+    document.getElementById('search-musique').value = '';
+    generateMusique();
+  }
+  if (page === 'anime') {
+    document.getElementById('search-anime').value = '';
+    generateAnime();
+  }
+  if (page === 'manga') {
+    document.getElementById('search-manga').value = '';
+    generateManga();
+  }
   if (page === 'apropos') updateTamagotchiUI();
-  
 }
 
 document.querySelectorAll('[data-page]').forEach(link => {
@@ -169,7 +207,7 @@ function filterData(data, query) {
     const matchCategory = normalize(category).includes(q);
     const filteredItems = data[category].filter(item => {
       const matchTitle = normalize(item.title).includes(q);
-      const matchEngTitle = item.englishTitle && normalize(item.englishTitle).includes(q);
+      const matchEngTitle = item.englishTitle != null && normalize(item.englishTitle).includes(q);
       return matchTitle || matchEngTitle || matchCategory;
     });
     if (filteredItems.length > 0) result[category] = filteredItems;
@@ -178,15 +216,18 @@ function filterData(data, query) {
 }
 
 // ── Generate Bibliography ──
-function generateBibliography(data = books) {
+function generateBibliography(data = books, isSearch = false) {
   const container = document.getElementById('bibliographyContent');
   
   let totalBooks = 0;
-  for (const author in books) totalBooks += books[author].length;
-  document.getElementById('biblio-counter').textContent = totalBooks + " livres lus";
+  for (const author in data) totalBooks += data[author].length;
+  const label = isSearch 
+    ? totalBooks + " livre" + (totalBooks !== 1 ? "s" : "") + " trouvé" + (totalBooks !== 1 ? "s" : "")
+    : totalBooks + " livre" + (totalBooks !== 1 ? "s" : "") + " lu" + (totalBooks !== 1 ? "s" : "");
+  document.getElementById('biblio-counter').textContent = label;
 
   if (!container.dataset.initialized) {
-    container.innerHTML = ''; 
+    container.innerHTML = '';
 
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
     const quoteDiv = document.createElement('div');
@@ -198,11 +239,16 @@ function generateBibliography(data = books) {
     listDiv.id = 'authors-list';
     container.appendChild(listDiv);
 
-    container.dataset.initialized = "true"; 
+    container.dataset.initialized = "true";
   }
 
   const listContainer = document.getElementById('authors-list');
   listContainer.innerHTML = '';
+
+  if (sortDataKeys(data).length === 0) {
+    listContainer.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+    return;
+  }
 
   sortDataKeys(data).forEach(function(author) {
     const h2 = document.createElement('h2');
@@ -253,24 +299,47 @@ document.querySelectorAll('.sub-nav-link').forEach(link => {
     document.querySelectorAll('.sub-page').forEach(p => p.classList.remove('active'));
     document.getElementById('subpage-' + subpage).classList.add('active');
 
-    if (subpage === 'films') generateFilms();
-    if (subpage === 'series') generateSeries();
+    const filteredFilms = filterData(films, ecransSearchQuery);
+    const filteredSeries = filterData(series, ecransSearchQuery);
+    const isSearch = !!ecransSearchQuery;
+
+    let totalFilms = Object.values(filteredFilms).reduce((acc, arr) => acc + arr.length, 0);
+    let totalSeries = Object.keys(filteredSeries).length;
+    let textFilms = isSearch ? totalFilms + " film" + (totalFilms !== 1 ? "s" : "") + " trouvé" + (totalFilms !== 1 ? "s" : "") : totalFilms + " film" + (totalFilms !== 1 ? "s" : "") + " vu" + (totalFilms !== 1 ? "s" : "");
+    let textSeries = isSearch ? totalSeries + " série" + (totalSeries !== 1 ? "s" : "") + " trouvée" + (totalSeries !== 1 ? "s" : "") : totalSeries + " série" + (totalSeries !== 1 ? "s" : "") + " suivie" + (totalSeries !== 1 ? "s" : "");
+    document.getElementById('ecrans-counter').textContent = textFilms + " • " + textSeries;
+
+    if (subpage === 'films') generateFilms(filteredFilms, isSearch);
+    if (subpage === 'series') generateSeries(filteredSeries, isSearch);
   });
 });
 
 // ── Compteur Écrans ──
-function updateEcransCounter() {
-  let totalFilms = Object.values(films).reduce((acc, arr) => acc + arr.length, 0);
-  let totalSeries = Object.keys(series).length;
-  document.getElementById('ecrans-counter').textContent = totalFilms + " films vus • " + totalSeries + " séries suivies";
+function updateEcransCounter(filmsData = films, seriesData = series, isSearch = false) {
+  let totalFilms = Object.values(filmsData).reduce((acc, arr) => acc + arr.length, 0);
+  let totalSeries = Object.keys(seriesData).length;
+
+  let textFilms = isSearch
+    ? totalFilms + " film" + (totalFilms !== 1 ? "s" : "") + " trouvé" + (totalFilms !== 1 ? "s" : "")
+    : totalFilms + " film" + (totalFilms !== 1 ? "s" : "") + " vu" + (totalFilms !== 1 ? "s" : "");
+  let textSeries = isSearch
+    ? totalSeries + " série" + (totalSeries !== 1 ? "s" : "") + " trouvée" + (totalSeries !== 1 ? "s" : "")
+    : totalSeries + " série" + (totalSeries !== 1 ? "s" : "") + " suivie" + (totalSeries !== 1 ? "s" : "");
+
+  document.getElementById('ecrans-counter').textContent = textFilms + " • " + textSeries;
 }
 
 // ── Generate Films ──
-function generateFilms(data = films) {
-  updateEcransCounter();
+function generateFilms(data = films, isSearch = false) {
   const container = document.getElementById('filmsContent');
   container.innerHTML = '';
-    sortDataKeys(data).forEach(function(director) {
+
+  if (sortDataKeys(data).length === 0) {
+    container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+    return;
+  }
+
+  sortDataKeys(data).forEach(function(director) {
     const h2 = document.createElement('h2');
     h2.textContent = director + " ( " + data[director].length + " )";
     container.appendChild(h2);
@@ -302,11 +371,16 @@ function generateFilms(data = films) {
 }
 
 // ── Generate Séries ──
-function generateSeries(data = series) {
-  updateEcransCounter();
+function generateSeries(data = series, isSearch = false) {
   const container = document.getElementById('seriesContent');
   container.innerHTML = '';
-    sortDataKeys(data).forEach(function(show) {
+
+  if (sortDataKeys(data).length === 0) {
+    container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+    return;
+  }
+
+  sortDataKeys(data).forEach(function(show) {
     const h2 = document.createElement('h2');
     h2.textContent = show + " ( " + data[show].length + " )";
     container.appendChild(h2);
@@ -336,15 +410,23 @@ function generateSeries(data = series) {
 }
 
 // ── Generate Jeux vidéo ──
-function generateGames(data = games) {
+function generateGames(data = games, isSearch = false) {
   let totalGames = 0;
-  for (const dev in games) totalGames += games[dev].length;
-  document.getElementById('jeux-counter').textContent = totalGames + " jeux joués";
+  for (const dev in data) totalGames += data[dev].length;
+  const label = isSearch 
+    ? totalGames + " jeu" + (totalGames !== 1 ? "x" : "") + " trouvé" + (totalGames !== 1 ? "s" : "")
+    : totalGames + " jeu" + (totalGames !== 1 ? "x" : "") + " joué" + (totalGames !== 1 ? "s" : "");
+  document.getElementById('jeux-counter').textContent = label;
 
   const container = document.getElementById('jeuxContent');
   container.innerHTML = '';
 
-   sortDataKeys(data).forEach(function(dev) {
+  if (sortDataKeys(data).length === 0) {
+    container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+    return;
+  }
+
+  sortDataKeys(data).forEach(function(dev) {
     const h2 = document.createElement('h2');
     h2.textContent = dev + " ( " + data[dev].length + " )";
     container.appendChild(h2);
@@ -376,13 +458,21 @@ function generateGames(data = games) {
 }
 
 // ── Generate Musique ──
-function generateMusique(data = musique) {
+function generateMusique(data = musique, isSearch = false) {
   let totalAlbums = 0;
-  for (const artist in musique) totalAlbums += musique[artist].length;
-  document.getElementById('musique-counter').textContent = totalAlbums + " albums écoutés";
+  for (const artist in data) totalAlbums += data[artist].length;
+  const label = isSearch 
+    ? totalAlbums + " album" + (totalAlbums !== 1 ? "s" : "") + " trouvé" + (totalAlbums !== 1 ? "s" : "")
+    : totalAlbums + " album" + (totalAlbums !== 1 ? "s" : "") + " écouté" + (totalAlbums !== 1 ? "s" : "");
+  document.getElementById('musique-counter').textContent = label;
 
   const container = document.getElementById('musiqueContent');
   container.innerHTML = '';
+
+  if (sortDataKeys(data).length === 0) {
+    container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+    return;
+  }
 
   sortDataKeys(data).forEach(function(artist) {
     const h2 = document.createElement('h2');
@@ -453,7 +543,7 @@ function getBudgieState() {
 
   const now = Date.now();
   const elapsedMinutes = (now - state.lastUpdate) / (1000 * 60);
-  const decay = elapsedMinutes * 0.5;
+  const decay = elapsedMinutes * 0.055;
   
   ['pistachio', 'cielazur'].forEach(bird => {
     if(!state[bird]) state[bird] = { faim: 80, bonheur: 80, energie: 80 };
@@ -622,33 +712,33 @@ document.getElementById('cage-cielazur').addEventListener('click', () => petBird
 // ── Événements de Recherche ──
 document.getElementById('search-biblio').addEventListener('input', e => {
   const query = e.target.value;
-  const filteredBooks = filterData(books, query);
-  generateBibliography(filteredBooks);
+  generateBibliography(filterData(books, query), true);
 });
 
 document.getElementById('search-ecrans').addEventListener('input', e => {
-  const query = e.target.value;
-  const filteredFilms = filterData(films, query);
-  const filteredSeries = filterData(series, query);
-  
-  const isFilmsActive = document.getElementById('subpage-films').classList.contains('active');
-  if (isFilmsActive) {
-    generateFilms(filteredFilms);
-  } else {
-    generateSeries(filteredSeries);
-  }
+  ecransSearchQuery = e.target.value;
+  const filteredFilms = filterData(films, ecransSearchQuery);
+  const filteredSeries = filterData(series, ecransSearchQuery);
+  const isSearch = !!ecransSearchQuery;
+
+  let totalFilms = Object.values(filteredFilms).reduce((acc, arr) => acc + arr.length, 0);
+  let totalSeries = Object.keys(filteredSeries).length;
+  let textFilms = isSearch ? totalFilms + " film" + (totalFilms !== 1 ? "s" : "") + " trouvé" + (totalFilms !== 1 ? "s" : "") : totalFilms + " film" + (totalFilms !== 1 ? "s" : "") + " vu" + (totalFilms !== 1 ? "s" : "");
+  let textSeries = isSearch ? totalSeries + " série" + (totalSeries !== 1 ? "s" : "") + " trouvée" + (totalSeries !== 1 ? "s" : "") : totalSeries + " série" + (totalSeries !== 1 ? "s" : "") + " suivie" + (totalSeries !== 1 ? "s" : "");
+  document.getElementById('ecrans-counter').textContent = textFilms + " • " + textSeries;
+
+  generateFilms(filteredFilms, isSearch);
+  generateSeries(filteredSeries, isSearch);
 });
 
 document.getElementById('search-jeux').addEventListener('input', e => {
   const query = e.target.value;
-  const filteredGames = filterData(games, query);
-  generateGames(filteredGames);
+  generateGames(filterData(games, query), true);
 });
 
 document.getElementById('search-musique').addEventListener('input', e => {
   const query = e.target.value;
-  const filteredMusique = filterData(musique, query);
-  generateMusique(filteredMusique);
+  generateMusique(filterData(musique, query), true);
 });
 
 const typeColors = { film: "dot-film", livre: "dot-livre", jeu: "dot-jeu", musique: "dot-musique", anime: "dot-anime", "série": "dot-serie", manga: "dot-manga" };
@@ -848,9 +938,15 @@ function loadImageCache() {
   } catch (e) {}
 }
 
+const MAX_IMG_CACHE = 500;
+
 function saveImageCache() {
   if (!cacheDirty) return;
   cacheDirty = false;
+  if (animeImageCache.size > MAX_IMG_CACHE) {
+    var entries = Array.from(animeImageCache.entries());
+    animeImageCache = new Map(entries.slice(entries.length - MAX_IMG_CACHE));
+  }
   try { localStorage.setItem('anime_img_cache', JSON.stringify(Object.fromEntries(animeImageCache))); } catch (e) {}
 }
 
@@ -991,7 +1087,11 @@ function applyAnimeFilter() {
   var norm = function(str) { return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); };
 
   animeFiltered = animeList.filter(function(a) {
-    if (activeTag === 'favorite') return a.tags.indexOf('favorite') !== -1;
+    if (activeTag === 'favorite') {
+      if (a.tags.indexOf('favorite') === -1) return false;
+      if (query) { var q = norm(query); return norm(a.title).indexOf(q) !== -1; }
+      return true;
+    }
     if (activeTag) {
       if (activeTag === 'normal episode' || activeTag === 'short episode') {
         if (a.tags.indexOf('hentai') !== -1) return false;
@@ -1030,11 +1130,20 @@ function applyAnimeFilter() {
   animeFiltered.forEach(function(a) { displayedIds[a.id] = true; });
   imageQueue = imageQueue.filter(function(id) { return displayedIds[id]; });
 
-  document.getElementById('anime-counter').textContent = activeTag && !query
+  document.getElementById('anime-counter').textContent = activeTag
     ? animeFiltered.length + ' / ' + animeList.length + ' animes'
-    : animeList.length + " animes terminés";
+    : query
+      ? animeFiltered.length + " anime" + (animeFiltered.length !== 1 ? "s" : "") + " trouvé" + (animeFiltered.length !== 1 ? "s" : "")
+      : animeList.length + " anime" + (animeList.length !== 1 ? "s" : "") + " terminé" + (animeList.length !== 1 ? "s" : "");
   animeDisplayed = 0;
   document.getElementById('animeContent').innerHTML = '';
+
+  if (animeFiltered.length === 0) {
+    document.getElementById('animeContent').innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+    document.getElementById('load-more-anime').style.display = 'none';
+    return;
+  }
+
   renderAnimeBatch();
 }
 
@@ -1150,6 +1259,10 @@ function loadMangaImageCache() {
 }
 function saveMangaImageCache() {
   if (!mangaCacheDirty) return; mangaCacheDirty = false;
+  if (mangaImageCache.size > MAX_IMG_CACHE) {
+    var entries = Array.from(mangaImageCache.entries());
+    mangaImageCache = new Map(entries.slice(entries.length - MAX_IMG_CACHE));
+  }
   try { localStorage.setItem('manga_img_cache', JSON.stringify(Object.fromEntries(mangaImageCache))); } catch (e) {}
 }
 function queueMangaImage(id) {
@@ -1187,7 +1300,6 @@ function generateManga() {
   }
   loadMangaImageCache();
   var total = 0; for (var a in mangaData) total += mangaData[a].length;
-  document.getElementById('manga-counter').textContent = total + " manga lus";
 
   var fC = document.getElementById('manga-filters'); fC.innerHTML = '';
   var allBtn = document.createElement('button');
@@ -1231,6 +1343,11 @@ function generateManga() {
   renderManga();
 }
 
+  var total = 0; for (var a in mangaData) total += mangaData[a].length;
+  document.getElementById('manga-counter').textContent = total + " manga lu" + (total !== 1 ? "s" : "");
+
+  var fC = document.getElementById('manga-filters'); fC.innerHTML = '';
+
 function renderMangaFilters() {
   document.querySelectorAll('#manga-filters .anime-tag-btn').forEach(function(btn) {
     btn.classList.remove('active');
@@ -1265,22 +1382,46 @@ function renderManga() {
         }
       });
     });
+    if (allFav.length === 0) {
+      container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+      return;
+    }
     renderTopList(container, allFav, 'manga');
     return;
   }
 
+  var totalFiltered = 0;
   keys.forEach(function(author) {
     var filtered = mangaData[author].filter(function(m) {
       if (mangaActiveFilter) {
-        if (mangaActiveFilter === 'hentai' && m.tags.indexOf('one-shot') !== -1 && m.tags.indexOf('hentai') !== -1) return true;
-        if (mangaActiveFilter === 'one-shot' && m.tags.indexOf('one-shot') !== -1 && m.tags.indexOf('hentai') !== -1) return false;
-        if (m.tags.indexOf(mangaActiveFilter) === -1) return false;
+        if (mangaActiveFilter === 'hentai') {
+          if (m.tags.indexOf('hentai') === -1) return false;
+        } else if (mangaActiveFilter === 'one-shot') {
+          if (m.tags.indexOf('one-shot') === -1) return false;
+          if (m.tags.indexOf('hentai') !== -1) return false;
+        } else {
+          if (m.tags.indexOf(mangaActiveFilter) === -1) return false;
+        }
       }
       if (q) { return norm(m.title).indexOf(q) !== -1; }
       return true;
     });
+    totalFiltered += filtered.length;
+    if (author === keys[keys.length - 1]) {
+      var mangaLabel = q
+        ? totalFiltered + " manga trouvé" + (totalFiltered !== 1 ? "s" : "")
+        : mangaActiveFilter
+          ? totalFiltered + " / " + total + " manga"
+          : total + " manga lu" + (total !== 1 ? "s" : "");
+      document.getElementById('manga-counter').textContent = mangaLabel;
+
+      if (totalFiltered === 0) {
+        container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+        return;
+      }
+    }
     if (filtered.length === 0) return;
-        filtered.sort(function(a, b) {
+    filtered.sort(function(a, b) {
       if (a.note === null && b.note === null) return a.title.localeCompare(b.title);
       if (a.note === null) return 1; if (b.note === null) return -1;
       return b.note - a.note;
