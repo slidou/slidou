@@ -12,4 +12,7 @@ const musicData = {
   "Luidji": [
     { title: "Tristesse Business : Saison 1", note: 5, cover: "music/tristessebusiness.webp", link: "https://rateyourmusic.com/release/album/luidji/tristesse-business-saison-1/" },
   ],
+  "Makala": [
+    { title: "YAMOTO", note: 4.5, cover: "music/yamoto.webp", link: "https://rateyourmusic.com/release/album/makala/yamoto/" },
+  ],
 };
