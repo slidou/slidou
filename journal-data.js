@@ -16,4 +16,5 @@ const journalData = [
 { d: "2026-04-24", t: "anime", title: "Be My Star", img: "anime/bemystar.jpg", note: "" },
 { d: "2026-04-24", t: "musique", title: "Tristesse Business : Saison 1", img: "music/tristessebusiness.webp", note: "" },
 { d: "2026-04-24", t: "musique", title: "YAMOTO", img: "music/yamoto.webp", note: "" },
+{ d: "2026-04-24", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "épisode 1" },
 ];
