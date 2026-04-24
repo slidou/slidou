@@ -9,4 +9,7 @@ const musicData = {
   "slayr": [
     { title: "Half Blood (BloodLuxe)", note: 3.5, cover: "music/halfblood.webp", link: "https://rateyourmusic.com/release/mixtape/slayr/half-blood-bloodluxe/" },
   ],
+  "Luidji": [
+    { title: "Tristesse Business : Saison 1", note: 5, cover: "music/tristessebusiness.webp", link: "https://rateyourmusic.com/release/album/luidji/tristesse-business-saison-1/" },
+  ],
 };

@@ -14,4 +14,5 @@ const journalData = [
 { d: "2026-04-23", t: "anime", title: "Oshikake! Bakunyuu Gal Harem Seikatsu", img: "anime/oshikake.jpg", note: "2 épisodes", blur: true },
 { d: "2026-04-23", t: "musique", title: "Half Blood (BloodLuxe)", img: "music/halfblood.webp", note: "Flashout Freestyle >" },
 { d: "2026-04-24", t: "anime", title: "Be My Star", img: "anime/bemystar.jpg", note: "" },
+{ d: "2026-04-24", t: "musique", title: "Tristesse Business : Saison 1", img: "music/tristessebusiness.webp", note: "" },
 ];
