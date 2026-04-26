@@ -30,4 +30,10 @@ const journalData = [
 { d: "2026-04-26", t: "anime", title: "Mouth Music feat. Takkyu Ishino, Shinco", img: "anime/mouthmusic.jpg", note: "music" },
 { d: "2026-04-26", t: "anime", title: "Cupcake feat. punchnello", img: "anime/cupcake.jpg", note: "music" },
 { d: "2026-04-26", t: "anime", title: "Seoul Phonk feat. Skyminhyuk", img: "anime/seoulphonk.jpg", note: "music" },
+{ d: "2026-04-26", t: "anime", title: "Nippon Sangoku", img: "anime/nipponsangoku.jpg", note: "épisode 4" },
+{ d: "2026-04-26", t: "musique", title: "Just Friends", img: "music/justfriends.webp", note: "réécoute" },
+{ d: "2026-04-26", t: "anime", title: "Adrenaline (NO1 Ver.)", img: "anime/adrenaline.jpg", note: "music" },
+{ d: "2026-04-26", t: "anime", title: "Ichi Ni no San", img: "anime/ichininosan.jpg", note: "music" },
+{ d: "2026-04-26", t: "anime", title: "Judgement?", img: "anime/judgement.jpg", note: "music" },
+{ d: "2026-04-26", t: "anime", title: "Side Quest King (KISAI remix)", img: "anime/sidequestking.jpg", note: "music" },
 ];

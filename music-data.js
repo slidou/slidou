@@ -18,4 +18,7 @@ const musicData = {
   "Nujabes": [
     { title: "Luv(sic) Hexalogy", note: 5, cover: "music/luvsichexalogy.web", link: "https://rateyourmusic.com/release/comp/nujabes-feat-shing02/luv_sic-hexalogy/" },
   ],
+  "potsu": [
+    { title: "Just Friends", note: 5, cover: "music/justfriends.web", link: "https://rateyourmusic.com/release/album/potsu/just-friends/" },
+  ],
 };
