@@ -779,7 +779,7 @@ const labels = {
     if (catEntries.length > 0) {
       hasAnyActivity = true;
       // On trie par date et on prend le plus récent
-      const latestEntry = catEntries.sort((a, b) => new Date(b.d) - new Date(a.d))[0];
+      const latestEntry = catEntries[catEntries.length - 1];
       
       var blurStyle = latestEntry.blur ? 'filter:blur(6px);transition:filter 0.3s;' : '';
       var ratioClass = cat === 'musique' ? ' dash-card-square' : ' dash-card-cover';
