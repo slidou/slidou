@@ -15,4 +15,7 @@ const musicData = {
   "Makala": [
     { title: "YAMOTO", note: 4.5, cover: "music/yamoto.webp", link: "https://rateyourmusic.com/release/album/makala/yamoto/" },
   ],
+  "Nujabes": [
+    { title: "Luv(sic) Hexalogy", note: 5, cover: "music/luvsichexalogy.web", link: "https://rateyourmusic.com/release/comp/nujabes-feat-shing02/luv_sic-hexalogy/" },
+  ],
 };
