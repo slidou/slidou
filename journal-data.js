@@ -36,4 +36,5 @@ const journalData = [
 { d: "2026-04-26", t: "anime", title: "Ichi Ni no San", img: "anime/ichininosan.jpg", note: "music" },
 { d: "2026-04-26", t: "anime", title: "Judgement?", img: "anime/judgement.jpg", note: "music" },
 { d: "2026-04-26", t: "anime", title: "Side Quest King (KISAI remix)", img: "anime/sidequestking.jpg", note: "music" },
+{ d: "2026-04-26", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "épisodes 2 & 3" },
 ];
