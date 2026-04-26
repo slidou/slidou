@@ -508,6 +508,7 @@ body {
   display: flex; 
   flex-wrap: wrap; 
   gap: 15px; 
+  justify-content: center; 
 }
 .popup-item { 
   width: 100px; 
