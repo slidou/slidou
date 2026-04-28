@@ -16,13 +16,13 @@ const musicData = {
     { title: "YAMOTO", note: 4.5, cover: "music/yamoto.webp", link: "https://rateyourmusic.com/release/album/makala/yamoto/" },
   ],
   "Nujabes": [
-    { title: "Luv(sic) Hexalogy", note: 5, cover: "music/luvsichexalogy.web", link: "https://rateyourmusic.com/release/comp/nujabes-feat-shing02/luv_sic-hexalogy/" },
+    { title: "Luv(sic) Hexalogy", note: 5, cover: "music/luvsichexalogy.webp", link: "https://rateyourmusic.com/release/comp/nujabes-feat-shing02/luv_sic-hexalogy/" },
   ],
   "potsu": [
-    { title: "Just Friends", note: 5, cover: "music/justfriends.web", link: "https://rateyourmusic.com/release/album/potsu/just-friends/" },
+    { title: "Just Friends", note: 5, cover: "music/justfriends.webp", link: "https://rateyourmusic.com/release/album/potsu/just-friends/" },
   ],
   "Kekra": [
-    { title: "Kekra", note: 4, cover: "music/kekra.web", link: "https://rateyourmusic.com/release/album/kekra/kekra/" },
+    { title: "Kekra", note: 4, cover: "music/kekra.webp", link: "https://rateyourmusic.com/release/album/kekra/kekra/" },
   ],
   "aupinard": [
     { title: "spleen. social club", note: 3, cover: "music/spleensocialclub.PNG", link: "https://rateyourmusic.com/release/album/aupinard/spleen-social-club/" },
