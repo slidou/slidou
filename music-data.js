@@ -25,6 +25,6 @@ const musicData = {
     { title: "Kekra", note: 4, cover: "music/kekra.web", link: "https://rateyourmusic.com/release/album/kekra/kekra/" },
   ],
   "aupinard": [
-    { title: "spleen. social club", note: 3, cover: "music/spleensocialclub.png", link: "https://rateyourmusic.com/release/album/aupinard/spleen-social-club/" },
+    { title: "spleen. social club", note: 3, cover: "music/spleensocialclub.PNG", link: "https://rateyourmusic.com/release/album/aupinard/spleen-social-club/" },
   ],
 };
