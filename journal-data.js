@@ -39,4 +39,5 @@ const journalData = [
 { d: "2026-04-26", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "épisodes 2 & 3" },
 { d: "2026-04-27", t: "livre", title: "Libertés sans expression", img: "covers/libertesansexpression.jpg", note: "lecture de 16 pages" },
 { d: "2026-04-28", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "épisodes 4 & 5" },
+{ d: "2026-04-28", t: "musique", title: "Kekra", img: "music/kekra.webp", note: "réécoute" },
 ];
