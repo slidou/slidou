@@ -7410,5 +7410,8 @@ const animeList = [
   { id: 64034, title: "Ichi Ni no San", note: 4, tags: ["music","+","gem","archived"] },
   { id: 64042, title: "Judgement?", note: 3, tags: ["music","archived"] },
   { id: 64044, title: "Side Quest King (KISAI remix)", note: 3, tags: ["music","archived"] },
+  { id: 63273, title: "Jyuugoya", note: 3.5, tags: ["music","archived"] },
+  { id: 63265, title: "Fact Check (Bulgasaui) (2Spade Remix)", note: 3, tags: ["music","archived"] },
+  { id: 64067, title: "Lazy River", note: 3.5, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

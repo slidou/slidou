@@ -42,4 +42,7 @@ const journalData = [
 { d: "2026-04-28", t: "musique", title: "Kekra", img: "music/kekra.webp", note: "réécoute" },
 { d: "2026-04-28", t: "musique", title: "spleen. social club", img: "music/spleensocialclub.PNG", note: "première écoute" },
 { d: "2026-04-29", t: "musique", title: "Extasia", img: "music/extasia.webp", note: "première écoute" },
+{ d: "2026-04-30", t: "anime", title: "Jyuugoya", img: "anime/jyuugoya.jpg", note: "music" },
+{ d: "2026-04-30", t: "anime", title: "Fact Check (Bulgasaui) (2Spade Remix)", img: "anime/factcheck.jpg", note: "music" },
+{ d: "2026-04-30", t: "anime", title: "Lazy River", img: "anime/lazyriver.jpg", note: "music" },
 ];
