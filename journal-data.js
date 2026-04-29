@@ -41,4 +41,5 @@ const journalData = [
 { d: "2026-04-28", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "épisodes 4 & 5" },
 { d: "2026-04-28", t: "musique", title: "Kekra", img: "music/kekra.webp", note: "réécoute" },
 { d: "2026-04-28", t: "musique", title: "spleen. social club", img: "music/spleensocialclub.PNG", note: "première écoute" },
+{ d: "2026-04-29", t: "musique", title: "Extasia", img: "music/extasia.webp", note: "première écoute" },
 ];
