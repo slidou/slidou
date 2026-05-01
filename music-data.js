@@ -29,5 +29,6 @@ const musicData = {
   ],
   "Ino Casablanca": [
     { title: "Extasia", note: 3.5, cover: "music/extasia.webp", link: "https://rateyourmusic.com/release/mixtape/ino-casablanca/extasia/" },
+    { title: "Tamara", note: 3, cover: "music/tamara.webp", link: "https://rateyourmusic.com/release/mixtape/ino-casablanca/tamara/" },
   ],
 };
