@@ -7413,5 +7413,11 @@ const animeList = [
   { id: 63273, title: "Jyuugoya", note: 3.5, tags: ["music","archived"] },
   { id: 63265, title: "Fact Check (Bulgasaui) (2Spade Remix)", note: 3, tags: ["music","archived"] },
   { id: 64067, title: "Lazy River", note: 3.5, tags: ["music","archived"] },
+  { id: 64073, title: "Rave In My Ears", note: 2.5, tags: ["music","archived"] },
+  { id: 64074, title: "Lanternoid", note: 3, tags: ["music","+","archived"] },
+  { id: 64047, title: "Kira", note: 3, tags: ["music","archived"] },
+  { id: 64056, title: "Mirai no Lemon Sour x Final Fantasy VII Rebirth CM", note: null, tags: ["short","commercial"] },
+  { id: 64055, title: "Uta no Uta (2026)", note: 3, tags: ["music","archived"] },
+  { id: 64060, title: "Re:Prism", note: 3.5, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

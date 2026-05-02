@@ -46,4 +46,10 @@ const journalData = [
 { d: "2026-04-30", t: "anime", title: "Fact Check (Bulgasaui) (2Spade Remix)", img: "anime/factcheck.jpg", note: "music" },
 { d: "2026-04-30", t: "anime", title: "Lazy River", img: "anime/lazyriver.jpg", note: "music" },
 { d: "2026-05-01", t: "musique", title: "Tamara", img: "music/tamara.webp", note: "première écoute" },
+{ d: "2026-05-02", t: "anime", title: "Rave In My Ears", img: "anime/raveinmyears.jpg", note: "music" },
+{ d: "2026-05-02", t: "anime", title: "Lanternoid", img: "anime/lanternoid.jpg", note: "music" },
+{ d: "2026-05-02", t: "anime", title: "Kira", img: "anime/kira.jpg", note: "music" },
+{ d: "2026-05-02", t: "anime", title: "Mirai no Lemon Sour x Final Fantasy VII Rebirth CM", img: "anime/mirainolemon.jpg", note: "commercial" },
+{ d: "2026-05-02", t: "anime", title: "Uta no Uta (2026)", img: "anime/utanouta2026.jpg", note: "music" },
+{ d: "2026-05-02", t: "anime", title: "Re:Prism", img: "anime/reprism.jpg", note: "music" },
 ];
