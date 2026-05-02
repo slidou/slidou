@@ -7419,5 +7419,10 @@ const animeList = [
   { id: 64056, title: "Mirai no Lemon Sour x Final Fantasy VII Rebirth CM", note: null, tags: ["short","commercial"] },
   { id: 64055, title: "Uta no Uta (2026)", note: 3, tags: ["music","archived"] },
   { id: 64060, title: "Re:Prism", note: 3.5, tags: ["music","archived"] },
+  { id: 64080, title: "Jujutsu Kaisen Modulo Saishuu Sankan Hatsubai Kinen Special PV", note: null, tags: ["short","archived"] },
+  { id: 64088, title: "Flipper (2026)", note: 3, tags: ["music","archived"] },
+  { id: 64083, title: "Girl feat. kojikoji", note: 3.5, tags: ["music","archived"] },
+  { id: 60183, title: "Sumikko Style Cafe Base Rap Compilation", note: null, tags: ["music","commercial","+","archived"] },
+  { id: 36851, title: "Bousai Keihatsu Douga", note: null, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

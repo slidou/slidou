@@ -27,7 +27,7 @@ const mangaData = {
   "Fujimoto, Tatsuki": [
     { id: 141214, title: "17-21: Fujimoto Tatsuki Tanpenshuu", note: null, tags: [] },
     { id: 141294, title: "22-26: Fujimoto Tatsuki Tanpenshuu", note: null, tags: [] },
-    { id: 98270, title: "Fire Punch", note: 5, tags: ["favorite","rank:4"] },
+    { id: 98270, title: "Fire Punch", note: 5, tags: ["favorite","bought","rank:4"] },
     { id: 148353, title: "Futsuu ni Kiite Kure", note: null, tags: ["one-shot"] },
     { id: 138673, title: "Look Back", note: 4.5, tags: ["gem"] },
     { id: 145863, title: "Sayonara Eri", note: 5, tags: ["favorite","bought","rank:7"] },
@@ -40,7 +40,7 @@ const mangaData = {
     { id: 38981, title: "Onna Kyoushi Marikou no Gogo", note: null, tags: ["one-shot","hentai"] },
   ],
   "Matsumoto, Taiyou": [
-    { id: 130171, title: "Tokyo Higoro", note: 5, tags: ["favorite","archived","rank10"] },
+    { id: 130171, title: "Tokyo Higoro", note: 5, tags: ["favorite","bought","archived","rank10"] },
   ],
   "Tsukushi, Akihito": [
     { id: 110834, title: "Star Strings yori", note: null, tags: [] },

@@ -52,4 +52,10 @@ const journalData = [
 { d: "2026-05-02", t: "anime", title: "Mirai no Lemon Sour x Final Fantasy VII Rebirth CM", img: "anime/mirainolemon.jpg", note: "commercial" },
 { d: "2026-05-02", t: "anime", title: "Uta no Uta (2026)", img: "anime/utanouta2026.jpg", note: "music" },
 { d: "2026-05-02", t: "anime", title: "Re:Prism", img: "anime/reprism.jpg", note: "music" },
+{ d: "2026-05-02", t: "anime", title: "Jujutsu Kaisen Modulo Saishuu Sankan Hatsubai Kinen Special PV", img: "anime/jujutsukaisenmodulo.jpg", note: "short" },
+{ d: "2026-05-02", t: "anime", title: "Flipper (2026)", img: "anime/flipper2026.jpg", note: "music" },
+{ d: "2026-05-02", t: "anime", title: "Girl feat. kojikoji", img: "anime/girlfeatkoji.jpg", note: "music" },
+{ d: "2026-05-02", t: "anime", title: "Sumikko Style Cafe Base Rap Compilation", img: "anime/sumikko.jpg", note: "commercial" },
+{ d: "2026-05-02", t: "anime", title: "Marriagetoxin", img: "anime/marriagetoxin.jpg", note: "épisode 4" },
+{ d: "2026-05-02", t: "anime", title: "Bousai Keihatsu Douga", img: "anime/bousaikeihatsu.jpg", note: "short" },
 ];
