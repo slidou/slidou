@@ -58,4 +58,8 @@ const journalData = [
 { d: "2026-05-02", t: "anime", title: "Sumikko Style Cafe Base Rap Compilation", img: "anime/sumikko.jpg", note: "commercial" },
 { d: "2026-05-02", t: "anime", title: "Marriagetoxin", img: "anime/marriagetoxin.jpg", note: "épisode 4" },
 { d: "2026-05-02", t: "anime", title: "Bousai Keihatsu Douga", img: "anime/bousaikeihatsu.jpg", note: "short" },
+{ d: "2026-05-02", t: "livre", title: "Libertés sans expression", img: "covers/libertesansexpression.jpg", note: "70/126" },
+{ d: "2026-05-03", t: "anime", title: "Broots", img: "anime/broots.jpg", note: "short" },
+{ d: "2026-05-03", t: "anime", title: "Eguo", img: "anime/eguo.jpg", note: "short" },
+{ d: "2026-05-03", t: "série", title: "One Piece", img: "series/onepiecesaison2.jpg", note: "saison 2 épisode 4" },
 ];

@@ -7424,5 +7424,7 @@ const animeList = [
   { id: 64083, title: "Girl feat. kojikoji", note: 3.5, tags: ["music","archived"] },
   { id: 60183, title: "Sumikko Style Cafe Base Rap Compilation", note: null, tags: ["music","commercial","+","archived"] },
   { id: 36851, title: "Bousai Keihatsu Douga", note: null, tags: ["short","archived"] },
+  { id: 28305, title: "Broots", note: null, tags: ["short","+","archived"] },
+  { id: 52909, title: "Eguo", note: null, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
