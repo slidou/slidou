@@ -62,4 +62,6 @@ const journalData = [
 { d: "2026-05-03", t: "anime", title: "Broots", img: "anime/broots.jpg", note: "short" },
 { d: "2026-05-03", t: "anime", title: "Eguo", img: "anime/eguo.jpg", note: "short" },
 { d: "2026-05-03", t: "série", title: "One Piece", img: "series/onepiecesaison2.jpg", note: "saison 2 épisode 4" },
+{ d: "2026-05-03", t: "anime", title: "Nippon Sangoku", img: "anime/nipponsangoku.jpg", note: "épisode 5" },
+{ d: "2026-05-04", t: "livre", title: "Libertés sans expression", img: "covers/libertesansexpression.jpg", note: "100/126" },
 ];
