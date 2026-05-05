@@ -456,7 +456,6 @@ const animeList = [
   { id: 57939, title: "Arknights 4th Anniversary PV", note: null, tags: ["short"] },
   { id: 54944, title: "Arknights x Luo Xiaohei Zhanji: Haojiu Bujian", note: null, tags: ["short","+"] },
   { id: 59922, title: "Armageddon (Flava D Remix)", note: 3, tags: ["music"] },
-  { id: 3960, title: "Armored Core: Fort Tower Song", note: null, tags: ["short"] },
   { id: 19233, title: "Around", note: null, tags: ["short"] },
   { id: 59212, title: "Around the World (Tsukino Mito Cover)", note: 3, tags: ["music","archived"] },
   { id: 43385, title: "Around the World!", note: null, tags: ["short"] },
