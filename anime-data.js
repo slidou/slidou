@@ -7426,5 +7426,8 @@ const animeList = [
   { id: 36851, title: "Bousai Keihatsu Douga", note: null, tags: ["short","archived"] },
   { id: 28305, title: "Broots", note: null, tags: ["short","+","archived"] },
   { id: 52909, title: "Eguo", note: null, tags: ["short","archived"] },
+  { id: 64117, title: "Sigan Yeokhaeng", note: 2, tags: ["music","archived"] },
+  { id: 64112, title: "Dance at the Moonlight feat. kojikoji", note: 3, tags: ["music","archived"] },
+  { id: 59343, title: "Hoyahoyaraa", note: 0.5, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

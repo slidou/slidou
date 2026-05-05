@@ -64,4 +64,8 @@ const journalData = [
 { d: "2026-05-03", t: "série", title: "One Piece", img: "series/onepiecesaison2.jpg", note: "saison 2 épisode 4" },
 { d: "2026-05-03", t: "anime", title: "Nippon Sangoku", img: "anime/nipponsangoku.jpg", note: "épisode 5" },
 { d: "2026-05-04", t: "livre", title: "Libertés sans expression", img: "covers/libertesansexpression.jpg", note: "100/126" },
+{ d: "2026-05-05", t: "livre", title: "Libertés sans expression", img: "covers/libertesansexpression.jpg", note: "terminé" },
+{ d: "2026-05-05", t: "anime", title: "Sigan Yeokhaeng", img: "anime/siganyeokhaeng.jpg", note: "music" },
+{ d: "2026-05-05", t: "anime", title: "Dance at the Moonlight feat. kojikoji", img: "anime/danceatthemoonlight.jpg", note: "music" },
+{ d: "2026-05-05", t: "anime", title: "Hoyahoyaraa", img: "anime/hoyahoyaraa.jpg", note: "music" },
 ];
