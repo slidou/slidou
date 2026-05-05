@@ -809,4 +809,32 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
   to { opacity: 1; transform: translateY(0); }
 }
 
+.project-bar {
+  max-width: 400px;
+  margin: 0 auto 30px auto;
+  text-align: left;
+}
+.project-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 6px;
+}
+.project-track {
+  width: 100%;
+  height: 3px;
+  background: var(--border-color);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.project-fill {
+  height: 100%;
+  background: var(--link-color);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
 .page:focus { outline: none; }

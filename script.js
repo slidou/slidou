@@ -1000,6 +1000,11 @@ function generateAnime() {
   loadImageCache();
   document.getElementById('anime-counter').textContent = animeList.length + " animes terminés";
 
+  var rewatches = animeList.filter(function(a) { return a.tags.indexOf('re-watched') !== -1; }).length;
+  var pct = animeList.length ? (rewatches / animeList.length * 100).toFixed(1) : 0;
+  var barHtml = '<div class="project-bar"><span class="project-label">projet revisionnage : ' + rewatches + ' / ' + animeList.length + ' (' + pct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + pct + '%"></div></div></div>';
+  document.getElementById('anime-project-bar').innerHTML = barHtml;
+
   var sortContainer = document.getElementById('anime-sort');
   sortContainer.innerHTML = '<span class="anime-sort-label">tri :</span>';
   ['note', 'titre'].forEach(function(mode) {
@@ -1359,6 +1364,14 @@ function generateManga() {
 
   var total = 0; for (var a in mangaData) total += mangaData[a].length;
   document.getElementById('manga-counter').textContent = total + " manga lu" + (total !== 1 ? "s" : "");
+
+  var rereads = 0;
+  for (var a in mangaData) {
+    mangaData[a].forEach(function(m) { if (m.tags.indexOf('re-read') !== -1) rereads++; });
+  }
+  var pct = total ? (rereads / total * 100).toFixed(1) : 0;
+  var barHtml = '<div class="project-bar"><span class="project-label">projet relecture : ' + rereads + ' / ' + total + ' (' + pct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + pct + '%"></div></div></div>';
+  document.getElementById('manga-project-bar').innerHTML = barHtml;
 
   var fC = document.getElementById('manga-filters'); fC.innerHTML = '';
 
