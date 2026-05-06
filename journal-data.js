@@ -68,4 +68,8 @@ const journalData = [
 { d: "2026-05-05", t: "anime", title: "Sigan Yeokhaeng", img: "anime/siganyeokhaeng.jpg", note: "music" },
 { d: "2026-05-05", t: "anime", title: "Dance at the Moonlight feat. kojikoji", img: "anime/danceatthemoonlight.jpg", note: "music" },
 { d: "2026-05-05", t: "anime", title: "Hoyahoyaraa", img: "anime/hoyahoyaraa.jpg", note: "music" },
+{ d: "2026-05-06", t: "anime", title: "Toge", img: "anime/toge.jpg", note: "music" },
+{ d: "2026-05-06", t: "anime", title: "Bakusoku Ronriness", img: "anime/bakusokuronriness.jpg", note: "music" },
+{ d: "2026-05-06", t: "anime", title: "Mind Scape", img: "anime/mindscape.jpg", note: "short" },
+{ d: "2026-05-06", t: "anime", title: "Madoromi no Shuumatsu", img: "anime/madorominoshuumatsu.jpg", note: "short" },
 ];

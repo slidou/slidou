@@ -7428,5 +7428,9 @@ const animeList = [
   { id: 64117, title: "Sigan Yeokhaeng", note: 2, tags: ["music","archived"] },
   { id: 64112, title: "Dance at the Moonlight feat. kojikoji", note: 3, tags: ["music","archived"] },
   { id: 59343, title: "Hoyahoyaraa", note: 0.5, tags: ["music","archived"] },
+  { id: 64125, title: "Toge", note: 3.5, tags: ["music","archived"] },
+  { id: 64122, title: "Bakusoku Ronriness", note: 3, tags: ["music","archived"] },
+  { id: 62901, title: "Mind Scape", note: null, tags: ["short","archived"] },
+  { id: 62902, title: "Madoromi no Shuumatsu", note: 3.5, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
