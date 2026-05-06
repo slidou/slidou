@@ -7432,5 +7432,7 @@ const animeList = [
   { id: 64122, title: "Bakusoku Ronriness", note: 3, tags: ["music","archived"] },
   { id: 62901, title: "Mind Scape", note: null, tags: ["short","archived"] },
   { id: 62902, title: "Madoromi no Shuumatsu", note: 3.5, tags: ["short","archived"] },
+  { id: 31638, title: "Mr. Shape", note: null, tags: ["short episode","archived"] },
+  { id: 58806, title: "Parking Area", note: null, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

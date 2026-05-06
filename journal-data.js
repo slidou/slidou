@@ -72,4 +72,7 @@ const journalData = [
 { d: "2026-05-06", t: "anime", title: "Bakusoku Ronriness", img: "anime/bakusokuronriness.jpg", note: "music" },
 { d: "2026-05-06", t: "anime", title: "Mind Scape", img: "anime/mindscape.jpg", note: "short" },
 { d: "2026-05-06", t: "anime", title: "Madoromi no Shuumatsu", img: "anime/madorominoshuumatsu.jpg", note: "short" },
+{ d: "2026-05-06", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "épisodes 6" },
+{ d: "2026-05-07", t: "anime", title: "Mr. Shape", img: "anime/mrshape.jpg", note: "4/4" },
+{ d: "2026-05-07", t: "anime", title: "Parking Area", img: "anime/parkingarea.jpg", note: "short" },
 ];
