@@ -75,4 +75,10 @@ const journalData = [
 { d: "2026-05-06", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "épisodes 6" },
 { d: "2026-05-07", t: "anime", title: "Mr. Shape", img: "anime/mrshape.jpg", note: "4/4" },
 { d: "2026-05-07", t: "anime", title: "Parking Area", img: "anime/parkingarea.jpg", note: "short" },
+{ d: "2026-05-08", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "chapitre 1182" },
+{ d: "2026-05-09", t: "anime", title: "Haru wo Irodoru", img: "anime/haruwoirodoru.jpg", note: "short" },
+{ d: "2026-05-09", t: "anime", title: "Chichin Pui Pui", img: "anime/chichinpuipui.jpg", note: "music" },
+{ d: "2026-05-09", t: "anime", title: "Chiikawa Park TV CMs", img: "anime/chiikawaparkcms.jpg", note: "commercial" },
+{ d: "2026-05-09", t: "anime", title: "Hifukidake", img: "anime/hifukidake.jpg", note: "short" },
+{ d: "2026-05-09", t: "anime", title: "Jiu Wo", img: "anime/jiuwo.jpg", note: "short" },
 ];

@@ -7434,5 +7434,10 @@ const animeList = [
   { id: 62902, title: "Madoromi no Shuumatsu", note: 3.5, tags: ["short","archived"] },
   { id: 31638, title: "Mr. Shape", note: null, tags: ["short episode","archived"] },
   { id: 58806, title: "Parking Area", note: null, tags: ["short","archived"] },
+  { id: 58412, title: "Chichin Pui Pui", note: null, tags: ["music","archived"] },
+  { id: 61815, title: "Chiikawa Park TV CMs", note: null, tags: ["short","archived","commercial","+"] },
+  { id: 49090, title: "Haru wo Irodoru", note: null, tags: ["short","archived"] },
+  { id: 50138, title: "Hifukidake", note: null, tags: ["short","archived"] },
+  { id: 59380, title: "Jiu Wo", note: 1.5, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
