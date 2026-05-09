@@ -7439,5 +7439,8 @@ const animeList = [
   { id: 49090, title: "Haru wo Irodoru", note: null, tags: ["short","archived"] },
   { id: 50138, title: "Hifukidake", note: null, tags: ["short","archived"] },
   { id: 59380, title: "Jiu Wo", note: 1.5, tags: ["short","archived"] },
+  { id: 64133, title: "Koi no Tamashii", note: 2.5, tags: ["music","archived"] },
+  { id: 64142, title: "Star Trail", note: 3.5, tags: ["music","archived"] },
+  { id: 64148, title: "NaN Game", note: 2.5, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

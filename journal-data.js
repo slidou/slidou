@@ -81,4 +81,7 @@ const journalData = [
 { d: "2026-05-09", t: "anime", title: "Chiikawa Park TV CMs", img: "anime/chiikawaparkcms.jpg", note: "commercial" },
 { d: "2026-05-09", t: "anime", title: "Hifukidake", img: "anime/hifukidake.jpg", note: "short" },
 { d: "2026-05-09", t: "anime", title: "Jiu Wo", img: "anime/jiuwo.jpg", note: "short" },
+{ d: "2026-05-09", t: "anime", title: "Koi no Tamashii", img: "anime/koinotamashii.jpg", note: "music" },
+{ d: "2026-05-09", t: "anime", title: "Star Trail", img: "anime/startrail.jpg", note: "music" },
+{ d: "2026-05-09", t: "anime", title: "NaN Game", img: "anime/nangame.jpg", note: "music" },
 ];
