@@ -7447,5 +7447,6 @@ const animeList = [
   { id: 62209, title: "Poke Oki", note: null, tags: ["short","+","archived"] },
   { id: 40139, title: "Konohakaseki no Natsu", note: 3.5, tags: ["short film","archived"] },
   { id: 64102, title: "Kujira wo Yumemu", note: 4, tags: ["short","gem","archived"] },
+  { id: 64149, title: "I Got feat. Woodie Gochild", note: 3, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
