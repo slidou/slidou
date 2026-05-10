@@ -7442,5 +7442,10 @@ const animeList = [
   { id: 64133, title: "Koi no Tamashii", note: 2.5, tags: ["music","archived"] },
   { id: 64142, title: "Star Trail", note: 3.5, tags: ["music","archived"] },
   { id: 64148, title: "NaN Game", note: 2.5, tags: ["music","archived"] },
+  { id: 57709, title: "Kudamonou", note: null, tags: ["short episode"] },
+  { id: 60038, title: "Sweet Singapore CMs", note: null, tags: ["short","commercial","archived"] },
+  { id: 62209, title: "Poke Oki", note: null, tags: ["short","+","archived"] },
+  { id: 40139, title: "Konohakaseki no Natsu", note: 3.5, tags: ["short film","archived"] },
+  { id: 64102, title: "Kujira wo Yumemu", note: 4, tags: ["short","gem","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
