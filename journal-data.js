@@ -92,4 +92,6 @@ const journalData = [
 { d: "2026-05-10", t: "anime", title: "I Got feat. Woodie Gochild", img: "anime/igotwoodie.jpg", note: "music" },
 { d: "2026-05-10", t: "anime", title: "Nippon Sangoku", img: "anime/nipponsangoku.jpg", note: "épisode 6" },
 { d: "2026-05-10", t: "anime", title: "Mangzhong", img: "anime/mangzhong.jpg", note: "short film" },
+{ d: "2026-05-12", t: "anime", title: "Marriagetoxin", img: "anime/marriagetoxin.jpg", note: "épisode 5" },
+{ d: "2026-05-12", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "épisodes 7" },
 ];
