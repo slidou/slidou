@@ -94,4 +94,6 @@ const journalData = [
 { d: "2026-05-10", t: "anime", title: "Mangzhong", img: "anime/mangzhong.jpg", note: "short film" },
 { d: "2026-05-12", t: "anime", title: "Marriagetoxin", img: "anime/marriagetoxin.jpg", note: "épisode 5" },
 { d: "2026-05-12", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "épisodes 7" },
+{ d: "2026-05-14", t: "anime", title: "Kin no Ono, Gin no Ono, Emerald no Ono", img: "anime/kinnoonogin.jpg", note: "music" },
+{ d: "2026-05-14", t: "musique", title: "Circles", img: "music/circles.webp", note: "réécoute" },
 ];
