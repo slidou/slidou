@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Comparateur MAL V2</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #16213e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 1000px;
+        }
+        h2 {
+            color: #0f3460;
+            background: #e94560;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 5px;
+            margin-top: 0;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+        textarea {
+            width: 100%;
+            height: 250px;
+            background-color: #0f3460;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 13px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+        button {
+            background-color: #e94560;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: background 0.3s;
+            display: block;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #d83a50;
+        }
+        #outputList {
+            background-color: #0a0f1a;
+            border: 2px solid #e94560;
+            height: 300px;
+        }
+        .stats {
+            color: #e94560;
+            font-weight: bold;
+            font-size: 1.2em;
+            display: block;
+            margin-top: -5px;
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: #53a8b6;
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>⚡ Comparateur de Listes V2 ⚡</h2>
+    <span class="stats" id="stats"></span>
+
+    <div class="grid">
+        <div>
+            <label>1. La liste DE L'AUTRE (Titres bruts)</label>
+            <textarea id="listeAutre" placeholder="Colle ici le résultat du premier programme (les titres un par dessous l'autre)..."></textarea>
+        </div>
+        <div>
+            <label>2. TA liste (Format texte/JSON de MAL)</label>
+            <textarea id="listeMoi" placeholder='Colle ici ton bloc ( { id: 51478, title: "...", etc... } )...'></textarea>
+        </div>
+    </div>
+
+    <button onclick="comparerListes()">🔥 TROUVER CE QU'IL A VU ET PAS MOI 🔥</button>
+
+    <label>Résultat (Les pépites à regarder) :</label>
+    <textarea id="outputList" placeholder="Les animes qu'il a regardé et que tu n'as JAMAIS vus apparaîtront ici..." readonly></textarea>
+</div>
+
+<script>
+    // Fonction pour standardiser les titres (enlever les guillemets bizarres, espaces, et mettre en minuscules)
+    function standardiserTitre(titre) {
+        return titre
+            .replace(/\\"/g, '')           // Enlève les antislashs et guillemets échappés comme \"0\"
+            .replace(/^["']+|["']+$/g, '') // Enlève les " ou ' au début et à la fin
+            .trim()
+            .toLowerCase();
+    }
+
+    function comparerListes() {
+        // 1. Récupérer la liste de l'autre (les titres simples)
+        let texteAutre = document.getElementById('listeAutre').value;
+        let lignesAutre = texteAutre.split('\n').map(ligne => ligne.trim()).filter(ligne => ligne !== "");
+        
+        let listeAutrePropre = lignesAutre.map(titre => ({
+            original: titre,
+            cle: standardiserTitre(titre)
+        }));
+
+        // 2. Récupérer MA liste (JSON de MAL)
+        let texteMoi = document.getElementById('listeMoi').value;
+        let mesCles = new Set(); 
+
+        // REGEX CORRIGÉE : "?title"?\s* permet de trouver "title": MAIS AUSSI title: (sans guillemets)
+        let regexJson = /"?title"?\s*:\s*"((?:\\"|[^"])*)"/g;
+        let match;
+        
+        while ((match = regexJson.exec(texteMoi)) !== null) {
+            let titreBrutJson = match[1];
+            mesCles.add(standardiserTitre(titreBrutJson));
+        }
+
+        // Sécurité : si le programme n'a rien trouvé dans ta liste, on t'alerte
+        if (mesCles.size === 0) {
+            document.getElementById('stats').innerText = "⚠️ Erreur : Ta liste semble vide ou mal formatée. Le programme n'a trouvé aucun titre de ton côté.";
+            document.getElementById('outputList').value = "";
+            return;
+        }
+
+        // 3. LA COMPARAISON : Ce que l'autre a ET que je n'ai pas
+        let resultatFinal = [];
+        
+        listeAutrePropre.forEach(anime => {
+            if (!mesCles.has(anime.cle)) {
+                resultatFinal.push(anime.original); 
+            }
+        });
+
+        // 4. Affichage
+        document.getElementById('outputList').value = resultatFinal.join('\n');
+        document.getElementById('stats').innerText = `Terminé ! Il y a ${resultatFinal.length} animes que lui a vu et pas toi.`;
+    }
+</script>
+
+</body>
+</html>

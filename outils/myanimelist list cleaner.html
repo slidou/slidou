@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>MAL List Cleaner</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #16213e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            width: 90%;
+            max-width: 900px;
+        }
+        h2 {
+            color: #0f3460;
+            background: #e94560;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 5px;
+            margin-top: 0;
+        }
+        textarea {
+            width: 100%;
+            height: 250px;
+            background-color: #0f3460;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 14px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+        button {
+            background-color: #e94560;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 15px 0;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #d83a50;
+        }
+        #outputList {
+            background-color: #1a1a2e;
+            border: 2px solid #0f3460;
+        }
+        .stats {
+            color: #e94560;
+            font-weight: bold;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Liste MAL Cleaner</h2>
+    <span class="stats" id="stats"></span>
+    <p>Colle tes 8000 lignes ici (Ctrl+V) :</p>
+    <textarea id="inputList" placeholder="Colle le gros bloc copié depuis MAL ici..."></textarea>
+    <br>
+    <button onclick="nettoyerListe()">⚡ NETTOYER ET EXTRAIRE LES TITRES ⚡</button>
+    <p>Résultat propre (juste les titres) :</p>
+    <textarea id="outputList" placeholder="Les titres apparaîtront ici, prêts à être copiés..." readonly></textarea>
+</div>
+
+<script>
+    function nettoyerListe() {
+        // Récupérer le texte brut du gros pavé
+        let texteBrut = document.getElementById('inputList').value;
+        
+        // La formule magique (Regex) :
+        // ^\d+        : Commence par des chiffres (le numéro de la ligne)
+        // \t+         : Suivi d'une ou plusieurs tabulations
+        // (.*?)       : C'est LE TITRE qu'on capture (le ? veut dire "arrête-toi dès que tu vois la suite")
+        // Edit - More : Le texte invariant de MAL qui suit toujours le titre
+        // gm          : g = cherche partout, m = multiligne (traverse les retours à la ligne)
+        let regex = /^\d+\t+(.*?) Edit - More/gm;
+        
+        let titresPropres = [];
+        let match;
+        
+        // On cherche toutes les correspondances une par une
+        while ((match = regex.exec(texteBrut)) !== null) {
+            // match[1] contient ce qui est entre les parenthèses (.*?) dans notre regex, donc le titre
+            titresPropres.push(match[1]);
+        }
+        
+        // Afficher le résultat dans la deuxième zone de texte
+        document.getElementById('outputList').value = titresPropres.join('\n');
+        
+        // Afficher le nombre d'animes trouvés
+        document.getElementById('stats').innerText = titresPropres.length + " animes trouvés !";
+    }
+</script>
+
+</body>
+</html>
