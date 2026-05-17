@@ -102,5 +102,6 @@ const journalData = [
 { d: "2026-05-16", t: "musique", title: "Habibti", img: "music/habibti.webp", note: "première écoute, nul" },
 { d: "2026-05-16", t: "anime", title: "Kick-Heart", img: "anime/kick-heart.jpg", note: "short film" },
 { d: "2026-05-17", t: "film", title: "Junk Head", img: "films/junkhead.webp", note: "une vibe à la blame" },
-{ d: "2026-05-10", t: "anime", title: "Nippon Sangoku", img: "anime/nipponsangoku.jpg", note: "épisode 7, l'anime est vraiment bien, top 3 persos : Yasuaki Kaku, Mitsuhide Ryuumon, Gou Sugou" },
+{ d: "2026-05-17", t: "anime", title: "Nippon Sangoku", img: "anime/nipponsangoku.jpg", note: "épisode 7, l'anime est vraiment bien, top 3 persos : Yasuaki Kaku, Mitsuhide Ryuumon, Gou Sugou" },
+{ d: "2026-05-18", t: "manga", title: "Tower Dungeon", img: "manga/towerdungeon.jpg", note: "premier tome de lu, très bon début, j'adore l'ambiance" },
 ];
