@@ -53,7 +53,7 @@ const booksData = {
     { title: "Soleil couchant", note: 4, cover: "covers/soleil-couchant.jpg", link: "https://www.goodreads.com/book/show/194740.The_Setting_Sun" }
   ],
   "Jordan Bardella": [
-    { title: "Ce Que Je Cherche", note: 1, cover: "covers/ce-que-je-cherche.jpg", link: "https://www.goodreads.com/book/show/220459830-ce-que-je-cherche" },
+    { title: "Ce Que Je Cherche", note: 1, cover: "covers/ce-que-je-cherche.jpg", link: "https://www.goodreads.com/book/show/220459830-ce-que-je-cherche", review: `Fond absolument désastreux et ennuyeux à mourir, au point que je me passerai de commentaire par flemme. Mais cerise sur le gâteau, la forme pêche aussi : faire une faute de paronymie entre 'dénote' et 'détonne' dans un livre qui se veut un minimum sérieux, fallait le faire. D'autant plus quand l’auteur, en plus d’être bourré de contradictions, n’a sans doute même pas écrit seul.` },
     { title: "Ce que veulent les Français", note: 1, cover: "covers/ce-que-veulent-francais.jpg", link: "https://www.goodreads.com/book/show/237782229-ce-que-veulent-les-fran-ais" }
   ],
   "Léo Etchar": [

@@ -842,3 +842,337 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 }
 
 .page:focus { outline: none; }
+
+.review-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6px;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 2px 8px;
+  cursor: pointer;
+  color: var(--secondary-text);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  text-transform: lowercase;
+  transition: all 0.2s;
+}
+.review-btn:hover {
+  border-color: var(--link-color);
+  color: var(--link-color);
+}
+.review-popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+.review-popup.visible { display: flex; }
+.review-popup-content {
+  background: var(--bg-color);
+  padding: 40px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  border: 1px solid var(--border-color);
+}
+.review-popup-close {
+  position: absolute;
+  top: 15px; right: 15px;
+  background: none; border: none;
+  color: var(--secondary-text); font-size: 24px; cursor: pointer;
+}
+.review-popup-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--author-text);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+.review-popup-text {
+  font-family: 'IM Fell English', serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-color);
+  white-space: pre-line;
+}
+
+#page-statistiques.active { display: block; padding-top: 40px; }
+.stats-page-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  color: var(--author-text);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+  margin-bottom: 40px;
+}
+.stats-section {
+  margin-bottom: 50px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 20px 20px 10px 30px;
+  position: relative;
+}
+.stats-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.stats-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--author-text);
+  text-transform: lowercase;
+}
+.stats-sep {
+  width: 1px;
+  height: 14px;
+  background: var(--border-color);
+}
+.stats-moy {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--secondary-text);
+}
+.stats-total {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+  opacity: 0.5;
+  margin-left: auto;
+}
+.stats-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  height: 160px;
+  margin-left: 50px;
+  margin-bottom: 25px;
+  border-left: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-left: 6px;
+}
+.stats-vbar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  justify-content: flex-end;
+}
+.stats-vbar-count {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  color: var(--secondary-text);
+  margin-bottom: 3px;
+}
+.stats-vbar-fill {
+  width: 100%;
+  max-width: 40px;
+  min-height: 3px;
+  border-radius: 2px 2px 0 0;
+  transition: height 0.6s ease;
+}
+.stats-vbar-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  margin-top: 5px;
+}
+.stats-axis-x {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  opacity: 0.4;
+  text-transform: lowercase;
+  text-align: center;
+  margin-left: 50px;
+  letter-spacing: 1px;
+}
+.stats-axis-y {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  opacity: 0.4;
+  text-transform: lowercase;
+  position: absolute;
+  left: 5px;
+  top: 45%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 1px;
+}
+body:not(.dark-mode) .stats-vbar-count { opacity: 0.7; }
+body:not(.dark-mode) .stats-vbar-label { opacity: 0.7; }
+body:not(.dark-mode) .stats-axis-x { opacity: 0.5; }
+body:not(.dark-mode) .stats-axis-y { opacity: 0.5; }
+body:not(.dark-mode) .stats-total { opacity: 0.7; }
+@media(max-width:768px) {
+  .stats-bars { overflow-x: auto; }
+  .stats-vbar-col { min-width: 32px; }
+}
+
+.sidebar-separator {
+  height: 1px;
+  background: var(--border-color);
+  margin: 20px 0;
+  width: 100%;
+}
+
+.stats-summary {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--secondary-text);
+  text-align: center;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  margin-bottom: 40px;
+  line-height: 1.8;
+  text-transform: lowercase;
+}
+
+.stats-top {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+.stats-top-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+}
+.stats-top-rank {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--link-color);
+  width: 20px;
+  text-align: center;
+  opacity: 0.6;
+}
+.stats-top-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--text-color);
+  flex: 1;
+}
+.stats-top-info {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+  opacity: 0.5;
+}
+
+.player-widget {
+  max-width: 400px;
+  margin: 0 auto 30px auto;
+  padding: 18px 24px;
+  background: var(--quote-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  text-align: center;
+}
+.player-now {
+  margin-bottom: 16px;
+}
+.player-track-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+.player-title {
+  font-family: 'IM Fell English', serif;
+  font-size: 16px;
+  color: var(--text-color);
+}
+.player-artist {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--secondary-text);
+  font-style: italic;
+}
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.player-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.player-btn:hover {
+  border-color: var(--link-color);
+  color: var(--link-color);
+}
+.player-btn-play {
+  width: 42px;
+  height: 42px;
+  font-size: 18px;
+  border-color: var(--link-color);
+  color: var(--link-color);
+}
+.player-btn-play:hover {
+  background: var(--link-color);
+  color: #fff;
+}
+.player-btn-play.playing {
+  background: var(--link-color);
+  color: #fff;
+}
+.player-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.player-time {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  opacity: 0.5;
+  min-width: 32px;
+}
+.player-time-current { text-align: right; }
+.player-time-total { text-align: left; }
+.player-bar {
+  flex: 1;
+  height: 3px;
+  background: var(--border-color);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.player-bar-fill {
+  height: 100%;
+  background: var(--link-color);
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.1s linear;
+}

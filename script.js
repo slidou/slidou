@@ -49,6 +49,33 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 
+// ── Protection HTML ──
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
+// ── Review popup ──
+document.addEventListener('click', function(e) {
+  if (!e.target.classList.contains('review-btn')) return;
+  e.preventDefault();
+  e.stopPropagation();
+  var reviewData = e.target.nextElementSibling;
+  var titleData = e.target.closest('.book-card').querySelector('.book-title');
+  document.getElementById('review-popup-title').textContent = titleData ? titleData.textContent : '';
+  document.getElementById('review-popup-text').textContent = reviewData ? reviewData.textContent : '';
+  document.getElementById('review-popup').classList.add('visible');
+});
+
+document.getElementById('review-popup').addEventListener('click', function(e) {
+  if (e.target.id === 'review-popup' || e.target.id === 'review-popup-close') {
+    document.getElementById('review-popup').classList.remove('visible');
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') document.getElementById('review-popup').classList.remove('visible');
+});
+
 // ── Système d'étoiles (gère les demis et les notes vides) ──
 function getStars(note) {
   if (!note) return '';
@@ -115,6 +142,7 @@ function navigateTo(page) {
     document.getElementById('search-manga').value = '';
     generateManga();
   }
+  if (page === 'statistiques') generateStats();
   if (page === 'apropos') updateTamagotchiUI();
 }
 
@@ -275,10 +303,12 @@ function generateBibliography(data = books, isSearch = false) {
       
       const starsHtml = book.note !== null ? `<div class="book-meta">${getStars(book.note)}</div>` : '';
       
+      var reviewHtml = book.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(book.review) + '</span>' : '';
       card.innerHTML = `
         <img src="${book.cover}" alt="${book.title}">
         <div class="book-title">${book.title}</div>
         ${starsHtml}
+        ${reviewHtml}
       `;
       booksDiv.appendChild(card);
     });
@@ -364,7 +394,8 @@ function generateFilms(data = films, isSearch = false) {
       const starsHtml = movie.note !== null ? `<div class="book-meta">${getStars(movie.note)}</div>` : '';
       
       if (movie.tags && movie.tags.indexOf('coup de coeur') !== -1) card.className += ' coup-de-coeur-card';
-      card.innerHTML = `<img src="${movie.cover}" alt="${movie.title}"><div class="book-title">${movie.title}</div>${starsHtml}`;
+      var reviewHtml = movie.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(movie.review) + '</span>' : '';
+      card.innerHTML = `<img src="${movie.cover}" alt="${movie.title}"><div class="book-title">${movie.title}</div>${starsHtml}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
@@ -404,7 +435,8 @@ function generateSeries(data = series, isSearch = false) {
       const starsHtml = season.note !== null ? `<div class="book-meta">${getStars(season.note)}</div>` : '';
       
       if (season.tags && season.tags.indexOf('coup de coeur') !== -1) card.className += 'coup-de-coeur-card';
-      card.innerHTML = `<img src="${season.cover}" alt="${season.title}"><div class="book-title">${season.title}</div>${starsHtml}`;
+      var reviewHtml = season.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(season.review) + '</span>' : '';
+      card.innerHTML = `<img src="${season.cover}" alt="${season.title}"><div class="book-title">${season.title}</div>${starsHtml}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
@@ -452,7 +484,8 @@ function generateGames(data = games, isSearch = false) {
 
       const starsHtml = game.note !== null ? `<div class="book-meta">${getStars(game.note)}</div>` : '';
 
-      card.innerHTML = `<img src="${game.cover}" alt="${game.title}"><div class="book-title">${game.title}</div>${starsHtml}`;
+      var reviewHtml = game.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(game.review) + '</span>' : '';
+      card.innerHTML = `<img src="${game.cover}" alt="${game.title}"><div class="book-title">${game.title}</div>${starsHtml}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
@@ -500,7 +533,8 @@ function generateMusique(data = musique, isSearch = false) {
 
       const starsHtml = album.note !== null ? `<div class="book-meta">${getStars(album.note)}</div>` : '';
 
-      card.innerHTML = `<img src="${album.cover}" alt="${album.title}"><div class="book-title">${album.title}</div>${starsHtml}`;
+      var reviewHtml = album.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(album.review) + '</span>' : '';
+      card.innerHTML = `<img src="${album.cover}" alt="${album.title}"><div class="book-title">${album.title}</div>${starsHtml}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
@@ -1198,7 +1232,8 @@ function renderAnimeBatch() {
     card.className = 'book-card anime-card';
     if (a.tags.indexOf('hentai') !== -1) card.className += ' hentai-card';
     card.setAttribute('data-id', a.id);
-    card.innerHTML = imgBlock + badges + '<div class="book-title">' + a.title + '</div>' + starsHtml;
+    var reviewHtml = a.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(a.review) + '</span>' : '';
+    card.innerHTML = imgBlock + badges + '<div class="book-title">' + a.title + '</div>' + starsHtml + reviewHtml;
     container.appendChild(card);
   }
 
@@ -1439,10 +1474,10 @@ function renderManga() {
     totalFiltered += filtered.length;
     if (author === keys[keys.length - 1]) {
       var mangaLabel = q
-        ? totalFiltered + " manga trouvé" + (totalFiltered !== 1 ? "s" : "")
+        ? totalFiltered + " mangas trouvé" + (totalFiltered !== 1 ? "s" : "")
         : mangaActiveFilter
-          ? totalFiltered + " / " + total + " manga"
-          : total + " manga lu" + (total !== 1 ? "s" : "");
+          ? totalFiltered + " / " + total + " mangas"
+          : total + " mangas lu" + (total !== 1 ? "s" : "");
       document.getElementById('manga-counter').textContent = mangaLabel;
 
       if (totalFiltered === 0) {
@@ -1495,12 +1530,250 @@ function renderManga() {
       card.className = 'book-card manga-card';
       if (m.tags.indexOf('hentai') !== -1) card.classList.add('hentai-card');
       card.setAttribute('data-id', m.id);
-      card.innerHTML = imgBlock + badges + '<div class="book-title">' + m.title + '</div>'  + stars;
+      var reviewHtml = m.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(m.review) + '</span>' : '';
+      card.innerHTML = imgBlock + badges + '<div class="book-title">' + m.title + '</div>'  + stars + reviewHtml;
       div.appendChild(card);
     });
     container.appendChild(div);
   });
 }
+
+function generateStats() {
+  var container = document.getElementById('statsContent');
+  container.innerHTML = '';
+
+  var sections = [
+    { name: 'livres', data: books, creatorLabel: 'auteur' },
+    { name: 'films', data: films, creatorLabel: 'réalisateur' },
+    { name: 'séries', data: series, creatorLabel: 'série' },
+    { name: 'jeux', data: games, creatorLabel: 'développeur' },
+    { name: 'albums', data: musique, creatorLabel: 'artiste' }
+  ];
+
+  if (typeof animeList !== 'undefined') {
+    var animeNotes = animeList.map(function(a) { return a.note; }).filter(function(n) { return n !== null; });
+    if (animeNotes.length > 0) sections.push({ name: 'anime', notes: animeNotes });
+  }
+
+  if (typeof mangaData !== 'undefined') {
+    sections.push({ name: 'manga', data: mangaData, creatorLabel: 'auteur' });
+  }
+
+  var summaryParts = [];
+  var bookTotal = 0;
+  for (var k in books) bookTotal += books[k].length;
+  if (bookTotal > 0) summaryParts.push(bookTotal + ' livre' + (bookTotal !== 1 ? 's' : ''));
+
+  var filmTotal = 0;
+  for (var k in films) filmTotal += films[k].length;
+  if (filmTotal > 0) summaryParts.push(filmTotal + ' film' + (filmTotal !== 1 ? 's' : ''));
+
+  var seriesTotal = 0;
+  for (var k in series) seriesTotal += series[k].length;
+  if (seriesTotal > 0) summaryParts.push(seriesTotal + ' série' + (seriesTotal !== 1 ? 's' : ''));
+
+  var gameTotal = 0;
+  for (var k in games) gameTotal += games[k].length;
+  if (gameTotal > 0) summaryParts.push(gameTotal + ' jeu' + (gameTotal !== 1 ? 'x' : ''));
+
+  var musicTotal = 0;
+  for (var k in musique) musicTotal += musique[k].length;
+  if (musicTotal > 0) summaryParts.push(musicTotal + ' album' + (musicTotal !== 1 ? 's' : ''));
+
+  if (typeof animeList !== 'undefined' && animeList.length > 0) summaryParts.push(animeList.length + ' animes');
+
+  if (typeof mangaData !== 'undefined') {
+    var mangaTotal = 0;
+    for (var k in mangaData) mangaTotal += mangaData[k].length;
+    if (mangaTotal > 0) summaryParts.push(mangaTotal + ' mangas');
+  }
+
+  if (summaryParts.length > 0) {
+    var summaryDiv = document.createElement('div');
+    summaryDiv.className = 'stats-summary';
+    summaryDiv.textContent = summaryParts.join(' · ');
+    container.appendChild(summaryDiv);
+  }
+
+  sections.forEach(function(section) {
+    var allNotes = [];
+    if (section.notes) {
+      allNotes = section.notes;
+    } else {
+      for (var key in section.data) {
+        section.data[key].forEach(function(item) {
+          if (item.note !== null) allNotes.push(item.note);
+        });
+      }
+    }
+
+    if (allNotes.length === 0) return;
+
+    var moyenne = (allNotes.reduce(function(a, b) { return a + b; }, 0) / allNotes.length).toFixed(1);
+    var counts = {};
+    allNotes.forEach(function(n) {
+      var k = n % 1 === 0 ? n.toString() : n.toFixed(1);
+      counts[k] = (counts[k] || 0) + 1;
+    });
+
+    var sortedKeys = Object.keys(counts).sort(function(a, b) { return parseFloat(a) - parseFloat(b); });
+    var maxCount = Math.max.apply(null, sortedKeys.map(function(k) { return counts[k]; }));
+    var maxBarHeight = 120;
+
+    var sectionDiv = document.createElement('div');
+    sectionDiv.className = 'stats-section';
+
+    var header = document.createElement('div');
+    header.className = 'stats-header';
+    header.innerHTML = '<span class="stats-name">' + section.name + '</span><span class="stats-sep"></span><span class="stats-moy">moy. ' + moyenne + '</span><span class="stats-sep"></span><span class="stats-total">' + allNotes.length + ' noté' + (allNotes.length !== 1 ? 's' : '') + '</span>';
+    sectionDiv.appendChild(header);
+
+    var barsDiv = document.createElement('div');
+    barsDiv.className = 'stats-bars';
+
+    sortedKeys.forEach(function(key) {
+      var noteVal = parseFloat(key);
+      var barHeight = maxCount ? Math.max(3, (counts[key] / maxCount) * maxBarHeight) : 0;
+
+      var intensity = noteVal / 5;
+      var hue = 220 * intensity;
+      var sat = 55 + intensity * 15;
+      var light = 40 + intensity * 15;
+      var barColor = 'hsl(' + hue + ', ' + sat + '%, ' + light + '%)';
+
+      var col = document.createElement('div');
+      col.className = 'stats-vbar-col';
+      col.innerHTML = '<span class="stats-vbar-count">' + counts[key] + '</span><div class="stats-vbar-fill" style="height:' + barHeight + 'px;background:' + barColor + '"></div><span class="stats-vbar-label">' + key + '</span>';
+      barsDiv.appendChild(col);
+    });
+
+    sectionDiv.appendChild(barsDiv);
+
+    var xAxis = document.createElement('div');
+    xAxis.className = 'stats-axis-x';
+    xAxis.textContent = 'notes';
+    sectionDiv.appendChild(xAxis);
+
+    var yAxis = document.createElement('div');
+    yAxis.className = 'stats-axis-y';
+    yAxis.textContent = 'nombres';
+    sectionDiv.appendChild(yAxis);
+
+    if (section.creatorLabel) {
+      var topKeys = Object.keys(section.data).map(function(key) {
+        var notes = section.data[key].map(function(item) { return item.note; }).filter(function(n) { return n !== null; });
+        var avg = notes.length ? (notes.reduce(function(a, b) { return a + b; }, 0) / notes.length).toFixed(1) : '-';
+        return { name: key, count: section.data[key].length, avg: avg };
+      }).sort(function(a, b) { return b.count - a.count; }).slice(0, 3);
+
+      if (topKeys.length > 0) {
+        var topDiv = document.createElement('div');
+        topDiv.className = 'stats-top';
+        topKeys.forEach(function(item, i) {
+          var topItem = document.createElement('div');
+          topItem.className = 'stats-top-item';
+          topItem.innerHTML = '<span class="stats-top-rank">' + (i + 1) + '</span><span class="stats-top-name">' + item.name + '</span><span class="stats-top-info">' + item.count + ' · moy. ' + item.avg + '</span>';
+          topDiv.appendChild(topItem);
+        });
+        sectionDiv.appendChild(topDiv);
+      }
+    }
+
+    container.appendChild(sectionDiv);
+  });
+}
+
+// ── Lecteur MP3 ──
+var currentTrack = 0;
+var isPlaying = false;
+var audio = document.getElementById('player-audio');
+
+function loadTrack(index) {
+  if (typeof playerTracks === 'undefined' || playerTracks.length === 0) return;
+  currentTrack = index;
+  var track = playerTracks[currentTrack];
+  audio.src = track.file;
+  document.querySelector('.player-title').textContent = track.title;
+  document.querySelector('.player-artist').textContent = track.artiste;
+  document.getElementById('player-bar-fill').style.width = '0%';
+  document.getElementById('player-time-current').textContent = '0:00';
+  document.getElementById('player-time-total').textContent = '0:00';
+  document.querySelector('.player-btn-play').textContent = '▶';
+  document.querySelector('.player-btn-play').classList.remove('playing');
+  isPlaying = false;
+}
+
+function formatTime(sec) {
+  var m = Math.floor(sec / 60);
+  var s = Math.floor(sec % 60);
+  return m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+audio.addEventListener('timeupdate', function() {
+  if (audio.duration) {
+    var pct = (audio.currentTime / audio.duration) * 100;
+    document.getElementById('player-bar-fill').style.width = pct + '%';
+    document.getElementById('player-time-current').textContent = formatTime(audio.currentTime);
+    document.getElementById('player-time-total').textContent = formatTime(audio.duration);
+  }
+});
+
+audio.addEventListener('ended', function() {
+  if (currentTrack < playerTracks.length - 1) {
+    loadTrack(currentTrack + 1);
+    audio.play();
+    isPlaying = true;
+    document.querySelector('.player-btn-play').textContent = '❚❚';
+    document.querySelector('.player-btn-play').classList.add('playing');
+  } else {
+    isPlaying = false;
+    document.querySelector('.player-btn-play').textContent = '▶';
+    document.querySelector('.player-btn-play').classList.remove('playing');
+    document.getElementById('player-bar-fill').style.width = '0%';
+  }
+});
+
+document.getElementById('player-play').addEventListener('click', function() {
+  if (typeof playerTracks === 'undefined' || playerTracks.length === 0) return;
+  if (isPlaying) {
+    audio.pause();
+    isPlaying = false;
+    this.textContent = '▶';
+    this.classList.remove('playing');
+  } else {
+    if (audio.src === '') loadTrack(0);
+    audio.play();
+    isPlaying = true;
+    this.textContent = '❚❚';
+    this.classList.add('playing');
+  }
+});
+
+document.getElementById('player-prev').addEventListener('click', function() {
+  if (typeof playerTracks === 'undefined' || playerTracks.length === 0) return;
+  var idx = currentTrack - 1;
+  if (idx < 0) idx = playerTracks.length - 1;
+  loadTrack(idx);
+  if (isPlaying) audio.play();
+});
+
+document.getElementById('player-next').addEventListener('click', function() {
+  if (typeof playerTracks === 'undefined' || playerTracks.length === 0) return;
+  var idx = currentTrack + 1;
+  if (idx >= playerTracks.length) idx = 0;
+  loadTrack(idx);
+  if (isPlaying) audio.play();
+});
+
+document.getElementById('player-bar').addEventListener('click', function(e) {
+  if (audio.duration) {
+    var rect = this.getBoundingClientRect();
+    var pct = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = pct * audio.duration;
+  }
+});
+
+if (typeof playerTracks !== 'undefined' && playerTracks.length > 0) loadTrack(0);
 
 document.getElementById('toggle-tags-btn').addEventListener('click', function() { tagsExpanded = !tagsExpanded; renderAnimeTags(); });
 document.getElementById('search-anime').addEventListener('input', function() { animeDisplayed = 0; applyAnimeFilter(); });
