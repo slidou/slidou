@@ -6792,7 +6792,22 @@ const animeList = [
   { id: 55533, title: "Uwanosora kara Kaettekuru", note: null, tags: ["short"] },
   { id: 63474, title: "Uza Kawaikute Nani ga Warui!", note: 3.5, tags: ["music","+","archived"] },
   { id: 52220, title: "Uzattaina", note: 2, tags: ["music"] },
-  { id: 40333, title: "Uzumaki", note: 0.5, tags: ["normal episode"] },
+  { id: 40333, title: "Uzumaki", note: 0.5, tags: ["normal episode"], review: `An anime that managed to be even worse than the manga, spiraling into absurdity.
+I don't even know where to start, it's so bad that I feel compelled to talk about it, if only to remind myself how mediocre this work is.
+
+I've seen a lot of people talking about the animation as if it were the anime's main problem, when in fact there's a much deeper problem, and that's what made me drop the manga as well (even though it's short), because it was so frustrating to read.
+
+Where I agree that the animation is awful (episode one was fine), there's no fluidity, the drawings are disparate, there are huge problems with movement, even if the basic premise of making a horror anime in black and white wasn't a bad idea.
+
+The worst thing about all this is the story and, above all, the characters, whose problems come from the manga (and so the same problems are necessarily transcribed in the anime, or even worse, as I'll talk about later), nameless horrors happen in front of their eyes, but the characters remain unmoved and take for a madman the only character who takes precotions, instead of leaving the city, seeking help outside or whatever, no, I see a guy turning into a snail, women sucking the blood to death of people around me but I continue to live my life as if nothing had happened. And before anyone says hypnosis in defense of that, I know it happens in the anime, but it's clearly shown when it does and it's by no means all the time the case, they see crazy things but aren't any more shocked than that, everything's fine, the next day we'll move on and go back to school.
+
+How is it possible to accept this? I don't see many people talking about it, everyone's focused on the form that is the animation, without talking about the essence, which shocks me a hundred times more.
+
+People say that the anime doesn't do justice to the manga, which is understandable from a creative point of view, I understand that the author is recognized for his drawing talent, but the biggest problem remains and is even worsened by the fact that they're obviously trying to condense several stories into a single episode, which makes the whole thing even less comprehensible (just watch episode three to understand what I mean, since it's the most striking).
+
+All this means that you can't even take the show seriously, which is supposed to be a horror story, but rather a humorous one, given the absurdity on display in every episode. At least in the manga you could enjoy the drawings, but here everything's just a waste, even the osts didn't impress me any more than that.
+
+They managed to make it suck even more than the manga, and I must admit, I wasn't expecting anything, but I'm still disappointed.` },
   { id: 41296, title: "Valhait Rising: Kandou e.", note: null, tags: ["short","commercial"] },
   { id: 57722, title: "Valis the Animation", note: null, tags: ["short episode"] },
   { id: 58210, title: "Value", note: 3, tags: ["music"] },
