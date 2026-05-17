@@ -363,6 +363,7 @@ function generateFilms(data = films, isSearch = false) {
       
       const starsHtml = movie.note !== null ? `<div class="book-meta">${getStars(movie.note)}</div>` : '';
       
+      if (movie.tags && movie.tags.indexOf('coup de coeur') !== -1) card.className += ' coup-de-coeur-card';
       card.innerHTML = `<img src="${movie.cover}" alt="${movie.title}"><div class="book-title">${movie.title}</div>${starsHtml}`;
       div.appendChild(card);
     });
@@ -402,6 +403,7 @@ function generateSeries(data = series, isSearch = false) {
       
       const starsHtml = season.note !== null ? `<div class="book-meta">${getStars(season.note)}</div>` : '';
       
+      if (season.tags && season.tags.indexOf('coup de coeur') !== -1) card.className += 'coup-de-coeur-card';
       card.innerHTML = `<img src="${season.cover}" alt="${season.title}"><div class="book-title">${season.title}</div>${starsHtml}`;
       div.appendChild(card);
     });

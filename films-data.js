@@ -14,7 +14,7 @@ const filmsData = {
     { title: "Tarantella", note: null, cover: "films/tarantella.jpg", link: "https://www.senscritique.com/film/tarantella/24971949" },
   ],
     "Aleksandr Petrov": [
-    { title: "Le Rêve d'un homme ridicule", note: 4.5, cover: "films/hommeridicule.jpg", link: "https://www.senscritique.com/film/le_reve_d_un_homme_ridicule/485462" },
+    { title: "Le Rêve d'un homme ridicule", note: 4.5, cover: "films/hommeridicule.jpg", link: "https://www.senscritique.com/film/le_reve_d_un_homme_ridicule/485462", tags: ["coup de coeur"] },
     { title: "Le Vieil Homme et la Mer", note: 4, cover: "films/vieilhommeetmer.jpg", link: "https://www.senscritique.com/film/le_vieil_homme_et_la_mer/372930" },
     { title: "La Sirène", note: 4, cover: "films/lasirene.jpg", link: "https://www.senscritique.com/film/la_sirene/1225870" },
     { title: "Mon amour", note: 3, cover: "films/monamour.jpg", link: "https://www.senscritique.com/film/mon_amour/470451" },
@@ -49,13 +49,13 @@ const filmsData = {
     { title: "Les Dents du singe", note: null, cover: "films/lesdentsdusinge.jpg", link: "https://www.senscritique.com/film/les_dents_du_singe/552178" },
   ],
   "Michael Dudok de Wit": [
-    { title: "La Tortue rouge", note: 4, cover: "films/latortuerouge.jpg", link: "https://www.senscritique.com/film/la_tortue_rouge/10900169" },
+    { title: "La Tortue rouge", note: 4, cover: "films/latortuerouge.jpg", link: "https://www.senscritique.com/film/la_tortue_rouge/10900169", tags: ["coup de coeur"] },
     { title: "Père et fille", note: null, cover: "films/pereetfille.jpg", link: "https://www.senscritique.com/film/pere_et_fille/476376" },
     { title: "Tom Sweep", note: null, cover: "films/tomsweep.jpg", link: "https://www.senscritique.com/film/tom_sweep/433403" },
     { title: "L'Arôme du thé", note: 0.5, cover: "films/laromeduthe.jpg", link: "https://www.senscritique.com/film/l_arome_du_the/480159" },
   ],
   "Jean-Luc Godard": [
-    { title: "Le Petit Soldat", note: 4, cover: "films/lepetitsoldat.jpg", link: "https://www.senscritique.com/film/le_petit_soldat/428321" },
+    { title: "Le Petit Soldat", note: 4, cover: "films/lepetitsoldat.jpg", link: "https://www.senscritique.com/film/le_petit_soldat/428321", tags: ["coup de coeur"] },
     { title: "Vivre sa vie", note: 3.5, cover: "films/vivresavie.jpg", link: "https://www.senscritique.com/film/vivre_sa_vie/372817" },
     { title: "Deux ou trois choses que je sais d'elle", note: 0.5, cover: "films/deuxoutroischoses.jpg", link: "https://www.senscritique.com/film/deux_ou_trois_choses_que_je_sais_d_elle/438890" },
     { title: "Je vous salue, Sarajevo", note: null, cover: "films/sarajevo.jpg", link: "https://www.senscritique.com/film/je_vous_salue_sarajevo/495688" },
@@ -75,7 +75,7 @@ const filmsData = {
     { title: "22 Jump Street", note: 4, cover: "films/22jumpstreet.jpg", link: "https://www.senscritique.com/film/22_jump_street/7937020" },
   ],
   "Naoto Yamakawa": [
-    { title: "Attack on the Bakery", note: 4, cover: "films/bakery.jpg", link: "https://www.senscritique.com/film/attack_on_the_bakery/16798354" },
+    { title: "Attack on the Bakery", note: 4, cover: "films/bakery.jpg", link: "https://www.senscritique.com/film/attack_on_the_bakery/16798354", tags: ["coup de coeur"] },
     { title: "A Girl, She Is 100%", note: 3.5, cover: "films/agirlsheis.jpg", link: "https://www.senscritique.com/film/a_girl_she_is_100/43801189" },
   ],
   "Anthony Russo": [
@@ -87,34 +87,34 @@ const filmsData = {
     { title: "Inglourious Basterds", note: 3, cover: "films/inglourious.webp", link: "https://www.senscritique.com/film/inglourious_basterds/388285" },
   ],
   "Park Chan-Wook": [
-    { title: "Old Boy", note: 5, cover: "films/oldboy.png", link: "https://www.senscritique.com/film/old_boy/444625" },
+    { title: "Old Boy", note: 5, cover: "films/oldboy.png", link: "https://www.senscritique.com/film/old_boy/444625", tags: ["coup de coeur"] },
   ],
   "Sidney Lumet": [
-    { title: "Douze Hommes en colère", note: 5, cover: "films/douzehommes.jpg", link: "https://www.senscritique.com/film/douze_hommes_en_colere/370894" },
+    { title: "Douze Hommes en colère", note: 5, cover: "films/douzehommes.jpg", link: "https://www.senscritique.com/film/douze_hommes_en_colere/370894", tags: ["coup de coeur"] },
   ],
   "Yang Li": [
-    { title: "Escape From the 21st Century", note: 5, cover: "films/escape21.webp", link: "https://www.senscritique.com/film/escape_from_the_21st_century/97622952" },
+    { title: "Escape From the 21st Century", note: 5, cover: "films/escape21.webp", link: "https://www.senscritique.com/film/escape_from_the_21st_century/97622952", tags: ["coup de coeur"] },
   ],
   "Bernard Queysanne": [
-    { title: "Un homme qui dort", note: 4.5, cover: "films/unhommequidort.jpg", link: "https://www.senscritique.com/film/un_homme_qui_dort/390872" },
+    { title: "Un homme qui dort", note: 4.5, cover: "films/unhommequidort.jpg", link: "https://www.senscritique.com/film/un_homme_qui_dort/390872", tags: ["coup de coeur"] },
   ],
   "Jean Cocteau": [
-    { title: "Le Testament d'Orphée", note: 4.5, cover: "films/letestamentdorphee.jpg", link: "https://www.senscritique.com/film/le_testament_d_orphee/397005" },
+    { title: "Le Testament d'Orphée", note: 4.5, cover: "films/letestamentdorphee.jpg", link: "https://www.senscritique.com/film/le_testament_d_orphee/397005", tags: ["coup de coeur"] },
   ],
   "Daniel Kwan": [
-    { title: "Everything Everywhere All at Once", note: 4.5, cover: "films/everything.webp", link: "https://www.senscritique.com/film/everything_everywhere_all_at_once/41357764" },
+    { title: "Everything Everywhere All at Once", note: 4.5, cover: "films/everything.webp", link: "https://www.senscritique.com/film/everything_everywhere_all_at_once/41357764", tags: ["coup de coeur"] },
   ],
   "Georges Schwizgebel": [
     { title: "Fugue", note: 4.5, cover: "films/fugue.jpg", link: "https://www.senscritique.com/film/fugue/456566" },
   ],
   "Alain Guiraudie": [
-    { title: "Ce vieux rêve qui bouge", note: 4.5, cover: "films/cevieuxreve.jpg", link: "https://www.senscritique.com/film/ce_vieux_reve_qui_bouge/1333244" },
+    { title: "Ce vieux rêve qui bouge", note: 4.5, cover: "films/cevieuxreve.jpg", link: "https://www.senscritique.com/film/ce_vieux_reve_qui_bouge/1333244", tags: ["coup de coeur"] },
   ],
   "Martin Scorsese": [
-    { title: "Shutter Island", note: 4.5, cover: "films/shutterisland.png", link: "https://www.senscritique.com/film/shutter_island/405140" },
+    { title: "Shutter Island", note: 4.5, cover: "films/shutterisland.png", link: "https://www.senscritique.com/film/shutter_island/405140", tags: ["coup de coeur"] },
   ],
   "Patrick Imbert": [
-    { title: "Le Sommet des dieux", note: 4.5, cover: "films/lesommetdesdieux.jpg", link: "https://www.senscritique.com/film/le_sommet_des_dieux/20012631" },
+    { title: "Le Sommet des dieux", note: 4.5, cover: "films/lesommetdesdieux.jpg", link: "https://www.senscritique.com/film/le_sommet_des_dieux/20012631", tags: ["coup de coeur"] },
   ],
   "Mathieu Kassovitz": [
     { title: "La Haine", note: 4.5, cover: "films/lahaine.png", link: "https://www.senscritique.com/film/la_haine/472094" },
@@ -129,13 +129,13 @@ const filmsData = {
     { title: "Miss Candace Hilligoss' Flickering Halo", note: 4, cover: "films/misscandace.jpg", link: "https://www.senscritique.com/film/miss_candace_hilligoss_flickering_halo/24982154" },
   ],
   "Caroline Poggi": [
-    { title: "Bébé Colère", note: 4, cover: "films/bebecolere.png", link: "https://www.senscritique.com/film/bebe_colere/43518566" },
+    { title: "Bébé Colère", note: 4, cover: "films/bebecolere.png", link: "https://www.senscritique.com/film/bebe_colere/43518566", tags: ["coup de coeur"] },
   ],
   "Tim Egan": [
     { title: "Curve", note: 4, cover: "films/curve.jpg", link: "https://www.senscritique.com/film/curve/23737037" },
   ],
   "Elizabeth Chai Vasarhelyi": [
-    { title: "Free Solo", note: 4, cover: "films/freesolo.jpg", link: "https://www.senscritique.com/film/free_solo/36158361" },
+    { title: "Free Solo", note: 4, cover: "films/freesolo.jpg", link: "https://www.senscritique.com/film/free_solo/36158361", tags: ["coup de coeur"] },
   ],
   "Darren Aronofsky": [
     { title: "Requiem for a Dream", note: 4, cover: "films/requiemforadream.jpg", link: "https://www.senscritique.com/film/requiem_for_a_dream/466346" },
@@ -162,7 +162,7 @@ const filmsData = {
     { title: "Mirrored Mind", note: 3.5, cover: "films/mirroredmind.jpg", link: "https://www.senscritique.com/film/mirrored_mind/38280622" },
   ],
   "Friedrich Wilhelm Murnau": [
-    { title: "Nosferatu le vampire", note: 3.5, cover: "films/nosferatu.jpg", link: "https://www.senscritique.com/film/nosferatu_le_vampire/470348" },
+    { title: "Nosferatu le vampire", note: 3.5, cover: "films/nosferatu.jpg", link: "https://www.senscritique.com/film/nosferatu_le_vampire/470348", tags: ["coup de coeur"] },
   ],
   "Robert Eggers": [
     { title: "The Lighthouse", note: 3.5, cover: "films/thelighthouse.jpg", link: "https://www.senscritique.com/film/the_lighthouse/30479044" },
@@ -189,7 +189,7 @@ const filmsData = {
     { title: "Bullet Train", note: 3.5, cover: "films/bulletrain.png", link: "https://www.senscritique.com/film/bullet_train/42556935" },
   ],
   "Hideaki Anno": [
-    { title: "Ryusei Kacho", note: 3.5, cover: "films/ryuseikacho.jpg", link: "https://www.senscritique.com/film/ryusei_kacho/17202295" },
+    { title: "Ryusei Kacho", note: 3.5, cover: "films/ryuseikacho.jpg", link: "https://www.senscritique.com/film/ryusei_kacho/17202295", tags: ["coup de coeur"] },
   ],
   "Mary Harron": [
     { title: "American Psycho", note: 3.5, cover: "films/americanpsycho.jpg", link: "https://www.senscritique.com/film/american_psycho/375957" },
@@ -288,9 +288,12 @@ const filmsData = {
     { title: "J'ai perdu mon corps", note: null, cover: "films/jaiperdumoncorps.png", link: "https://www.senscritique.com/film/j_ai_perdu_mon_corps/39006031" },
   ],
   "Takeshi Kitano": [
-    { title: "Sonatine - Mélodie mortelle", note: 4, cover: "films/sonatine.webp", link: "https://www.senscritique.com/film/sonatine_melodie_mortelle/432069" },
+    { title: "Sonatine - Mélodie mortelle", note: 4, cover: "films/sonatine.webp", link: "https://www.senscritique.com/film/sonatine_melodie_mortelle/432069", tags: ["coup de coeur"] },
   ],
   "David Dufresne": [
     { title: "Un pays qui se tient sage", note: null, cover: "films/unpayssage.jpg", link: "https://www.senscritique.com/film/un_pays_qui_se_tient_sage/42372324" },
+  ],
+  "Takahide Hori": [
+    { title: "Junk Head", note: 4, cover: "films/junkhead.webp", link: "https://www.senscritique.com/film/junk_head/29568884", tags: ["coup de coeur"] },
   ],
 };
