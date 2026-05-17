@@ -838,7 +838,7 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 }
 
 .coup-de-coeur-card img {
-  box-shadow: 0 0 0 2px rgba(236, 64, 122, 0.6), 0 4px 8px var(--shadow-color);
+  box-shadow: 0 0 0 2px rgba(236, 64, 122, 0.6), 0 0 12px rgba(236, 64, 122, 0.4), 0 4px 8px var(--shadow-color);
 }
 
 .page:focus { outline: none; }
