@@ -873,9 +873,57 @@ const joursNoms = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
 let viewedYear = new Date().getFullYear();
 let viewedMonth = new Date().getMonth();
 
+// ── Calcul de la Streak ──
+function renderStreak() {
+  const container = document.getElementById('home-streak');
+  if (!journal || journal.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+
+  // On crée un Set de toutes les dates uniques du journal pour aller vite
+  const datesInJournal = new Set(journal.map(j => j.d));
+
+  let streakCount = 0;
+  let isPaused = false;
+  let checkDate = new Date();
+  checkDate.setHours(0, 0, 0, 0);
+
+  // Si on n'a rien rentré aujourd'hui, la streak est "en pause", on commence à checker depuis hier
+  const todayStr = checkDate.toISOString().split('T')[0];
+  if (!datesInJournal.has(todayStr)) {
+    isPaused = true;
+    checkDate.setDate(checkDate.getDate() - 1);
+  }
+
+  // On remonte le temps
+  while (true) {
+    const dateStr = checkDate.toISOString().split('T')[0];
+    if (datesInJournal.has(dateStr)) {
+      streakCount++;
+      checkDate.setDate(checkDate.getDate() - 1);
+    } else {
+      break;
+    }
+  }
+
+  // Affichage propre
+  if (streakCount === 0) {
+    container.innerHTML = '';
+    return;
+  }
+
+  const countHtml = `<span class="home-streak-count">${streakCount}</span>`;
+  const pausedHtml = isPaused ? `<span class="home-streak-paused"> · en pause</span>` : '';
+  
+  const text = streakCount === 1 ? 'jour d\'affilée' : 'jours d\'affilée';
+  container.innerHTML = `${countHtml} ${text}${pausedHtml}`;
+}
+
 function initHome() {
   renderDashboard();
   renderCalendar();
+  renderStreak();
 }
 
 function renderDashboard() {
