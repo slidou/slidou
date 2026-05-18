@@ -104,4 +104,5 @@ const journalData = [
 { d: "2026-05-17", t: "film", title: "Junk Head", img: "films/junkhead.webp", note: "une vibe à la blame" },
 { d: "2026-05-17", t: "anime", title: "Nippon Sangoku", img: "anime/nipponsangoku.jpg", note: "épisode 7, l'anime est vraiment bien, top 3 persos : Yasuaki Kaku, Mitsuhide Ryuumon, Gou Sugou" },
 { d: "2026-05-18", t: "manga", title: "Tower Dungeon", img: "manga/towerdungeon.jpg", note: "premier tome de lu, très bon début, j'adore l'ambiance" },
+{ d: "2026-05-18", t: "musique", title: "Pluie, montagnes et soleil", img: "music/pluiemontagnessoleil.webp", note: "première écoute même si je connaissais déjà quelques sons" },
 ];

@@ -26,6 +26,7 @@ const musicData = {
   ],
   "aupinard": [
     { title: "spleen. social club", note: 3, cover: "music/spleensocialclub.PNG", link: "https://rateyourmusic.com/release/album/aupinard/spleen-social-club/" },
+    { title: "Pluie, montagnes et soleil", note: 3.5, cover: "music/pluiemontagnessoleil.webp", link: "https://rateyourmusic.com/release/album/aupinard/pluie-montagnes-et-soleil/" },
   ],
   "Ino Casablanca": [
     { title: "Extasia", note: 3.5, cover: "music/extasia.webp", link: "https://rateyourmusic.com/release/mixtape/ino-casablanca/extasia/" },
