@@ -235,7 +235,9 @@ body {
   border-radius: 10px;
   border: 1px solid var(--border-color);
   transition: background 0.3s;
-  cursor: pointer; /* Pour montrer qu'on peut cliquer */
+  cursor: pointer; 
+  user-select: none; /* <-- CECI EMPÊCHE LE CARRÉ BLEU */
+  /* J'ai enlevé le "overflow: hidden" qui empêchait le Zzz de monter */
 }
 .tamagotchi-stats { 
   display: flex; 
@@ -1199,4 +1201,76 @@ body:not(.dark-mode) .stats-total { opacity: 0.7; }
   background: var(--link-color);
   color: #fff;
   border-color: var(--link-color);
+}
+
+/* ── ANIMATIONS PERRUCHES ── */
+/* Il faut que la cage soit "relative" pour que les animations restent à l'intérieur */
+.tamagotchi-cage { position: relative; overflow: hidden; }
+
+/* 1. Le Spin (Jouer) */
+@keyframes birdSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+.bird-spin { animation: birdSpin 0.6s ease-in-out; }
+
+/* 2. La graine qui tombe (Nourrir) */
+.falling-seed {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  pointer-events: none;
+  z-index: 10;
+  animation: fallSeed 0.8s ease-in forwards;
+}
+@keyframes fallSeed {
+  0% { top: 10px; opacity: 1; }
+  100% { top: 65%; opacity: 0; transform: translateX(-50%) translateY(10px); }
+}
+
+/* 3. Le Zzz qui flotte (Dormir) */
+.floating-zzz {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--link-color);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  animation: floatZzz 1.5s ease-in-out forwards;
+}
+@keyframes floatZzz {
+  0% { opacity: 0; transform: translateY(0) scale(0.8); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-20px) scale(1.2); }
+}
+
+/* 4. Le Cœur (Quand on caresse) */
+.pop-heart {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  font-size: 18px;
+  pointer-events: none;
+  z-index: 10;
+  animation: popHeart 0.8s ease-out forwards;
+}
+@keyframes popHeart {
+  0% { transform: scale(0); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; top: 10px; }
+}
+
+/* 5. Le rebond des barres de vie */
+.bar-bounce { animation: barBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes barBounce {
+  0% { transform: scaleY(1); }
+  40% { transform: scaleY(1.6); }
+  100% { transform: scaleY(1); }
 }

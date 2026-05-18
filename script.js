@@ -562,6 +562,38 @@ function generateMusique(data = musique, isSearch = false) {
 // ── TAMAGOTCHI PERRUCHES ──
 const TAMAGOTCHI_KEY = 'slidou_budgie_state';
 
+// Fonction pour lancer une animation temporaire
+function spawnAnim(parentElement, cssClass, emoji) {
+  const el = document.createElement('span');
+  el.className = cssClass;
+  el.innerHTML = emoji;
+  parentElement.appendChild(el);
+  el.addEventListener('animationend', () => el.remove());
+}
+
+// ── Yeux ^^ temporaires ──
+let isBirdHappy = false;
+
+function triggerHappyEyes() {
+  isBirdHappy = true;
+  updateTamagotchiUI(); // Redessine avec les yeux ^^
+  setTimeout(() => {
+    isBirdHappy = false;
+    updateTamagotchiUI(); // Redessine avec les yeux normaux
+  }, 1500); // Revient à la normale après 1,5 secondes
+}
+
+// Fonction pour faire rebondir les barres
+function bounceBars(birdId) {
+  ['faim', 'bonheur', 'energie'].forEach(stat => {
+    const bar = document.getElementById('stat-' + stat + '-' + birdId);
+    if (!bar) return;
+    bar.classList.remove('bar-bounce');
+    void bar.offsetWidth; // Force le navigateur à relancer l'animation
+    bar.classList.add('bar-bounce');
+  });
+}
+
 const BIRD_COLORS = {
   pistachio: { body: '#66BB6A', belly: '#A5D6A7', wing: '#43A047' },
   cielazur: { body: '#42A5F5', belly: '#90CAF9', wing: '#1E88E5' }
@@ -627,7 +659,10 @@ function drawBudgie(birdId, state) {
   let beak = `<polygon points="64,38 58,44 70,44" fill="#FF9800"/>`;
   let extra = '';
 
-  if (birdState.energie < 20) {
+  // NOUVEAU : Les yeux ^^
+  if (isBirdHappy) {
+    eye = `<path d="M51 34 L53 30 M55 30 L57 34" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+  } else if (birdState.energie < 20) {
     eye = `<line x1="51" y1="32" x2="57" y2="32" stroke="#333" stroke-width="2" stroke-linecap="round"/>`;
     beak = `<polygon points="64,38 59,42 69,42" fill="#FF9800"/>`;
     extra = `<text x="85" y="25" font-family="Space Grotesk" font-size="10" fill="#999" font-style="italic">Zzz</text>`;
@@ -708,6 +743,8 @@ function petBird(birdId) {
   wrapper.classList.remove('bird-jump');
   void wrapper.offsetWidth; 
   wrapper.classList.add('bird-jump');
+  spawnAnim(wrapper.parentElement, 'pop-heart', '❤️');
+  bounceBars(birdId);
   
   const harmonyEl = document.getElementById('bird-harmony');
   if (state.pistachio.bonheur > 70 && state.cielazur.bonheur > 70) {
@@ -724,10 +761,14 @@ document.getElementById('btn-nourrir').addEventListener('click', () => {
   ['pistachio', 'cielazur'].forEach(bird => {
     state[bird].faim = Math.min(100, state[bird].faim + 30);
     state[bird].energie = Math.max(0, state[bird].energie - 5);
+    
+    const cage = document.getElementById('cage-' + bird);
+    spawnAnim(cage, 'falling-seed', '🌻');
+    bounceBars(bird);
   });
   saveBudgieState(state);
   setRandomThought();
-  updateTamagotchiUI();
+  triggerHappyEyes();
 });
 
 document.getElementById('btn-jouer').addEventListener('click', () => {
@@ -737,10 +778,16 @@ document.getElementById('btn-jouer').addEventListener('click', () => {
     state[bird].bonheur = Math.min(100, state[bird].bonheur + 30);
     state[bird].energie = Math.max(0, state[bird].energie - 15);
     state[bird].faim = Math.max(0, state[bird].faim - 10);
+    
+    const wrapper = document.getElementById('wrapper-' + bird);
+    wrapper.classList.remove('bird-jump', 'bird-spin');
+    void wrapper.offsetWidth; 
+    wrapper.classList.add('bird-spin');
+    bounceBars(bird);
   });
   saveBudgieState(state);
   setRandomThought();
-  updateTamagotchiUI();
+  triggerHappyEyes();
 });
 
 document.getElementById('btn-dormir').addEventListener('click', () => {
@@ -748,6 +795,10 @@ document.getElementById('btn-dormir').addEventListener('click', () => {
   ['pistachio', 'cielazur'].forEach(bird => {
     state[bird].energie = Math.min(100, state[bird].energie + 40);
     state[bird].faim = Math.max(0, state[bird].faim - 5);
+    
+    const cage = document.getElementById('cage-' + bird);
+    spawnAnim(cage, 'floating-zzz', 'Z z z');
+    bounceBars(bird);
   });
   saveBudgieState(state);
   setRandomThought();
