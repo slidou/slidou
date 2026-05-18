@@ -1,3 +1,14 @@
+let showOnlyReviewsBiblio = false;
+
+function filterByReview(data) {
+  const result = {};
+  for (const category in data) {
+    const reviewedItems = data[category].filter(item => item.review);
+    if (reviewedItems.length > 0) result[category] = reviewedItems;
+  }
+  return result;
+}
+
 // ── Chargement des données ──
 let books, films, series, games, musique, journal;
 try { books = booksData; } catch(e) { books = {}; }
@@ -116,6 +127,8 @@ function navigateTo(page) {
 
   if (page === 'home') initHome();
   if (page === 'bibliographie') {
+    showOnlyReviewsBiblio = false;
+    document.getElementById('filter-reviews-biblio').classList.remove('active');
     document.getElementById('bibliographyContent').dataset.initialized = '';
     document.getElementById('search-biblio').value = '';
     generateBibliography();
@@ -249,9 +262,14 @@ function generateBibliography(data = books, isSearch = false) {
   
   let totalBooks = 0;
   for (const author in data) totalBooks += data[author].length;
-  const label = isSearch 
-    ? totalBooks + " livre" + (totalBooks !== 1 ? "s" : "") + " trouvé" + (totalBooks !== 1 ? "s" : "")
-    : totalBooks + " livre" + (totalBooks !== 1 ? "s" : "") + " lu" + (totalBooks !== 1 ? "s" : "");
+  let label = totalBooks + " livre" + (totalBooks !== 1 ? "s" : "") + " lu" + (totalBooks !== 1 ? "s" : "");
+  
+  if (isSearch) {
+    label = totalBooks + " livre" + (totalBooks !== 1 ? "s" : "") + " trouvé" + (totalBooks !== 1 ? "s" : "");
+  } else if (showOnlyReviewsBiblio) {
+    label = totalBooks + " review" + (totalBooks !== 1 ? "s" : "");
+  }
+  
   document.getElementById('biblio-counter').textContent = label;
 
   if (!container.dataset.initialized) {
@@ -745,10 +763,29 @@ document.getElementById('cage-cielazur').addEventListener('click', () => petBird
   });
 });
 
+// ── Check bouton review Biblio ──
+function checkBiblioReviewBtn() {
+  const btn = document.getElementById('filter-reviews-biblio');
+  let hasReview = false;
+  for (const author in books) {
+    if (books[author].some(item => item.review)) { hasReview = true; break; }
+  }
+  btn.style.display = hasReview ? 'inline-block' : 'none';
+}
+checkBiblioReviewBtn();
+
+document.getElementById('filter-reviews-biblio').addEventListener('click', function() {
+  showOnlyReviewsBiblio = !showOnlyReviewsBiblio;
+  this.classList.toggle('active');
+  document.getElementById('search-biblio').value = '';
+  generateBibliography(showOnlyReviewsBiblio ? filterByReview(books) : books);
+});
+
 // ── Événements de Recherche ──
 document.getElementById('search-biblio').addEventListener('input', e => {
   const query = e.target.value;
-  generateBibliography(filterData(books, query), true);
+  let dataToSearch = showOnlyReviewsBiblio ? filterByReview(books) : books;
+  generateBibliography(filterData(dataToSearch, query), true);
 });
 
 document.getElementById('search-ecrans').addEventListener('input', e => {

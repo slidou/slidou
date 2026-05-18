@@ -296,4 +296,7 @@ const filmsData = {
   "Takahide Hori": [
     { title: "Junk Head", note: 4, cover: "films/junkhead.webp", link: "https://www.senscritique.com/film/junk_head/29568884", tags: ["coup de coeur"] },
   ],
+  "Phil Tippett": [
+    { title: "Mad God", note: 4, cover: "films/madgod.webp", link: "https://www.senscritique.com/film/mad_god/45240949", tags: ["coup de coeur"] },
+  ],
 };
