@@ -106,4 +106,5 @@ const journalData = [
 { d: "2026-05-18", t: "manga", title: "Tower Dungeon", img: "manga/towerdungeon.jpg", note: "premier tome de lu, très bon début, j'adore l'ambiance" },
 { d: "2026-05-18", t: "musique", title: "Pluie, montagnes et soleil", img: "music/pluiemontagnessoleil.webp", note: "première écoute même si je connaissais déjà quelques sons" },
 { d: "2026-05-18", t: "film", title: "Mad God", img: "films/madgod.webp", note: "fascinant" },
+{ d: "2026-05-20", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "épisodes 8" },
 ];
