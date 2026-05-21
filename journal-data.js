@@ -111,4 +111,5 @@ const journalData = [
 { d: "2026-05-21", t: "musique", title: "Balloonerism", img: "music/balloonerism.webp", note: "première écoute, album sympa, le meiller son est funny papers pour moi" },
 { d: "2026-05-21", t: "manga", title: "Tower Dungeon", img: "manga/towerdungeon.jpg", note: "second tome de lu" },
 { d: "2026-05-21", t: "musique", title: "キャット", img: "music/キャット.webp", note: "première écoute" },
+{ d: "2026-05-22", t: "anime", title: "Numb Numb feat. Hatsune Miku, Kasane Teto", img: "anime/numbnumb.jpg", note: "music" },
 ];

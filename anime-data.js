@@ -7465,6 +7465,7 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64149, title: "I Got feat. Woodie Gochild", note: 3, tags: ["music","archived"] },
   { id: 62482, title: "Mangzhong", note: 0.5, tags: ["short film","archived"] },
   { id: 64177, title: "Kin no Ono, Gin no Ono, Emerald no Ono", note: 3.5, tags: ["music","+","archived"] },
-  { id: 64177, title: "Kick-Heart", note: 4, tags: ["short film","gem","archived"] },
+  { id: 16149, title: "Kick-Heart", note: 4, tags: ["short film","gem","archived"] },
+  { id: 64248, title: "Numb Numb feat. Hatsune Miku, Kasane Teto", note: 4, tags: ["music","gem","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
