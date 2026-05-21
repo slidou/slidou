@@ -107,4 +107,6 @@ const journalData = [
 { d: "2026-05-18", t: "musique", title: "Pluie, montagnes et soleil", img: "music/pluiemontagnessoleil.webp", note: "première écoute même si je connaissais déjà quelques sons" },
 { d: "2026-05-18", t: "film", title: "Mad God", img: "films/madgod.webp", note: "fascinant" },
 { d: "2026-05-20", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "épisodes 8" },
+{ d: "2026-05-21", t: "série", title: "One Piece", img: "series/onepiecesaison2.jpg", note: "saison 2 épisode 5" },
+{ d: "2026-05-21", t: "musique", title: "Balloonerism", img: "music/balloonerism.webp", note: "première écoute, album sympa, le meiller son est funny papers pour moi" },
 ];

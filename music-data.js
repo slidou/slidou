@@ -34,6 +34,7 @@ const musicData = {
   ],
   "Mac Miller": [
     { title: "Circles", note: 5, cover: "music/circles.webp", link: "https://rateyourmusic.com/release/album/mac-miller/circles/" },
+    { title: "Balloonerism", note: 3, cover: "music/balloonerism.webp", link: "https://rateyourmusic.com/release/album/mac-miller/balloonerism/" },
   ],
   "Drake": [
     { title: "Iceman", note: 1, cover: "music/iceman.webp", link: "https://rateyourmusic.com/release/album/drake/iceman/" },
