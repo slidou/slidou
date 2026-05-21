@@ -41,4 +41,7 @@ const musicData = {
     { title: "Maid of Honour", note: 1, cover: "music/maidofhonour.webp", link: "https://rateyourmusic.com/release/album/drake/maid-of-honour/" },
     { title: "Habibti", note: 1, cover: "music/habibti.webp", link: "https://rateyourmusic.com/release/album/drake/habibti/" },
   ],
+  "Hiroshi Suzuki": [
+    { title: "キャット", note: 3, cover: "music/キャット.webp", link: "https://rateyourmusic.com/release/album/%E9%88%B4%E6%9C%A8%E5%BC%98/%E3%82%AD%E3%83%A3%E3%83%83%E3%83%88/" },
+  ],
 };
