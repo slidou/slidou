@@ -1428,3 +1428,107 @@ body:not(.dark-mode) .stats-total { opacity: 0.7; }
 #recap-visual .book-card:hover img[style*="blur"] {
   filter: none !important; /* Force la suppression du flou au survol */
 }
+
+/* ── EXCLUSIF MOBILE (NE CHANGE RIEN AU PC) ── */
+@media(max-width:768px) {
+
+  /* 1. CALENDRIER : MODE LISTE */
+  .home-calendar-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .calendar-day-header {
+    display: none; /* On cache Dim, Lun, Mar... pour gagner de la place */
+  }
+  .calendar-day.empty {
+    display: none; /* On cache les jours vides du début du mois */
+  }
+  .calendar-day {
+    display: flex;
+    flex-direction: row; /* Image à gauche, texte à droite */
+    align-items: center;
+    aspect-ratio: unset; /* On enlève le carré */
+    height: auto;
+    padding: 8px;
+    gap: 10px;
+  }
+  .calendar-day img {
+    width: 45px;
+    height: 65px;
+    object-fit: cover;
+    position: relative; /* Enlève l'image de fond */
+    top: auto;
+    left: auto;
+  }
+  .calendar-day-num {
+    position: relative; /* Enlève la position en bas à gauche */
+    bottom: auto;
+    left: auto;
+    background: none;
+    color: var(--secondary-text);
+    padding: 0;
+    z-index: 1;
+    font-size: 12px;
+  }
+  .calendar-badge {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-left: auto; /* Pousse le badge tout à droite */
+    background: var(--link-color);
+    color: white;
+  }
+
+  /* 2. LECTEUR MUSIQUE : COLLE EN BAS */
+  .player-widget {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50; /* Pour qu'il passe au-dessus des images */
+    margin: 0;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -4px 15px var(--shadow-color);
+    padding: 15px 20px;
+  }
+  /* On ajoute de l'espace tout en bas de la page Musique pour que le dernier album ne soit pas caché sous le lecteur */
+  #page-musique { 
+    padding-bottom: 140px; 
+  }
+
+  /* 3. PERRUCHES : COLONNE */
+  .tamagotchi-cages-wrapper {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .tamagotchi-bird-container {
+    max-width: 100%; /* Prend toute la largeur dispo */
+  }
+
+}
+
+/* ── STATUTS JOURNAL ── */
+.popup-item-status {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  text-transform: lowercase;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+.status-ongoing { color: var(--link-color); font-style: italic; }
+.status-dropped { color: #e57373; font-style: italic; }
+.status-done { color: var(--secondary-text); opacity: 0.6; }
+
+.calendar-status-dot {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  z-index: 3;
+  pointer-events: none;
+}
+.calendar-status-dot.ongoing { background: var(--link-color); }
+.calendar-status-dot.dropped { background: #e57373; }

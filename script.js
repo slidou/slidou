@@ -137,6 +137,10 @@ function navigateTo(page) {
     ecransSearchQuery = '';
     document.getElementById('search-ecrans').value = '';
     updateEcransCounter();
+
+      var activeSubEcran = document.querySelector('.sub-nav-link.active').dataset.subpage;
+      setupEcransSort(activeSubEcran);
+
     generateFilms();
   }
   if (page === 'jeux') {
@@ -401,11 +405,46 @@ function generateBibliography(data = books, isSearch = false) {
   });
 }
 
+function setupEcransSort(subpage) {
+  var sortContainer = document.getElementById('ecrans-sort');
+  sortContainer.innerHTML = '<span class="anime-sort-label">tri :</span>';
+  
+  // Si on est sur Séries, on enlève le bouton "titre"
+  var modes = subpage === 'series' 
+    ? ['série', 'note'] 
+    : ['réalisateur', 'note', 'titre'];
+    
+  modes.forEach(function(mode) {
+    // On fait correspondre "série" à "réalisateur" en interne pour pas casser le code
+    var internalMode = mode === 'titre' ? 'alpha' : (mode === 'série' ? 'réalisateur' : mode);
+    
+    var btn = document.createElement('button');
+    btn.className = 'anime-sort-btn' + (ecransSortMode === internalMode ? ' active' : '');
+    btn.textContent = mode;
+    btn.addEventListener('click', function() {
+      if (ecransSortMode === internalMode && internalMode !== 'réalisateur') {
+        ecransSortDir *= -1;
+      } else {
+        ecransSortMode = internalMode;
+        ecransSortDir = 1;
+      }
+      document.querySelectorAll('#ecrans-sort .anime-sort-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      
+      if (subpage === 'films') generateFilms();
+      else if (subpage === 'series') generateSeries();
+    });
+    sortContainer.appendChild(btn);
+  });
+}
+
 // ── Sous-navigation Écrans ──
 document.querySelectorAll('.sub-nav-link').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
     const subpage = link.dataset.subpage;
+
+    setupEcransSort(subpage);
 
     document.querySelectorAll('.sub-nav-link').forEach(l => l.classList.remove('active'));
     link.classList.add('active');
@@ -446,6 +485,38 @@ function updateEcransCounter(filmsData = films, seriesData = series, isSearch = 
 // ── Generate Films ──
 function generateFilms(data = films, isSearch = false) {
   const container = document.getElementById('filmsContent');
+
+  // --- VUE GLOBALE FILMS ---
+  if (ecransSortMode !== 'réalisateur') {
+    var allMovies = [];
+    for (var dir in data) {
+      data[dir].forEach(function(movie) { allMovies.push(movie); });
+    }
+    allMovies.sort(function(a, b) {
+      if (ecransSortMode === 'note') {
+        if (a.note === null && b.note === null) return (a.title.localeCompare(b.title)) * ecransSortDir;
+        if (a.note === null) return 1; if (b.note === null) return -1;
+        return (b.note - a.note) * ecransSortDir;
+      } else {
+        return (a.title.localeCompare(b.title)) * ecransSortDir;
+      }
+    });
+    if (allMovies.length === 0) { container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>'; return; }
+    var div = document.createElement('div'); div.className = 'books';
+    allMovies.forEach(function(movie) {
+      var starsHtml = movie.note !== null ? '<div class="book-meta">' + getStars(movie.note) + '</div>' : '';
+      var reviewHtml = movie.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(movie.review) + '</span>' : '';
+      if (movie.tags && movie.tags.indexOf('coup de coeur') !== -1) var cdcClass = ' coup-de-coeur-card'; else var cdcClass = '';
+      var card = document.createElement('a');
+      card.href = movie.link; card.target = "_blank"; card.className = 'book-card' + cdcClass;
+      card.innerHTML = '<img src="' + movie.cover + '" alt="' + movie.title + '"><div class="book-title">' + movie.title + '</div>' + starsHtml + reviewHtml;
+      div.appendChild(card);
+    });
+    container.innerHTML = '';
+    container.appendChild(div);
+    return; 
+  }
+
   container.innerHTML = '';
 
   if (sortDataKeys(data).length === 0) {
@@ -489,6 +560,38 @@ function generateFilms(data = films, isSearch = false) {
 // ── Generate Séries ──
 function generateSeries(data = series, isSearch = false) {
   const container = document.getElementById('seriesContent');
+
+  // --- VUE GLOBALE SÉRIES ---
+  if (ecransSortMode !== 'réalisateur') {
+    var allSeries = [];
+    for (var show in data) {
+      data[show].forEach(function(season) { allSeries.push(season); });
+    }
+    allSeries.sort(function(a, b) {
+      if (ecransSortMode === 'note') {
+        if (a.note === null && b.note === null) return (a.title.localeCompare(b.title)) * ecransSortDir;
+        if (a.note === null) return 1; if (b.note === null) return -1;
+        return (b.note - a.note) * ecransSortDir;
+      } else {
+        return (a.title.localeCompare(b.title)) * ecransSortDir;
+      }
+    });
+    if (allSeries.length === 0) { container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>'; return; }
+    var div = document.createElement('div'); div.className = 'books';
+    allSeries.forEach(function(season) {
+      var starsHtml = season.note !== null ? '<div class="book-meta">' + getStars(season.note) + '</div>' : '';
+      var reviewHtml = season.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(season.review) + '</span>' : '';
+      if (season.tags && season.tags.indexOf('coup de coeur') !== -1) var cdcClass = ' coup-de-coeur-card'; else var cdcClass = '';
+      var card = document.createElement('a');
+      card.href = season.link; card.target = "_blank"; card.className = 'book-card' + cdcClass;
+      card.innerHTML = '<img src="' + season.cover + '" alt="' + season.title + '"><div class="book-title">' + season.title + '</div>' + starsHtml + reviewHtml;
+      div.appendChild(card);
+    });
+    container.innerHTML = '';
+    container.appendChild(div);
+    return; 
+  }
+
   container.innerHTML = '';
 
   if (sortDataKeys(data).length === 0) {
@@ -1349,8 +1452,11 @@ function renderCalendar() {
     if (dayEntries.length > 0) {
       const badge = dayEntries.length > 1 ? `<div class="calendar-badge">+${dayEntries.length - 1}</div>` : '';
       var blurClass = dayEntries[0].blur ? ' blur-entry' : '';
-      html += `
+      var dayStatus = getStatusLabel(dayEntries[0]);
+      var statusDot = dayStatus === 'en cours' ? '<div class="calendar-status-dot ongoing"></div>' : (dayStatus === 'abandonné' ? '<div class="calendar-status-dot dropped"></div>' : '');
+        html += `
         <div class="calendar-day has-data${blurClass}" data-date="${dateStr}">
+          ${statusDot}
           <div class="calendar-day-num">${day}</div>
           <img src="${dayEntries[0].img}" alt="${dateStr}">
           ${badge}
@@ -1379,6 +1485,25 @@ function changeMonth(offset) {
   renderCalendar();
 }
 
+// ── Statuts automatiques du journal ──
+function getStatusLabel(entry) {
+  // Si tu as précisé un statut manuellement, on l'utilise
+  if (entry.status === 'en cours') return 'en cours';
+  if (entry.status === 'abandonné') return 'abandonné';
+  
+  // Sinon, on devine en fonction du type (t:)
+  const labels = {
+    'livre': 'lu',
+    'manga': 'lu',
+    'film': 'vu',
+    'série': 'vu',
+    'anime': 'terminé',
+    'jeu': 'terminé',
+    'musique': 'écouté'
+  };
+  return labels[entry.t] || '';
+}
+
 function openPopup(dateStr) {
   const popup = document.getElementById('calendar-popup');
   const content = document.getElementById('calendar-popup-content');
@@ -1397,11 +1522,15 @@ function openPopup(dateStr) {
     const dotClass = typeColors[item.t] || "";
     const noteHtml = item.note ? `<div class="popup-item-note">${item.note}</div>` : '';
     var blurClass = item.blur ? ' blur-entry' : '';
+    const statusLabel = getStatusLabel(item);
+    const statusClass = statusLabel === 'en cours' ? 'status-ongoing' : (statusLabel === 'abandonné' ? 'status-dropped' : 'status-done');
+    const statusHtml = statusLabel ? '<div class="popup-item-status ' + statusClass + '">' + statusLabel + '</div>' : '';
     html += `
       <div class="popup-item${blurClass}">
         <img src="${item.img}" alt="${item.title}">
         <div class="popup-item-title"><span class="popup-type-dot ${dotClass}"></span>${item.title}</div>
         ${noteHtml}
+        ${statusHtml}
       </div>
     `;
   });
@@ -1837,6 +1966,8 @@ let musiqueSortMode = 'artiste';
 let musiqueSortDir = 1;
 let jeuxSortMode = 'développeur';
 let jeuxSortDir = 1;
+let ecransSortMode = 'réalisateur';
+let ecransSortDir = 1;
 
 function loadMangaImageCache() {
   try { var d = JSON.parse(localStorage.getItem('manga_img_cache')); if (d) Object.entries(d).forEach(function(e) { mangaImageCache.set(parseInt(e[0]), e[1]); }); } catch (e) {}
