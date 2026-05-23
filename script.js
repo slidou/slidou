@@ -124,7 +124,7 @@ function navigateTo(page) {
   document.querySelector('.content').scrollTo({ top: 0, behavior: 'instant' });
 
   localStorage.setItem('activePage', page);
-
+  
   if (page === 'home') initHome();
   if (page === 'bibliographie') {
     showOnlyReviewsBiblio = false;
@@ -148,6 +148,7 @@ function navigateTo(page) {
     generateMusique();
   }
   if (page === 'anime') {
+    showOnlyReviewsAnime = false;
     document.getElementById('search-anime').value = '';
     generateAnime();
   }
@@ -272,6 +273,70 @@ function generateBibliography(data = books, isSearch = false) {
   }
   
   document.getElementById('biblio-counter').textContent = label;
+
+    // Tri Bibliographie
+  var sortContainer = document.getElementById('biblio-sort');
+  sortContainer.innerHTML = '<span class="anime-sort-label">tri :</span>';
+  ['auteur', 'note', 'titre'].forEach(function(mode) {
+    var btn = document.createElement('button');
+    var internalMode = mode === 'titre' ? 'alpha' : mode;
+    btn.className = 'anime-sort-btn' + (biblioSortMode === internalMode ? ' active' : '');
+    btn.textContent = mode;
+    btn.addEventListener('click', function() {
+      if (biblioSortMode === internalMode && internalMode !== 'auteur') {
+        biblioSortDir *= -1;
+      } else {
+        biblioSortMode = internalMode;
+        biblioSortDir = 1;
+      }
+      document.querySelectorAll('.anime-sort-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('bibliographyContent').dataset.initialized = '';
+      
+      // On vérifie si on était en mode "reviews" avant de trier
+      var dataToUse = showOnlyReviewsBiblio ? filterByReview(books) : books;
+      generateBibliography(dataToUse);
+    });
+    sortContainer.appendChild(btn);
+  });
+
+  // --- VUE GLOBALE BIBLIO ---
+  if (biblioSortMode !== 'auteur') {
+    var allBooks = [];
+    for (var author in data) {
+      data[author].forEach(function(book) { allBooks.push(book); });
+    }
+
+    allBooks.sort(function(a, b) {
+      if (biblioSortMode === 'note') {
+        if (a.note === null && b.note === null) return (a.title.localeCompare(b.title)) * biblioSortDir;
+        if (a.note === null) return 1; if (b.note === null) return -1;
+        return (b.note - a.note) * biblioSortDir;
+      } else {
+        return (a.title.localeCompare(b.title)) * biblioSortDir;
+      }
+    });
+
+    if (allBooks.length === 0) {
+      container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+      return;
+    }
+
+    var div = document.createElement('div'); div.className = 'books';
+    allBooks.forEach(function(book) {
+      var starsHtml = book.note !== null ? '<div class="book-meta">' + getStars(book.note) + '</div>' : '';
+      var reviewHtml = book.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(book.review) + '</span>' : '';
+      
+      var card = document.createElement('a');
+      card.href = book.link; card.target = "_blank"; card.className = 'book-card';
+      card.innerHTML = '<img src="' + book.cover + '" alt="' + book.title + '"><div class="book-title">' + book.title + '</div>' + starsHtml + reviewHtml;
+      div.appendChild(card);
+    });
+    
+    container.innerHTML = '';
+    container.appendChild(div);
+    return; 
+  }
 
   if (!container.dataset.initialized) {
     container.innerHTML = '';
@@ -471,7 +536,68 @@ function generateGames(data = games, isSearch = false) {
     : totalGames + " jeu" + (totalGames !== 1 ? "x" : "") + " joué" + (totalGames !== 1 ? "s" : "");
   document.getElementById('jeux-counter').textContent = label;
 
+    // Tri Jeux
+  var sortContainer = document.getElementById('jeux-sort');
+  sortContainer.innerHTML = '<span class="anime-sort-label">tri :</span>';
+  ['développeur', 'note', 'titre'].forEach(function(mode) {
+    var btn = document.createElement('button');
+    var internalMode = mode === 'titre' ? 'alpha' : mode;
+    btn.className = 'anime-sort-btn' + (jeuxSortMode === internalMode ? ' active' : '');
+    btn.textContent = mode;
+    btn.addEventListener('click', function() {
+      if (jeuxSortMode === internalMode && internalMode !== 'développeur') {
+        jeuxSortDir *= -1;
+      } else {
+        jeuxSortMode = internalMode;
+        jeuxSortDir = 1;
+      }
+      document.querySelectorAll('.anime-sort-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      generateGames();
+    });
+    sortContainer.appendChild(btn);
+  });
+
   const container = document.getElementById('jeuxContent');
+
+  // --- VUE GLOBALE JEUX ---
+  if (jeuxSortMode !== 'développeur') {
+    var allGames = [];
+    for (var dev in data) {
+      data[dev].forEach(function(game) { allGames.push(game); });
+    }
+
+    allGames.sort(function(a, b) {
+      if (jeuxSortMode === 'note') {
+        if (a.note === null && b.note === null) return (a.title.localeCompare(b.title)) * jeuxSortDir;
+        if (a.note === null) return 1; if (b.note === null) return -1;
+        return (b.note - a.note) * jeuxSortDir;
+      } else {
+        return (a.title.localeCompare(b.title)) * jeuxSortDir;
+      }
+    });
+
+    if (allGames.length === 0) {
+      container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+      return;
+    }
+
+    var div = document.createElement('div'); div.className = 'books';
+    allGames.forEach(function(game) {
+      var starsHtml = game.note !== null ? '<div class="book-meta">' + getStars(game.note) + '</div>' : '';
+      var reviewHtml = game.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(game.review) + '</span>' : '';
+      
+      var card = document.createElement('a');
+      card.href = game.link; card.target = "_blank"; card.className = 'book-card';
+      card.innerHTML = '<img src="' + game.cover + '" alt="' + game.title + '"><div class="book-title">' + game.title + '</div>' + starsHtml + reviewHtml;
+      div.appendChild(card);
+    });
+    
+    container.innerHTML = '';
+    container.appendChild(div);
+    return; 
+  }
+
   container.innerHTML = '';
 
   if (sortDataKeys(data).length === 0) {
@@ -520,7 +646,68 @@ function generateMusique(data = musique, isSearch = false) {
     : totalAlbums + " album" + (totalAlbums !== 1 ? "s" : "") + " écouté" + (totalAlbums !== 1 ? "s" : "");
   document.getElementById('musique-counter').textContent = label;
 
+    // Tri Musique
+  var sortContainer = document.getElementById('musique-sort');
+  sortContainer.innerHTML = '<span class="anime-sort-label">tri :</span>';
+  ['artiste', 'note', 'titre'].forEach(function(mode) {
+    var btn = document.createElement('button');
+    var internalMode = mode === 'titre' ? 'alpha' : mode;
+    btn.className = 'anime-sort-btn' + (musiqueSortMode === internalMode ? ' active' : '');
+    btn.textContent = mode;
+    btn.addEventListener('click', function() {
+      if (musiqueSortMode === internalMode && internalMode !== 'artiste') {
+        musiqueSortDir *= -1;
+      } else {
+        musiqueSortMode = internalMode;
+        musiqueSortDir = 1;
+      }
+      document.querySelectorAll('.anime-sort-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      generateMusique();
+    });
+    sortContainer.appendChild(btn);
+  });
+
   const container = document.getElementById('musiqueContent');
+
+  // --- VUE GLOBALE MUSIQUE ---
+  if (musiqueSortMode !== 'artiste') {
+    var allAlbums = [];
+    for (var artist in data) {
+      data[artist].forEach(function(album) { allAlbums.push(album); });
+    }
+
+    allAlbums.sort(function(a, b) {
+      if (musiqueSortMode === 'note') {
+        if (a.note === null && b.note === null) return (a.title.localeCompare(b.title)) * musiqueSortDir;
+        if (a.note === null) return 1; if (b.note === null) return -1;
+        return (b.note - a.note) * musiqueSortDir;
+      } else {
+        return (a.title.localeCompare(b.title)) * musiqueSortDir;
+      }
+    });
+
+    if (allAlbums.length === 0) {
+      container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+      return;
+    }
+
+    var div = document.createElement('div'); div.className = 'books';
+    allAlbums.forEach(function(album) {
+      var starsHtml = album.note !== null ? '<div class="book-meta">' + getStars(album.note) + '</div>' : '';
+      var reviewHtml = album.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(album.review) + '</span>' : '';
+      
+      var card = document.createElement('a');
+      card.href = album.link; card.target = "_blank"; card.className = 'book-card';
+      card.innerHTML = '<img src="' + album.cover + '" alt="' + album.title + '"><div class="book-title">' + album.title + '</div>' + starsHtml + reviewHtml;
+      div.appendChild(card);
+    });
+    
+    container.innerHTML = '';
+    container.appendChild(div);
+    return; 
+  }
+
   container.innerHTML = '';
 
   if (sortDataKeys(data).length === 0) {
@@ -921,6 +1108,173 @@ function renderStreak() {
   container.innerHTML = `${countHtml} ${text}${pausedHtml}`;
 }
 
+// ── RECAP ANNUEL (Bouton d'ouverture) ──
+let recapYear = new Date().getFullYear();
+
+document.getElementById('toggle-recap-btn').addEventListener('click', function() {
+  const recapEl = document.getElementById('home-recap');
+  const dashboardEl = document.getElementById('home-dashboard');
+  const calendarHeaderEl = document.querySelector('.home-calendar-header');
+  const calendarGridEl = document.getElementById('home-calendar-grid');
+  
+  const isRecapVisible = recapEl.classList.contains('visible');
+  
+  if (isRecapVisible) {
+    // Si le recap est ouvert, on le ferme et on remet le calendrier
+    recapEl.classList.remove('visible');
+    dashboardEl.classList.remove('hide-for-recap');
+    calendarHeaderEl.classList.remove('hide-for-recap');
+    calendarGridEl.classList.remove('hide-for-recap');
+    this.textContent = 'bilan ' + recapYear;
+  } else {
+    // Si le recap est fermé, on l'ouvre et on cache le calendrier
+    recapEl.classList.add('visible');
+    dashboardEl.classList.add('hide-for-recap');
+    calendarHeaderEl.classList.add('hide-for-recap');
+    calendarGridEl.classList.add('hide-for-recap');
+    this.textContent = 'retour au calendrier';
+     renderRecap(); // On activera ça à l'étape suivante !
+  }
+});
+
+document.getElementById('recap-prev-year').addEventListener('click', () => {
+  recapYear--;
+  document.getElementById('recap-year-title').textContent = recapYear;
+   renderRecap(); // Pour plus tard
+});
+
+document.getElementById('recap-next-year').addEventListener('click', () => {
+  recapYear++;
+  document.getElementById('recap-year-title').textContent = recapYear;
+   renderRecap(); // Pour plus tard
+});
+
+// ── RECAP ANNUEL (Calcul des données) ──
+function renderRecap() {
+  const yearStr = recapYear.toString();
+  const yearJournal = journal.filter(j => j.d.startsWith(yearStr));
+  
+  if (yearJournal.length === 0) {
+    document.getElementById('recap-main-count').textContent = '0';
+    document.getElementById('recap-main-breakdown').textContent = 'aucune activité cette année';
+    document.getElementById('recap-secondary-count').textContent = '0';
+    document.getElementById('recap-secondary-breakdown').textContent = '';
+    document.getElementById('recap-visual').innerHTML = '';
+    return;
+  }
+
+  // On utilise des Map pour stocker le titre ET l'image, sans doublons
+  const mainItems = {
+    livre: new Map(),
+    film: new Map(),
+    série: new Map(),
+    anime: new Map(),
+    manga: new Map(),
+    jeu: new Map(),
+    musique: new Map()
+  };
+  
+  const secondaryCounts = { anime: { short: 0, music: 0, commercial: 0, 'short film': 0 } };
+
+  function isMainAnime(note) {
+    if (!note) return true;
+    const n = note.toLowerCase();
+    if (n.includes('épisode')) return true;
+    if (/^\d+\/\d+$/.test(n)) return true;
+    return false;
+  }
+
+  yearJournal.forEach(entry => {
+    if (entry.t === 'anime') {
+      if (isMainAnime(entry.note)) {
+        // .set ignore automatiquement le doublon si le titre est identique
+        mainItems.anime.set(entry.title, { title: entry.title, img: entry.img, blur: entry.blur || false });
+      } else {
+        const n = entry.note.toLowerCase();
+        if (n.includes('short film')) secondaryCounts.anime['short film']++;
+        else if (n.includes('short')) secondaryCounts.anime.short++;
+        else if (n.includes('music')) secondaryCounts.anime.music++;
+        else if (n.includes('commercial') || n.includes('cms')) secondaryCounts.anime.commercial++;
+      }
+    } else if (mainItems[entry.t]) {
+      mainItems[entry.t].set(entry.title, { title: entry.title, img: entry.img, blur: entry.blur || false });
+    }
+  });
+
+  // --- PARTIE TEXTE (Compteurs) ---
+  const pluralMap = { livre: 'livres', film: 'films', série: 'séries', anime: 'animes', manga: 'mangas', jeu: 'jeux', musique: 'albums' };
+  let totalMain = 0;
+  const mainParts = [];
+  
+  for (const cat in mainItems) {
+    const count = mainItems[cat].size;
+    if (count > 0) {
+      totalMain += count;
+      const label = count > 1 ? pluralMap[cat] : cat;
+      mainParts.push(count + ' ' + label);
+    }
+  }
+
+  let totalSecondary = 0;
+  const secParts = [];
+  for (const type in secondaryCounts.anime) {
+    const count = secondaryCounts.anime[type];
+    if (count > 0) {
+      totalSecondary += count;
+      secParts.push(count + ' ' + type + (count > 1 ? 's' : ''));
+    }
+  }
+
+  document.getElementById('recap-main-count').textContent = totalMain;
+  document.getElementById('recap-main-breakdown').textContent = mainParts.join(' · ');
+  document.getElementById('recap-secondary-count').textContent = totalSecondary;
+  document.getElementById('recap-secondary-breakdown').textContent = secParts.length > 0 ? ('animes : ' + secParts.join(' · ')) : '';
+
+
+  // --- PARTIE VISUELLE (Les images) ---
+  const visualContainer = document.getElementById('recap-visual');
+  visualContainer.innerHTML = '';
+
+  // L'ordre dans lequel on veut afficher les catégories
+  const categoryOrder = ['livre', 'film', 'série', 'anime', 'manga', 'jeu', 'musique'];
+
+  categoryOrder.forEach(cat => {
+    if (mainItems[cat].size === 0) return; // On saute si vide
+    
+    const count = mainItems[cat].size;
+    const label = count > 1 ? pluralMap[cat] : cat;
+
+    // Le titre de la catégorie (ex: "animes (3)")
+    const h2 = document.createElement('h2');
+    h2.textContent = label + ' (' + count + ')';
+    visualContainer.appendChild(h2);
+
+    // La grille d'images
+    const grid = document.createElement('div');
+    grid.className = 'books'; // On réutilise TA classe CSS !
+
+    mainItems[cat].forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'book-card';
+      
+      // Ajout des classes spéciales selon le format
+      if (cat === 'musique') card.classList.add('recap-music-card');
+      if (cat === 'film' || cat === 'série') card.classList.add('recap-ecrans-card');
+      
+      // Ajout du flou si besoin (avec la transition pour que ça disparaisse doucement au survol)
+      const blurStyle = item.blur ? 'style="filter:blur(6px); transition: filter 0.3s;"' : '';
+      
+      card.innerHTML = `
+        <img src="${item.img}" alt="${item.title}" ${blurStyle}>
+        <div class="book-title">${item.title}</div>
+      `;
+      grid.appendChild(card);
+    });
+
+    visualContainer.appendChild(grid);
+  });
+}
+
 function initHome() {
   renderDashboard();
   renderCalendar();
@@ -1088,16 +1442,19 @@ document.addEventListener('keydown', e => {
 
 // ── ANIME ──
 const ANIME_BATCH = 50;
-const TAG_BLACKLIST = ['+', '*', 'recap', 'arg', 'music.archived', 'archived', 're-watched', 'bought', 'watched', 'plan to watch', 'dropped', 'on hold', 'watching', 'rank', 'completed', ''];
+const TAG_BLACKLIST = ['+', '*', 'recap', 'arg', 'music.archived', 're-watched', 'watched', 'plan to watch', 'dropped', 'on hold', 'watching', 'rank', 'completed', ''];
 const FORMAT_TAGS = ['normal episode', 'short episode', 'movie', 'short film', 'music', 'short', 'commercial', 'hentai'];
 const QUALITY_TAGS = ['favorite', 'gem'];
+const COLLECTION_TAGS = ['bought', 'archived'];
 const TAG_REST_LIMIT = 20;
 let animeFiltered = [];
 let animeDisplayed = 0;
 let activeTag = null;
+let showOnlyReviewsAnime = false;
 let tagsExpanded = false;
 let animeSortMode = 'note';
-let _fmtE = [], _quaE = [], _rstE = [];
+let animeSortDir = 1; // 1 = Normal, -1 = Inversé
+let _fmtE = [], _quaE = [], _rstE = [], _colE = [];
 
 // ── Images via API Jikan avec cache persistant ──
 const animeImageCache = new Map();
@@ -1185,7 +1542,15 @@ function generateAnime() {
     btn.className = 'anime-sort-btn' + (animeSortMode === mode ? ' active' : '');
     btn.textContent = mode;
     btn.addEventListener('click', function() {
-      animeSortMode = mode;
+      // Si on clique sur le bouton QUI EST DÉJÀ actif, on inverse le sens
+      if (animeSortMode === mode) {
+        animeSortDir *= -1; // Passe de 1 à -1, ou de -1 à 1
+      } else {
+        // Sinon on change de mode et on remet le sens par défaut
+        animeSortMode = mode;
+        animeSortDir = 1; 
+      }
+      
       document.querySelectorAll('.anime-sort-btn').forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
       animeDisplayed = 0;
@@ -1207,7 +1572,8 @@ function generateAnime() {
   });
   _fmtE = FORMAT_TAGS.map(function(ft) { return [ft, tagCount[ft] || 0]; }).filter(function(e) { return e[1] > 0; });
   _quaE = QUALITY_TAGS.map(function(qt) { return [qt, tagCount[qt] || 0]; }).filter(function(e) { return e[1] > 0; });
-  _rstE = Object.entries(tagCount).filter(function(e) { return FORMAT_TAGS.indexOf(e[0]) === -1 && QUALITY_TAGS.indexOf(e[0]) === -1; }).sort(function(a, b) { return b[1] - a[1]; });
+  _colE = COLLECTION_TAGS.map(function(ct) { return [ct, tagCount[ct] || 0]; }).filter(function(e) { return e[1] > 0; });
+  _rstE = Object.entries(tagCount).filter(function(e) { return FORMAT_TAGS.indexOf(e[0]) === -1 && QUALITY_TAGS.indexOf(e[0]) === -1 && COLLECTION_TAGS.indexOf(e[0]) === -1; }).sort(function(a, b) { return b[1] - a[1]; });
   renderAnimeTags();
   applyAnimeFilter();
 }
@@ -1220,11 +1586,34 @@ function renderAnimeTags() {
   var allBtn = document.createElement('button');
   allBtn.className = 'anime-tag-btn' + (activeTag === null ? ' active' : '');
   allBtn.textContent = 'tous (' + animeList.length + ')';
-  allBtn.addEventListener('click', function() { activeTag = null; animeDisplayed = 0; renderAnimeTags(); applyAnimeFilter(); });
-  container.appendChild(allBtn);
+    allBtn.addEventListener('click', function() { activeTag = null; animeDisplayed = 0; renderAnimeTags(); applyAnimeFilter(); });
+    
+    // Petite boîte horizontale pour aligner "tous" et "reviews"
+    var topRow = document.createElement('div');
+    topRow.style.cssText = 'display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;';
+    topRow.appendChild(allBtn);
+
+    // Bouton Reviews pour Anime
+    var hasReview = animeList.some(function(a) { return a.review; });
+    if (hasReview) {
+      var reviewBtn = document.createElement('button');
+      reviewBtn.className = 'anime-tag-btn' + (showOnlyReviewsAnime ? ' active' : '');
+      reviewBtn.textContent = 'reviews';
+      reviewBtn.addEventListener('click', function() {
+        showOnlyReviewsAnime = !showOnlyReviewsAnime;
+        this.classList.toggle('active');
+        animeDisplayed = 0;
+        applyAnimeFilter();
+      });
+      topRow.appendChild(reviewBtn); // On l'ajoute à la boîte, pas directement au container
+    }
+    
+    container.appendChild(topRow); // On ajoute la boîte au container
 
   if (_fmtE.length) buildSection(container, 'format', _fmtE);
   if (_quaE.length) buildSection(container, 'qualité', _quaE);
+  if (_colE.length) buildSection(container, 'collection', _colE);
+  var visRest = tagsExpanded ? _rstE.slice(0, TAG_REST_LIMIT) : _rstE;
 
   var visRest = tagsExpanded ? _rstE : _rstE.slice(0, TAG_REST_LIMIT);
   if (visRest.length) buildSection(container, 'autres', visRest);
@@ -1266,6 +1655,7 @@ function applyAnimeFilter() {
   var norm = function(str) { return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); };
 
   animeFiltered = animeList.filter(function(a) {
+    if (showOnlyReviewsAnime && !a.review) return false;
     if (activeTag === 'favorite') {
       if (a.tags.indexOf('favorite') === -1) return false;
       if (query) { var q = norm(query); return norm(a.title).indexOf(q) !== -1; }
@@ -1295,13 +1685,13 @@ function applyAnimeFilter() {
 
   animeFiltered.sort(function(a, b) {
     if (animeSortMode === 'note') {
-      if (a.note === null && b.note === null) return a.title.localeCompare(b.title);
+      if (a.note === null && b.note === null) return (a.title.localeCompare(b.title)) * animeSortDir;
       if (a.note === null) return 1;
       if (b.note === null) return -1;
-      if (a.note !== b.note) return b.note - a.note;
+      if (a.note !== b.note) return (b.note - a.note) * animeSortDir; // Le * animeSortDir fait la magie
       return a.title.localeCompare(b.title);
     } else {
-      return a.title.localeCompare(b.title);
+      return (a.title.localeCompare(b.title)) * animeSortDir; // Le * animeSortDir fait la magie
     }
   });
 
@@ -1309,11 +1699,17 @@ function applyAnimeFilter() {
   animeFiltered.forEach(function(a) { displayedIds[a.id] = true; });
   imageQueue = imageQueue.filter(function(id) { return displayedIds[id]; });
 
-  document.getElementById('anime-counter').textContent = activeTag
-    ? animeFiltered.length + ' / ' + animeList.length + ' animes'
-    : query
-      ? animeFiltered.length + " anime" + (animeFiltered.length !== 1 ? "s" : "") + " trouvé" + (animeFiltered.length !== 1 ? "s" : "")
-      : animeList.length + " anime" + (animeList.length !== 1 ? "s" : "") + " terminé" + (animeList.length !== 1 ? "s" : "");
+  var counterText = '';
+  if (showOnlyReviewsAnime) {
+    counterText = animeFiltered.length + " review" + (animeFiltered.length !== 1 ? "s" : "");
+  } else if (activeTag) {
+    counterText = animeFiltered.length + ' / ' + animeList.length + ' animes';
+  } else if (query) {
+    counterText = animeFiltered.length + " anime" + (animeFiltered.length !== 1 ? "s" : "") + " trouvé" + (animeFiltered.length !== 1 ? "s" : "");
+  } else {
+    counterText = animeList.length + " anime" + (animeList.length !== 1 ? "s" : "") + " terminé" + (animeList.length !== 1 ? "s" : "");
+  }
+  document.getElementById('anime-counter').textContent = counterText;
   animeDisplayed = 0;
   document.getElementById('animeContent').innerHTML = '';
 
@@ -1350,8 +1746,8 @@ function renderAnimeBatch() {
     if (hasRw || hasAr || hasBo) {
       badges = '<div class="anime-badges">';
       if (hasRw) badges += '<span class="anime-badge" title="re-watched"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></span>';
-      if (hasAr) badges += '<span class="anime-badge" title="archived"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-9 9H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a9 9 0 0 1 9 9z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="9" x2="13" y2="9"/><line x1="9" y1="17" x2="15" y2="17"/></svg></span>';
-      if (hasBo) badges += '<span class="anime-badge" title="bought"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>';
+      if (hasAr) badges += '<span class="anime-badge" title="archived"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-9 9H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a9 9 0 0 1 9 9z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="9" x2="13" y2="9"/><line x1="9" y1="17" x2="15" y2="17"/></svg></span>';
+      if (hasBo) badges += '<span class="anime-badge" title="bought"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>';
       badges += '</div>';
     }
 
@@ -1425,14 +1821,22 @@ function renderTopList(container, items, type) {
 }
 
 // ── MANGA ──
-var MANGA_TAG_BLACKLIST = ['*', 'archived', 're-read', 'bought', 'watched', 'plan to read', 'dropped', 'on hold', 'reading', 'rank', 'completed', ''];
+var MANGA_TAG_BLACKLIST = ['*', 're-read', 'watched', 'plan to read', 'dropped', 'on hold', 'reading', 'rank', 'completed', ''];
 var MANGA_FILTER_TAGS = ['one-shot', 'hentai', 'favorite', 'gem'];
+var MANGA_COLLECTION_TAGS = ['bought', 'archived'];
 var mangaActiveFilter = null;
-var mangaSortMode = 'alpha';
+var mangaSortMode = 'auteur';
+var mangaSortDir = 1;
 var mangaImageCache = new Map();
 var mangaImageQueue = [];
 var mangaImageLoading = false;
 var mangaCacheDirty = false;
+let biblioSortMode = 'auteur';
+let biblioSortDir = 1;
+let musiqueSortMode = 'artiste';
+let musiqueSortDir = 1;
+let jeuxSortMode = 'développeur';
+let jeuxSortDir = 1;
 
 function loadMangaImageCache() {
   try { var d = JSON.parse(localStorage.getItem('manga_img_cache')); if (d) Object.entries(d).forEach(function(e) { mangaImageCache.set(parseInt(e[0]), e[1]); }); } catch (e) {}
@@ -1480,6 +1884,40 @@ function generateManga() {
   }
   loadMangaImageCache();
   var total = 0; for (var a in mangaData) total += mangaData[a].length;
+  document.getElementById('manga-counter').textContent = total + " manga lu" + (total !== 1 ? "s" : "");
+
+  var rereads = 0;
+  for (var a in mangaData) {
+mangaData[a].forEach(function(m) {
+    if (m.tags && m.tags.indexOf('re-read') !== -1) {
+        rereads++;
+    }
+});
+  }
+  var pct = total ? (rereads / total * 100).toFixed(1) : 0;
+  var barHtml = '<div class="project-bar"><span class="project-label">projet relecture : ' + rereads + ' / ' + total + ' (' + pct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + pct + '%"></div></div></div>';
+  document.getElementById('manga-project-bar').innerHTML = barHtml;
+
+  var sortContainer = document.getElementById('manga-sort');
+  sortContainer.innerHTML = '<span class="anime-sort-label">tri :</span>';
+  ['auteur', 'note', 'titre'].forEach(function(mode) {
+    var btn = document.createElement('button');
+    var internalMode = mode === 'titre' ? 'alpha' : mode;
+    btn.className = 'anime-sort-btn' + (mangaSortMode === internalMode ? ' active' : '');
+    btn.textContent = mode;
+    btn.addEventListener('click', function() {
+      if (mangaSortMode === internalMode && internalMode !== 'auteur') {
+        mangaSortDir *= -1;
+      } else {
+        mangaSortMode = internalMode;
+        mangaSortDir = 1;
+      }
+      document.querySelectorAll('.anime-sort-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderManga();
+    });
+    sortContainer.appendChild(btn);
+  });
 
   var fC = document.getElementById('manga-filters'); fC.innerHTML = '';
   var allBtn = document.createElement('button');
@@ -1533,27 +1971,33 @@ function generateManga() {
     });
     s2.appendChild(w2); fC.appendChild(s2);
   }
+
+  // Nouvelle section Collection
+  var colArr = MANGA_COLLECTION_TAGS.map(function(t) { return [t, mangaTagCount[t] || 0]; }).filter(function(e) { return e[1] > 0; });
+  if (colArr.length) {
+    var s3 = document.createElement('div'); s3.className = 'anime-tag-section';
+    var l3 = document.createElement('div'); l3.className = 'anime-tag-section-label'; l3.textContent = 'collection'; s3.appendChild(l3);
+    var w3 = document.createElement('div'); w3.className = 'anime-tag-section-tags';
+    colArr.forEach(function(entry) {
+      var tag = entry[0], count = entry[1];
+      var btn = document.createElement('button');
+      btn.className = 'anime-tag-btn'; if (mangaActiveFilter === tag) btn.classList.add('active');
+      btn.textContent = tag + ' (' + count + ')';
+      btn.addEventListener('click', function() { mangaActiveFilter = mangaActiveFilter === tag ? null : tag; renderMangaFilters(); renderManga(); });
+      w3.appendChild(btn);
+    });
+    s3.appendChild(w3); fC.appendChild(s3);
+  }
+
   renderManga();
 }
-
-  var total = 0; for (var a in mangaData) total += mangaData[a].length;
-  document.getElementById('manga-counter').textContent = total + " manga lu" + (total !== 1 ? "s" : "");
-
-  var rereads = 0;
-  for (var a in mangaData) {
-    mangaData[a].forEach(function(m) { if (m.tags.indexOf('re-read') !== -1) rereads++; });
-  }
-  var pct = total ? (rereads / total * 100).toFixed(1) : 0;
-  var barHtml = '<div class="project-bar"><span class="project-label">projet relecture : ' + rereads + ' / ' + total + ' (' + pct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + pct + '%"></div></div></div>';
-  document.getElementById('manga-project-bar').innerHTML = barHtml;
-
-  var fC = document.getElementById('manga-filters'); fC.innerHTML = '';
 
 function renderMangaFilters() {
   document.querySelectorAll('#manga-filters .anime-tag-btn').forEach(function(btn) {
     btn.classList.remove('active');
-    if (btn.textContent === 'tous' && mangaActiveFilter === null) btn.classList.add('active');
-    if (btn.textContent === mangaActiveFilter) btn.classList.add('active');
+    if (btn.textContent.includes('tous') && mangaActiveFilter === null) btn.classList.add('active');
+    // On utilise "includes" au lieu de "===" pour ignorer le chiffre entre parenthèses
+    if (mangaActiveFilter && btn.textContent.includes(mangaActiveFilter)) btn.classList.add('active');
   });
 }
 
@@ -1562,6 +2006,103 @@ function renderManga() {
   var query = document.getElementById('search-manga').value;
   var norm = function(s) { return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); };
   var q = query ? norm(query) : '';
+  
+  var total = 0; for (var a in mangaData) total += mangaData[a].length;
+
+  if (mangaActiveFilter === 'favorite') {
+    var allFav = [];
+    for (var a in mangaData) {
+      mangaData[a].forEach(function(m) {
+        if (m.tags.indexOf('favorite') !== -1) {
+          if (q) { if (norm(m.title).indexOf(q) !== -1) allFav.push(m); }
+          else { allFav.push(m); }
+        }
+      });
+    }
+    if (allFav.length === 0) {
+      container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+      return;
+    }
+    document.getElementById('manga-counter').textContent = allFav.length + ' / ' + total + ' manga';
+    renderTopList(container, allFav, 'manga');
+    return;
+  }
+
+  // --- VUE GLOBALE (Si on clique sur Note ou Titre) ---
+  if (mangaSortMode !== 'auteur') {
+    var allMangas = [];
+    for (var a in mangaData) {
+      mangaData[a].forEach(function(m) { allMangas.push(m); });
+    }
+
+    var filteredGlobal = allMangas.filter(function(m) {
+      if (mangaActiveFilter) {
+        if (mangaActiveFilter === 'hentai') { if (m.tags.indexOf('hentai') === -1) return false; }
+        else if (mangaActiveFilter === 'one-shot') { if (m.tags.indexOf('one-shot') === -1) return false; if (m.tags.indexOf('hentai') !== -1) return false; }
+        else { if (m.tags.indexOf(mangaActiveFilter) === -1) return false; }
+      }
+      if (q) { return norm(m.title).indexOf(q) !== -1; }
+      return true;
+    });
+
+    filteredGlobal.sort(function(a, b) {
+      if (mangaSortMode === 'note') {
+        if (a.note === null && b.note === null) return (a.title.localeCompare(b.title)) * mangaSortDir;
+        if (a.note === null) return 1; if (b.note === null) return -1;
+        return (b.note - a.note) * mangaSortDir;
+      } else {
+        return (a.title.localeCompare(b.title)) * mangaSortDir;
+      }
+    });
+
+    var mangaLabel = q
+      ? filteredGlobal.length + " mangas trouvé" + (filteredGlobal.length !== 1 ? "s" : "")
+      : mangaActiveFilter
+        ? filteredGlobal.length + " / " + total + " mangas"
+        : total + " mangas lu" + (total !== 1 ? "s" : "");
+    document.getElementById('manga-counter').textContent = mangaLabel;
+
+    if (filteredGlobal.length === 0) {
+      container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+      return;
+    }
+
+    var div = document.createElement('div'); div.className = 'books';
+    filteredGlobal.forEach(function(m) {
+      var hue = (m.id * 137) % 360;
+      var stars = m.note !== null ? '<div class="book-meta">' + getStars(m.note) + '</div>' : '';
+      var badges = '';
+      var hasRr = m.tags.indexOf('re-read') !== -1, hasAr = m.tags.indexOf('archived') !== -1, hasBo = m.tags.indexOf('bought') !== -1;
+      if (hasRr || hasAr || hasBo) {
+        badges = '<div class="anime-badges">';
+        if (hasRr) badges += '<span class="anime-badge" title="re-read"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></span>';
+        if (hasAr) badges += '<span class="anime-badge" title="archived"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-9 9H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a9 9 0 0 1 9 9z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="9" x2="13" y2="9"/><line x1="9" y1="17" x2="15" y2="17"/></svg></span>';
+        if (hasBo) badges += '<span class="anime-badge" title="bought"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>';
+        badges += '</div>';
+      }
+
+      var imgBlock;
+      if (mangaImageCache.has(m.id)) {
+                imgBlock = '<img src="' + mangaImageCache.get(m.id) + '" alt="" class="manga-img-render">';
+      } else {
+        imgBlock = '<div class="manga-placeholder anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>';
+        queueMangaImage(m.id);
+      }
+
+      var card = document.createElement('a');
+      card.href = 'https://myanimelist.net/manga/' + m.id; card.target = '_blank';
+      card.className = 'book-card manga-card';
+      if (m.tags.indexOf('hentai') !== -1) card.classList.add('hentai-card');
+      card.setAttribute('data-id', m.id);
+      var reviewHtml = m.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(m.review) + '</span>' : '';
+      card.innerHTML = imgBlock + badges + '<div class="book-title">' + m.title + '</div>'  + stars + reviewHtml;
+      div.appendChild(card);
+    });
+    container.appendChild(div);
+    return; 
+  }
+
+  // --- ANCIEN CODE (Si on est en mode "auteur") ---
   var keys = Object.keys(mangaData);
 
   keys.sort(function(a, b) {
@@ -1572,25 +2113,6 @@ function renderManga() {
     var bA = bN.length ? bN.reduce(function(x, y) { return x + y; }, 0) / bN.length : 0;
     return bA - aA || a.localeCompare(b);
   });
-
-    if (mangaActiveFilter === 'favorite') {
-    var allFav = [];
-    keys.forEach(function(author) {
-      mangaData[author].forEach(function(m) {
-        if (m.tags.indexOf('favorite') !== -1) {
-          if (q) { if (norm(m.title).indexOf(q) !== -1) allFav.push(m); }
-          else { allFav.push(m); }
-        }
-      });
-    });
-    if (allFav.length === 0) {
-      container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
-      return;
-    }
-    document.getElementById('manga-counter').textContent = allFav.length + ' / ' + total + ' manga';
-    renderTopList(container, allFav, 'manga');
-    return;
-  }
 
   var totalFiltered = 0;
   keys.forEach(function(author) {
@@ -1623,10 +2145,12 @@ function renderManga() {
       }
     }
     if (filtered.length === 0) return;
+    
+    // CORRECTION ICI : Suppression du double bloc de tri orphelin
     filtered.sort(function(a, b) {
-      if (a.note === null && b.note === null) return a.title.localeCompare(b.title);
+      if (a.note === null && b.note === null) return (a.title.localeCompare(b.title)) * mangaSortDir;
       if (a.note === null) return 1; if (b.note === null) return -1;
-      return b.note - a.note;
+      return (b.note - a.note) * mangaSortDir;
     });
 
     var h2 = document.createElement('h2');

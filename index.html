@@ -52,6 +52,30 @@
     <div class="page active" id="page-home">
       <div class="home-wrapper">
         <div class="home-dashboard" id="home-dashboard"></div>
+        
+      <button id="toggle-recap-btn" class="home-recap-toggle">bilan 2026</button>
+      
+      <!-- CONTENEUR DU RECAP (Caché par défaut) -->
+      <div class="home-recap" id="home-recap">
+        <div class="home-recap-nav">
+          <button class="calendar-nav-btn" id="recap-prev-year">‹</button>
+          <div class="home-month-title" id="recap-year-title">2026</div>
+          <button class="calendar-nav-btn" id="recap-next-year">›</button>
+        </div>
+        
+        <div class="recap-main">
+          <div class="recap-main-count" id="recap-main-count">0</div>
+          <div class="recap-main-label">œuvres uniques</div>
+          <div class="recap-main-breakdown" id="recap-main-breakdown"></div>
+        </div>
+        
+        <div class="recap-secondary">
+          <div class="recap-secondary-header">+ <span id="recap-secondary-count">0</span> activités secondaires</div>
+          <div class="recap-secondary-breakdown" id="recap-secondary-breakdown"></div>
+          <div class="text-content" id="recap-visual"></div>
+        </div>
+      </div>
+
         <div class="home-calendar-header">
           <button class="calendar-nav-btn" id="btn-prev-month">‹</button>
           <div>
@@ -70,7 +94,10 @@
 
     <!-- BIBLIOGRAPHIE -->
     <div class="page" id="page-bibliographie">
-      <div class="counter" id="biblio-counter"></div>
+<div class="anime-top-controls">
+  <div class="counter" id="biblio-counter"></div>
+  <div class="anime-sort" id="biblio-sort"></div>
+</div>
       <input type="text" id="search-biblio" class="search-bar" placeholder="Rechercher un livre, un auteur...">
       <button class="review-filter-btn" id="filter-reviews-biblio" style="display:none;">reviews</button>
       <div id="bibliographyContent" class="text-content"></div>
@@ -96,14 +123,20 @@
 
     <!-- JEUX VIDÉO -->
     <div class="page" id="page-jeux">
-      <div class="counter" id="jeux-counter"></div>
+<div class="anime-top-controls">
+  <div class="counter" id="jeux-counter"></div>
+  <div class="anime-sort" id="jeux-sort"></div>
+</div>
       <input type="text" id="search-jeux" class="search-bar" placeholder="Rechercher un jeu, un développeur...">
       <div id="jeuxContent" class="text-content"></div>
     </div>
 
     <!-- MUSIQUE -->
     <div class="page" id="page-musique">
-      <div class="counter" id="musique-counter"></div>
+<div class="anime-top-controls">
+  <div class="counter" id="musique-counter"></div>
+  <div class="anime-sort" id="musique-sort"></div>
+</div>
       <input type="text" id="search-musique" class="search-bar" placeholder="Rechercher un album, un artiste...">
       <div class="player-widget" id="player-widget">
         <div class="player-now">
@@ -147,9 +180,10 @@
 
 <!-- MANGA -->
 <div class="page" id="page-manga">
-  <div class="anime-top-controls">
-    <div class="counter" id="manga-counter"></div>
-  </div>
+<div class="anime-top-controls">
+  <div class="counter" id="manga-counter"></div>
+  <div class="anime-sort" id="manga-sort"></div>
+</div>
   <div id="manga-project-bar"></div>
   <input type="text" id="search-manga" class="search-bar" placeholder="Rechercher un manga, un auteur...">
   <div class="manga-filters" id="manga-filters"></div>
