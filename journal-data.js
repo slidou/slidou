@@ -86,7 +86,7 @@ const journalData = [
 { d: "2026-05-09", t: "anime", title: "NaN Game", img: "anime/nangame.jpg", note: "music" },
 { d: "2026-05-10", t: "anime", title: "Kudamonou", img: "anime/kudamonou.jpg", note: "short episode, 3/3" },
 { d: "2026-05-10", t: "anime", title: "Sweet Singapore CMs", img: "anime/sweetsingaporecms.jpg", note: "commercial" },
-{ d: "2026-05-10", t: "anime", title: "Poke Oki", img: "anime/pokeoki.jpg", note: "short, 6/6" },
+{ d: "2026-05-10", t: "anime", title: "Poke Oki", img: "anime/pokeoki.jpg", note: "short" },
 { d: "2026-05-10", t: "anime", title: "Konohakaseki no Natsu", img: "anime/konohakaseki.jpg", note: "short film" },
 { d: "2026-05-10", t: "anime", title: "Kujira wo Yumemu", img: "anime/kujirawoyumeru.jpg", note: "short" },
 { d: "2026-05-10", t: "anime", title: "I Got feat. Woodie Gochild", img: "anime/igotwoodie.jpg", note: "music" },
