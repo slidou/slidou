@@ -1297,9 +1297,8 @@ function renderRecap() {
       } else {
         const n = entry.note.toLowerCase();
         if (n.includes('short film')) secondaryCounts.anime['short film']++;
-        else if (n.includes('short')) secondaryCounts.anime.short++;
-        else if (n.includes('music')) secondaryCounts.anime.music++;
-        else if (n.includes('commercial') || n.includes('cms')) secondaryCounts.anime.commercial++;
+        else if (n.includes('hentai')) secondaryCounts.anime.hentai++; // Ajout des hentai
+        else if (n.includes('short')) secondaryCounts.anime.short
       }
     } else if (mainItems[entry.t]) {
       mainItems[entry.t].set(entry.title, { title: entry.title, img: entry.img, blur: entry.blur || false });
