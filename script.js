@@ -1282,10 +1282,10 @@ function renderRecap() {
   function isMainAnime(note) {
     if (!note) return true;
     const n = note.toLowerCase();
-    // On accepte "épisode" MAIS AUSSI "episode" (sans accent)
     if (n.includes('épisode') || n.includes('episode')) return true;
-    // On accepte les chiffres (ex: "6/12") N'IMPORTE OÙ ils sont dans la phrase
     if (/\d+\/\d+/.test(n)) return true; 
+    if (n.includes('short film')) return true; // Ajouté
+    if (n.includes('hentai')) return true;     // Ajouté
     return false;
   }
 
@@ -1296,9 +1296,9 @@ function renderRecap() {
         mainItems.anime.set(entry.title, { title: entry.title, img: entry.img, blur: entry.blur || false });
       } else {
         const n = entry.note.toLowerCase();
-        if (n.includes('short film')) secondaryCounts.anime['short film']++;
-        else if (n.includes('hentai')) secondaryCounts.anime.hentai++; // Ajout des hentai
-        else if (n.includes('short')) secondaryCounts.anime.short
+        if (n.includes('short')) secondaryCounts.anime.short++;
+        else if (n.includes('music')) secondaryCounts.anime.music++;
+        else if (n.includes('commercial') || n.includes('cms')) secondaryCounts.anime.commercial++;
       }
     } else if (mainItems[entry.t]) {
       mainItems[entry.t].set(entry.title, { title: entry.title, img: entry.img, blur: entry.blur || false });
