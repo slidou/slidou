@@ -1282,8 +1282,10 @@ function renderRecap() {
   function isMainAnime(note) {
     if (!note) return true;
     const n = note.toLowerCase();
-    if (n.includes('épisode')) return true;
-    if (/^\d+\/\d+$/.test(n)) return true;
+    // On accepte "épisode" MAIS AUSSI "episode" (sans accent)
+    if (n.includes('épisode') || n.includes('episode')) return true;
+    // On accepte les chiffres (ex: "6/12") N'IMPORTE OÙ ils sont dans la phrase
+    if (/\d+\/\d+/.test(n)) return true; 
     return false;
   }
 
