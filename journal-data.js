@@ -123,4 +123,6 @@ const journalData = [
 { d: "2026-05-24", t: "anime", title: "Expressions", img: "anime/expressions.jpg", note: "music" },
 { d: "2026-05-24", t: "anime", title: "Nippon Sangoku", img: "anime/nipponsangoku.jpg", note: "8/12", status: "en cours" },
 { d: "2026-05-24", t: "musique", title: "Keitaidenwa", img: "music/keitaidenwa.webp", note: "première écoute, je connaissais déjà Hyperventilation" },
+{ d: "2026-05-24", t: "jeu", title: "Slime Rancher", img: "games/slimerancher.jpg", note: "94 minutes", status: "en cours" },
+{ d: "2026-05-24", t: "anime", title: "Chimimonryou", img: "anime/chimimonryou.jpg", note: "hentai, 1/?", blur: true, status: "en cours" },
 ];
