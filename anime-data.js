@@ -7467,5 +7467,10 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64177, title: "Kin no Ono, Gin no Ono, Emerald no Ono", note: 3.5, tags: ["music","+","archived"] },
   { id: 16149, title: "Kick-Heart", note: 4, tags: ["short film","gem","archived"] },
   { id: 64248, title: "Numb Numb feat. Hatsune Miku, Kasane Teto", note: 4, tags: ["music","gem","archived"] },
+  { id: 64262, title: "Bite (2024)", note: 1.5, tags: ["music","archived"] },
+  { id: 63953, title: "Mofumofu Man", note: null, tags: ["short","archived"] },
+  { id: 64245, title: "Rakuraku Fukuyaku Jelly: Oshaberi na Ningen no Tame ni", note: null, tags: ["short","commercial","archived"] },
+  { id: 64269, title: "Tokyo Night Dreaming feat. No Rome", note: 3, tags: ["music","archived"] },
+  { id: 64265, title: "Expressions", note: null, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
