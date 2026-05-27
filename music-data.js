@@ -50,4 +50,7 @@ const musicData = {
   "RADWIMPS": [
     { title: "Keitaidenwa", note: 3.5, cover: "music/keitaidenwa.webp", link: "https://rateyourmusic.com/release/single/radwimps/%E6%90%BA%E5%B8%AF%E9%9B%BB%E8%A9%B1-keitaidenwa/" },
   ],
+  "Charli XCX": [
+    { title: "Brat", note: 3.5, cover: "music/brat.webp", link: "https://rateyourmusic.com/release/album/charli-xcx/brat/" },
+  ],
 };
