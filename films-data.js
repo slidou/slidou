@@ -299,4 +299,7 @@ const filmsData = {
   "Phil Tippett": [
     { title: "Mad God", note: 4, cover: "films/madgod.webp", link: "https://www.senscritique.com/film/mad_god/45240949", tags: ["coup de coeur"] },
   ],
+  "Kiyoshi Kurosawa": [
+    { title: "Cure", note: 3, cover: "films/cure.jpg", link: "https://www.senscritique.com/film/cure/496968" },
+  ],
 };

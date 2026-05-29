@@ -129,4 +129,6 @@ const journalData = [
 { d: "2026-05-27", t: "musique", title: "Brat", img: "music/brat.webp", note: "première écoute, je sors de ma zone de confort et c'est vraiment pas mal" },
 { d: "2026-05-27", t: "anime", title: "Airman ga Taosenai Team.Nekokan [Neko] Premium Version", img: "anime/airmangataosenai.jpg", note: "commercial" },
 { d: "2026-05-27", t: "jeu", title: "Slime Rancher", img: "games/slimerancher.jpg", note: "27 minutes", status: "en cours" },
+{ d: "2026-05-27", t: "anime", title: "Vinland Saga", img: "anime/vinlandsaga.jpg", note: "normal episode, 5/24", status: "en cours" },
+{ d: "2026-05-28", t: "film", title: "Cure", img: "films/cure.jpg", note: "pas convaincu" },
 ];
