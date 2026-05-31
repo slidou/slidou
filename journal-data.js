@@ -132,7 +132,7 @@ const journalData = [
 { d: "2026-05-27", t: "anime", title: "Vinland Saga", img: "anime/vinlandsaga.jpg", note: "normal episode, 5/24", status: "en cours" },
 { d: "2026-05-28", t: "film", title: "Cure", img: "films/cure.jpg", note: "pas convaincu" },
 { d: "2026-05-29", t: "livre", title: "Morphine", img: "covers/morphine.jpg", note: "lu dans le train vers Paris" },
-{ d: "2026-05-30", t: "livre", title: "Le Nez", img: "covers/lenez.jpg", note: "lu également dans le train vers Paris" },
+{ d: "2026-05-30", t: "livre", title: "Le Nez", img: "covers/lenez.jpg", note: "lu dans le train vers Nice" },
 { d: "2026-05-31", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1184/?", status: "en cours" },
 { d: "2026-06-01", t: "musique", title: "Heroes & Villains", img: "music/heroesvillains.webp", note: "réécoute, un album toujours aussi exceptionnel" },
 ];
