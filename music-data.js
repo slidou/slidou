@@ -53,4 +53,7 @@ const musicData = {
   "Charli XCX": [
     { title: "Brat", note: 3.5, cover: "music/brat.webp", link: "https://rateyourmusic.com/release/album/charli-xcx/brat/" },
   ],
+  "Metro Boomin": [
+    { title: "Heroes & Villains", note: 4.5, cover: "music/heroesvillains.webp", link: "https://rateyourmusic.com/release/album/metro-boomin/heroes-and-villains/" },
+  ],
 };

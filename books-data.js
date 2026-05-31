@@ -466,6 +466,12 @@ Et je dois bien l’avouer, ça fait très bizarre de lire un roman aussi incisi
   "Giovanni Boccaccio": [
     { title: "Mrs Rosie and the Priest", note: 1, cover: "covers/mrs-rosie-priest.jpg", link: "https://www.goodreads.com/book/show/24874328-mrs-rosie-and-the-priest" }
   ],
+  "Mikhaïl Boulgakov": [
+    { title: "Morphine", note: 3, cover: "covers/morphine.jpg", link: "https://www.goodreads.com/book/show/125084812-morphine" }
+  ],
+  "Nikolai Gogol": [
+    { title: "Le Nez", note: 4, cover: "covers/lenez.jpg", link: "https://www.goodreads.com/book/show/24311743-le-nez" }
+  ],
   "Christine Kelly": [
     { title: "Libertés sans expression", note: 1, cover: "covers/libertesansexpression.jpg", link: "https://www.goodreads.com/book/show/61741943-libert-s-sans-expression" }
   ]
