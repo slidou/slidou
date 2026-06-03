@@ -136,4 +136,5 @@ const journalData = [
 { d: "2026-05-31", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1184/?", status: "en cours" },
 { d: "2026-06-01", t: "musique", title: "Heroes & Villains", img: "music/heroesvillains.webp", note: "réécoute, un album toujours aussi exceptionnel" },
 { d: "2026-06-03", t: "musique", title: "Disco Inferno", img: "music/discoinferno.webp", note: "première écoute, bon petit délire, bonne vibe" },
+{ d: "2026-06-03", t: "musique", title: "PUBLIC ENEMY", img: "music/publicenemy.jpg", note: "première écoute, ça s'écoute sans plus" },
 ];
