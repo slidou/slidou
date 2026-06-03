@@ -56,4 +56,7 @@ const musicData = {
   "Metro Boomin": [
     { title: "Heroes & Villains", note: 4.5, cover: "music/heroesvillains.webp", link: "https://rateyourmusic.com/release/album/metro-boomin/heroes-and-villains/" },
   ],
+  "LinLin": [
+    { title: "Disco Inferno", note: 3, cover: "music/discoinferno.webp", link: "https://rateyourmusic.com/release/album/linlin/disco-inferno/" },
+  ],
 };
