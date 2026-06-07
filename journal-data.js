@@ -141,4 +141,7 @@ const journalData = [
 { d: "2026-06-04", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "normal episode, 10/12", status: "en cours" },
 { d: "2026-06-04", t: "jeu", title: "Minecraft", img: "games/minecraft.jpg", note: "1h30 à peu près sur un serveur mmorpg", status: "en cours" },
 { d: "2026-06-05", t: "anime", title: "Vinland Saga", img: "anime/vinlandsaga.jpg", note: "normal episode, 6-7/24", status: "en cours" },
+{ d: "2026-06-06", t: "anime", title: "Vinland Saga", img: "anime/vinlandsaga.jpg", note: "normal episode, 8-9/24", status: "en cours" },
+{ d: "2026-06-06", t: "jeu", title: "Minecraft", img: "games/minecraft.jpg", note: "3h sur un serveur mmorpg", status: "en cours" },
+{ d: "2026-06-07", t: "anime", title: "Vinland Saga", img: "anime/vinlandsaga.jpg", note: "normal episode, 10-13/24", status: "en cours" },
 ];
