@@ -7474,5 +7474,6 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64265, title: "Expressions", note: null, tags: ["music","archived"] },
   { id: 64279, title: "Airman ga Taosenai Team.Nekokan [Neko] Premium Version", note: null, tags: ["short","commercial","archived"] },
   { id: 37521, title: "Vinland Saga", note: 4, tags: ["normal episode","archived"] },
+  { id: 64306, title: "Shinkirou", note: 3, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

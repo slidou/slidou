@@ -147,4 +147,7 @@ const journalData = [
 { d: "2026-06-07", t: "jeu", title: "Minecraft", img: "games/minecraft.jpg", note: "2h22 sur un serveur mmorpg", status: "en cours" },
 { d: "2026-06-08", t: "anime", title: "Vinland Saga", img: "anime/vinlandsaga.jpg", note: "normal episode, 17-19/24", status: "en cours" },
 { d: "2026-06-09", t: "anime", title: "Vinland Saga", img: "anime/vinlandsaga.jpg", note: "normal episode, 20-24/24" },
+{ d: "2026-06-11", t: "anime", title: "Nippon Sangoku", img: "anime/nipponsangoku.jpg", note: "normal episode, 10/12", status: "en cours" },
+{ d: "2026-06-12", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1185/?", status: "en cours" },
+{ d: "2026-06-12", t: "anime", title: "Shinkirou", img: "anime/shinkirou.jpg", note: "music" },
 ];
