@@ -159,5 +159,5 @@ const journalData = [
 { d: "2026-06-13", t: "anime", title: "No Thank Cute!", img: "anime/nothankcute.jpg", note: "music" },
 { d: "2026-06-13", t: "anime", title: "Vision Megane CMs", img: "anime/visionmegane.jpg", note: "commercial" },
 { d: "2026-06-13", t: "anime", title: "Mebae feat. Phoka", img: "anime/mebae.jpg", note: "music" },
-{ d: "2026-06-07", t: "jeu", title: "Minecraft", img: "games/minecraft.jpg", note: "2h18 sur un serveur mmorpg", status: "en cours" },
+{ d: "2026-06-13", t: "jeu", title: "Minecraft", img: "games/minecraft.jpg", note: "2h18 sur un serveur mmorpg", status: "en cours" },
 ];
