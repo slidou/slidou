@@ -20,6 +20,7 @@ const musicData = {
   ],
   "potsu": [
     { title: "Just Friends", note: 5, cover: "music/justfriends.webp", link: "https://rateyourmusic.com/release/album/potsu/just-friends/" },
+    { title: "Ivy League", note: 4.5, cover: "music/ivyleague.webp", link: "https://rateyourmusic.com/release/album/potsu/ivy-league/" },
   ],
   "Kekra": [
     { title: "Kekra", note: 4, cover: "music/kekra.webp", link: "https://rateyourmusic.com/release/album/kekra/kekra/" },

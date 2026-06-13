@@ -7475,5 +7475,12 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64279, title: "Airman ga Taosenai Team.Nekokan [Neko] Premium Version", note: null, tags: ["short","commercial","archived"] },
   { id: 37521, title: "Vinland Saga", note: 4, tags: ["normal episode","archived"] },
   { id: 64306, title: "Shinkirou", note: 3, tags: ["music","archived"] },
+  { id: 64376, title: "Bunch 25-shuunen Kinen Special PV: Gokushufudou", note: null, tags: ["short","+","archived"] },
+  { id: 63887, title: "Akane", note: 3.5, tags: ["music","+","gem","archived"] },
+  { id: 64281, title: "Torimodosou, Ichiban Taisetsu na Mono wo: GIST Project", note: null, tags: ["short","commercial","archived"] },
+  { id: 64345, title: "Cin Sai Syu", note: 2.5, tags: ["music","archived"] },
+  { id: 64223, title: "No Thank Cute!", note: 3, tags: ["music","archived"] },
+  { id: 64389, title: "Vision Megane CMs", note: null, tags: ["short","commercial","archived"] },
+  { id: 64390, title: "Mebae feat. Phoka", note: 2.5, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
