@@ -160,4 +160,5 @@ const journalData = [
 { d: "2026-06-13", t: "anime", title: "Vision Megane CMs", img: "anime/visionmegane.jpg", note: "commercial" },
 { d: "2026-06-13", t: "anime", title: "Mebae feat. Phoka", img: "anime/mebae.jpg", note: "music" },
 { d: "2026-06-13", t: "jeu", title: "Minecraft", img: "games/minecraft.jpg", note: "2h18 sur un serveur mmorpg", status: "en cours" },
+{ d: "2026-06-14", t: "jeu", title: "Fears to Fathom: Scratch Creek", img: "games/fearstofathom.jpg", note: "jeu terminé en 2,7 heures, en une session, pas convaincu" },
 ];

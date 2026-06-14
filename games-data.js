@@ -139,4 +139,7 @@ const gamesData = {
   "SKH Apps": [
     { title: "Pacify", note: null, cover: "games/pacify.jpg", link: "https://backloggd.com/games/pacify/" },
   ],
+  "Rayll Studios": [
+    { title: "Fears to Fathom: Scratch Creek", note: 2, cover: "games/fearstofathom.jpg", link: "https://backloggd.com/games/fears-to-fathom-scratch-creek/" },
+  ],
 };
