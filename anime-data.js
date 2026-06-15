@@ -7482,5 +7482,6 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64223, title: "No Thank Cute!", note: 3, tags: ["music","archived"] },
   { id: 64389, title: "Vision Megane CMs", note: null, tags: ["short","commercial","archived"] },
   { id: 64390, title: "Mebae feat. Phoka", note: 2.5, tags: ["music","archived"] },
+  { id: 60784, title: "Yuugao", note: 3.5, tags: ["hentai","normal episode"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
