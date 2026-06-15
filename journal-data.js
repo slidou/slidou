@@ -161,4 +161,6 @@ const journalData = [
 { d: "2026-06-13", t: "anime", title: "Mebae feat. Phoka", img: "anime/mebae.jpg", note: "music" },
 { d: "2026-06-13", t: "jeu", title: "Minecraft", img: "games/minecraft.jpg", note: "2h18 sur un serveur mmorpg", status: "en cours" },
 { d: "2026-06-14", t: "jeu", title: "Fears to Fathom: Scratch Creek", img: "games/fearstofathom.jpg", note: "jeu terminé en 2,7 heures, en une session, pas convaincu" },
+{ d: "2026-06-15", t: "anime", title: "Heart Mark Oome", img: "anime/heartmarkoome.jpg", note: "hentai, 2/?", blur: true, status: "en cours" },
+{ d: "2026-06-16", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "normal episode, 12/13", status: "en cours" },
 ];
