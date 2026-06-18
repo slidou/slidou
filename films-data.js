@@ -302,4 +302,7 @@ const filmsData = {
   "Kiyoshi Kurosawa": [
     { title: "Cure", note: 3, cover: "films/cure.jpg", link: "https://www.senscritique.com/film/cure/496968" },
   ],
+  "Kane Parsons (Kane Pixels)": [
+    { title: "Backrooms", note: 3, cover: "films/backrooms.webp", link: "https://www.senscritique.com/film/backrooms/54875220" },
+  ],
 };

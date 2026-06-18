@@ -173,4 +173,6 @@ const journalData = [
 { d: "2026-06-17", t: "anime", title: "Muu", img: "anime/muu.jpg", note: "music" },
 { d: "2026-06-17", t: "anime", title: "Tarepanda (ONA)", img: "anime/tarepanda.jpg", note: "short" },
 { d: "2026-06-17", t: "anime", title: "Chocopa", img: "anime/chocopa.jpg", note: "short" },
+{ d: "2026-06-17", t: "jeu", title: "Minecraft", img: "games/minecraft.jpg", note: "3h07 sur un serveur mmorpg", status: "en cours" },
+{ d: "2026-06-18", t: "film", title: "Backrooms", img: "films/backrooms.webp", note: "je l'ai regardé au cinéma, un peu déçu pour être honnête" },
 ];
