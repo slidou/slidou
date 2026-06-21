@@ -817,6 +817,9 @@ const mangaData = {
   "Shouhei": [
     { id: 108864, title: "Zenryaku, Love Hotel yori", note: null, tags: ["one-shot"] },
   ],
+  "Kuromoto-kun": [
+    { id: 194184, title: "Shouwaru Gal Shitsukerareru", note: 4, tags: ["hentai","archived"] },
+  ],
   "23": [
     { id: 38859, title: "Shigatsu Tsuitachi", note: null, tags: ["one-shot","hentai"] },
     { id: 38857, title: "Summer Vacation", note: 4.5, tags: ["one-shot","hentai"] },

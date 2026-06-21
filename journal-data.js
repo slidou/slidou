@@ -175,4 +175,10 @@ const journalData = [
 { d: "2026-06-17", t: "anime", title: "Chocopa", img: "anime/chocopa.jpg", note: "short" },
 { d: "2026-06-17", t: "jeu", title: "Minecraft", img: "games/minecraft.jpg", note: "3h07 sur un serveur mmorpg", status: "en cours" },
 { d: "2026-06-18", t: "film", title: "Backrooms", img: "films/backrooms.webp", note: "je l'ai regardé au cinéma, un peu déçu pour être honnête" },
+{ d: "2026-06-19", t: "anime", title: "Reika wa Karei na Boku no Joou The Animation", img: "anime/reika.jpg", note: "hentai, 1/?", blur: true, status: "en cours" },
+{ d: "2026-06-20", t: "anime", title: "Play", img: "anime/play.jpg", note: "music" },
+{ d: "2026-06-21", t: "anime", title: "Kamisama Hajimemashita (Music)", img: "anime/kamisama.jpg", note: "music" },
+{ d: "2026-06-21", t: "anime", title: "Himitsu Doushi", img: "anime/himitsudoushi.jpg", note: "short" },
+{ d: "2026-06-21", t: "anime", title: "MAPPA 15th Anniversary Movie: Seikatsu", img: "anime/mappa15.jpg", note: "short" },
+{ d: "2026-06-21", t: "manga", title: "Shouwaru Gal Shitsukerareru", img: "manga/shouwarugal.jpg", note: "hentai, 1/1", blur: true },
 ];
