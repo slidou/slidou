@@ -63,4 +63,7 @@ const musicData = {
   "Hamza": [
     { title: "PUBLIC ENEMY", note: 2.5, cover: "music/publicenemy.jpg", link: "https://rateyourmusic.com/release/ep/hamza/public-enemy/" },
   ],
+  "Josman": [
+    { title: "HHHH²", note: 2.5, cover: "music/hhhh².jpg", link: "." },
+  ],
 };
