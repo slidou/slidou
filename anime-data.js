@@ -7499,5 +7499,6 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64429, title: "MAPPA 15th Anniversary Movie: Seikatsu", note: null, tags: ["short","archived"] },
   { id: 63375, title: "Nippon Sangoku", note: 4, tags: ["normal episode","gem","archived"] },
   { id: 64440, title: "The Whole Blue World", note: 3, tags: ["music","+","archived"] },
+  { id: 51553, title: "Tongari Boushi no Atelier", note: 4, tags: ["normal episode","gem","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

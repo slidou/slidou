@@ -184,4 +184,5 @@ const journalData = [
 { d: "2026-06-21", t: "anime", title: "Nippon Sangoku", img: "anime/nipponsangoku.jpg", note: "normal episode, 11-12/12, c'était vraiment bien" },
 { d: "2026-06-21", t: "musique", title: "HHHH²", img: "music/hhhh².jpg", note: "première écoute de ce projet surprise, pas nul mais pas exceptionnel non plus, j'ai connu mieux d'un Josman lover" },
 { d: "2026-06-22", t: "anime", title: "The Whole Blue World", img: "anime/wholeblue.jpg", note: "music" },
+{ d: "2026-06-24", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "normal episode, 13/13" },
 ];
