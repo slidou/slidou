@@ -185,4 +185,6 @@ const journalData = [
 { d: "2026-06-21", t: "musique", title: "HHHH²", img: "music/hhhh².jpg", note: "première écoute de ce projet surprise, pas nul mais pas exceptionnel non plus, j'ai connu mieux d'un Josman lover" },
 { d: "2026-06-22", t: "anime", title: "The Whole Blue World", img: "anime/wholeblue.jpg", note: "music" },
 { d: "2026-06-24", t: "anime", title: "Tongari Boushi no Atelier", img: "anime/tongari.jpg", note: "normal episode, 13/13" },
+{ d: "2026-06-24", t: "anime", title: "Vinland Saga Season 2", img: "anime/vinlandsaga2.jpg", note: "normal episode, 2/24", status: "en cours" },
+{ d: "2026-06-25", t: "jeu", title: "Minecraft", img: "games/minecraft.jpg", note: "48 minutes sur un serveur mmorpg", status: "en cours" },
 ];
