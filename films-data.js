@@ -106,6 +106,10 @@ const filmsData = {
   ],
   "Georges Schwizgebel": [
     { title: "Fugue", note: 4.5, cover: "films/fugue.jpg", link: "https://www.senscritique.com/film/fugue/456566" },
+    { title: "D'une peinture... à l'autre", note: 2.5, cover: "films/peinturealautre.webp", link: "https://www.senscritique.com/film/d_une_peinture_a_l_autre/56276766" },
+    { title: "Zig Zag", note: null, cover: "films/zigzag.jpg", link: "https://www.senscritique.com/film/zig_zag/112427302" },
+    { title: "Le Vol d'Icare", note: 3, cover: "films/levoldicare.webp", link: "https://www.senscritique.com/film/le_vol_d_icare/444558" },
+    { title: "Hors-jeu", note: 3.5, cover: "films/horsjeu.webp", link: "https://www.senscritique.com/film/hors_jeu/471721" },
   ],
   "Alain Guiraudie": [
     { title: "Ce vieux rêve qui bouge", note: 4.5, cover: "films/cevieuxreve.jpg", link: "https://www.senscritique.com/film/ce_vieux_reve_qui_bouge/1333244", tags: ["coup de coeur"] },
@@ -298,11 +302,13 @@ const filmsData = {
   ],
   "Phil Tippett": [
     { title: "Mad God", note: 4, cover: "films/madgod.webp", link: "https://www.senscritique.com/film/mad_god/45240949", tags: ["coup de coeur"] },
+    { title: "Prehistoric Beast", note: 3.5, cover: "films/prehistoricbeast.webp", link: "https://www.senscritique.com/film/prehistoric_beast/459836" },
+    { title: "MutantLand", note: 3, cover: "films/mutantland.webp", link: "https://www.senscritique.com/film/mutantland/494474" },
   ],
   "Kiyoshi Kurosawa": [
     { title: "Cure", note: 3, cover: "films/cure.jpg", link: "https://www.senscritique.com/film/cure/496968" },
   ],
   "Kane Parsons (Kane Pixels)": [
-    { title: "Backrooms", note: 3, cover: "films/backrooms.webp", link: "https://www.senscritique.com/film/backrooms/54875220" },
+    { title: "Backrooms", note: 3, cover: "films/backrooms.jpg", link: "https://www.senscritique.com/film/backrooms/54875220" },
   ],
 };
