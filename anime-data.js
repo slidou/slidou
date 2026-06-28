@@ -7500,5 +7500,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 63375, title: "Nippon Sangoku", note: 4, tags: ["normal episode","gem","archived"] },
   { id: 64440, title: "The Whole Blue World", note: 3, tags: ["music","+","archived"] },
   { id: 51553, title: "Tongari Boushi no Atelier", note: 4, tags: ["normal episode","gem","archived"] },
+  { id: 50597, title: "Massara", note: 3.5, tags: ["short","gem","archived"] },
+  { id: 64477, title: "Abyss in the World", note: 3.5, tags: ["music","archived"] },
+  { id: 64491, title: "Kishi Kaisen", note: 3.5, tags: ["music","+","archived"] },
+  { id: 64469, title: "Roman Jet Charisma", note: 2.5, tags: ["music","+","archived"] },
+  { id: 64488, title: "Poltergeist", note: 3, tags: ["music","archived"] },
+  { id: 64490, title: "Sakujitsu", note: 3, tags: ["music","+","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
