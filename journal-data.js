@@ -193,4 +193,8 @@ const journalData = [
 { d: "2026-06-27", t: "film", title: "Zig Zag", img: "films/zigzag.jpg", note: "court-métrage de Georges Schwizgebel" },
 { d: "2026-06-27", t: "film", title: "Le Vol d'Icare", img: "films/levoldicare.webp", note: "court-métrage de Georges Schwizgebel" },
 { d: "2026-06-27", t: "film", title: "Hors-jeu", img: "films/horsjeu.webp", note: "court-métrage de Georges Schwizgebel" },
+{ d: "2026-06-27", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1186/?", status: "en cours" },
+{ d: "2026-06-27", t: "anime", title: "Vinland Saga Season 2", img: "anime/vinlandsaga2.jpg", note: "normal episode, 4/24", status: "en cours" },
+{ d: "2026-06-27", t: "jeu", title: "Minecraft", img: "games/minecraft.jpg", note: "3h20 sur un serveur mmorpg, je suis passé niveau 40", status: "en cours" },
+{ d: "2026-06-28", t: "jeu", title: "Minecraft", img: "games/minecraft.jpg", note: "2h11 sur un serveur mmorpg", status: "en cours" },
 ];
