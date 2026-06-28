@@ -240,6 +240,7 @@ const quotes = [
   { text: "Notre être tout entier n'est qu'une lutte contre les forces obscures qui sont en nous. Vivre c'est faire la guerre dans notre coeur et notre âme. Écrire, c'est de juger soi-meme.", author: "Henrik Ibsen" },
   { text: "La plupart des gens préfèrent s'accrocher à des idées et des principes. Ils ont secrètement peur de l'incertain et de l'inconnu. Ils remplacent la curiosité par la conviction.", author: "Robert Greene" },
   { text: "C'est un garçon sans importance collective, c'est tout juste un individu. - La Nausée", author: "Jean-Paul Sartre" },
+  { text: "L'absurde naît de cette confrontation entre l'appel humain et le silence déraisonnable du monde.", author: "Albert Camus" },
   { text: "La justice sans la force est impuissante, la force sans la justice est tyrannique.", author: "Blaise Pascal" }
 ];
 
