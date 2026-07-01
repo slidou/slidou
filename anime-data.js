@@ -7506,5 +7506,9 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64469, title: "Roman Jet Charisma", note: 2.5, tags: ["music","+","archived"] },
   { id: 64488, title: "Poltergeist", note: 3, tags: ["music","archived"] },
   { id: 64490, title: "Sakujitsu", note: 3, tags: ["music","+","archived"] },
+  { id: 64506, title: "Homie's Tie!!", note: 3, tags: ["music","+","archived"] },
+  { id: 64511, title: "Turn Around For Me", note: 2, tags: ["music","archived"] },
+  { id: 64512, title: "Imamura Shoken CMs", note: null, tags: ["short","commercial","archived"] },
+  { id: 64513, title: "Gentle Teaching", note: 2, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

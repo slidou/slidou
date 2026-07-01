@@ -110,6 +110,7 @@ const filmsData = {
     { title: "Zig Zag", note: null, cover: "films/zigzag.jpg", link: "https://www.senscritique.com/film/zig_zag/112427302" },
     { title: "Le Vol d'Icare", note: 3, cover: "films/levoldicare.webp", link: "https://www.senscritique.com/film/le_vol_d_icare/444558" },
     { title: "Hors-jeu", note: 3.5, cover: "films/horsjeu.webp", link: "https://www.senscritique.com/film/hors_jeu/471721" },
+    { title: "Le Ravissement de Frank N. Stein", note: 3.5, cover: "films/ravissementfrank.jpg", link: "https://www.senscritique.com/film/le_ravissement_de_frank_n_stein/441831" },
   ],
   "Alain Guiraudie": [
     { title: "Ce vieux rêve qui bouge", note: 4.5, cover: "films/cevieuxreve.jpg", link: "https://www.senscritique.com/film/ce_vieux_reve_qui_bouge/1333244", tags: ["coup de coeur"] },

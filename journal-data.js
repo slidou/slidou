@@ -204,4 +204,9 @@ const journalData = [
 { d: "2026-06-28", t: "anime", title: "Poltergeist", img: "anime/poltergeist.jpg", note: "music" },
 { d: "2026-06-28", t: "anime", title: "Sakujitsu", img: "anime/sakujitsu.jpg", note: "music" },
 { d: "2026-06-28", t: "anime", title: "Vinland Saga Season 2", img: "anime/vinlandsaga2.jpg", note: "normal episode, 5-6/24", status: "en cours" },
+{ d: "2026-07-01", t: "anime", title: "Homie's Tie!!", img: "anime/homiestie.jpg", note: "music" },
+{ d: "2026-07-01", t: "anime", title: "Turn Around For Me", img: "anime/turnaroundforme.jpg", note: "music" },
+{ d: "2026-07-01", t: "anime", title: "Imamura Shoken CMs", img: "anime/imamura.jpg", note: "commercial" },
+{ d: "2026-07-01", t: "anime", title: "Gentle Teaching", img: "anime/gentleteaching.jpg", note: "music" },
+{ d: "2026-07-01", t: "film", title: "Le Ravissement de Frank N. Stein", img: "films/ravissementfrank.jpg", note: "court-métrage de Georges Schwizgebel" },
 ];
