@@ -209,4 +209,6 @@ const journalData = [
 { d: "2026-07-01", t: "anime", title: "Imamura Shoken CMs", img: "anime/imamura.jpg", note: "commercial" },
 { d: "2026-07-01", t: "anime", title: "Gentle Teaching", img: "anime/gentleteaching.jpg", note: "music" },
 { d: "2026-07-01", t: "film", title: "Le Ravissement de Frank N. Stein", img: "films/ravissementfrank.jpg", note: "court-métrage de Georges Schwizgebel" },
+{ d: "2026-07-02", t: "anime", title: "FBKingdom Story", img: "anime/fbkingdom.jpg", note: "short" },
+{ d: "2026-07-02", t: "musique", title: "The Divine Feminine", img: "music/divinefeminine.webp", note: "première écoute même si je connaissais déjà quelques sons, vraiment pas mal, album très sensuel, il porte bien son titre" },
 ];

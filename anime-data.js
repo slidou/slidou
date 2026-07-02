@@ -7510,5 +7510,6 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64511, title: "Turn Around For Me", note: 2, tags: ["music","archived"] },
   { id: 64512, title: "Imamura Shoken CMs", note: null, tags: ["short","commercial","archived"] },
   { id: 64513, title: "Gentle Teaching", note: 2, tags: ["music","archived"] },
+  { id: 64522, title: "FBKingdom Story", note: null, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
