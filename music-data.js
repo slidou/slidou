@@ -67,4 +67,7 @@ const musicData = {
   "Josman": [
     { title: "HHHH²", note: 2.5, cover: "music/hhhh².jpg", link: "." },
   ],
+  "Krisy": [
+    { title: "Edward Risky", note: 3.5, cover: "music/edwardrisky.jpg", link: "https://rateyourmusic.com/release/album/krisy/edward-risky/" },
+  ],
 };

@@ -211,4 +211,8 @@ const journalData = [
 { d: "2026-07-01", t: "film", title: "Le Ravissement de Frank N. Stein", img: "films/ravissementfrank.jpg", note: "court-métrage de Georges Schwizgebel" },
 { d: "2026-07-02", t: "anime", title: "FBKingdom Story", img: "anime/fbkingdom.jpg", note: "short" },
 { d: "2026-07-02", t: "musique", title: "The Divine Feminine", img: "music/divinefeminine.webp", note: "première écoute même si je connaissais déjà quelques sons, vraiment pas mal, album très sensuel, il porte bien son titre" },
+{ d: "2026-07-03", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1187/?", status: "en cours" },
+{ d: "2026-07-03", t: "jeu", title: "nophenia", img: "games/nophenia.jpg", note: "fini en 3,1h réparties dans une journée, j'ai adoré" },
+{ d: "2026-07-04", t: "anime", title: "Bimo Xinglu", img: "anime/bimoxinglu.jpg", note: "short" },
+{ d: "2026-07-04", t: "musique", title: "Edward Risky", img: "music/edwardrisky.jpg", note: "première écoute, le retour de Krisy après 3ans" },
 ];
