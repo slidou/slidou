@@ -214,5 +214,5 @@ const journalData = [
 { d: "2026-07-03", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1187/?", status: "en cours" },
 { d: "2026-07-03", t: "jeu", title: "nophenia", img: "games/nophenia.jpg", note: "fini en 3,1h réparties dans une journée, j'ai adoré" },
 { d: "2026-07-04", t: "anime", title: "Bimo Xinglu", img: "anime/bimoxinglu.jpg", note: "short" },
-{ d: "2026-07-04", t: "musique", title: "Edward Risky", img: "music/edwardrisky.jpg", note: "première écoute, le retour de Krisy après 3ans" },
+{ d: "2026-07-04", t: "musique", title: "Edward Risky", img: "music/edwardrisky.jpg", note: "première écoute, le retour de Krisy après 3ans sans album" },
 ];
