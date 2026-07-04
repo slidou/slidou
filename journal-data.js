@@ -215,4 +215,7 @@ const journalData = [
 { d: "2026-07-03", t: "jeu", title: "nophenia", img: "games/nophenia.jpg", note: "fini en 3,1h réparties dans une journée, j'ai adoré" },
 { d: "2026-07-04", t: "anime", title: "Bimo Xinglu", img: "anime/bimoxinglu.jpg", note: "short" },
 { d: "2026-07-04", t: "musique", title: "Edward Risky", img: "music/edwardrisky.jpg", note: "première écoute, le retour de Krisy après 3ans sans album" },
+{ d: "2026-07-04", t: "film", title: "78 Tours", img: "films/78tours.jpg", note: "court-métrage de Georges Schwizgebel" },
+{ d: "2026-07-04", t: "film", title: "Nakounine", img: "films/nakounine.jpg", note: "court documentaire de Georges Schwizgebel" },
+{ d: "2026-07-04", t: "film", title: "Le sujet du tableau", img: "films/lesujetdutableau.jpg", note: "court-métrage de Georges Schwizgebel" },
 ];

@@ -111,6 +111,9 @@ const filmsData = {
     { title: "Le Vol d'Icare", note: 3, cover: "films/levoldicare.webp", link: "https://www.senscritique.com/film/le_vol_d_icare/444558" },
     { title: "Hors-jeu", note: 3.5, cover: "films/horsjeu.webp", link: "https://www.senscritique.com/film/hors_jeu/471721" },
     { title: "Le Ravissement de Frank N. Stein", note: 3.5, cover: "films/ravissementfrank.jpg", link: "https://www.senscritique.com/film/le_ravissement_de_frank_n_stein/441831" },
+    { title: "78 Tours", note: 3, cover: "films/78tours.jpg", link: "https://www.senscritique.com/film/78_tours/422398" },
+    { title: "Nakounine", note: null, cover: "films/nakounine.jpg", link: "https://www.senscritique.com/film/nakounine/436751" },
+    { title: "Le sujet du tableau", note: 2.5, cover: "films/lesujetdutableau.jpg", link: "https://www.senscritique.com/film/le_sujet_du_tableau/484121" },
   ],
   "Alain Guiraudie": [
     { title: "Ce vieux rêve qui bouge", note: 4.5, cover: "films/cevieuxreve.jpg", link: "https://www.senscritique.com/film/ce_vieux_reve_qui_bouge/1333244", tags: ["coup de coeur"] },
