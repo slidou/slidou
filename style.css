@@ -812,8 +812,9 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 }
 
 .project-bar {
+  flex-basis: 100%; /* Force à aller à la ligne si c'est dans un flex */
   max-width: 400px;
-  margin: 0 auto 30px auto;
+  margin: 15px auto 30px auto; /* 15px au lieu de 0 pour l'espacer du tri */
   text-align: left;
 }
 .project-label {
@@ -827,15 +828,15 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 }
 .project-track {
   width: 100%;
-  height: 3px;
+  height: 5px; /* Épaissi de 3px à 5px */
   background: var(--border-color);
-  border-radius: 2px;
+  border-radius: 3px;
   overflow: hidden;
 }
 .project-fill {
   height: 100%;
   background: var(--link-color);
-  border-radius: 2px;
+  border-radius: 3px;
   transition: width 0.5s ease;
 }
 
@@ -1532,3 +1533,30 @@ body:not(.dark-mode) .stats-total { opacity: 0.7; }
 }
 .calendar-status-dot.ongoing { background: var(--link-color); }
 .calendar-status-dot.dropped { background: #e57373; }
+
+/* ── BADGE RÉÉCOUTE MUSIQUE ── */
+.book-card { position: relative; }
+.music-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  background: rgba(0,0,0,0.65);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+.music-badge svg {
+  width: 12px;
+  height: 12px;
+}
+.music-badge svg {
+  width: 12px;
+  height: 12px;
+}

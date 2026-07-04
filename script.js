@@ -744,13 +744,29 @@ function generateGames(data = games, isSearch = false) {
 // ── Generate Musique ──
 function generateMusique(data = musique, isSearch = false) {
   let totalAlbums = 0;
-  for (const artist in data) totalAlbums += data[artist].length;
+  let relistenCount = 0;
+  for (const artist in data) {
+    data[artist].forEach(function(album) {
+      totalAlbums++;
+      if (album.tags && album.tags.indexOf('réécoute') !== -1) relistenCount++;
+    });
+  }
+
   const label = isSearch 
     ? totalAlbums + " album" + (totalAlbums !== 1 ? "s" : "") + " trouvé" + (totalAlbums !== 1 ? "s" : "")
     : totalAlbums + " album" + (totalAlbums !== 1 ? "s" : "") + " écouté" + (totalAlbums !== 1 ? "s" : "");
   document.getElementById('musique-counter').textContent = label;
 
-    // Tri Musique
+  // Barre réécoute
+  var relistenBar = document.getElementById('musique-relisten-bar');
+  if (relistenBar && totalAlbums > 0 && !isSearch) {
+    var percentage = (relistenCount / totalAlbums) * 100;
+    relistenBar.innerHTML = '<span class="project-label">projet réécoute : ' + relistenCount + ' / ' + totalAlbums + ' (' + percentage.toFixed(1) + '%)</span><div class="project-track"><div class="project-fill" style="width: ' + percentage + '%"></div></div>';
+  } else if (relistenBar) {
+    relistenBar.innerHTML = '';
+  }
+
+  // Tri Musique
   var sortContainer = document.getElementById('musique-sort');
   sortContainer.innerHTML = '<span class="anime-sort-label">tri :</span>';
   ['artiste', 'note', 'titre'].forEach(function(mode) {
@@ -801,9 +817,14 @@ function generateMusique(data = musique, isSearch = false) {
       var starsHtml = album.note !== null ? '<div class="book-meta">' + getStars(album.note) + '</div>' : '';
       var reviewHtml = album.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(album.review) + '</span>' : '';
       
+      var relistenBadge = '';
+      if (album.tags && album.tags.indexOf('réécoute') !== -1) {
+        relistenBadge = '<span class="music-badge" title="réécouté"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg></span>';
+      }
+      
       var card = document.createElement('a');
       card.href = album.link; card.target = "_blank"; card.className = 'book-card';
-      card.innerHTML = '<img src="' + album.cover + '" alt="' + album.title + '"><div class="book-title">' + album.title + '</div>' + starsHtml + reviewHtml;
+      card.innerHTML = '<img src="' + album.cover + '" alt="' + album.title + '">' + relistenBadge + '<div class="book-title">' + album.title + '</div>' + starsHtml + reviewHtml;
       div.appendChild(card);
     });
     
@@ -844,7 +865,13 @@ function generateMusique(data = musique, isSearch = false) {
       const starsHtml = album.note !== null ? `<div class="book-meta">${getStars(album.note)}</div>` : '';
 
       var reviewHtml = album.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(album.review) + '</span>' : '';
-      card.innerHTML = `<img src="${album.cover}" alt="${album.title}"><div class="book-title">${album.title}</div>${starsHtml}${reviewHtml}`;
+      
+      var relistenBadge = '';
+      if (album.tags && album.tags.indexOf('réécoute') !== -1) {
+        relistenBadge = '<span class="music-badge" title="réécouté"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg></span>';
+      }
+      
+      card.innerHTML = `<img src="${album.cover}" alt="${album.title}">${relistenBadge}<div class="book-title">${album.title}</div>${starsHtml}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
