@@ -218,4 +218,5 @@ const journalData = [
 { d: "2026-07-04", t: "film", title: "78 Tours", img: "films/78tours.jpg", note: "court-métrage de Georges Schwizgebel" },
 { d: "2026-07-04", t: "film", title: "Nakounine", img: "films/nakounine.jpg", note: "court documentaire de Georges Schwizgebel" },
 { d: "2026-07-04", t: "film", title: "Le sujet du tableau", img: "films/lesujetdutableau.jpg", note: "court-métrage de Georges Schwizgebel" },
+{ d: "2026-07-04", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "un petit retour sur valo parce que ça faisait longtemps histoire de (dernière game en octobre 2025)", status: "en cours" },
 ];
