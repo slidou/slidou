@@ -241,6 +241,9 @@ const quotes = [
   { text: "La plupart des gens préfèrent s'accrocher à des idées et des principes. Ils ont secrètement peur de l'incertain et de l'inconnu. Ils remplacent la curiosité par la conviction.", author: "Robert Greene" },
   { text: "C'est un garçon sans importance collective, c'est tout juste un individu. - La Nausée", author: "Jean-Paul Sartre" },
   { text: "L'absurde naît de cette confrontation entre l'appel humain et le silence déraisonnable du monde.", author: "Albert Camus" },
+  { text: "J'étais un enfant, ce monstre que les adultes fabriquent avec leurs regrets.", author: "Sartre" },
+  { text: "L'ironie est le premier signe que la conscience prend conscience d'elle même.", author: "Fernando Pessoa" },
+  { text: "On peut douter de tout sauf de la mort.", author: "Cioran" },
   { text: "La justice sans la force est impuissante, la force sans la justice est tyrannique.", author: "Blaise Pascal" }
 ];
 

@@ -30,7 +30,7 @@ const musicData = {
     { title: "Pluie, montagnes et soleil", note: 3.5, cover: "music/pluiemontagnessoleil.webp", link: "https://rateyourmusic.com/release/album/aupinard/pluie-montagnes-et-soleil/" },
   ],
   "Ino Casablanca": [
-    { title: "Extasia", note: 3.5, cover: "music/extasia.webp", link: "https://rateyourmusic.com/release/mixtape/ino-casablanca/extasia/", tags: ["réécoute"] },
+    { title: "Extasia", note: 4, cover: "music/extasia.webp", link: "https://rateyourmusic.com/release/mixtape/ino-casablanca/extasia/", tags: ["réécoute"] },
     { title: "Tamara", note: 3, cover: "music/tamara.webp", link: "https://rateyourmusic.com/release/mixtape/ino-casablanca/tamara/" },
   ],
   "Mac Miller": [
@@ -69,5 +69,6 @@ const musicData = {
   ],
   "Krisy": [
     { title: "Edward Risky", note: 3.5, cover: "music/edwardrisky.jpg", link: "https://rateyourmusic.com/release/album/krisy/edward-risky/" },
+    { title: "Paradis d'amour", note: 4, cover: "music/paradisdamour.webp", link: "https://rateyourmusic.com/release/album/krisy/paradis-damour/", tags: ["réécoute"] },
   ],
 };
