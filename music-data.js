@@ -70,5 +70,6 @@ const musicData = {
   "Krisy": [
     { title: "Edward Risky", note: 3.5, cover: "music/edwardrisky.jpg", link: "https://rateyourmusic.com/release/album/krisy/edward-risky/" },
     { title: "Paradis d'amour", note: 4, cover: "music/paradisdamour.webp", link: "https://rateyourmusic.com/release/album/krisy/paradis-damour/", tags: ["réécoute"] },
+    { title: "Euphoria", note: 3.5, cover: "music/euphoria.webp", link: "https://rateyourmusic.com/release/album/krisy/euphoria/", tags: ["réécoute"] },
   ],
 };
