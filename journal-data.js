@@ -223,4 +223,5 @@ const journalData = [
 { d: "2026-07-06", t: "musique", title: "Paradis d'amour", img: "music/paradisdamour.webp", note: "réécoute, j'ai eu envie de le réécouter après la sortie de son dernier album, que de nostalgie et ça a plutôt bien vieilli" },
 { d: "2026-07-06", t: "musique", title: "Euphoria", img: "music/euphoria.webp", note: "réécoute" },
 { d: "2026-07-06", t: "film", title: "La Course à l'abîme", img: "films/lacoursealabime.jpg", note: "court-métrage de Georges Schwizgebel" },
+{ d: "2026-07-08", t: "anime", title: "One Piece: Heroines", img: "anime/onepieceheroines.jpg", note: "normal episode, 1/1, très mignon" },
 ];

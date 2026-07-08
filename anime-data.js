@@ -7512,5 +7512,6 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64513, title: "Gentle Teaching", note: 2, tags: ["music","archived"] },
   { id: 64522, title: "FBKingdom Story", note: null, tags: ["short","archived"] },
   { id: 64549, title: "Bimo Xinglu", note: 3, tags: ["short","archived"] },
+  { id: 62233, title: "One Piece: Heroines", note: 4, tags: ["normal episode","+","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
