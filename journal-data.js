@@ -225,5 +225,5 @@ const journalData = [
 { d: "2026-07-06", t: "film", title: "La Course à l'abîme", img: "films/lacoursealabime.jpg", note: "court-métrage de Georges Schwizgebel" },
 { d: "2026-07-08", t: "anime", title: "One Piece: Heroines", img: "anime/onepieceheroines.jpg", note: "normal episode, 1/1, très mignon" },
 { d: "2026-07-09", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1188/?", status: "en cours" },
-{ d: "2026-07-10", t: "anime", title: "Yani Neko", img: "anime/yanineko.jpg", note: "normal episode, 1/?, au vu d'à quel point c'est déjanté, soit je vais adorer soit je vais détester, on verra bien" },
+{ d: "2026-07-10", t: "anime", title: "Yani Neko", img: "anime/yanineko.jpg", note: "normal episode, 1/?, au vu d'à quel point c'est déjanté, soit je vais adorer soit je vais détester, on verra bien", status: "en cours" },
 ];
