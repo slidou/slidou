@@ -233,4 +233,5 @@ const journalData = [
 { d: "2026-07-11", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "training", status: "en cours" },
 { d: "2026-07-11", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "mom's heart battu une deuxième fois avec isaac", status: "en cours" },
 { d: "2026-07-11", t: "musique", title: "cats in the cold", img: "music/catsinthecold.webp", note: "première écoute, un bon album à écouter pour être encore plus déprimé" },
+{ d: "2026-07-11", t: "anime", title: "Yani Neko", img: "anime/yanineko.jpg", note: "normal episode, 2/?", status: "en cours" },
 ];
