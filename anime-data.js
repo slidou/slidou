@@ -2909,7 +2909,7 @@ const animeList = [
   { id: 56669, title: "Justice Runners", note: 0.5, tags: ["short"] },
   { id: 27603, title: "Jutaijima", note: 4.5, tags: ["hentai","short episode"] },
   { id: 29409, title: "Juu-nin no Chiisa na Indian", note: 0.5, tags: ["short"] },
-  { id: 617, title: "Juubee Ninpuuchou", note: 4.5, tags: ["movie","gem"] },
+  { id: 617, title: "Juubee Ninpuuchou", note: 4.5, tags: ["movie","gem","archived"] },
   { id: 54017, title: "Juubee Ninpuuchou Burst", note: null, tags: ["short","+"] },
   { id: 19481, title: "Juujika You and I", note: 2.5, tags: ["music"] },
   { id: 43711, title: "Juunenbun no Watashi e", note: null, tags: ["short"] },
@@ -7513,5 +7513,7 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64522, title: "FBKingdom Story", note: null, tags: ["short","archived"] },
   { id: 64549, title: "Bimo Xinglu", note: 3, tags: ["short","archived"] },
   { id: 62233, title: "One Piece: Heroines", note: 4, tags: ["normal episode","+","archived"] },
+  { id: 62321, title: "Dottabatta Chin Douchuu!", note: 3.5, tags: ["music","archived"] },
+  { id: 62292, title: "#Mugen ni Tomaranai", note: null, tags: ["short","commercial","+","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
