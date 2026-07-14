@@ -255,4 +255,5 @@ const journalData = [
 { d: "2026-07-14", t: "anime", title: "Sayonara Penguin", img: "anime/sayonarapenguin.jpg", note: "music" },
 { d: "2026-07-14", t: "anime", title: "Orion", img: "anime/orion.jpg", note: "music" },
 { d: "2026-07-14", t: "anime", title: "Fengwu You Shijie", img: "anime/fengwu.jpg", note: "short" },
+{ d: "2026-07-14", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "une seule très bonne run de faite où j'ai battu satan", status: "en cours" },
 ];
