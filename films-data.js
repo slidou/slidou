@@ -316,4 +316,7 @@ const filmsData = {
   "Kane Parsons (Kane Pixels)": [
     { title: "Backrooms", note: 3, cover: "films/backrooms.jpg", link: "https://www.senscritique.com/film/backrooms/54875220" },
   ],
+  "Tsui Hark": [
+    { title: "Time and Tide", note: 4, cover: "films/timeandtide.webp", link: "https://www.senscritique.com/film/time_and_tide/407152" },
+  ],
 };

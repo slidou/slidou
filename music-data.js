@@ -75,4 +75,7 @@ const musicData = {
   "mage tears": [
     { title: "cats in the cold", note: 3, cover: "music/catsinthecold.webp", link: "https://rateyourmusic.com/release/album/mage-tears/cats-in-the-cold/" },
   ],
+  "Playboi Carti": [
+    { title: "Whole Lotta Red", note: 4, cover: "music/wholelottared.webp", link: "https://rateyourmusic.com/release/album/playboi-carti/whole-lotta-red/", tags: ["réécoute"] },
+  ],
 };
