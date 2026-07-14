@@ -246,7 +246,7 @@ const journalData = [
 { d: "2026-07-13", t: "anime", title: "Mob Psycho 100: 10-shuunen Kinen Tokubetsu Eizou", img: "anime/mobpsycho10010.jpg", note: "short" },
 { d: "2026-07-13", t: "film", title: "Time and Tide", img: "films/timeandtide.webp", note: "vraiment très bonne découverte, ça partait dans tous les sens" },
 { d: "2026-07-13", t: "musique", title: "Whole Lotta Red", img: "music/wholelottared.webp", note: "réécoute" },
-{ d: "2026-07-14", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "mom's heart battu une quatrième fois avec isaac, ça a l'air de m'avoir débloqué la suite (en plus d'une nouvelle voie qui descend dans la devil's room", status: "en cours" },
+{ d: "2026-07-14", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "mom's heart battu une quatrième fois avec isaac, ça a l'air de m'avoir débloqué la suite (en plus d'une nouvelle voie qui descend dans la devil's room)", status: "en cours" },
 { d: "2026-07-14", t: "anime", title: "Satori", img: "anime/satori.jpg", note: "music" },
 { d: "2026-07-14", t: "anime", title: "Kidou Butouden G Gundam: 30-shuunen Kinen Fighting Movie", img: "anime/kidoubutouden.jpg", note: "short" },
 { d: "2026-07-14", t: "anime", title: "Omstart", img: "anime/omstart.jpg", note: "music" },
