@@ -256,4 +256,6 @@ const journalData = [
 { d: "2026-07-14", t: "anime", title: "Orion", img: "anime/orion.jpg", note: "music" },
 { d: "2026-07-14", t: "anime", title: "Fengwu You Shijie", img: "anime/fengwu.jpg", note: "short" },
 { d: "2026-07-14", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "une seule très bonne run de faite où j'ai battu satan", status: "en cours" },
+{ d: "2026-07-14", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "training, monstrueux", status: "en cours" },
+{ d: "2026-07-15", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "j'ai fait deux runs de dingue et les deux je suis mort dans des rooms de dingue, je n'ai jamais vu ça, même quand j'ai de la chance sur les items je finis par tomber sur les pires rooms", status: "en cours" },
 ];
