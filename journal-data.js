@@ -258,4 +258,6 @@ const journalData = [
 { d: "2026-07-14", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "une seule très bonne run de faite où j'ai battu satan", status: "en cours" },
 { d: "2026-07-14", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "training, monstrueux", status: "en cours" },
 { d: "2026-07-15", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "j'ai fait deux runs de dingue et les deux je suis mort dans des rooms de dingue, je n'ai jamais vu ça, même quand j'ai de la chance sur les items je finis par tomber sur les pires rooms", status: "en cours" },
+{ d: "2026-07-15", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "mom's heart battu une cinquième fois avec isaac, de ce que j'ai compris je dois la battre onze fois, plus que six", status: "en cours" },
+{ d: "2026-07-16", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "que des runs de merde", status: "en cours" },
 ];
