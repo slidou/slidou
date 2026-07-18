@@ -12,6 +12,7 @@ const filmsData = {
     { title: "Following", note: 2.5, cover: "films/following.jpg", link: "https://www.senscritique.com/film/following_le_suiveur/382251" },
     { title: "Doodlebug", note: null, cover: "films/doodlebug.jpg", link: "https://www.senscritique.com/film/doodlebug/404551" },
     { title: "Tarantella", note: null, cover: "films/tarantella.jpg", link: "https://www.senscritique.com/film/tarantella/24971949" },
+    { title: "L'Odyssée", note: 4, cover: "films/odyssee.webp", link: "https://www.senscritique.com/film/l_odyssee/81361437" },
   ],
     "Aleksandr Petrov": [
     { title: "Le Rêve d'un homme ridicule", note: 4.5, cover: "films/hommeridicule.jpg", link: "https://www.senscritique.com/film/le_reve_d_un_homme_ridicule/485462", tags: ["coup de coeur"] },
