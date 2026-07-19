@@ -244,6 +244,7 @@ const quotes = [
   { text: "J'étais un enfant, ce monstre que les adultes fabriquent avec leurs regrets.", author: "Sartre" },
   { text: "L'ironie est le premier signe que la conscience prend conscience d'elle même.", author: "Fernando Pessoa" },
   { text: "On peut douter de tout sauf de la mort.", author: "Cioran" },
+  { text: "La science peut seule éveiller dans les âmes, à défaut du soleil, l'astre de la raison.", author: "Lucrece" },
   { text: "La justice sans la force est impuissante, la force sans la justice est tyrannique.", author: "Blaise Pascal" }
 ];
 

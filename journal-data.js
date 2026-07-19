@@ -273,4 +273,6 @@ const journalData = [
 { d: "2026-07-18", t: "anime", title: "Aloha You: Kizuna", img: "anime/alohayou.jpg", note: "music" },
 { d: "2026-07-18", t: "anime", title: "Ama Gli Animali", img: "anime/amagli.jpg", note: "short" },
 { d: "2026-07-18", t: "film", title: "L'Odyssée", img: "films/odyssee.webp", note: "vu au cinéma, excellent, je n'ai pas vu le temps passer malgré le film de 3 heures" },
+{ d: "2026-07-18", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "training", status: "en cours" },
+{ d: "2026-07-19", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "mom battu 8 fois en tout, plus que 3", status: "en cours" },
 ];
