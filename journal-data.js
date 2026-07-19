@@ -276,5 +276,5 @@ const journalData = [
 { d: "2026-07-18", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "training", status: "en cours" },
 { d: "2026-07-19", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "mom battu 8 fois en tout, plus que 3", status: "en cours" },
 { d: "2026-07-19", t: "livre", title: "Schopenhauer", img: "covers/schopenhauer.jpg", note: "fini, c'était très enrichissant" },
-{ d: "2026-07-19", t: "musique", title: "Charm", img: "music/charm.webp", note: "réécoute, c'est mignon sans plus, hormis Juna que je mets à des sphères au dessus du reste, reste qui est loin d'être nul pour autant, je tiens à le préciser" },
+{ d: "2026-07-19", t: "musique", title: "Charm", img: "music/charm.webp", note: "réécoute, c'est mignon sans plus, hormis Juna que je mets à des sphères au dessus du reste, reste qui est loin d'être nul pour autant, je tiens à le dire" },
 ];
