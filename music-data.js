@@ -84,4 +84,7 @@ const musicData = {
   "Nirvana": [
     { title: "Nevermind", note: 2.5, cover: "music/nevermind.webp", link: "https://rateyourmusic.com/release/album/nirvana/nevermind/" },
   ],
+  "Clairo": [
+    { title: "Charm", note: 3, cover: "music/charm.webp", link: "https://rateyourmusic.com/release/album/clairo/charm/" },
+  ],
 };

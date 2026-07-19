@@ -474,5 +474,8 @@ Et je dois bien l’avouer, ça fait très bizarre de lire un roman aussi incisi
   ],
   "Christine Kelly": [
     { title: "Libertés sans expression", note: 1, cover: "covers/libertesansexpression.jpg", link: "https://www.goodreads.com/book/show/61741943-libert-s-sans-expression" }
+  ],
+  "Le Monde": [
+    { title: "Schopenhauer", note: 4, cover: "covers/schopenhauer.jpg", link: "https://www.goodreads.com/book/show/46011341-schopenhauer" }
   ]
 };
