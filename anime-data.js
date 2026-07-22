@@ -7529,5 +7529,9 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64616, title: "5-56 Hokuto no Ken: Akanai Tobira-hen", note: null, tags: ["short","commercial","+","archived"] },
   { id: 59495, title: "Aloha You: Kizuna", note: 2.5, tags: ["music","archived"] },
   { id: 32253, title: "Ama Gli Animali", note: null, tags: ["short","archived"] },
+  { id: 63659, title: "KFC x Yuanshen Liandong PV: Qiji Shunjian Meiwei Zaixian", note: null, tags: ["short","commercial","archived"] },
+  { id: 64641, title: "Box Party", note: null, tags: ["short","archived"] },
+  { id: 64657, title: "Fade into Blue", note: 3, tags: ["music","archived"] },
+  { id: 63936, title: "Benghuai: Xing Qiong Tiedao - San Zhounian Zhutiqu: Tiansheng Guicai", note: 3, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
