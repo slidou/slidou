@@ -283,4 +283,8 @@ const journalData = [
 { d: "2026-07-23", t: "anime", title: "Box Party", img: "anime/boxparty.jpg", note: "short" },
 { d: "2026-07-23", t: "anime", title: "Fade into Blue", img: "anime/fadeintoblue.jpg", note: "music" },
 { d: "2026-07-23", t: "anime", title: "Benghuai: Xing Qiong Tiedao - San Zhounian Zhutiqu: Tiansheng Guicai", img: "anime/zhutiqu.jpg", note: "music" },
+{ d: "2026-07-23", t: "musique", title: "Minecraft: Volume Alpha", img: "music/minecraft.webp", note: "réécoute, que d'émotions... ça me rend si nostalgique" },
+{ d: "2026-07-23", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "je me fais défoncer", status: "en cours" },
+{ d: "2026-07-24", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "je me fais défoncer", status: "en cours" },
+{ d: "2026-07-24", t: "anime", title: "Tsunaide", img: "anime/tsunaide.jpg", note: "short, c'est vraiment mignon" },
 ];

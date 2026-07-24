@@ -87,4 +87,7 @@ const musicData = {
   "Clairo": [
     { title: "Charm", note: 3, cover: "music/charm.webp", link: "https://rateyourmusic.com/release/album/clairo/charm/", tags: ["réécoute"] },
   ],
+  "C418": [
+    { title: "Minecraft: Volume Alpha", note: 5, cover: "music/minecraft.webp", link: "https://rateyourmusic.com/release/album/c418/minecraft-volume-alpha/", tags: ["réécoute"] },
+  ],
 };

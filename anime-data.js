@@ -7533,5 +7533,6 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64641, title: "Box Party", note: null, tags: ["short","archived"] },
   { id: 64657, title: "Fade into Blue", note: 3, tags: ["music","archived"] },
   { id: 63936, title: "Benghuai: Xing Qiong Tiedao - San Zhounian Zhutiqu: Tiansheng Guicai", note: 3, tags: ["music","archived"] },
+  { id: 64652, title: "Tsunaide", note: 3.5, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
