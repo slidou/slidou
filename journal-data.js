@@ -287,4 +287,7 @@ const journalData = [
 { d: "2026-07-23", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "je me fais défoncer", status: "en cours" },
 { d: "2026-07-24", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "je me fais défoncer", status: "en cours" },
 { d: "2026-07-24", t: "anime", title: "Tsunaide", img: "anime/tsunaide.jpg", note: "short, c'est vraiment mignon" },
+{ d: "2026-07-24", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1189/?", status: "en cours" },
+{ d: "2026-07-25", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "nul", status: "en cours" },
+{ d: "2026-07-25", t: "film", title: "Plastic Tears", img: "films/plastictears.jpg", note: "court-métrage de Jun Miyazaki, j'en pense rien, c'était très spécial" },
 ];

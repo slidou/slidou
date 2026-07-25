@@ -320,4 +320,7 @@ const filmsData = {
   "Tsui Hark": [
     { title: "Time and Tide", note: 4, cover: "films/timeandtide.webp", link: "https://www.senscritique.com/film/time_and_tide/407152" },
   ],
+  "Jun Miyazaki": [
+    { title: "Plastic Tears", note: null, cover: "films/plastictears.jpg", link: "https://www.senscritique.com/film/plastic_tears/124956984" },
+  ],
 };
