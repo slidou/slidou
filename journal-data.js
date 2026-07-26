@@ -290,4 +290,13 @@ const journalData = [
 { d: "2026-07-24", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1189/?", status: "en cours" },
 { d: "2026-07-25", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "nul", status: "en cours" },
 { d: "2026-07-25", t: "film", title: "Plastic Tears", img: "films/plastictears.jpg", note: "court-métrage de Jun Miyazaki, j'en pense rien, c'était très spécial" },
+{ d: "2026-07-26", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "abominable", status: "en cours" },
+{ d: "2026-07-26", t: "film", title: "Rapid Fire", img: "films/rapidfire.webp", note: "court-métrage de Jun Miyazaki, j'en pense rien, c'était très spécial" },
+{ d: "2026-07-26", t: "film", title: "Flip Light Cruiser", img: "films/fliplightcruiser.jpg", note: "court-métrage de Jun Miyazaki, j'en pense rien, c'était très spécial" },
+{ d: "2026-07-26", t: "anime", title: "Sunny (Music, 2026)", img: "anime/sunny.jpg", note: "music" },
+{ d: "2026-07-26", t: "anime", title: "Hatachi no Kenketsu CMs", img: "anime/hatachinokenketsu.jpg", note: "commercial, la première pub est sortie en 2024 et la deuxième en 2026" },
+{ d: "2026-07-26", t: "anime", title: "Disney Twisted-Wonderland CMs", img: "anime/disney.jpg", note: "commercial, il y a eu des ajouts depuis 2024" },
+{ d: "2026-07-26", t: "anime", title: "Why Häagen-Dazs?", img: "anime/dazs.jpg", note: "commercial" },
+{ d: "2026-07-26", t: "anime", title: "Yuanshen: Rui Shou Xiang Wen", img: "anime/yuanshenrui.jpg", note: "commercial" },
+{ d: "2026-07-26", t: "anime", title: "Yuanshen: Wu Zhounian Zhutiqu - Huijia de Lu", img: "anime/yuanshenwu.jpg", note: "commercial" },
 ];
