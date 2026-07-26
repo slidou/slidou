@@ -90,4 +90,7 @@ const musicData = {
   "C418": [
     { title: "Minecraft: Volume Alpha", note: 5, cover: "music/minecraft.webp", link: "https://rateyourmusic.com/release/album/c418/minecraft-volume-alpha/", tags: ["réécoute"] },
   ],
+  "Kanye West": [
+    { title: "Graduation", note: 4, cover: "music/graduation.webp", link: "https://rateyourmusic.com/release/album/kanye-west/graduation/" },
+  ],
 };

@@ -299,4 +299,9 @@ const journalData = [
 { d: "2026-07-26", t: "anime", title: "Why Häagen-Dazs?", img: "anime/dazs.jpg", note: "commercial" },
 { d: "2026-07-26", t: "anime", title: "Yuanshen: Rui Shou Xiang Wen", img: "anime/yuanshenrui.jpg", note: "commercial" },
 { d: "2026-07-26", t: "anime", title: "Yuanshen: Wu Zhounian Zhutiqu - Huijia de Lu", img: "anime/yuanshenwu.jpg", note: "commercial" },
+{ d: "2026-07-26", t: "musique", title: "Graduation", img: "music/graduation.webp", note: "première réelle écoute même si je connaissais la majorité des tracks, excellent, rien à dire de plus" },
+{ d: "2026-07-26", t: "anime", title: "Yani Neko", img: "anime/yanineko.jpg", note: "normal episode, 3/?", status: "en cours" },
+{ d: "2026-07-26", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "3h sur isaac, j'ai battu mom 11 fois puis une douzième qui m'a permis d'accéder à la cathédrale pour la première fois et j'ai battu isaac, c'était une session azazel pour changer un peu et c'était vraiment fun, j'ai perdu une seule run au début et après j'ai enchaîné que des wins", status: "en cours" },
+{ d: "2026-07-26", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "+9rr", status: "en cours" },
+{ d: "2026-07-26", t: "jeu", title: "Counter-Strike 2", img: "games/cs2.png", note: "reprise, c'était sympa", status: "en cours" },
 ];
