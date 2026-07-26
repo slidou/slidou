@@ -303,5 +303,5 @@ const journalData = [
 { d: "2026-07-26", t: "anime", title: "Yani Neko", img: "anime/yanineko.jpg", note: "normal episode, 3/?", status: "en cours" },
 { d: "2026-07-26", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "3h sur isaac, j'ai battu mom 11 fois puis une douzième qui m'a permis d'accéder à la cathédrale pour la première fois et j'ai battu isaac, c'était une session azazel pour changer un peu et c'était vraiment fun, j'ai perdu une seule run au début et après j'ai enchaîné que des wins", status: "en cours" },
 { d: "2026-07-26", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "+9rr", status: "en cours" },
-{ d: "2026-07-26", t: "jeu", title: "Counter-Strike 2", img: "games/cs2.png", note: "reprise, c'était sympa", status: "en cours" },
+{ d: "2026-07-26", t: "jeu", title: "Counter-Strike 2", img: "games/cs2.png", note: "reprise, c'était sympathique", status: "en cours" },
 ];
