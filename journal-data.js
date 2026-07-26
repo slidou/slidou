@@ -279,7 +279,7 @@ const journalData = [
 { d: "2026-07-19", t: "musique", title: "Charm", img: "music/charm.webp", note: "réécoute, c'est mignon sans plus, hormis Juna que je mets à des sphères au dessus du reste, reste qui est loin d'être nul pour autant, je tiens à le préciser" },
 { d: "2026-07-21", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "training", status: "en cours" },
 { d: "2026-07-22", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "reprise des ranked, j'ai été placé plat 2, plus qu'à reprendre l'habitude", status: "en cours" },
-{ d: "2026-07-23", t: "anime", title: "KFC x Yuanshen Liandong PV: Qiji Shunjian Meiwei Zaixian", img: "anime/yuanshennnnn.jpg", note: "commercial" },
+{ d: "2026-07-23", t: "anime", title: "KFC x Yuanshen Liandong PV: Qiji Shunjian Meiwei Zaixian", img: "anime/kfc.jpg", note: "commercial" },
 { d: "2026-07-23", t: "anime", title: "Box Party", img: "anime/boxparty.jpg", note: "short" },
 { d: "2026-07-23", t: "anime", title: "Fade into Blue", img: "anime/fadeintoblue.jpg", note: "music" },
 { d: "2026-07-23", t: "anime", title: "Benghuai: Xing Qiong Tiedao - San Zhounian Zhutiqu: Tiansheng Guicai", img: "anime/zhutiqu.jpg", note: "music" },
