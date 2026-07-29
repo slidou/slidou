@@ -93,4 +93,10 @@ const musicData = {
   "Kanye West": [
     { title: "Graduation", note: 4, cover: "music/graduation.webp", link: "https://rateyourmusic.com/release/album/kanye-west/graduation/" },
   ],
+  "Dosseh": [
+    { title: "Yuri", note: 4, cover: "music/yuri.webp", link: "https://rateyourmusic.com/release/album/dosseh/yuri/" },
+  ],
+  "Lil Tecca": [
+    { title: "DOPAMINE", note: 3, cover: "music/dopamine.webp", link: "https://rateyourmusic.com/release/album/lil-tecca/dopamine/" },
+  ],
 };

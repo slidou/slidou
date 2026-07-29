@@ -304,4 +304,12 @@ const journalData = [
 { d: "2026-07-26", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "3h sur isaac, j'ai battu mom 11 fois puis une douzième qui m'a permis d'accéder à la cathédrale pour la première fois et j'ai battu isaac, c'était une session azazel pour changer un peu et c'était vraiment fun, j'ai perdu une seule run au début et après j'ai enchaîné que des wins", status: "en cours" },
 { d: "2026-07-26", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "+9rr", status: "en cours" },
 { d: "2026-07-26", t: "jeu", title: "Counter-Strike 2", img: "games/cs2.jpg", note: "reprise, c'était sympathique", status: "en cours" },
+{ d: "2026-07-27", t: "livre", title: "La Mort d' Ivan Illitch / Maitre et Serviteur / Trois Morts", img: "covers/illitch.jpg", note: "commencement de la lecture" },
+{ d: "2026-07-27", t: "musique", title: "DOPAMINE", img: "music/dopamine.webp", note: "réécoute, c'est légèrement au dessus de la moyenne sans plus, quelques sons au dessus du lot" },
+{ d: "2026-07-27", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "j'ai essayé le bébé bleu pour tenter de battre isaac et débloquer le dé mais je me suis fait défoncer comme pas possible, ça va être compliqué", status: "en cours" },
+{ d: "2026-07-27", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "nul", status: "en cours" },
+{ d: "2026-07-28", t: "musique", title: "Yuri", img: "music/yuri.webp", note: "première réelle écoute même si je connaissais quelques tracks, on est là sur un haut niveau de rap" },
+{ d: "2026-07-28", t: "livre", title: "La Mort d' Ivan Illitch / Maitre et Serviteur / Trois Morts", img: "covers/illitch.jpg", note: "poursuite de la lecture" },
+{ d: "2026-07-29", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "1 win, 2 lose", status: "en cours" },
+{ d: "2026-07-29", t: "jeu", title: "Counter-Strike 2", img: "games/cs2.jpg", note: "une game sur dust 2, win", status: "en cours" },
 ];
