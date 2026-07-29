@@ -312,4 +312,5 @@ const journalData = [
 { d: "2026-07-28", t: "livre", title: "La Mort d' Ivan Illitch / Maitre et Serviteur / Trois Morts", img: "covers/illitch.jpg", note: "poursuite de la lecture" },
 { d: "2026-07-29", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "1 win, 2 lose", status: "en cours" },
 { d: "2026-07-29", t: "jeu", title: "Counter-Strike 2", img: "games/cs2.jpg", note: "une game sur dust 2, win", status: "en cours" },
+{ d: "2026-07-29", t: "musique", title: "Vréel 3", img: "music/vréel3.webp", note: "première réelle écoute même si je connaissais quelques tracks, c'est pas mal" },
 ];
