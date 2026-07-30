@@ -315,4 +315,5 @@ const journalData = [
 { d: "2026-07-29", t: "musique", title: "Vréel 3", img: "music/vréel3.webp", note: "première réelle écoute même si je connaissais quelques tracks, c'est pas mal" },
 { d: "2026-07-29", t: "musique", title: "Stratos", img: "music/stratos.webp", note: "réécoute, assez moyen, l'album galère à démarrer et même une fois lancé on finit par retomber dans le moyen, le seul son qui m'a fait vibre c'est Vibe & Sun" },
 { d: "2026-07-30", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "1 win, 1 lose", status: "en cours" },
+{ d: "2026-07-30", t: "musique", title: "1994", img: "music/1994.webp", note: "réécoute" },
 ];

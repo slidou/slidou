@@ -65,6 +65,7 @@ const musicData = {
   ],
   "Hamza": [
     { title: "PUBLIC ENEMY", note: 2.5, cover: "music/publicenemy.jpg", link: "https://rateyourmusic.com/release/ep/hamza/public-enemy/" },
+    { title: "1994", note: 4, cover: "music/1994.webp", link: "https://rateyourmusic.com/release/mixtape/hamza/1994/", tags: ["réécoute"] },
   ],
   "Josman": [
     { title: "HHHH²", note: 2.5, cover: "music/hhhh².jpg", link: "." },
@@ -100,5 +101,9 @@ const musicData = {
   ],
   "Lil Tecca": [
     { title: "DOPAMINE", note: 3, cover: "music/dopamine.webp", link: "https://rateyourmusic.com/release/album/lil-tecca/dopamine/", tags: ["réécoute"] },
+  ],
+  "Damso": [
+    { title: "Batterie faible", note: 5, cover: "music/batteriefaible.webp", link: "https://rateyourmusic.com/release/album/damso/batterie-faible/", tags: ["réécoute"] },
+    { title: "Ipséité", note: 5, cover: "music/ipséité.webp", link: "https://rateyourmusic.com/release/album/damso/ipseite/", tags: ["réécoute"] },
   ],
 };
