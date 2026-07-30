@@ -25,7 +25,7 @@ const musicData = {
   "Kekra": [
     { title: "Kekra", note: 4, cover: "music/kekra.webp", link: "https://rateyourmusic.com/release/album/kekra/kekra/", tags: ["réécoute"] },
     { title: "Vréel 3", note: 3.5, cover: "music/vréel3.webp", link: "https://rateyourmusic.com/release/album/kekra/vreel-3/" },
-    { title: "Stratos", note: 3.5, cover: "music/stratos.webp", link: "https://rateyourmusic.com/release/album/kekra/stratos/", tags: ["réécoute"] },
+    { title: "Stratos", note: 3, cover: "music/stratos.webp", link: "https://rateyourmusic.com/release/album/kekra/stratos/", tags: ["réécoute"] },
   ],
   "aupinard": [
     { title: "spleen. social club", note: 3, cover: "music/spleensocialclub.PNG", link: "https://rateyourmusic.com/release/album/aupinard/spleen-social-club/" },
