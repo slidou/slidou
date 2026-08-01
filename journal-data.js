@@ -319,4 +319,6 @@ const journalData = [
 { d: "2026-07-30", t: "musique", title: "Jazz Samba Encore!", img: "music/jazzsambaencore.webp", note: "première écoute, je connaissais déjà cet artiste légendaire bien évidemment, j'ai le vinyle de Getz/Gilberto, excellent album" },
 { d: "2026-07-31", t: "musique", title: "Radio Suicide", img: "music/radiosuicide.webp", note: "première vraie écoute, pas ultra convaincu" },
 { d: "2026-08-01", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "4w/2l, j'ai fait de très bonnes games, les réflexes commencent à revenir et je suis enfin monté D1 !", status: "en cours" },
+{ d: "2026-08-01", t: "film", title: "Hana-bi", img: "films/hana-bi.webp", note: "deuxième film de kitano que je regarde et il est exceptionnel, c'est le meilleur film que j'ai regardé de ma vie" },
+{ d: "2026-08-01", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "j'ai été médiocre avec azazel c'est dire mon niveau, trop impatient", status: "en cours" },
 ];
