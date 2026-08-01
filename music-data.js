@@ -14,6 +14,7 @@ const musicData = {
   ],
   "Makala": [
     { title: "YAMOTO", note: 4.5, cover: "music/yamoto.webp", link: "https://rateyourmusic.com/release/album/makala/yamoto/", tags: ["réécoute"] },
+    { title: "Radio Suicide", note: 3, cover: "music/radiosuicide.webp", link: "https://rateyourmusic.com/release/album/makala/radio-suicide/" },
   ],
   "Nujabes": [
     { title: "Luv(sic) Hexalogy", note: 5, cover: "music/luvsichexalogy.webp", link: "https://rateyourmusic.com/release/comp/nujabes-feat-shing02/luv_sic-hexalogy/", tags: ["réécoute"] },
@@ -105,5 +106,8 @@ const musicData = {
   "Damso": [
     { title: "Batterie faible", note: 5, cover: "music/batteriefaible.webp", link: "https://rateyourmusic.com/release/album/damso/batterie-faible/", tags: ["réécoute"] },
     { title: "Ipséité", note: 5, cover: "music/ipséité.webp", link: "https://rateyourmusic.com/release/album/damso/ipseite/", tags: ["réécoute"] },
+  ],
+  "Stan Getz": [
+    { title: "Jazz Samba Encore!", note: 4, cover: "music/jazzsambaencore.webp", link: "https://rateyourmusic.com/release/album/stan-getz-luiz-bonfa/jazz-samba-encore/" },
   ],
 };

@@ -316,4 +316,7 @@ const journalData = [
 { d: "2026-07-29", t: "musique", title: "Stratos", img: "music/stratos.webp", note: "réécoute, assez moyen, l'album galère à démarrer et même une fois lancé on finit par retomber dans le moyen, le seul son qui m'a fait vibre c'est Vibe & Sun" },
 { d: "2026-07-30", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "1 win, 1 lose", status: "en cours" },
 { d: "2026-07-30", t: "musique", title: "1994", img: "music/1994.webp", note: "réécoute" },
+{ d: "2026-07-30", t: "musique", title: "Jazz Samba Encore!", img: "music/jazzsambaencore.webp", note: "première écoute, je connaissais déjà cet artiste légendaire bien évidemment, j'ai le vinyle de Getz/Gilberto, excellent album" },
+{ d: "2026-07-31", t: "musique", title: "Radio Suicide", img: "music/radiosuicide.webp", note: "première vraie écoute, pas ultra convaincu" },
+{ d: "2026-08-01", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "4w/2l, j'ai fait de très bonnes games, les réflexes commencent à revenir et je suis enfin monté D1 !", status: "en cours" },
 ];
