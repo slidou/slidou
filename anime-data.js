@@ -7538,5 +7538,12 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64654, title: "Why Häagen-Dazs?", note: null, tags: ["short","commercial","archived"] },
   { id: 63660, title: "Yuanshen: Rui Shou Xiang Wen", note: null, tags: ["short","commercial","archived"] },
   { id: 62574, title: "Yuanshen: Wu Zhounian Zhutiqu - Huijia de Lu", note: null, tags: ["music","commercial","archived"] },
+  { id: 64688, title: "I-Bull", note: 3, tags: ["music","+","archived"] },
+  { id: 64708, title: "Engawa de Dancehall", note: 1.5, tags: ["music","archived"] },
+  { id: 64696, title: "Soko ga Hen da yo! Inuneko Saiban", note: null, tags: ["short","commercial","archived"] },
+  { id: 64698, title: "Yahoo! Japan 23rd Anniversary: Arigatou no Kiseki", note: null, tags: ["short","commercial","archived"] },
+  { id: 64711, title: "BooooM!!!", note: 3.5, tags: ["music","+","archived"] },
+  { id: 64716, title: "Kuraiai", note: 3, tags: ["music","+","archived"] },
+  { id: 64721, title: "Rasen", note: 3.5, tags: ["music","+","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

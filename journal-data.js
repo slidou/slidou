@@ -324,4 +324,11 @@ const journalData = [
 { d: "2026-08-02", t: "film", title: "Jamila's Mirror", img: "films/jamilasmirror.png", note: "🇵🇸" },
 { d: "2026-08-02", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "que des games de merde", status: "en cours" },
 { d: "2026-08-02", t: "musique", title: "Reaching for a Star", img: "music/rfas.webp", note: "réécoute" },
+{ d: "2026-08-02", t: "anime", title: "I-Bull", img: "anime/i-bull.jpg", note: "music" },
+{ d: "2026-08-02", t: "anime", title: "Engawa de Dancehall", img: "anime/engawa.jpg", note: "music" },
+{ d: "2026-08-02", t: "anime", title: "Soko ga Hen da yo! Inuneko Saiban", img: "anime/sokoga.jpg", note: "commercial" },
+{ d: "2026-08-02", t: "anime", title: "Yahoo! Japan 23rd Anniversary: Arigatou no Kiseki", img: "anime/yahoo.jpg", note: "commercial" },
+{ d: "2026-08-02", t: "anime", title: "BooooM!!!", img: "anime/boooom.jpg", note: "music" },
+{ d: "2026-08-02", t: "anime", title: "Kuraiai", img: "anime/kuraiai.jpg", note: "music" },
+{ d: "2026-08-02", t: "anime", title: "Rasen", img: "anime/rasen.jpg", note: "music" },
 ];
