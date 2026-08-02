@@ -331,4 +331,6 @@ const journalData = [
 { d: "2026-08-02", t: "anime", title: "BooooM!!!", img: "anime/boooom.jpg", note: "music" },
 { d: "2026-08-02", t: "anime", title: "Kuraiai", img: "anime/kuraiai.jpg", note: "music" },
 { d: "2026-08-02", t: "anime", title: "Rasen", img: "anime/rasen.jpg", note: "music" },
+{ d: "2026-08-02", t: "anime", title: "Yani Neko", img: "anime/yanineko.jpg", note: "normal episode, 4-5/?", status: "en cours" },
+{ d: "2026-08-02", t: "livre", title: "La Mort d' Ivan Illitch / Maitre et Serviteur / Trois Morts", img: "covers/illitch.jpg", note: "poursuite de la lecture" },
 ];
