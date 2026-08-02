@@ -22,6 +22,7 @@ const musicData = {
   "potsu": [
     { title: "Just Friends", note: 5, cover: "music/justfriends.webp", link: "https://rateyourmusic.com/release/album/potsu/just-friends/", tags: ["réécoute"] },
     { title: "Ivy League", note: 4.5, cover: "music/ivyleague.webp", link: "https://rateyourmusic.com/release/album/potsu/ivy-league/", tags: ["réécoute"] },
+    { title: "Reaching for a Star", note: 4, cover: "music/rfas.webp", link: "https://rateyourmusic.com/release/album/potsu/reaching-for-a-star/", tags: ["réécoute"] },
   ],
   "Kekra": [
     { title: "Kekra", note: 4, cover: "music/kekra.webp", link: "https://rateyourmusic.com/release/album/kekra/kekra/", tags: ["réécoute"] },

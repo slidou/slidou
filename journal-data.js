@@ -321,4 +321,7 @@ const journalData = [
 { d: "2026-08-01", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "4w/2l, j'ai fait de très bonnes games, les réflexes commencent à revenir et je suis enfin monté D1 !", status: "en cours" },
 { d: "2026-08-01", t: "film", title: "Hana-bi", img: "films/hana-bi.webp", note: "deuxième film de kitano que je regarde et il est exceptionnel, c'est le meilleur film que j'ai regardé de ma vie" },
 { d: "2026-08-01", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "j'ai été médiocre avec azazel c'est dire mon niveau, trop impatient", status: "en cours" },
+{ d: "2026-08-02", t: "film", title: "Jamila's Mirror", img: "films/jamilasmirror.png", note: "🇵🇸" },
+{ d: "2026-08-02", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "que des games de merde", status: "en cours" },
+{ d: "2026-08-02", t: "musique", title: "Reaching for a Star", img: "music/rfas.webp", note: "réécoute" },
 ];

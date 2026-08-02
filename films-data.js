@@ -326,4 +326,7 @@ const filmsData = {
     { title: "Rapid Fire", note: null, cover: "films/rapidfire.webp", link: "https://www.senscritique.com/film/rapid_fire/54348922" },
     { title: "Flip Light Cruiser", note: null, cover: "films/fliplightcruiser.jpg", link: "https://www.senscritique.com/film/flip_light_cruiser/127647685" },
   ],
+  "Arab Loutif": [
+    { title: "Jamila's Mirror", note: 5, cover: "films/jamilasmirror.png", link: "https://www.senscritique.com/film/jamila_s_mirror/71632791" },
+  ],
 };
