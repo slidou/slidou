@@ -334,4 +334,5 @@ const journalData = [
 { d: "2026-08-02", t: "anime", title: "Yani Neko", img: "anime/yanineko.jpg", note: "normal episode, 4-5/?", status: "en cours" },
 { d: "2026-08-02", t: "livre", title: "La Mort d' Ivan Illitch / Maitre et Serviteur / Trois Morts", img: "covers/illitch.jpg", note: "poursuite de la lecture" },
 { d: "2026-08-03", t: "musique", title: "Star-Crossed", img: "music/starcrossed.webp", note: "réécoute" },
+{ d: "2026-08-03", t: "musique", title: "A Great Chaos", img: "music/agreatchaos.webp", note: "réécoute" },
 ];
