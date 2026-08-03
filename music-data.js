@@ -113,6 +113,6 @@ const musicData = {
     { title: "Jazz Samba Encore!", note: 4, cover: "music/jazzsambaencore.webp", link: "https://rateyourmusic.com/release/album/stan-getz-luiz-bonfa/jazz-samba-encore/" },
   ],
   "Ken Carson": [
-    { title: "A Great Chaos", note: 4, cover: "music/agreatchaos.webp", link: "https://rateyourmusic.com/release/album/ken-carson/a-great-chaos/" },
+    { title: "A Great Chaos", note: 3.5, cover: "music/agreatchaos.webp", link: "https://rateyourmusic.com/release/album/ken-carson/a-great-chaos/" },
   ],
 };
