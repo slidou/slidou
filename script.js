@@ -775,8 +775,8 @@ function generateMusique(data = musique, isSearch = false) {
   }
 
   const label = isSearch 
-    ? totalAlbums + " album" + (totalAlbums !== 1 ? "s" : "") + " trouvé" + (totalAlbums !== 1 ? "s" : "")
-    : totalAlbums + " album" + (totalAlbums !== 1 ? "s" : "") + " écouté" + (totalAlbums !== 1 ? "s" : "");
+    ? totalAlbums + " projet" + (totalAlbums !== 1 ? "s" : "") + " trouvé" + (totalAlbums !== 1 ? "s" : "")
+    : totalAlbums + " projet" + (totalAlbums !== 1 ? "s" : "") + " écouté" + (totalAlbums !== 1 ? "s" : "");
   document.getElementById('musique-counter').textContent = label;
 
   // Barre réécoute
