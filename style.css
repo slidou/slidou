@@ -708,6 +708,24 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
   backdrop-filter: blur(4px);
 }
 
+/* ── BADGE FORMAT MUSIQUE ── */
+.music-format-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+
 .load-more-btn {
   font-family: 'Space Grotesk', sans-serif; font-size: 13px;
   color: var(--text-color); background: transparent;

@@ -65,6 +65,23 @@ function escapeHtml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 
+// ── Helper pour le badge Archived ──
+function getArchivedBadge(item) {
+  if (item.tags && item.tags.indexOf('archived') !== -1) {
+    return '<div class="anime-badges"><span class="anime-badge" title="archived"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-9 9H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a9 9 0 0 1 9 9z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="9" x2="13" y2="9"/><line x1="9" y1="17" x2="15" y2="17"/></svg></span></div>';
+  }
+  return '';
+}
+
+// ── Helper pour le badge de format musique ──
+function getMusicFormatBadge(item) {
+  var format = item.format ? item.format.toLowerCase() : 'album';
+  if (format === 'album' || format === 'ep' || format === 'single') {
+    return '<span class="music-format-badge">' + format + '</span>';
+  }
+  return '';
+}
+
 // ── Review popup ──
 document.addEventListener('click', function(e) {
   if (!e.target.classList.contains('review-btn')) return;
@@ -338,7 +355,7 @@ function generateBibliography(data = books, isSearch = false) {
       
       var card = document.createElement('a');
       card.href = book.link; card.target = "_blank"; card.className = 'book-card';
-      card.innerHTML = '<img src="' + book.cover + '" alt="' + book.title + '"><div class="book-title">' + book.title + '</div>' + starsHtml + reviewHtml;
+      card.innerHTML = '<img src="' + book.cover + '" alt="' + book.title + '">' + getArchivedBadge(book) + '<div class="book-title">' + book.title + '</div>' + starsHtml + reviewHtml;
       div.appendChild(card);
     });
     
@@ -399,6 +416,7 @@ function generateBibliography(data = books, isSearch = false) {
       var reviewHtml = book.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(book.review) + '</span>' : '';
       card.innerHTML = `
         <img src="${book.cover}" alt="${book.title}">
+        ${getArchivedBadge(book)}
         <div class="book-title">${book.title}</div>
         ${starsHtml}
         ${reviewHtml}
@@ -514,7 +532,7 @@ function generateFilms(data = films, isSearch = false) {
       if (movie.tags && movie.tags.indexOf('coup de coeur') !== -1) var cdcClass = ' coup-de-coeur-card'; else var cdcClass = '';
       var card = document.createElement('a');
       card.href = movie.link; card.target = "_blank"; card.className = 'book-card' + cdcClass;
-      card.innerHTML = '<img src="' + movie.cover + '" alt="' + movie.title + '"><div class="book-title">' + movie.title + '</div>' + starsHtml + reviewHtml;
+      card.innerHTML = '<img src="' + movie.cover + '" alt="' + movie.title + '">' + getArchivedBadge(movie) + '<div class="book-title">' + movie.title + '</div>' + starsHtml + reviewHtml;
       div.appendChild(card);
     });
     container.innerHTML = '';
@@ -555,7 +573,7 @@ function generateFilms(data = films, isSearch = false) {
       
       if (movie.tags && movie.tags.indexOf('coup de coeur') !== -1) card.className += ' coup-de-coeur-card';
       var reviewHtml = movie.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(movie.review) + '</span>' : '';
-      card.innerHTML = `<img src="${movie.cover}" alt="${movie.title}"><div class="book-title">${movie.title}</div>${starsHtml}${reviewHtml}`;
+      card.innerHTML = `<img src="${movie.cover}" alt="${movie.title}">${getArchivedBadge(movie)}<div class="book-title">${movie.title}</div>${starsHtml}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
@@ -589,7 +607,7 @@ function generateSeries(data = series, isSearch = false) {
       if (season.tags && season.tags.indexOf('coup de coeur') !== -1) var cdcClass = ' coup-de-coeur-card'; else var cdcClass = '';
       var card = document.createElement('a');
       card.href = season.link; card.target = "_blank"; card.className = 'book-card' + cdcClass;
-      card.innerHTML = '<img src="' + season.cover + '" alt="' + season.title + '"><div class="book-title">' + season.title + '</div>' + starsHtml + reviewHtml;
+      card.innerHTML = '<img src="' + season.cover + '" alt="' + season.title + '">' + getArchivedBadge(season) + '<div class="book-title">' + season.title + '</div>' + starsHtml + reviewHtml;
       div.appendChild(card);
     });
     container.innerHTML = '';
@@ -628,7 +646,7 @@ function generateSeries(data = series, isSearch = false) {
       
       if (season.tags && season.tags.indexOf('coup de coeur') !== -1) card.className += 'coup-de-coeur-card';
       var reviewHtml = season.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(season.review) + '</span>' : '';
-      card.innerHTML = `<img src="${season.cover}" alt="${season.title}"><div class="book-title">${season.title}</div>${starsHtml}${reviewHtml}`;
+      card.innerHTML = `<img src="${season.cover}" alt="${season.title}">${getArchivedBadge(season)}<div class="book-title">${season.title}</div>${starsHtml}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
@@ -697,7 +715,7 @@ function generateGames(data = games, isSearch = false) {
       
       var card = document.createElement('a');
       card.href = game.link; card.target = "_blank"; card.className = 'book-card';
-      card.innerHTML = '<img src="' + game.cover + '" alt="' + game.title + '"><div class="book-title">' + game.title + '</div>' + starsHtml + reviewHtml;
+      card.innerHTML = '<img src="' + game.cover + '" alt="' + game.title + '">' + getArchivedBadge(game) + '<div class="book-title">' + game.title + '</div>' + starsHtml + reviewHtml;
       div.appendChild(card);
     });
     
@@ -738,7 +756,7 @@ function generateGames(data = games, isSearch = false) {
       const starsHtml = game.note !== null ? `<div class="book-meta">${getStars(game.note)}</div>` : '';
 
       var reviewHtml = game.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(game.review) + '</span>' : '';
-      card.innerHTML = `<img src="${game.cover}" alt="${game.title}"><div class="book-title">${game.title}</div>${starsHtml}${reviewHtml}`;
+      card.innerHTML = `<img src="${game.cover}" alt="${game.title}">${getArchivedBadge(game)}<div class="book-title">${game.title}</div>${starsHtml}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
@@ -821,14 +839,18 @@ function generateMusique(data = musique, isSearch = false) {
       var starsHtml = album.note !== null ? '<div class="book-meta">' + getStars(album.note) + '</div>' : '';
       var reviewHtml = album.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(album.review) + '</span>' : '';
       
-      var relistenBadge = '';
-      if (album.tags && album.tags.indexOf('réécoute') !== -1) {
-        relistenBadge = '<span class="music-badge" title="réécouté"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg></span>';
-      }
+var badgesHtml = '';
+if (album.tags && album.tags.indexOf('réécoute') !== -1) {
+  badgesHtml += '<span class="anime-badge" title="réécouté"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg></span>';
+}
+if (album.tags && album.tags.indexOf('archived') !== -1) {
+  badgesHtml += '<span class="anime-badge" title="archived"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-9 9H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a9 9 0 0 1 9 9z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="9" x2="13" y2="9"/><line x1="9" y1="17" x2="15" y2="17"/></svg></span>';
+}
+var relistenBadge = badgesHtml ? '<div class="anime-badges">' + badgesHtml + '</div>' : '';
       
       var card = document.createElement('a');
       card.href = album.link; card.target = "_blank"; card.className = 'book-card';
-      card.innerHTML = '<img src="' + album.cover + '" alt="' + album.title + '">' + relistenBadge + '<div class="book-title">' + album.title + '</div>' + starsHtml + reviewHtml;
+      card.innerHTML = '<img src="' + album.cover + '" alt="' + album.title + '">' + getMusicFormatBadge(album) + relistenBadge + '<div class="book-title">' + album.title + '</div>' + starsHtml + reviewHtml;
       div.appendChild(card);
     });
     
@@ -870,12 +892,16 @@ function generateMusique(data = musique, isSearch = false) {
 
       var reviewHtml = album.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(album.review) + '</span>' : '';
       
-      var relistenBadge = '';
-      if (album.tags && album.tags.indexOf('réécoute') !== -1) {
-        relistenBadge = '<span class="music-badge" title="réécouté"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg></span>';
-      }
+var badgesHtml = '';
+if (album.tags && album.tags.indexOf('réécoute') !== -1) {
+  badgesHtml += '<span class="anime-badge" title="réécouté"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg></span>';
+}
+if (album.tags && album.tags.indexOf('archived') !== -1) {
+  badgesHtml += '<span class="anime-badge" title="archived"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-9 9H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a9 9 0 0 1 9 9z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="9" x2="13" y2="9"/><line x1="9" y1="17" x2="15" y2="17"/></svg></span>';
+}
+var relistenBadge = badgesHtml ? '<div class="anime-badges">' + badgesHtml + '</div>' : '';
       
-      card.innerHTML = `<img src="${album.cover}" alt="${album.title}">${relistenBadge}<div class="book-title">${album.title}</div>${starsHtml}${reviewHtml}`;
+      card.innerHTML = `<img src="${album.cover}" alt="${album.title}">${getMusicFormatBadge(album)}${relistenBadge}<div class="book-title">${album.title}</div>${starsHtml}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
