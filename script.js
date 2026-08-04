@@ -14,7 +14,7 @@ let books, films, series, games, musique, journal;
 try { books = booksData; } catch(e) { books = {}; }
 try { films = filmsData; } catch(e) { films = {}; }
 try { series = seriesData; } catch(e) { series = {}; }
-try { games = gamesData; } catch(e) { games = {}; }
+try { games = gamesData; } catch(e) { games = []; }
 try { musique = musicData; } catch(e) { musique = {}; }
 try { journal = journalData; } catch(e) { journal = {}; }
 let ecransSearchQuery = '';
@@ -286,6 +286,16 @@ function filterData(data, query) {
   const normalize = str => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[''`']/g, "");
   const q = normalize(query);
   
+  // Si c'est une liste plate (comme les jeux), on filtre directement dedans
+  if (Array.isArray(data)) {
+    return data.filter(item => {
+      const matchTitle = normalize(item.title).includes(q);
+      const matchEngTitle = item.englishTitle != null && normalize(item.englishTitle).includes(q);
+      return matchTitle || matchEngTitle;
+    });
+  }
+
+  // Sinon, on filtre par catégorie (comme avant)
   const result = {};
   for (const category in data) {
     const matchCategory = normalize(category).includes(q);
@@ -664,23 +674,23 @@ function generateSeries(data = series, isSearch = false) {
 
 // ── Generate Jeux vidéo ──
 function generateGames(data = games, isSearch = false) {
-  let totalGames = 0;
-  for (const dev in data) totalGames += data[dev].length;
+  // Comme data est maintenant une liste plate, on prend directement sa longueur
+  let totalGames = data.length;
   const label = isSearch 
     ? totalGames + " jeu" + (totalGames !== 1 ? "x" : "") + " trouvé" + (totalGames !== 1 ? "s" : "")
     : totalGames + " jeu" + (totalGames !== 1 ? "x" : "") + " joué" + (totalGames !== 1 ? "s" : "");
   document.getElementById('jeux-counter').textContent = label;
 
-    // Tri Jeux
+  // Tri Jeux
   var sortContainer = document.getElementById('jeux-sort');
   sortContainer.innerHTML = '<span class="anime-sort-label">tri :</span>';
-  ['développeur', 'note', 'titre'].forEach(function(mode) {
+  ['note', 'titre'].forEach(function(mode) {
     var btn = document.createElement('button');
     var internalMode = mode === 'titre' ? 'alpha' : mode;
     btn.className = 'anime-sort-btn' + (jeuxSortMode === internalMode ? ' active' : '');
     btn.textContent = mode;
     btn.addEventListener('click', function() {
-      if (jeuxSortMode === internalMode && internalMode !== 'développeur') {
+      if (jeuxSortMode === internalMode) {
         jeuxSortDir *= -1;
       } else {
         jeuxSortMode = internalMode;
@@ -695,79 +705,42 @@ function generateGames(data = games, isSearch = false) {
 
   const container = document.getElementById('jeuxContent');
 
-  // --- VUE GLOBALE JEUX ---
-  if (jeuxSortMode !== 'développeur') {
-    var allGames = [];
-    for (var dev in data) {
-      data[dev].forEach(function(game) { allGames.push(game); });
+  // On copie le tableau pour ne pas modifier l'original lors du tri
+  var allGames = data.slice();
+
+  allGames.sort(function(a, b) {
+    if (jeuxSortMode === 'note') {
+      if (a.note === null && b.note === null) return (a.title.localeCompare(b.title)) * jeuxSortDir;
+      if (a.note === null) return 1; 
+      if (b.note === null) return -1;
+      return (b.note - a.note) * jeuxSortDir;
+    } else {
+      return (a.title.localeCompare(b.title)) * jeuxSortDir;
     }
+  });
 
-    allGames.sort(function(a, b) {
-      if (jeuxSortMode === 'note') {
-        if (a.note === null && b.note === null) return (a.title.localeCompare(b.title)) * jeuxSortDir;
-        if (a.note === null) return 1; if (b.note === null) return -1;
-        return (b.note - a.note) * jeuxSortDir;
-      } else {
-        return (a.title.localeCompare(b.title)) * jeuxSortDir;
-      }
-    });
-
-    if (allGames.length === 0) {
-      container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
-      return;
-    }
-
-    var div = document.createElement('div'); div.className = 'books';
-    allGames.forEach(function(game) {
-      var starsHtml = game.note !== null ? '<div class="book-meta">' + getStars(game.note) + '</div>' : '';
-      var reviewHtml = game.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(game.review) + '</span>' : '';
-      
-      var card = document.createElement('a');
-      card.href = game.link; card.target = "_blank"; card.className = 'book-card';
-      card.innerHTML = '<img src="' + game.cover + '" alt="' + game.title + '">' + getArchivedBadge(game) + '<div class="book-title">' + game.title + '</div>' + starsHtml + reviewHtml;
-      div.appendChild(card);
-    });
-    
-    container.innerHTML = '';
-    container.appendChild(div);
-    return; 
-  }
-
-  container.innerHTML = '';
-
-  if (sortDataKeys(data).length === 0) {
+  if (allGames.length === 0) {
     container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
     return;
   }
 
-  sortDataKeys(data).forEach(function(dev) {
-    container.insertAdjacentHTML('beforeend', getCreatorHeader(dev, data[dev].length));
-
-    const notesValides = data[dev].map(g => g.note).filter(n => n !== null);
-    if (notesValides.length > 1) {
-      const moyenne = (notesValides.reduce((acc, note) => acc + note, 0) / notesValides.length).toFixed(1);
-      const avgDiv = document.createElement('div');
-      avgDiv.className = 'show-average';
-      avgDiv.textContent = "moyenne : " + moyenne;
-      container.appendChild(avgDiv);
-    }
-
-    const div = document.createElement('div');
-    div.className = 'books';
-    sortEntriesByNote(data[dev]).forEach(function(game) {
-      const card = document.createElement('a');
-      card.href = game.link;
-      card.target = "_blank";
-      card.className = 'book-card';
-
-      const starsHtml = game.note !== null ? `<div class="book-meta">${getStars(game.note)}</div>` : '';
-
-      var reviewHtml = game.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(game.review) + '</span>' : '';
-      card.innerHTML = `<img src="${game.cover}" alt="${game.title}">${getArchivedBadge(game)}<div class="book-title">${game.title}</div>${starsHtml}${reviewHtml}`;
-      div.appendChild(card);
-    });
-    container.appendChild(div);
+  var div = document.createElement('div'); 
+  div.className = 'books';
+  
+  allGames.forEach(function(game) {
+    var starsHtml = game.note !== null ? '<div class="book-meta">' + getStars(game.note) + '</div>' : '';
+    var reviewHtml = game.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(game.review) + '</span>' : '';
+    
+    var card = document.createElement('a');
+    card.href = game.link; 
+    card.target = "_blank"; 
+    card.className = 'book-card';
+    card.innerHTML = '<img src="' + game.cover + '" alt="' + game.title + '">' + getArchivedBadge(game) + '<div class="book-title">' + game.title + '</div>' + starsHtml + reviewHtml;
+    div.appendChild(card);
   });
+  
+  container.innerHTML = '';
+  container.appendChild(div);
 }
 
 // ── Generate Musique ──
@@ -2028,7 +2001,7 @@ let biblioSortMode = 'auteur';
 let biblioSortDir = 1;
 let musiqueSortMode = 'artiste';
 let musiqueSortDir = 1;
-let jeuxSortMode = 'développeur';
+let jeuxSortMode = 'note';
 let jeuxSortDir = 1;
 let ecransSortMode = 'réalisateur';
 let ecransSortDir = 1;
@@ -2400,13 +2373,17 @@ function generateStats() {
     { name: 'livres', data: books, creatorLabel: 'auteur' },
     { name: 'films', data: films, creatorLabel: 'réalisateur' },
     { name: 'séries', data: series, creatorLabel: 'série' },
-    { name: 'jeux', data: games, creatorLabel: 'développeur' },
     { name: 'albums', data: musique, creatorLabel: 'artiste' }
   ];
 
   if (typeof animeList !== 'undefined') {
     var animeNotes = animeList.map(function(a) { return a.note; }).filter(function(n) { return n !== null; });
     if (animeNotes.length > 0) sections.push({ name: 'anime', notes: animeNotes });
+  }
+
+  if (typeof games !== 'undefined' && games.length > 0) {
+    var gameNotes = games.map(function(g) { return g.note; }).filter(function(n) { return n !== null; });
+    if (gameNotes.length > 0) sections.push({ name: 'jeux', notes: gameNotes });
   }
 
   if (typeof mangaData !== 'undefined') {
@@ -2426,8 +2403,7 @@ function generateStats() {
   for (var k in series) seriesTotal += series[k].length;
   if (seriesTotal > 0) summaryParts.push(seriesTotal + ' série' + (seriesTotal !== 1 ? 's' : ''));
 
-  var gameTotal = 0;
-  for (var k in games) gameTotal += games[k].length;
+  var gameTotal = games.length;
   if (gameTotal > 0) summaryParts.push(gameTotal + ' jeu' + (gameTotal !== 1 ? 'x' : ''));
 
   var musicTotal = 0;
