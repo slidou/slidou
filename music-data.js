@@ -45,6 +45,9 @@ const musicData = {
     { title: "make you feel", note: 2, cover: "music/makeyoufeel.webp", link: "https://rateyourmusic.com/release/single/potsu-danny-p/make-you-feel/", format: "single" },
     { title: "have u seen my dog", note: 1.5, cover: "music/haveuseenmydog.webp", link: "https://rateyourmusic.com/release/single/potsu/have-u-seen-my-dog/", format: "single" },
     { title: "lovesick", note: 3.5, cover: "music/lovesick.webp", link: "https://rateyourmusic.com/release/single/potsu/lovesick/", format: "single", tags: ["réécoute"] },
+    { title: "Silent Dialogue", note: 3, cover: "music/silentdialogue.webp", link: "https://rateyourmusic.com/release/album/potsu/silent-dialogue/" },
+    { title: "Cat Naps", note: 3.5, cover: "music/catnaps.webp", link: "https://rateyourmusic.com/release/album/potsu/cat-naps/" },
+    { title: "Moon Beams", note: 3, cover: "music/moonbeams.webp", link: "https://rateyourmusic.com/release/album/potsu/moon-beams/" },
   ],
   "Kekra": [
     { title: "Kekra", note: 4, cover: "music/kekra.webp", link: "https://rateyourmusic.com/release/album/kekra/kekra/", tags: ["réécoute"] },

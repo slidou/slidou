@@ -358,4 +358,8 @@ const journalData = [
 { d: "2026-08-04", t: "musique", title: "make you feel", img: "music/makeyoufeel.webp", note: "première écoute, single" },
 { d: "2026-08-04", t: "musique", title: "have u seen my dog", img: "music/haveuseenmydog.webp", note: "première écoute, single" },
 { d: "2026-08-04", t: "musique", title: "lovesick", img: "music/lovesick.webp", note: "réécoute, single" },
+{ d: "2026-08-04", t: "livre", title: "La Mort d' Ivan Illitch / Maitre et Serviteur / Trois Morts", img: "covers/illitch.jpg", note: "poursuite de la lecture au taf" },
+{ d: "2026-08-04", t: "musique", title: "Silent Dialogue", img: "music/silentdialogue.webp", note: "première écoute, je ne connaissais pas du tout, la genèse de potsu, c'est ok sans plus" },
+{ d: "2026-08-04", t: "musique", title: "Cat Naps", img: "music/catnaps.webp", note: "première écoute, je ne connaissais pas non plus, pas mal du tout" },
+{ d: "2026-08-04", t: "musique", title: "Moon Beams", img: "music/moonbeams.webp", note: "première écoute" },
 ];
