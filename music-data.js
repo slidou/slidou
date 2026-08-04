@@ -19,7 +19,7 @@ const musicData = {
   "Nujabes": [
     { title: "Luv(sic) Hexalogy", note: 5, cover: "music/luvsichexalogy.webp", link: "https://rateyourmusic.com/release/comp/nujabes-feat-shing02/luv_sic-hexalogy/", tags: ["réécoute","archived"] },
   ],
-  "potsu": [
+  "potsu [completed]": [
     { title: "Just Friends", note: 5, cover: "music/justfriends.webp", link: "https://rateyourmusic.com/release/album/potsu/just-friends/", tags: ["réécoute","archived"] },
     { title: "Ivy League", note: 4.5, cover: "music/ivyleague.webp", link: "https://rateyourmusic.com/release/album/potsu/ivy-league/", tags: ["réécoute","archived"] },
     { title: "Reaching for a Star", note: 4, cover: "music/rfas.webp", link: "https://rateyourmusic.com/release/album/potsu/reaching-for-a-star/", tags: ["réécoute","archived"] },

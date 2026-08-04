@@ -22,12 +22,15 @@ let ecransSearchQuery = '';
 // ── Tri utilitaire ──
 function sortDataKeys(data) {
   return Object.keys(data).sort(function(a, b) {
+    var aClean = a.replace(' [completed]', '');
+    var bClean = b.replace(' [completed]', '');
+    
     if (data[b].length !== data[a].length) return data[b].length - data[a].length;
     var aN = data[a].map(function(m) { return m.note; }).filter(function(n) { return n !== null; });
     var bN = data[b].map(function(m) { return m.note; }).filter(function(n) { return n !== null; });
     var aA = aN.length ? aN.reduce(function(x, y) { return x + y; }, 0) / aN.length : 0;
     var bA = bN.length ? bN.reduce(function(x, y) { return x + y; }, 0) / bN.length : 0;
-    return bA - aA || a.localeCompare(b);
+    return bA - aA || aClean.localeCompare(bClean);
   });
 }
 
@@ -80,6 +83,18 @@ function getMusicFormatBadge(item) {
     return '<span class="music-format-badge">' + format + '</span>';
   }
   return '';
+}
+
+// ── Helper pour le badge Intégrale ──
+function getCreatorHeader(name, count) {
+  var isIntegral = name.indexOf('[completed]') !== -1;
+  var cleanName = name.replace(' [completed]', '');
+  
+  if (isIntegral) {
+    return '<h2 class="integral-title">' + cleanName + " ( " + count + " )" + ' <span class="integral-badge">Intégrale</span></h2>';
+  } else {
+    return '<h2>' + cleanName + " ( " + count + " )" + '</h2>';
+  }
 }
 
 // ── Review popup ──
@@ -389,9 +404,7 @@ function generateBibliography(data = books, isSearch = false) {
   }
 
   sortDataKeys(data).forEach(function(author) {
-    const h2 = document.createElement('h2');
-    h2.textContent = author + " ( " + data[author].length + " )";
-    listContainer.appendChild(h2);
+    listContainer.insertAdjacentHTML('beforeend', getCreatorHeader(author, data[author].length));
 
     const notesValides = data[author].map(b => b.note).filter(n => n !== null);
     if (notesValides.length > 1) {
@@ -548,9 +561,7 @@ function generateFilms(data = films, isSearch = false) {
   }
 
   sortDataKeys(data).forEach(function(director) {
-    const h2 = document.createElement('h2');
-    h2.textContent = director + " ( " + data[director].length + " )";
-    container.appendChild(h2);
+    container.insertAdjacentHTML('beforeend', getCreatorHeader(director, data[director].length));
 
     const notesValides = data[director].map(m => m.note).filter(n => n !== null);
     if (notesValides.length > 1) {
@@ -623,9 +634,7 @@ function generateSeries(data = series, isSearch = false) {
   }
 
   sortDataKeys(data).forEach(function(show) {
-    const h2 = document.createElement('h2');
-    h2.textContent = show + " ( " + data[show].length + " )";
-    container.appendChild(h2);
+    container.insertAdjacentHTML('beforeend', getCreatorHeader(show, data[show].length));
 
     const notesValides = data[show].map(s => s.note).filter(n => n !== null);
     if (notesValides.length > 1) {
@@ -732,9 +741,7 @@ function generateGames(data = games, isSearch = false) {
   }
 
   sortDataKeys(data).forEach(function(dev) {
-    const h2 = document.createElement('h2');
-    h2.textContent = dev + " ( " + data[dev].length + " )";
-    container.appendChild(h2);
+    container.insertAdjacentHTML('beforeend', getCreatorHeader(dev, data[dev].length));
 
     const notesValides = data[dev].map(g => g.note).filter(n => n !== null);
     if (notesValides.length > 1) {
@@ -867,9 +874,7 @@ var relistenBadge = badgesHtml ? '<div class="anime-badges">' + badgesHtml + '</
   }
 
   sortDataKeys(data).forEach(function(artist) {
-    const h2 = document.createElement('h2');
-    h2.textContent = artist + " ( " + data[artist].length + " )";
-    container.appendChild(h2);
+    container.insertAdjacentHTML('beforeend', getCreatorHeader(artist, data[artist].length));
 
     const notesValides = data[artist].map(m => m.note).filter(n => n !== null);
     if (notesValides.length > 1) {
@@ -2343,9 +2348,7 @@ function renderManga() {
       return (b.note - a.note) * mangaSortDir;
     });
 
-    var h2 = document.createElement('h2');
-    h2.textContent = author + ' ( ' + filtered.length + ' )';
-    container.appendChild(h2);
+    container.insertAdjacentHTML('beforeend', getCreatorHeader(author, filtered.length));
 
     var nv = filtered.map(function(m) { return m.note; }).filter(function(n) { return n !== null; });
     if (nv.length > 1) {

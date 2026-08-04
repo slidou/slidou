@@ -726,6 +726,53 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
   backdrop-filter: blur(4px);
 }
 
+/* ── BADGE INTÉGRALE ── */
+.integral-title {
+  color: var(--star-color) !important;
+}
+.integral-badge {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 3px 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #fff;
+  background: linear-gradient(135deg, #B38728, #E0A93C, #C68A1E, #F0C75E, #A07214);
+  background-size: 200% auto;
+  border-radius: 12px;
+  vertical-align: middle;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(245, 197, 66, 0.5);
+  animation: pulseGlow 2.5s infinite ease-in-out;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* L'ombre qui sauve la lisibilité */
+}
+/* Le reflet qui traverse */
+.integral-badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
+  transform: skewX(-25deg);
+  animation: shine 3.5s infinite ease-in-out;
+}
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 5px rgba(245, 197, 66, 0.4); transform: scale(1); }
+  50% { box-shadow: 0 0 14px rgba(245, 197, 66, 0.8); transform: scale(1.08); }
+  100% { box-shadow: 0 0 5px rgba(245, 197, 66, 0.4); transform: scale(1); }
+}
+@keyframes shine {
+  0% { left: -50%; }
+  60% { left: 120%; }
+  100% { left: 120%; }
+}
+
 .load-more-btn {
   font-family: 'Space Grotesk', sans-serif; font-size: 13px;
   color: var(--text-color); background: transparent;
