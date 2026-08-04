@@ -380,7 +380,7 @@ function generateBibliography(data = books, isSearch = false) {
       
       var card = document.createElement('a');
       card.href = book.link; card.target = "_blank"; card.className = 'book-card';
-      card.innerHTML = '<img src="' + book.cover + '" alt="' + book.title + '">' + getArchivedBadge(book) + '<div class="book-title">' + book.title + '</div>' + starsHtml + reviewHtml;
+      card.innerHTML = '<img loading="lazy" src="' + book.cover + '" alt="' + book.title + '">' + getArchivedBadge(book) + '<div class="book-title">' + book.title + '</div>' + starsHtml + reviewHtml;
       div.appendChild(card);
     });
     
@@ -438,7 +438,7 @@ function generateBibliography(data = books, isSearch = false) {
       
       var reviewHtml = book.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(book.review) + '</span>' : '';
       card.innerHTML = `
-        <img src="${book.cover}" alt="${book.title}">
+        <img loading="lazy" src="${book.cover}" alt="${book.title}">
         ${getArchivedBadge(book)}
         <div class="book-title">${book.title}</div>
         ${starsHtml}
@@ -555,7 +555,7 @@ function generateFilms(data = films, isSearch = false) {
       if (movie.tags && movie.tags.indexOf('coup de coeur') !== -1) var cdcClass = ' coup-de-coeur-card'; else var cdcClass = '';
       var card = document.createElement('a');
       card.href = movie.link; card.target = "_blank"; card.className = 'book-card' + cdcClass;
-      card.innerHTML = '<img src="' + movie.cover + '" alt="' + movie.title + '">' + getArchivedBadge(movie) + '<div class="book-title">' + movie.title + '</div>' + starsHtml + reviewHtml;
+      card.innerHTML = '<img loading="lazy" src="' + movie.cover + '" alt="' + movie.title + '">' + getArchivedBadge(movie) + '<div class="book-title">' + movie.title + '</div>' + starsHtml + reviewHtml;
       div.appendChild(card);
     });
     container.innerHTML = '';
@@ -594,7 +594,7 @@ function generateFilms(data = films, isSearch = false) {
       
       if (movie.tags && movie.tags.indexOf('coup de coeur') !== -1) card.className += ' coup-de-coeur-card';
       var reviewHtml = movie.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(movie.review) + '</span>' : '';
-      card.innerHTML = `<img src="${movie.cover}" alt="${movie.title}">${getArchivedBadge(movie)}<div class="book-title">${movie.title}</div>${starsHtml}${reviewHtml}`;
+      card.innerHTML = `<img loading="lazy" src="${movie.cover}" alt="${movie.title}">${getArchivedBadge(movie)}<div class="book-title">${movie.title}</div>${starsHtml}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
@@ -628,7 +628,7 @@ function generateSeries(data = series, isSearch = false) {
       if (season.tags && season.tags.indexOf('coup de coeur') !== -1) var cdcClass = ' coup-de-coeur-card'; else var cdcClass = '';
       var card = document.createElement('a');
       card.href = season.link; card.target = "_blank"; card.className = 'book-card' + cdcClass;
-      card.innerHTML = '<img src="' + season.cover + '" alt="' + season.title + '">' + getArchivedBadge(season) + '<div class="book-title">' + season.title + '</div>' + starsHtml + reviewHtml;
+      card.innerHTML = '<img loading="lazy" src="' + season.cover + '" alt="' + season.title + '">' + getArchivedBadge(season) + '<div class="book-title">' + season.title + '</div>' + starsHtml + reviewHtml;
       div.appendChild(card);
     });
     container.innerHTML = '';
@@ -665,7 +665,7 @@ function generateSeries(data = series, isSearch = false) {
       
       if (season.tags && season.tags.indexOf('coup de coeur') !== -1) card.className += 'coup-de-coeur-card';
       var reviewHtml = season.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(season.review) + '</span>' : '';
-      card.innerHTML = `<img src="${season.cover}" alt="${season.title}">${getArchivedBadge(season)}<div class="book-title">${season.title}</div>${starsHtml}${reviewHtml}`;
+      card.innerHTML = `<img loading="lazy" src="${season.cover}" alt="${season.title}">${getArchivedBadge(season)}<div class="book-title">${season.title}</div>${starsHtml}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
@@ -735,7 +735,7 @@ function generateGames(data = games, isSearch = false) {
     card.href = game.link; 
     card.target = "_blank"; 
     card.className = 'book-card';
-    card.innerHTML = '<img src="' + game.cover + '" alt="' + game.title + '">' + getArchivedBadge(game) + '<div class="book-title">' + game.title + '</div>' + starsHtml + reviewHtml;
+    card.innerHTML = '<img loading="lazy" src="' + game.cover + '" alt="' + game.title + '">' + getArchivedBadge(game) + '<div class="book-title">' + game.title + '</div>' + starsHtml + reviewHtml;
     div.appendChild(card);
   });
   
@@ -830,7 +830,7 @@ var relistenBadge = badgesHtml ? '<div class="anime-badges">' + badgesHtml + '</
       
       var card = document.createElement('a');
       card.href = album.link; card.target = "_blank"; card.className = 'book-card';
-      card.innerHTML = '<img src="' + album.cover + '" alt="' + album.title + '">' + getMusicFormatBadge(album) + relistenBadge + '<div class="book-title">' + album.title + '</div>' + starsHtml + reviewHtml;
+      card.innerHTML = '<img loading="lazy" src="' + album.cover + '" alt="' + album.title + '">' + getMusicFormatBadge(album) + relistenBadge + '<div class="book-title">' + album.title + '</div>' + starsHtml + reviewHtml;
       div.appendChild(card);
     });
     
@@ -879,7 +879,7 @@ if (album.tags && album.tags.indexOf('archived') !== -1) {
 }
 var relistenBadge = badgesHtml ? '<div class="anime-badges">' + badgesHtml + '</div>' : '';
       
-      card.innerHTML = `<img src="${album.cover}" alt="${album.title}">${getMusicFormatBadge(album)}${relistenBadge}<div class="book-title">${album.title}</div>${starsHtml}${reviewHtml}`;
+      card.innerHTML = `<img loading="lazy" src="${album.cover}" alt="${album.title}">${getMusicFormatBadge(album)}${relistenBadge}<div class="book-title">${album.title}</div>${starsHtml}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
@@ -1405,7 +1405,7 @@ function renderRecap() {
       const blurStyle = item.blur ? 'style="filter:blur(6px); transition: filter 0.3s;"' : '';
       
       card.innerHTML = `
-        <img src="${item.img}" alt="${item.title}" ${blurStyle}>
+        <img loading="lazy" src="${item.img}" alt="${item.title}" ${blurStyle}>
         <div class="book-title">${item.title}</div>
       `;
       grid.appendChild(card);
@@ -1452,7 +1452,7 @@ const labels = {
       var ratioClass = cat === 'musique' ? ' dash-card-square' : ' dash-card-cover';
       html += `
         <div class="home-dash-card${ratioClass}">
-          <img src="${latestEntry.img}" alt="${latestEntry.title}" style="${blurStyle}">
+          <img loading="lazy" src="${latestEntry.img}" alt="${latestEntry.title}" style="${blurStyle}">
           <span class="dash-label">${labels[cat]}</span>
           <span class="dash-title">${latestEntry.title}</span>
         </div>`;
@@ -1495,7 +1495,7 @@ function renderCalendar() {
         <div class="calendar-day has-data${blurClass}" data-date="${dateStr}">
           ${statusDot}
           <div class="calendar-day-num">${day}</div>
-          <img src="${dayEntries[0].img}" alt="${dateStr}">
+          <img loading="lazy" src="${dayEntries[0].img}" alt="${dateStr}">
           ${badge}
         </div>`;
     } else {
@@ -1564,7 +1564,7 @@ function openPopup(dateStr) {
     const statusHtml = statusLabel ? '<div class="popup-item-status ' + statusClass + '">' + statusLabel + '</div>' : '';
     html += `
       <div class="popup-item${blurClass}">
-        <img src="${item.img}" alt="${item.title}">
+        <img loading="lazy" src="${item.img}" alt="${item.title}">
         <div class="popup-item-title"><span class="popup-type-dot ${dotClass}"></span>${item.title}</div>
         ${noteHtml}
         ${statusHtml}
@@ -1919,7 +1919,7 @@ function renderAnimeBatch() {
 
     var imgBlock;
     if (animeImageCache.has(a.id)) {
-      imgBlock = '<img src="' + animeImageCache.get(a.id) + '" alt="" style="width:100%;height:220px;object-fit:cover;object-position:center;border-radius:2px;box-shadow:0 4px 8px var(--shadow-color);display:block;">';
+      imgBlock = '<img loading="lazy" src="' + animeImageCache.get(a.id) + '" alt="" style="width:100%;height:220px;object-fit:cover;object-position:center;border-radius:2px;box-shadow:0 4px 8px var(--shadow-color);display:block;">';
     } else {
       imgBlock = '<div class="anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>';
       queueImageLoad(a.id);
@@ -1969,7 +1969,7 @@ function renderTopList(container, items, type) {
     var cache = type === 'anime' ? animeImageCache : mangaImageCache;
     var queueFn = type === 'anime' ? queueImageLoad : queueMangaImage;
     if (cache.has(item.id)) {
-      imgBlock = '<img src="' + cache.get(item.id) + '" alt="">';
+      imgBlock = '<img loading="lazy" src="' + cache.get(item.id) + '" alt="">';
     } else {
       imgBlock = '<div class="' + (type === 'manga' ? 'manga-placeholder' : '') + ' anime-placeholder" style="--hue:' + hue + '"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>';
       queueFn(item.id);
@@ -2251,7 +2251,7 @@ function renderManga() {
 
       var imgBlock;
       if (mangaImageCache.has(m.id)) {
-                imgBlock = '<img src="' + mangaImageCache.get(m.id) + '" alt="" class="manga-img-render">';
+                imgBlock = '<img loading="lazy" src="' + mangaImageCache.get(m.id) + '" alt="" class="manga-img-render">';
       } else {
         imgBlock = '<div class="manga-placeholder anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>';
         queueMangaImage(m.id);
@@ -2346,7 +2346,7 @@ function renderManga() {
 
       var imgBlock;
       if (mangaImageCache.has(m.id)) {
-                imgBlock = '<img src="' + mangaImageCache.get(m.id) + '" alt="" class="manga-img-render">';
+                imgBlock = '<img loading="lazy" src="' + mangaImageCache.get(m.id) + '" alt="" class="manga-img-render">';
       } else {
         imgBlock = '<div class="manga-placeholder anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>';
         queueMangaImage(m.id);
