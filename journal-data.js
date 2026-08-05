@@ -363,4 +363,7 @@ const journalData = [
 { d: "2026-08-04", t: "musique", title: "Cat Naps", img: "music/catnaps.webp", note: "première écoute, je ne connaissais pas non plus, pas mal du tout" },
 { d: "2026-08-04", t: "musique", title: "Moon Beams", img: "music/moonbeams.webp", note: "première écoute" },
 { d: "2026-08-05", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "de la merde", status: "en cours" },
+{ d: "2026-08-05", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "premier challenge réussi", status: "en cours" },
+{ d: "2026-08-05", t: "musique", title: "000$", img: "music/000$.webp", note: "réécoute" },
+{ d: "2026-08-05", t: "musique", title: "J.O.$", img: "music/J.O.$.webp", note: "réécoute" },
 ];
