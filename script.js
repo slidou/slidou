@@ -79,7 +79,7 @@ function getArchivedBadge(item) {
 // ── Helper pour le badge de format musique ──
 function getMusicFormatBadge(item) {
   var format = item.format ? item.format.toLowerCase() : 'album';
-  if (format === 'album' || format === 'ep' || format === 'single') {
+  if (format === 'album' || format === 'ep' || format === 'single' || format === 'mixtape') {
     return '<span class="music-format-badge">' + format + '</span>';
   }
   return '';
