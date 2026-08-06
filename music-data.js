@@ -98,6 +98,7 @@ const musicData = {
     { title: "HHHH²", note: 2.5, cover: "music/hhhh².jpg", link: "https://rateyourmusic.com/release/album/josman/hhhh2/" },
     { title: "000$", note: 4.5, cover: "music/000$.webp", link: "https://rateyourmusic.com/release/mixtape/josman/000/", format: "mixtape", tags: ["réécoute"] },
     { title: "J.O.$", note: 4, cover: "music/J.O.$.webp", link: "https://rateyourmusic.com/release/album/josman/j_o/", tags: ["réécoute"] },
+    { title: "M.A.N (Black Roses & Lost Feelings)", note: 3.5, cover: "music/M.A.N.webp", link: "https://rateyourmusic.com/release/album/josman/m_a_n-black-roses-and-lost-feelings/", tags: ["réécoute"] },
   ],
   "Krisy": [
     { title: "Edward Risky", note: 3.5, cover: "music/edwardrisky.jpg", link: "https://rateyourmusic.com/release/album/krisy/edward-risky/" },

@@ -366,4 +366,5 @@ const journalData = [
 { d: "2026-08-05", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "premier challenge réussi", status: "en cours" },
 { d: "2026-08-05", t: "musique", title: "000$", img: "music/000$.webp", note: "réécoute" },
 { d: "2026-08-05", t: "musique", title: "J.O.$", img: "music/J.O.$.webp", note: "réécoute" },
+{ d: "2026-08-06", t: "musique", title: "M.A.N (Black Roses & Lost Feelings)", img: "music/M.A.N.webp", note: "réécoute" },
 ];
