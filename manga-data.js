@@ -467,7 +467,7 @@ const mangaData = {
     { id: 159230, title: "Namaiki White Day", note: 4, tags: ["one-shot","hentai"] },
     { id: 138668, title: "Personal♥Training", note: null, tags: ["one-shot","hentai"] },
   ],
-  "Kawaisaw": [
+  "Kawaisaw [completed]": [
     { id: 173485, title: "Daseiism", note: 5, tags: ["hentai"] },
     { id: 173490, title: "Gokujou Kuso Zako Busu Mesu Ma○ko", note: 4, tags: ["hentai","archived"] },
     { id: 173496, title: "Jibakurei demo Koi ga Shitai!!", note: null, tags: ["hentai","archived"] },

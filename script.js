@@ -2408,7 +2408,7 @@ function generateStats() {
 
   var musicTotal = 0;
   for (var k in musique) musicTotal += musique[k].length;
-  if (musicTotal > 0) summaryParts.push(musicTotal + ' album' + (musicTotal !== 1 ? 's' : ''));
+  if (musicTotal > 0) summaryParts.push(musicTotal + ' projet' + (musicTotal !== 1 ? "s" : ""));
 
   if (typeof animeList !== 'undefined' && animeList.length > 0) summaryParts.push(animeList.length + ' animes');
 
@@ -2491,9 +2491,10 @@ function generateStats() {
 
     if (section.creatorLabel) {
       var topKeys = Object.keys(section.data).map(function(key) {
+        var cleanName = key.replace(' [completed]', '');
         var notes = section.data[key].map(function(item) { return item.note; }).filter(function(n) { return n !== null; });
         var avg = notes.length ? (notes.reduce(function(a, b) { return a + b; }, 0) / notes.length).toFixed(1) : '-';
-        return { name: key, count: section.data[key].length, avg: avg };
+        return { name: cleanName, count: section.data[key].length, avg: avg };
       }).sort(function(a, b) { return b.count - a.count; }).slice(0, 3);
 
       if (topKeys.length > 0) {

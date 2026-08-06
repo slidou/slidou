@@ -14,7 +14,7 @@ const filmsData = {
     { title: "Tarantella", note: null, cover: "films/tarantella.jpg", link: "https://www.senscritique.com/film/tarantella/24971949", tags: ["archived"] },
     { title: "L'Odyssée", note: 4, cover: "films/odyssee.webp", link: "https://www.senscritique.com/film/l_odyssee/81361437", tags: ["archived"] },
   ],
-    "Aleksandr Petrov": [
+    "Aleksandr Petrov [completed]": [
     { title: "Le Rêve d'un homme ridicule", note: 4.5, cover: "films/hommeridicule.jpg", link: "https://www.senscritique.com/film/le_reve_d_un_homme_ridicule/485462", tags: ["coup de coeur"] },
     { title: "Le Vieil Homme et la Mer", note: 4, cover: "films/vieilhommeetmer.jpg", link: "https://www.senscritique.com/film/le_vieil_homme_et_la_mer/372930" },
     { title: "La Sirène", note: 4, cover: "films/lasirene.jpg", link: "https://www.senscritique.com/film/la_sirene/1225870" },
@@ -310,12 +310,12 @@ const filmsData = {
   "Phil Tippett": [
     { title: "Mad God", note: 4, cover: "films/madgod.webp", link: "https://www.senscritique.com/film/mad_god/45240949", tags: ["coup de coeur"] },
     { title: "Prehistoric Beast", note: 3.5, cover: "films/prehistoricbeast.webp", link: "https://www.senscritique.com/film/prehistoric_beast/459836" },
-    { title: "MutantLand", note: 3, cover: "films/mutantland.webp", link: "https://www.senscritique.com/film/mutantland/494474" },
+    { title: "MutantLand", note: 3, cover: "films/mutantland.jpg", link: "https://www.senscritique.com/film/mutantland/494474" },
   ],
   "Kiyoshi Kurosawa": [
     { title: "Cure", note: 3, cover: "films/cure.jpg", link: "https://www.senscritique.com/film/cure/496968" },
   ],
-  "Kane Parsons (Kane Pixels)": [
+  "Kane Parsons (Kane Pixels) [completed]": [
     { title: "Backrooms", note: 3, cover: "films/backrooms.jpg", link: "https://www.senscritique.com/film/backrooms/54875220" },
   ],
   "Tsui Hark": [
