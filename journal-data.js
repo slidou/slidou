@@ -366,6 +366,12 @@ const journalData = [
 { d: "2026-08-05", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "premier challenge réussi", status: "en cours" },
 { d: "2026-08-05", t: "musique", title: "000$", img: "music/000$.webp", note: "réécoute" },
 { d: "2026-08-05", t: "musique", title: "J.O.$", img: "music/J.O.$.webp", note: "réécoute" },
+{ d: "2026-08-05", t: "livre", title: "La Mort d' Ivan Illitch / Maitre et Serviteur / Trois Morts", img: "covers/illitch.jpg", note: "poursuite de la lecture" },
 { d: "2026-08-06", t: "musique", title: "M.A.N (Black Roses & Lost Feelings)", img: "music/M.A.N.webp", note: "réécoute" },
+{ d: "2026-08-06", t: "livre", title: "La Mort d' Ivan Illitch / Maitre et Serviteur / Trois Morts", img: "covers/illitch.jpg", note: "poursuite de la lecture" },
 { d: "2026-08-06", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1190/?", status: "en cours" },
+{ d: "2026-08-07", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "je suis monté D2", status: "en cours" },
+{ d: "2026-08-07", t: "musique", title: "The Great Impersonator", img: "music/greatimpersonator.webp", note: "première écoute et découverte de l'artiste, c'était nul à chier" },
+{ d: "2026-08-08", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "3W/1L", status: "en cours" },
+{ d: "2026-08-08", t: "anime", title: "Yani Neko", img: "anime/yanineko.jpg", note: "normal episode, 6/?", status: "en cours" },
 ];

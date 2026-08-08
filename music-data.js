@@ -142,4 +142,7 @@ const musicData = {
   "Ken Carson": [
     { title: "A Great Chaos", note: 3.5, cover: "music/agreatchaos.webp", link: "https://rateyourmusic.com/release/album/ken-carson/a-great-chaos/", tags: ["réécoute"] },
   ],
+  "Halsey": [
+    { title: "The Great Impersonator", note: 1, cover: "music/greatimpersonator.webp", link: "https://rateyourmusic.com/release/album/halsey/the-great-impersonator/" },
+  ],
 };
