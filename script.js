@@ -180,6 +180,7 @@ function navigateTo(page) {
     generateGames();
   }
   if (page === 'musique') {
+    musiqueFormatFilter = null;
     document.getElementById('search-musique').value = '';
     generateMusique();
   }
@@ -745,27 +746,92 @@ function generateGames(data = games, isSearch = false) {
 
 // ── Generate Musique ──
 function generateMusique(data = musique, isSearch = false) {
-  let totalAlbums = 0;
-  let relistenCount = 0;
-  for (const artist in data) {
-    data[artist].forEach(function(album) {
-      totalAlbums++;
-      if (album.tags && album.tags.indexOf('réécoute') !== -1) relistenCount++;
+  // 1. Génération des boutons de filtre
+  var formatCounts = { album: 0, ep: 0, single: 0, mixtape: 0 };
+  for (var artist in musique) {
+    musique[artist].forEach(function(album) {
+      var fmt = album.format ? album.format.toLowerCase() : 'album';
+      if (formatCounts[fmt] !== undefined) formatCounts[fmt]++;
     });
   }
 
-  const label = isSearch 
-    ? totalAlbums + " projet" + (totalAlbums !== 1 ? "s" : "") + " trouvé" + (totalAlbums !== 1 ? "s" : "")
-    : totalAlbums + " projet" + (totalAlbums !== 1 ? "s" : "") + " écouté" + (totalAlbums !== 1 ? "s" : "");
+  var fC = document.getElementById('musique-filters');
+  if (fC) {
+    fC.innerHTML = '';
+    var topRow = document.createElement('div'); topRow.style.cssText = 'display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;';
+    var allBtn = document.createElement('button');
+    allBtn.className = 'anime-tag-btn' + (musiqueFormatFilter === null ? ' active' : '');
+    var totalAll = formatCounts.album + formatCounts.ep + formatCounts.single + formatCounts.mixtape;
+    allBtn.textContent = 'tous (' + totalAll + ')';
+    allBtn.addEventListener('click', function() { 
+      musiqueFormatFilter = null; 
+      generateMusique(filterData(musique, document.getElementById('search-musique').value), isSearch); 
+    });
+    topRow.appendChild(allBtn);
+    fC.appendChild(topRow);
+
+    var formats = ['album', 'ep', 'single', 'mixtape'];
+    var fmtSection = document.createElement('div'); fmtSection.className = 'anime-tag-section';
+    var fmtWrap = document.createElement('div'); fmtWrap.className = 'anime-tag-section-tags';
+    
+    formats.forEach(function(fmt) {
+      if (formatCounts[fmt] > 0) {
+        var btn = document.createElement('button');
+        btn.className = 'anime-tag-btn' + (musiqueFormatFilter === fmt ? ' active' : '');
+        btn.textContent = fmt + ' (' + formatCounts[fmt] + ')';
+        btn.addEventListener('click', function() { 
+          musiqueFormatFilter = musiqueFormatFilter === fmt ? null : fmt; // Si on reclique, ça remet à null (donc "tous")
+          generateMusique(filterData(musique, document.getElementById('search-musique').value), isSearch); 
+        });
+        fmtWrap.appendChild(btn);
+      }
+    });
+    fmtSection.appendChild(fmtWrap);
+    fC.appendChild(fmtSection);
+  }
+
+  // 2. Application du filtre sur les données
+  if (musiqueFormatFilter) {
+    var filteredData = {};
+    for (var artist in data) {
+      var validAlbums = data[artist].filter(function(album) {
+        var fmt = album.format ? album.format.toLowerCase() : 'album';
+        return fmt === musiqueFormatFilter;
+      });
+      if (validAlbums.length > 0) filteredData[artist] = validAlbums;
+    }
+    data = filteredData;
+  }
+
+  // 3. Compteur de la vue actuelle
+  let displayedAlbums = 0;
+  for (const artist in data) {
+    displayedAlbums += data[artist].length;
+  }
+
+  const label = (isSearch || musiqueFormatFilter) 
+    ? displayedAlbums + " projet" + (displayedAlbums !== 1 ? "s" : "") + " trouvé" + (displayedAlbums !== 1 ? "s" : "")
+    : displayedAlbums + " projet" + (displayedAlbums !== 1 ? "s" : "") + " écouté" + (displayedAlbums !== 1 ? "s" : "");
   document.getElementById('musique-counter').textContent = label;
 
-  // Barre réécoute
+  // 4. Barre réécoute (Toujours basée sur la totalité des projets, peu importe le filtre)
   var relistenBar = document.getElementById('musique-relisten-bar');
-  if (relistenBar && totalAlbums > 0 && !isSearch) {
-    var percentage = (relistenCount / totalAlbums) * 100;
-    relistenBar.innerHTML = '<span class="project-label">projet réécoute : ' + relistenCount + ' / ' + totalAlbums + ' (' + percentage.toFixed(1) + '%)</span><div class="project-track"><div class="project-fill" style="width: ' + percentage + '%"></div></div>';
-  } else if (relistenBar) {
-    relistenBar.innerHTML = '';
+  if (relistenBar) {
+    let globalTotal = 0;
+    let globalRelisten = 0;
+    for (const artist in musique) {
+      musique[artist].forEach(function(album) {
+        globalTotal++;
+        if (album.tags && album.tags.indexOf('réécoute') !== -1) globalRelisten++;
+      });
+    }
+    
+    if (globalTotal > 0) {
+      var percentage = (globalRelisten / globalTotal) * 100;
+      relistenBar.innerHTML = '<span class="project-label">projet réécoute : ' + globalRelisten + ' / ' + globalTotal + ' (' + percentage.toFixed(1) + '%)</span><div class="project-track"><div class="project-fill" style="width: ' + percentage + '%"></div></div>';
+    } else {
+      relistenBar.innerHTML = '';
+    }
   }
 
   // Tri Musique
@@ -2000,6 +2066,7 @@ var mangaCacheDirty = false;
 let biblioSortMode = 'auteur';
 let biblioSortDir = 1;
 let musiqueSortMode = 'artiste';
+let musiqueFormatFilter = null;
 let musiqueSortDir = 1;
 let jeuxSortMode = 'note';
 let jeuxSortDir = 1;
