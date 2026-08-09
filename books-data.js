@@ -477,5 +477,8 @@ Et je dois bien l’avouer, ça fait très bizarre de lire un roman aussi incisi
   ],
   "Le Monde": [
     { title: "Schopenhauer", note: 4, cover: "covers/schopenhauer.jpg", link: "https://www.goodreads.com/book/show/46011341-schopenhauer" }
+  ],
+  "Léon Tolstoï": [
+    { title: "La Mort d'Ivan Illitch suivi de Maître et serviteur et Trois morts", note: 3, cover: "covers/illitch.jpg", link: "https://www.goodreads.com/book/show/1990016.La_Mort_d_Ivan_Illitch" }
   ]
 };

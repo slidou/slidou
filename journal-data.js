@@ -374,4 +374,10 @@ const journalData = [
 { d: "2026-08-07", t: "musique", title: "The Great Impersonator", img: "music/greatimpersonator.webp", note: "première écoute et découverte de l'artiste, c'était nul à chier" },
 { d: "2026-08-08", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "3W/1L", status: "en cours" },
 { d: "2026-08-08", t: "anime", title: "Yani Neko", img: "anime/yanineko.jpg", note: "normal episode, 6/?", status: "en cours" },
+{ d: "2026-08-09", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "meh", status: "en cours" },
+{ d: "2026-08-09", t: "anime", title: "Daisan Wakusei", img: "anime/daisanwakusei.jpg", note: "music" },
+{ d: "2026-08-09", t: "anime", title: "Jaken GALDVAZAAG", img: "anime/jaken.jpg", note: "music" },
+{ d: "2026-08-09", t: "anime", title: "Nya Nya Nya Chu Nya (NNNCN)", img: "anime/nya.jpg", note: "music" },
+{ d: "2026-08-09", t: "anime", title: "2002", img: "anime/2002.jpg", note: "music" },
+{ d: "2026-08-09", t: "livre", title: "La Mort d' Ivan Illitch / Maitre et Serviteur / Trois Morts", img: "covers/illitch.jpg", note: "livre terminé" },
 ];

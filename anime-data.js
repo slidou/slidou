@@ -7545,5 +7545,9 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64711, title: "BooooM!!!", note: 3.5, tags: ["music","+","archived"] },
   { id: 64716, title: "Kuraiai", note: 3, tags: ["music","+","archived"] },
   { id: 64721, title: "Rasen", note: 3.5, tags: ["music","+","archived"] },
+  { id: 64732, title: "Daisan Wakusei", note: 3, tags: ["music","archived"] },
+  { id: 64690, title: "Nya Nya Nya Chu Nya (NNNCN)", note: 2.5, tags: ["music","archived"] },
+  { id: 64753, title: "Jaken GALDVAZAAG", note: 2.5, tags: ["music","archived"] },
+  { id: 64757, title: "2002", note: 2.5, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
