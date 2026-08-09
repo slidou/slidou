@@ -7549,5 +7549,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64690, title: "Nya Nya Nya Chu Nya (NNNCN)", note: 2.5, tags: ["music","archived"] },
   { id: 64753, title: "Jaken GALDVAZAAG", note: 2.5, tags: ["music","archived"] },
   { id: 64757, title: "2002", note: 2.5, tags: ["music","archived"] },
+  { id: 64769, title: "We Will Rise Again", note: 2.5, tags: ["music","archived"] },
+  { id: 64762, title: "Re,bloom*", note: 3, tags: ["music","archived"] },
+  { id: 64766, title: "Astral Lamp", note: 3.5, tags: ["music","archived"] },
+  { id: 64761, title: "Lovin'♡Rabbit", note: 3.5, tags: ["music","archived"] },
+  { id: 64770, title: "Oneul-man-eun", note: 3, tags: ["music","archived"] },
+  { id: 64771, title: "One Glowing Heart", note: 3, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

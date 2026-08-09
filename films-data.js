@@ -329,4 +329,7 @@ const filmsData = {
   "Arab Loutif": [
     { title: "Jamila's Mirror", note: 5, cover: "films/jamilasmirror.png", link: "https://www.senscritique.com/film/jamila_s_mirror/71632791" },
   ],
+  "Andreï Khrjanovski": [
+    { title: "Il était une fois Koziavine", note: 4, cover: "films/koziavine.png", link: "https://www.senscritique.com/film/il_etait_une_fois_koziavine/468399", tags: ["coup de coeur"] },
+  ],
 };

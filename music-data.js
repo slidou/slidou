@@ -145,4 +145,7 @@ const musicData = {
   "Halsey": [
     { title: "The Great Impersonator", note: 1, cover: "music/greatimpersonator.webp", link: "https://rateyourmusic.com/release/album/halsey/the-great-impersonator/" },
   ],
+  "Baby Keem": [
+    { title: "The Melodic Blue", note: 2, cover: "music/themelodicblue.webp", link: "https://rateyourmusic.com/release/album/baby-keem/the-melodic-blue/" },
+  ],
 };
