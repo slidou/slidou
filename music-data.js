@@ -134,7 +134,7 @@ const musicData = {
   ],
   "Damso": [
     { title: "Batterie faible", note: 5, cover: "music/batteriefaible.webp", link: "https://rateyourmusic.com/release/album/damso/batterie-faible/", tags: ["réécoute","archived"] },
-    { title: "Ipséité", note: 5, cover: "music/ipséité.webp", link: "https://rateyourmusic.com/release/album/damso/ipseite/", tags: ["réécoute","archived"] },
+    { title: "Ipséité", note: 4.5, cover: "music/ipséité.webp", link: "https://rateyourmusic.com/release/album/damso/ipseite/", tags: ["réécoute","archived"] },
   ],
   "Stan Getz": [
     { title: "Jazz Samba Encore!", note: 4, cover: "music/jazzsambaencore.webp", link: "https://rateyourmusic.com/release/album/stan-getz-luiz-bonfa/jazz-samba-encore/" },
@@ -147,5 +147,8 @@ const musicData = {
   ],
   "Baby Keem": [
     { title: "The Melodic Blue", note: 2, cover: "music/themelodicblue.webp", link: "https://rateyourmusic.com/release/album/baby-keem/the-melodic-blue/" },
+  ],
+  "JPEGMAFIA": [
+    { title: "I Lay Down My Life for You", note: 3.5, cover: "music/ilaydown.webp", link: "https://rateyourmusic.com/release/album/jpegmafia/i-lay-down-my-life-for-you/" },
   ],
 };
