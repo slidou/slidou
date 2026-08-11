@@ -390,4 +390,6 @@ const journalData = [
 { d: "2026-08-09", t: "anime", title: "Lovin'♡Rabbit", img: "anime/lovinrabbit.jpg", note: "music" },
 { d: "2026-08-09", t: "anime", title: "Oneul-man-eun", img: "anime/oneul.jpg", note: "music" },
 { d: "2026-08-09", t: "anime", title: "One Glowing Heart", img: "anime/oneglowingheart.jpg", note: "music" },
+{ d: "2026-08-10", t: "livre", title: "Marche ou crève", img: "covers/marcheoucreve.jpg", note: "j'ai recommencé le bouquin après l'avoir abandonné fut un temps" },
+{ d: "2026-08-11", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "1W/1L", status: "en cours" },
 ];
