@@ -395,4 +395,5 @@ const journalData = [
 { d: "2026-08-11", t: "musique", title: "I Lay Down My Life for You", img: "music/ilaydown.webp", note: "première écoute" },
 { d: "2026-08-12", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "unrated chill", status: "en cours" },
 { d: "2026-08-12", t: "film", title: "Le Mystère Koumiko", img: "films/koumiko.webp", note: "documentaire, je ne sais pas quoi en penser" },
+{ d: "2026-08-13", t: "film", title: "Kak stat chelovekom", img: "films/chelovekom.webp", note: "court-métrage, que dire" },
 ];

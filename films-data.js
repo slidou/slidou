@@ -335,4 +335,7 @@ const filmsData = {
   "Chris Marker": [
     { title: "Le Mystère Koumiko", note: null, cover: "films/koumiko.webp", link: "https://www.senscritique.com/film/le_mystere_koumiko/417365" },
   ],
+  "Vladimir Petkevitch": [
+    { title: "Kak stat chelovekom", note: null, cover: "films/chelovekom.webp", link: "https://www.senscritique.com/film/kak_stat_chelovekom/123005006" },
+  ],
 };
