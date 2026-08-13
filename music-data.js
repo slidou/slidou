@@ -7,7 +7,7 @@ const musicData = {
     { title: "Safety in the Sun", note: 3.5, cover: "music/safetyinthesun.webp", link: "https://rateyourmusic.com/release/album/nitsua/safety-in-the-sun/" },
   ],
   "slayr": [
-    { title: "Half Blood (BloodLuxe)", note: 3.5, cover: "music/halfblood.webp", link: "https://rateyourmusic.com/release/mixtape/slayr/half-blood-bloodluxe/" },
+    { title: "Half Blood (BloodLuxe)", note: 3.5, cover: "music/halfblood.webp", link: "https://rateyourmusic.com/release/mixtape/slayr/half-blood-bloodluxe/", format: "mixtape" },
   ],
   "Luidji": [
     { title: "Tristesse Business : Saison 1", note: 5, cover: "music/tristessebusiness.webp", link: "https://rateyourmusic.com/release/album/luidji/tristesse-business-saison-1/", tags: ["réécoute"] },
@@ -59,8 +59,8 @@ const musicData = {
     { title: "Pluie, montagnes et soleil", note: 3.5, cover: "music/pluiemontagnessoleil.webp", link: "https://rateyourmusic.com/release/album/aupinard/pluie-montagnes-et-soleil/" },
   ],
   "Ino Casablanca": [
-    { title: "Extasia", note: 4, cover: "music/extasia.webp", link: "https://rateyourmusic.com/release/mixtape/ino-casablanca/extasia/", tags: ["réécoute"] },
-    { title: "Tamara", note: 3, cover: "music/tamara.webp", link: "https://rateyourmusic.com/release/mixtape/ino-casablanca/tamara/" },
+    { title: "Extasia", note: 4, cover: "music/extasia.webp", link: "https://rateyourmusic.com/release/mixtape/ino-casablanca/extasia/", format: "mixtape", tags: ["réécoute"] },
+    { title: "Tamara", note: 3, cover: "music/tamara.webp", link: "https://rateyourmusic.com/release/mixtape/ino-casablanca/tamara/", format: "mixtape" },
   ],
   "Mac Miller": [
     { title: "Circles", note: 5, cover: "music/circles.webp", link: "https://rateyourmusic.com/release/album/mac-miller/circles/", tags: ["réécoute"] },
@@ -79,7 +79,7 @@ const musicData = {
     { title: "Ateyaba", note: 3.5, cover: "music/ateyaba.webp", link: "https://rateyourmusic.com/release/album/joke/ateyaba/" },
   ],
   "RADWIMPS": [
-    { title: "Keitaidenwa", note: 3.5, cover: "music/keitaidenwa.webp", link: "https://rateyourmusic.com/release/single/radwimps/%E6%90%BA%E5%B8%AF%E9%9B%BB%E8%A9%B1-keitaidenwa/" },
+    { title: "Keitaidenwa", note: 3.5, cover: "music/keitaidenwa.webp", link: "https://rateyourmusic.com/release/single/radwimps/%E6%90%BA%E5%B8%AF%E9%9B%BB%E8%A9%B1-keitaidenwa/", format: "single" },
   ],
   "Charli XCX": [
     { title: "Brat", note: 3.5, cover: "music/brat.webp", link: "https://rateyourmusic.com/release/album/charli-xcx/brat/" },
@@ -91,8 +91,8 @@ const musicData = {
     { title: "Disco Inferno", note: 3, cover: "music/discoinferno.webp", link: "https://rateyourmusic.com/release/album/linlin/disco-inferno/" },
   ],
   "Hamza": [
-    { title: "PUBLIC ENEMY", note: 2.5, cover: "music/publicenemy.jpg", link: "https://rateyourmusic.com/release/ep/hamza/public-enemy/" },
-    { title: "1994", note: 4, cover: "music/1994.webp", link: "https://rateyourmusic.com/release/mixtape/hamza/1994/", tags: ["réécoute"] },
+    { title: "PUBLIC ENEMY", note: 2.5, cover: "music/publicenemy.jpg", link: "https://rateyourmusic.com/release/ep/hamza/public-enemy/", format: "ep" },
+    { title: "1994", note: 4, cover: "music/1994.webp", link: "https://rateyourmusic.com/release/mixtape/hamza/1994/", format: "mixtape", tags: ["réécoute"] },
   ],
   "Josman": [
     { title: "HHHH²", note: 2.5, cover: "music/hhhh².jpg", link: "https://rateyourmusic.com/release/album/josman/hhhh2/" },
