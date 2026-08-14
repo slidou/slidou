@@ -396,4 +396,5 @@ const journalData = [
 { d: "2026-08-12", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "unrated chill", status: "en cours" },
 { d: "2026-08-12", t: "film", title: "Le Mystère Koumiko", img: "films/koumiko.webp", note: "documentaire, je ne sais pas quoi en penser" },
 { d: "2026-08-13", t: "film", title: "Kak stat chelovekom", img: "films/chelovekom.webp", note: "court-métrage, que dire" },
+{ d: "2026-08-14", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "3W, je suis monté D3", status: "en cours" },
 ];
