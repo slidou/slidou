@@ -338,4 +338,7 @@ const filmsData = {
   "Vladimir Petkevitch": [
     { title: "Kak stat chelovekom", note: null, cover: "films/chelovekom.webp", link: "https://www.senscritique.com/film/kak_stat_chelovekom/123005006" },
   ],
+  "Pierre Kast": [
+    { title: "La Brûlure de mille soleils", note: 3, cover: "films/millesoleils.png", link: "https://www.senscritique.com/film/la_brulure_de_mille_soleils/436654" },
+  ],
 };

@@ -151,4 +151,10 @@ const musicData = {
   "JPEGMAFIA": [
     { title: "I Lay Down My Life for You", note: 3.5, cover: "music/ilaydown.webp", link: "https://rateyourmusic.com/release/album/jpegmafia/i-lay-down-my-life-for-you/" },
   ],
+  "Siboy": [
+    { title: "Mula", note: 4.5, cover: "music/mula.webp", link: "https://rateyourmusic.com/release/single/siboy/mula/", format: "single" },
+  ],
+  "Radiohead": [
+    { title: "In Rainbows", note: 3, cover: "music/inrainbows.webp", link: "https://rateyourmusic.com/release/album/radiohead/in-rainbows/" },
+  ],
 };

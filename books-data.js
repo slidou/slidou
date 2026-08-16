@@ -181,12 +181,12 @@ Et pour finir la phrase la plus importante du livre :
     { title: "La Déchéance d'un homme", note: 4, cover: "covers/decheance-homme.jpg", link: "https://www.goodreads.com/book/show/11222940-no-longer-human", review: `J'avais déjà lu la version manga avant cela et c'est exactement la même histoire, hormis la fin qui change légèrement. La version manga est un peu plus modernisée. Bonne lecture, tout le monde peut se reconnaître, à un certain degré qui varie selon ce que l'on a vécu ou non, dans la psyché du personnage principal.` },
     { title: "Soleil couchant", note: 4, cover: "covers/soleil-couchant.jpg", link: "https://www.goodreads.com/book/show/194740.The_Setting_Sun" }
   ],
-  "Jordan Bardella": [
+  "Jordan Bardella [completed]": [
     { title: "Ce Que Je Cherche", note: 1, cover: "covers/ce-que-je-cherche.jpg", link: "https://www.goodreads.com/book/show/220459830-ce-que-je-cherche", review: `Fond absolument désastreux et ennuyeux à mourir, au point que je me passerai de commentaire par flemme. Mais cerise sur le gâteau, la forme pêche aussi : faire une faute de paronymie entre 'dénote' et 'détonne' dans un livre qui se veut un minimum sérieux, fallait le faire. D'autant plus quand l’auteur, en plus d’être bourré de contradictions, n’a sans doute même pas écrit seul.` },
     { title: "Ce que veulent les Français", note: 1, cover: "covers/ce-que-veulent-francais.jpg", link: "https://www.goodreads.com/book/show/237782229-ce-que-veulent-les-fran-ais", review: `Quelle misère, quelle souffrance.
 Un livre fantasmé et médiocre contenant la même structure narrative en boucle.` }
   ],
-  "Léo Etchar": [
+  "Léo Etchar [completed]": [
     { title: "COVID-19 : Une crise sanitaire névrosée", note: 5, cover: "covers/covid-etchar.jpg", link: "https://www.goodreads.com/book/show/87062089-covid-19", review: `Livre du GOAT.` }
   ],
   "Sarah Kane": [

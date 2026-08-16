@@ -7555,5 +7555,12 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64761, title: "Lovin'♡Rabbit", note: 3.5, tags: ["music","archived"] },
   { id: 64770, title: "Oneul-man-eun", note: 3, tags: ["music","archived"] },
   { id: 64771, title: "One Glowing Heart", note: 3, tags: ["music","archived"] },
+  { id: 64741, title: "Senritsu", note: null, tags: ["short","archived"] },
+  { id: 64774, title: "Psychomagic In An Adobe Home", note: 2, tags: ["music","archived"] },
+  { id: 64775, title: "Pluggin' Away", note: 2, tags: ["music","archived"] },
+  { id: 64284, title: "Tsuzuku Tousou", note: 3.5, tags: ["music","archived"] },
+  { id: 64295, title: "Contemporary Dance", note: 3, tags: ["music","+","archived"] },
+  { id: 64409, title: "Umya Unya Happy Life", note: 2.5, tags: ["music","archived"] },
+  { id: 64623, title: "Houkiboshi (2026)", note: 3.5, tags: ["music","+","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

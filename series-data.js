@@ -1,6 +1,6 @@
 // ── Data Séries ──
 const seriesData = {
-  "Breaking Bad": [
+  "Breaking Bad [completed]": [
     { title: "Saison 1", note: 3.5, cover: "series/breakingbad1.jpg", link: "https://www.senscritique.com/serie/breaking_bad/264963" },
     { title: "Saison 2", note: 3.5, cover: "series/breakingbad2.webp", link: "https://www.senscritique.com/serie/breaking_bad/264963" },
     { title: "Saison 3", note: 3.5, cover: "series/breakingbad3.jpg", link: "https://www.senscritique.com/serie/breaking_bad/264963" },
@@ -16,7 +16,7 @@ const seriesData = {
   "One Piece": [
     { title: "Saison 1", note: 4, cover: "series/onepiece.png", link: "https://www.senscritique.com/serie/one_piece/26565027" },
   ],
-  "Inside Jamel Comedy Club": [
+  "Inside Jamel Comedy Club [completed]": [
     { title: "Saison 1", note: 3.5, cover: "series/jamel.jpg", link: "https://www.senscritique.com/serie/inside_jamel_comedy_club/441758" },
   ],
   "Alice in Borderland": [
