@@ -390,7 +390,7 @@ const journalData = [
 { d: "2026-08-09", t: "anime", title: "Lovin'♡Rabbit", img: "anime/lovinrabbit.jpg", note: "music" },
 { d: "2026-08-09", t: "anime", title: "Oneul-man-eun", img: "anime/oneul.jpg", note: "music" },
 { d: "2026-08-09", t: "anime", title: "One Glowing Heart", img: "anime/oneglowingheart.jpg", note: "music" },
-{ d: "2026-08-10", t: "livre", title: "Marche ou crève", img: "covers/marcheoucreve.jpg", note: "j'ai recommencé le bouquin après l'avoir abandonné fut un temps" },
+{ d: "2026-08-10", t: "livre", title: "Marche ou crève", img: "covers/marcheoucreve.jpg", note: "j'ai recommencé le bouquin après l'avoir abandonné fut un temps", status: "en cours" },
 { d: "2026-08-11", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "1W/1L", status: "en cours" },
 { d: "2026-08-11", t: "musique", title: "I Lay Down My Life for You", img: "music/ilaydown.webp", note: "première écoute" },
 { d: "2026-08-12", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "unrated chill", status: "en cours" },
@@ -408,6 +408,6 @@ const journalData = [
 { d: "2026-08-16", t: "anime", title: "Umya Unya Happy Life", img: "anime/umya.jpg", note: "music" },
 { d: "2026-08-16", t: "anime", title: "Houkiboshi (2026)", img: "anime/houkiboshi.jpg", note: "music" },
 { d: "2026-08-16", t: "anime", title: "Fleur The Animation", img: "anime/fleur.jpg", note: "hentai, 2/2", blur: true },
-{ d: "2026-08-16", t: "livre", title: "Marche ou crève", img: "covers/marcheoucreve.jpg", note: "poursuite de la lecture" },
+{ d: "2026-08-16", t: "livre", title: "Marche ou crève", img: "covers/marcheoucreve.jpg", note: "poursuite de la lecture", status: "en cours" },
 { d: "2026-08-16", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "que des runs de merde avec blue baby, décidemment j'y arrive pas, une dernière run avec azazel où j'ai battu satan avant de me rendre compte que j'étais en normal...", status: "en cours" },
 ];
