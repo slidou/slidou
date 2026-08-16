@@ -407,4 +407,5 @@ const journalData = [
 { d: "2026-08-16", t: "anime", title: "Contemporary Dance", img: "anime/contemporary.jpg", note: "music" },
 { d: "2026-08-16", t: "anime", title: "Umya Unya Happy Life", img: "anime/umya.jpg", note: "music" },
 { d: "2026-08-16", t: "anime", title: "Houkiboshi (2026)", img: "anime/houkiboshi.jpg", note: "music" },
+{ d: "2026-08-16", t: "anime", title: "Fleur The Animation", img: "anime/fleur.jpg", note: "hentai, 2/2", blur: true },
 ];

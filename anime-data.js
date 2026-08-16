@@ -7562,5 +7562,6 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64295, title: "Contemporary Dance", note: 3, tags: ["music","+","archived"] },
   { id: 64409, title: "Umya Unya Happy Life", note: 2.5, tags: ["music","archived"] },
   { id: 64623, title: "Houkiboshi (2026)", note: 3.5, tags: ["music","+","archived"] },
+  { id: 57044, title: "Fleur The Animation", note: 3.5, tags: ["hentai","normal episode"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
