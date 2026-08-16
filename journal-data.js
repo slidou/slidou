@@ -409,4 +409,5 @@ const journalData = [
 { d: "2026-08-16", t: "anime", title: "Houkiboshi (2026)", img: "anime/houkiboshi.jpg", note: "music" },
 { d: "2026-08-16", t: "anime", title: "Fleur The Animation", img: "anime/fleur.jpg", note: "hentai, 2/2", blur: true },
 { d: "2026-08-16", t: "livre", title: "Marche ou crève", img: "covers/marcheoucreve.jpg", note: "poursuite de la lecture" },
+{ d: "2026-08-16", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "que des runs de merde avec blue baby, décidemment j'y arrive pas, une dernière run avec azazel où j'ai battu satan avant de me rendre compte que j'étais en normal...", status: "en cours" },
 ];
