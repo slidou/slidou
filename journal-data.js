@@ -410,4 +410,7 @@ const journalData = [
 { d: "2026-08-16", t: "anime", title: "Fleur The Animation", img: "anime/fleur.jpg", note: "hentai, 2/2", blur: true },
 { d: "2026-08-16", t: "livre", title: "Marche ou crève", img: "covers/marcheoucreve.jpg", note: "poursuite de la lecture", status: "en cours" },
 { d: "2026-08-16", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "que des runs de merde avec blue baby, décidemment j'y arrive pas, une dernière run avec azazel où j'ai battu satan avant de me rendre compte que j'étais en normal...", status: "en cours" },
+{ d: "2026-08-16", t: "anime", title: "Dai Mahou Touge", img: "anime/daimahoutouge.jpg", note: "normal episode, 1/4", status: "en cours" },
+{ d: "2026-08-17", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "que des runs avec azazel parce que je veux m'amuser et évidemment que des wins, j'ai enfin battu satan 5 fois, prochaine étape battre isaac 4 fois de plus !", status: "en cours" },
+{ d: "2026-08-17", t: "anime", title: "Dai Mahou Touge", img: "anime/daimahoutouge.jpg", note: "normal episode, 2/4", status: "en cours" },
 ];
