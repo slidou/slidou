@@ -413,4 +413,12 @@ const journalData = [
 { d: "2026-08-16", t: "anime", title: "Dai Mahou Touge", img: "anime/daimahoutouge.jpg", note: "normal episode, 1/4", status: "en cours" },
 { d: "2026-08-17", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "que des runs avec azazel parce que je veux m'amuser et évidemment que des wins, j'ai enfin battu satan 5 fois, prochaine étape battre isaac 4 fois de plus !", status: "en cours" },
 { d: "2026-08-17", t: "anime", title: "Dai Mahou Touge", img: "anime/daimahoutouge.jpg", note: "normal episode, 2/4", status: "en cours" },
+{ d: "2026-08-17", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "une run après le taf avec azazel, j'ai battu isaac", status: "en cours" },
+{ d: "2026-08-17", t: "musique", title: "444 nuits", img: "music/444.webp", note: "première écoute" },
+{ d: "2026-08-17", t: "musique", title: "445e nuit", img: "music/445.webp", note: "première écoute" },
+{ d: "2026-08-18", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "deux runs trop bien avec que des items quality 4 et 3, j'ai battu hush pour la première fois, fais le boss rush pour la première fois aussi et battu isaac une autre fois également, je me suis amusé comme un petit fou", status: "en cours" },
+{ d: "2026-08-18", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "deux runs de merde, aucune luck, ça m'apprendra à commencer avec des items de merde", status: "en cours" },
+{ d: "2026-08-19", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "deux runs, deux wins, j'ai enfin battu isaac 5 fois ! prochaine étape blue baby !", status: "en cours" },
+{ d: "2026-08-19", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "2L", status: "en cours" },
+{ d: "2026-08-20", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "une run où j'ai battu pour la première fois blue baby et delirium", status: "en cours" },
 ];

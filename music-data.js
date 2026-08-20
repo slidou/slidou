@@ -157,4 +157,8 @@ const musicData = {
   "Radiohead": [
     { title: "In Rainbows", note: 3, cover: "music/inrainbows.webp", link: "https://rateyourmusic.com/release/album/radiohead/in-rainbows/" },
   ],
+  "Népal": [
+    { title: "444 nuits", note: 4, cover: "music/444.webp", link: "https://rateyourmusic.com/release/ep/nepal/444-nuits/" },
+    { title: "445e nuit", note: 3, cover: "music/445.webp", link: "https://rateyourmusic.com/release/ep/nepal/445e-nuit/" },
+  ],
 };
