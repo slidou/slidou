@@ -421,4 +421,9 @@ const journalData = [
 { d: "2026-08-19", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "deux runs, deux wins, j'ai enfin battu isaac 5 fois ! prochaine étape blue baby !", status: "en cours" },
 { d: "2026-08-19", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "2L", status: "en cours" },
 { d: "2026-08-20", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "une run où j'ai battu pour la première fois blue baby et delirium", status: "en cours" },
+{ d: "2026-08-20", t: "musique", title: "Cheddar", img: "music/cheddar.webp", note: "réécoute" },
+{ d: "2026-08-20", t: "musique", title: "Coach K", img: "music/coachk.webp", note: "première écoute" },
+{ d: "2026-08-20", t: "musique", title: "Même Vie", img: "music/memevie.webp", note: "première écoute" },
+{ d: "2026-08-20", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "deux runs après le taf, une abominable et une seconde où j'ai littéralement fait une god run, ma meilleure, où j'ai eu l'effet du super mush tous les étages grâce à un item glich récupéré plus tot (la pioche), j'ai donc battu the lamb pour la première fois", status: "en cours" },
+{ d: "2026-08-21", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "2L/2W", status: "en cours" },
 ];

@@ -158,7 +158,10 @@ const musicData = {
     { title: "In Rainbows", note: 3, cover: "music/inrainbows.webp", link: "https://rateyourmusic.com/release/album/radiohead/in-rainbows/" },
   ],
   "Népal": [
-    { title: "444 nuits", note: 4, cover: "music/444.webp", link: "https://rateyourmusic.com/release/ep/nepal/444-nuits/" },
-    { title: "445e nuit", note: 3, cover: "music/445.webp", link: "https://rateyourmusic.com/release/ep/nepal/445e-nuit/" },
+    { title: "444 nuits", note: 4, cover: "music/444.webp", link: "https://rateyourmusic.com/release/ep/nepal/444-nuits/", format: "ep" },
+    { title: "445e nuit", note: 3, cover: "music/445.webp", link: "https://rateyourmusic.com/release/ep/nepal/445e-nuit/", format: "ep" },
+    { title: "Cheddar", note: 4, cover: "music/cheddar.webp", link: "https://rateyourmusic.com/release/single/nepal/cheddar/", format: "single", tags: ["réécoute"] },
+    { title: "Coach K", note: 3, cover: "music/coachk.webp", link: "https://rateyourmusic.com/release/single/nepal/coach-k/", format: "single" },
+    { title: "Même Vie", note: 2.5, cover: "music/memevie.webp", link: "https://rateyourmusic.com/release/single/nepal/meme-vie/", format: "single" },
   ],
 };
