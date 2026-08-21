@@ -1499,7 +1499,7 @@ const labels = {
   anime: 'dernier anime visionné', 
   manga: 'dernier manga lu', 
   jeu: 'dernier jeu joué', 
-  musique: 'dernier album écouté' 
+  musique: 'dernier projet écouté' 
 };
   
   let html = `<div class="home-dashboard-title">dernières activités</div><div class="home-dashboard-grid">`;
