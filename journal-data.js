@@ -426,4 +426,7 @@ const journalData = [
 { d: "2026-08-20", t: "musique", title: "Même Vie", img: "music/memevie.webp", note: "première écoute" },
 { d: "2026-08-20", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "deux runs après le taf, une abominable et une seconde où j'ai littéralement fait une god run, ma meilleure, où j'ai eu l'effet du super mush tous les étages grâce à un item glich récupéré plus tot (la pioche), j'ai donc battu the lamb pour la première fois", status: "en cours" },
 { d: "2026-08-21", t: "jeu", title: "Valorant", img: "games/valorant.png", note: "2L/2W", status: "en cours" },
+{ d: "2026-08-21", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1191/?", status: "en cours" },
+{ d: "2026-08-21", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "petite game d'isaac où j'ai battu the lamb encore une fois", status: "en cours" },
+{ d: "2026-08-22", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "très bonne session, j'ai battu deux fois mega satan pour la première fois et j'ai battu hush deux fois de plus pour débloquer le nouveau chemin, prochain objectif, mother !", status: "en cours" },
 ];
