@@ -157,11 +157,25 @@ const musicData = {
   "Radiohead": [
     { title: "In Rainbows", note: 3, cover: "music/inrainbows.webp", link: "https://rateyourmusic.com/release/album/radiohead/in-rainbows/" },
   ],
-  "Népal": [
+  "Népal [completed]": [
     { title: "444 nuits", note: 4, cover: "music/444.webp", link: "https://rateyourmusic.com/release/ep/nepal/444-nuits/", format: "ep" },
     { title: "445e nuit", note: 3, cover: "music/445.webp", link: "https://rateyourmusic.com/release/ep/nepal/445e-nuit/", format: "ep" },
     { title: "Cheddar", note: 4, cover: "music/cheddar.webp", link: "https://rateyourmusic.com/release/single/nepal/cheddar/", format: "single", tags: ["réécoute"] },
     { title: "Coach K", note: 3, cover: "music/coachk.webp", link: "https://rateyourmusic.com/release/single/nepal/coach-k/", format: "single" },
     { title: "Même Vie", note: 2.5, cover: "music/memevie.webp", link: "https://rateyourmusic.com/release/single/nepal/meme-vie/", format: "single" },
+    { title: "KKSHISENSE8", note: 3.5, cover: "music/kks.webp", link: "https://rateyourmusic.com/release/ep/nepal/kkshisense8/", format: "ep" },
+    { title: "Benji", note: 3, cover: "music/benji.webp", link: "https://rateyourmusic.com/release/single/nepal/benji/", format: "single" },
+    { title: "Dans le Fond", note: 3, cover: "music/danslefond.webp", link: "https://rateyourmusic.com/release/single/nepal/dans-le-fond/", format: "single" },
+    { title: "Là-bas", note: 2.5, cover: "music/labas.webp", link: "https://rateyourmusic.com/release/single/nepal/la-bas/", format: "single" },
+    { title: "Abras (10 Bands Freestyle)", note: 3, cover: "music/abras.webp", link: "https://rateyourmusic.com/release/single/nepal/abras-10-bands-freestyle/", format: "single" },
+    { title: "66 Mesures", note: 4, cover: "music/66.webp", link: "https://rateyourmusic.com/release/single/nepal/66-mesures/", format: "single", tags: ["réécoute"] },
+    { title: "Fugu", note: 3, cover: "music/fugu.webp", link: "https://rateyourmusic.com/release/single/nepal/fugu/", format: "single" },
+    { title: "James Worthy", note: 3.5, cover: "music/jamesworthy.webp", link: "https://rateyourmusic.com/release/single/nepal/james-worthy/", format: "single" },
+    { title: "Baby Milo", note: 3, cover: "music/babymilo.webp", link: "https://rateyourmusic.com/release/single/nepal/baby-milo/", format: "single" },
+    { title: "Ibiki", note: 2.5, cover: "music/ibiki.webp", link: "https://rateyourmusic.com/release/single/nepal/ibiki/", format: "single" },
+    { title: "16par16", note: 3, cover: "music/16par16.webp", link: "https://rateyourmusic.com/release/ep/nepal/16par16/", format: "ep" },
+    { title: "16par16 Remix", note: 3, cover: "music/16par16r.webp", link: "https://rateyourmusic.com/release/ep/nepal/16par16-remix/", format: "ep" },
+    { title: "Grandmaster Splinter", note: 2.5, cover: "music/grandmaster.jpg", link: "https://rateyourmusic.com/release/mixtape/grandmaster-splinter/grandmaster-splinter/", format: "mixtape" },
+    { title: "Adios Bahamas", note: 4, cover: "music/adiosbahamas.webp", link: "https://rateyourmusic.com/release/album/nepal/adios-bahamas/", tags: ["réécoute"] },
   ],
 };

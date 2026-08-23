@@ -7565,5 +7565,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 57044, title: "Fleur The Animation", note: 3.5, tags: ["hentai","normal episode"] },
   { id: 60351, title: "Ikuiku Succubus Saikyouiku", note: 4.5, tags: ["hentai","normal episode"] },
   { id: 61164, title: "Inshoku Ou Demar", note: 4.5, tags: ["hentai","normal episode"] },
+  { id: 64625, title: "Saihate ni Hana", note: 3, tags: ["music","archived"] },
+  { id: 64645, title: "My Love", note: 2.5, tags: ["music","archived"] },
+  { id: 64786, title: "Kyapi", note: 3, tags: ["music","archived"] },
+  { id: 64802, title: "Fate/Grand Order: Hoshimi no Kairou", note: null, tags: ["short","+","archived"] },
+  { id: 64783, title: "Hitotsu ni Naru Koe", note: 3, tags: ["music","archived"] },
+  { id: 64803, title: "Kagami yo Kagami", note: 3, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
