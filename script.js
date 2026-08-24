@@ -89,11 +89,12 @@ function getMusicFormatBadge(item) {
 function getCreatorHeader(name, count) {
   var isIntegral = name.indexOf('[completed]') !== -1;
   var cleanName = name.replace(' [completed]', '');
+  var arrow = '<span class="creator-arrow">▼</span>';
   
   if (isIntegral) {
-    return '<h2 class="integral-title">' + cleanName + " ( " + count + " )" + ' <span class="integral-badge">Intégrale</span></h2>';
+    return '<h2 class="integral-title creator-toggle">' + cleanName + " ( " + count + " )" + ' <span class="integral-badge">Intégrale</span>' + arrow + '</h2>';
   } else {
-    return '<h2>' + cleanName + " ( " + count + " )" + '</h2>';
+    return '<h2 class="creator-toggle">' + cleanName + " ( " + count + " )" + arrow + '</h2>';
   }
 }
 
@@ -2677,3 +2678,22 @@ document.getElementById('toggle-tags-btn').addEventListener('click', function() 
 document.getElementById('search-anime').addEventListener('input', function() { animeDisplayed = 0; applyAnimeFilter(); });
 document.getElementById('load-more-anime').addEventListener('click', renderAnimeBatch);
 document.getElementById('search-manga').addEventListener('input', function() { renderManga(); });
+
+// ── RÉDUIRE LES CRÉATEURS (Écouteur global) ──
+document.addEventListener('click', function(e) {
+  // Si on clique sur le titre d'un créateur (ou un enfant comme le badge)
+  var header = e.target.closest('h2.creator-toggle');
+  if (!header) return;
+
+  // On cherche tous les éléments qui suivent le titre jusqu'au prochain titre
+  var sibling = header.nextElementSibling;
+  while (sibling && sibling.tagName !== 'H2') {
+    if (sibling.classList.contains('books') || sibling.classList.contains('show-average')) {
+      sibling.classList.toggle('hidden-books');
+    }
+    sibling = sibling.nextElementSibling;
+  }
+  
+  // On fait tourner la flèche
+  header.classList.toggle('collapsed-creator');
+});
