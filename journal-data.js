@@ -471,4 +471,5 @@ const journalData = [
 { d: "2026-08-24", t: "anime", title: "Oshiri Puri Ondo", img: "anime/oshiripuri.jpg", note: "music" },
 { d: "2026-08-24", t: "anime", title: "Nalsum", img: "anime/nalsum.jpg", note: "short" },
 { d: "2026-08-24", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "plusieurs runs avec blue baby et c'était à chier, je hais ce personnage", status: "en cours" },
+{ d: "2026-08-24", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "nouvelle session, j'ai enfin débloqué le dé pour isaac", status: "en cours" },
 ];
