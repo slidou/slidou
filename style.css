@@ -1,15 +1,15 @@
 /* ── VARIABLES DE COULEURS ── */
 :root {
-  --bg-color: #f7f6f4;
-  --sidebar-bg: #f0efed;
-  --text-color: #2c2c2c;
-  --secondary-text: #707070;
-  --author-text: #1a1a1a;
-  --border-color: #e0dedb;
-  --link-color: #36c;
-  --star-color: #c89a15;
-  --shadow-color: rgba(0,0,0,0.08);
-  --quote-bg: #f0efed;
+  --bg-color: #f4f1ea; /* Fond beige très doux (façon papier) */
+  --sidebar-bg: #e9e4d8; /* Beige un peu plus sombre pour séparer la sidebar */
+  --text-color: #2b2b2b; /* Texte principal plus sombre pour le contraste */
+  --secondary-text: #5c5c5c; /* Texte secondaire assombri (plus de #707070) */
+  --author-text: #111111; /* Titres presque noirs */
+  --border-color: #d6d0c4; /* Bordures plus visibles pour structurer */
+  --link-color: #2b5b9e; /* Un bleu un peu plus profond et moins agressif */
+  --star-color: #b8860b; /* Une étoile un chouïa plus sombre pour ressortir */
+  --shadow-color: rgba(40, 30, 10, 0.1); /* Ombres légèrement chaudes */
+  --quote-bg: #e9e4d8; /* Fond des citations assorti à la sidebar */
 }
 
 /* ── MODE SOMBRE ── */
