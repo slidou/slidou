@@ -333,11 +333,36 @@ body {
 
 /* ── IMAGE BIO À PROPOS ── */
 .apropos-bio-img {
+  flex-basis: 100%;
   width: 100%;
-  height: auto;
+  height: auto; /* Garde l'image entière, sans la couper */
   display: block;
-  margin-bottom: 20px;
-  border-radius: 2px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+}
+
+/* Style de la liste "en ce moment" */
+#currently-list li {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  text-align: right; /* Le titre (strong) va se caler à droite */
+}
+#currently-list li span {
+  opacity: 0.6;
+  font-size: 12px;
+  float: left; /* Le mot "jeu" ou "livre" reste calé à gauche */
+}
+#currently-list li strong {
+  font-weight: 400;
+}
+
+/* ── TAMAGOTCHI ENCADRÉ ── */
+.tamagotchi-container {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 25px;
+  margin-top: 30px; /* Un peu d'espace avec les liens au-dessus */
 }
 
 /* ── PAGE ACCUEIL (CALENDRIER) ── */

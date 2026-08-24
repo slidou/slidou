@@ -195,7 +195,10 @@ function navigateTo(page) {
     generateManga();
   }
   if (page === 'statistiques') generateStats();
-  if (page === 'apropos') updateTamagotchiUI();
+  if (page === 'apropos') {
+    updateTamagotchiUI();
+    renderCurrently(); // <-- On ajoute ça
+  }
 }
 
 document.querySelectorAll('[data-page]').forEach(link => {
@@ -2720,3 +2723,42 @@ document.addEventListener('click', function(e) {
   // On fait tourner la flèche
   header.classList.toggle('collapsed-creator');
 });
+
+// ── Remplir "En ce moment" sur la page À propos ──
+function renderCurrently() {
+  var list = document.getElementById('currently-list');
+  if (!list) return;
+  list.innerHTML = '';
+
+  var current = {
+    livre: null, film: null, série: null, 
+    anime: null, manga: null, jeu: null, musique: null
+  };
+  var labels = {
+    livre: 'lecture', film: 'film', série: 'série', 
+    anime: 'anime', manga: 'manga', jeu: 'jeu', musique: 'musique'
+  };
+
+  // On parcourt le journal à l'envers (du plus récent au plus ancien)
+  for (var i = journal.length - 1; i >= 0; i--) {
+    var entry = journal[i];
+    // Si c'est "en cours" et qu'on n'a pas encore trouvé ce type de média
+    if (entry.status === 'en cours' && current[entry.t] === null) {
+      current[entry.t] = entry.title;
+    }
+  }
+
+  var hasContent = false;
+  for (var cat in current) {
+    if (current[cat]) {
+      hasContent = true;
+      var li = document.createElement('li');
+      li.innerHTML = '<span>' + labels[cat] + '</span> ' + current[cat];
+      list.appendChild(li);
+    }
+  }
+
+  if (!hasContent) {
+    list.innerHTML = '<li><span>rien</span> en cours pour le moment</li>';
+  }
+}
