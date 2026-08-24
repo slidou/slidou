@@ -2440,8 +2440,8 @@ function generateStats() {
   var sections = [
     { name: 'livres', data: books, creatorLabel: 'auteur' },
     { name: 'films', data: films, creatorLabel: 'réalisateur' },
-    { name: 'séries', data: series, creatorLabel: 'série' },
-    { name: 'albums', data: musique, creatorLabel: 'artiste' }
+    { name: 'saisons', data: series, creatorLabel: 'série' }, // <-- CHANGÉ ICI
+    { name: 'projets', data: musique, creatorLabel: 'artiste' }
   ];
 
   if (typeof animeList !== 'undefined') {
@@ -2458,40 +2458,53 @@ function generateStats() {
     sections.push({ name: 'manga', data: mangaData, creatorLabel: 'auteur' });
   }
 
-  var summaryParts = [];
-  var bookTotal = 0;
-  for (var k in books) bookTotal += books[k].length;
-  if (bookTotal > 0) summaryParts.push(bookTotal + ' livre' + (bookTotal !== 1 ? 's' : ''));
+  // --- CARTES RÉSUMÉ ---
+  var cardsContainer = document.createElement('div');
+  cardsContainer.className = 'stats-cards';
+  
+  var cardData = [
+    { name: 'livres', data: books, icon: '📚' },
+    { name: 'films', data: films, icon: '🎬' },
+    { name: 'saisons', data: series, icon: '📺' }, // <-- CHANGÉ ICI
+    { name: 'jeux', data: games, isFlat: true, icon: '🎮' },
+    { name: 'projets', data: musique, icon: '🎵' },
+    { name: 'animes', data: animeList, isFlat: true, icon: '🌸' },
+    { name: 'mangas', data: mangaData, icon: '📖' }
+  ];
 
-  var filmTotal = 0;
-  for (var k in films) filmTotal += films[k].length;
-  if (filmTotal > 0) summaryParts.push(filmTotal + ' film' + (filmTotal !== 1 ? 's' : ''));
-
-  var seriesTotal = 0;
-  for (var k in series) seriesTotal += series[k].length;
-  if (seriesTotal > 0) summaryParts.push(seriesTotal + ' série' + (seriesTotal !== 1 ? 's' : ''));
-
-  var gameTotal = games.length;
-  if (gameTotal > 0) summaryParts.push(gameTotal + ' jeu' + (gameTotal !== 1 ? 'x' : ''));
-
-  var musicTotal = 0;
-  for (var k in musique) musicTotal += musique[k].length;
-  if (musicTotal > 0) summaryParts.push(musicTotal + ' projet' + (musicTotal !== 1 ? "s" : ""));
-
-  if (typeof animeList !== 'undefined' && animeList.length > 0) summaryParts.push(animeList.length + ' animes');
-
-  if (typeof mangaData !== 'undefined') {
-    var mangaTotal = 0;
-    for (var k in mangaData) mangaTotal += mangaData[k].length;
-    if (mangaTotal > 0) summaryParts.push(mangaTotal + ' mangas');
-  }
-
-  if (summaryParts.length > 0) {
-    var summaryDiv = document.createElement('div');
-    summaryDiv.className = 'stats-summary';
-    summaryDiv.textContent = summaryParts.join(' · ');
-    container.appendChild(summaryDiv);
-  }
+  cardData.forEach(function(cat) {
+    if (!cat.data) return;
+    var total = 0;
+    var notes = [];
+    
+    if (cat.isFlat) {
+      cat.data.forEach(function(item) { 
+        total++; 
+        if (item.note !== null) notes.push(item.note); 
+      });
+    } else {
+      for (var k in cat.data) {
+        cat.data[k].forEach(function(item) {
+          total++;
+          if (item.note !== null) notes.push(item.note);
+        });
+      }
+    }
+    
+    if (total > 0) {
+      var avg = notes.length > 0 ? (notes.reduce(function(a, b) { return a + b; }, 0) / notes.length).toFixed(1) : '-';
+      var card = document.createElement('div');
+      card.className = 'stats-card';
+      card.innerHTML = `
+        <div class="stats-card-icon">${cat.icon}</div>
+        <div class="stats-card-count">${total}</div>
+        <div class="stats-card-label">${cat.name}</div>
+        <div class="stats-card-avg">moy. ${avg}</div>
+      `;
+      cardsContainer.appendChild(card);
+    }
+  });
+  container.appendChild(cardsContainer);
 
   sections.forEach(function(section) {
     var allNotes = [];
@@ -2545,17 +2558,25 @@ function generateStats() {
       barsDiv.appendChild(col);
     });
 
-    sectionDiv.appendChild(barsDiv);
+    // On crée la boîte flex qui contiendra le graphique et le top 3
+    var mainFlex = document.createElement('div');
+    mainFlex.className = 'stats-main-flex';
+
+    var chartCol = document.createElement('div');
+    chartCol.className = 'stats-chart-col';
+    chartCol.appendChild(barsDiv);
 
     var xAxis = document.createElement('div');
     xAxis.className = 'stats-axis-x';
     xAxis.textContent = 'notes';
-    sectionDiv.appendChild(xAxis);
+    chartCol.appendChild(xAxis);
 
     var yAxis = document.createElement('div');
     yAxis.className = 'stats-axis-y';
     yAxis.textContent = 'nombres';
-    sectionDiv.appendChild(yAxis);
+    chartCol.appendChild(yAxis);
+
+    mainFlex.appendChild(chartCol);
 
     if (section.creatorLabel) {
       var topKeys = Object.keys(section.data).map(function(key) {
@@ -2571,13 +2592,15 @@ function generateStats() {
         topKeys.forEach(function(item, i) {
           var topItem = document.createElement('div');
           topItem.className = 'stats-top-item';
-          topItem.innerHTML = '<span class="stats-top-rank">' + (i + 1) + '</span><span class="stats-top-name">' + item.name + '</span><span class="stats-top-info">' + item.count + ' · moy. ' + item.avg + '</span>';
+          var medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i + 1);
+          topItem.innerHTML = '<span class="stats-top-rank">' + medal + '</span><span class="stats-top-name">' + item.name + '</span><span class="stats-top-info">' + item.count + ' · moy. ' + item.avg + '</span>';
           topDiv.appendChild(topItem);
         });
-        sectionDiv.appendChild(topDiv);
+        mainFlex.appendChild(topDiv); // On met le Top 3 dans la boîte flex, à droite
       }
     }
 
+    sectionDiv.appendChild(mainFlex);
     container.appendChild(sectionDiv);
   });
 }

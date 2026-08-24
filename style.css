@@ -976,6 +976,7 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
   white-space: pre-line;
 }
 
+/* ── PAGE STATISTIQUES ── */
 #page-statistiques.active { display: block; padding-top: 40px; }
 .stats-page-title {
   font-family: 'Space Grotesk', sans-serif;
@@ -985,6 +986,51 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
   padding-bottom: 10px;
   margin-bottom: 40px;
 }
+
+/* --- CARTES RÉSUMÉ --- */
+.stats-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.stats-card {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px 20px;
+  text-align: center;
+  min-width: 110px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.stats-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--link-color);
+}
+.stats-card-icon { font-size: 22px; margin-bottom: 8px; }
+.stats-card-count {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--author-text);
+  line-height: 1;
+}
+.stats-card-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+}
+.stats-card-avg {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--star-color);
+  margin-top: 4px;
+}
+
+/* --- GRAPHIQUES --- */
 .stats-section {
   margin-bottom: 50px;
   border: 1px solid var(--border-color);
@@ -1005,11 +1051,7 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
   color: var(--author-text);
   text-transform: lowercase;
 }
-.stats-sep {
-  width: 1px;
-  height: 14px;
-  background: var(--border-color);
-}
+.stats-sep { width: 1px; height: 14px; background: var(--border-color); }
 .stats-moy {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 13px;
@@ -1025,19 +1067,20 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 .stats-bars {
   display: flex;
   align-items: flex-end;
-  gap: 0;
+  gap: 15px; /* Espace fixe entre les barres */
   height: 160px;
   margin-left: 50px;
   margin-bottom: 25px;
   border-left: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
-  padding-left: 6px;
+  padding-left: 10px;
+  justify-content: flex-start; /* Tire les barres à gauche */
 }
 .stats-vbar-col {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
+  flex: 0 0 35px; /* Largeur fixe de 35px pour chaque barre */
   height: 100%;
   justify-content: flex-end;
 }
@@ -1052,7 +1095,12 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
   max-width: 40px;
   min-height: 3px;
   border-radius: 2px 2px 0 0;
-  transition: height 0.6s ease;
+  transform-origin: bottom;
+  animation: barGrow 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* L'ANIMATION */
+}
+@keyframes barGrow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
 }
 .stats-vbar-label {
   font-family: 'Space Grotesk', sans-serif;
@@ -1083,55 +1131,37 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
   transform: rotate(180deg);
   letter-spacing: 1px;
 }
-body:not(.dark-mode) .stats-vbar-count { opacity: 0.7; }
-body:not(.dark-mode) .stats-vbar-label { opacity: 0.7; }
-body:not(.dark-mode) .stats-axis-x { opacity: 0.5; }
-body:not(.dark-mode) .stats-axis-y { opacity: 0.5; }
-body:not(.dark-mode) .stats-total { opacity: 0.7; }
-@media(max-width:768px) {
-  .stats-bars { overflow-x: auto; }
-  .stats-vbar-col { min-width: 32px; }
+
+/* --- CONTENEUR FLEX (Graphique + Top 3) --- */
+.stats-main-flex {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+.stats-chart-col {
+  flex: 1; /* Prend toute la place restante */
+  min-width: 0;
 }
 
-.sidebar-separator {
-  height: 1px;
-  background: var(--border-color);
-  margin: 20px 0;
-  width: 100%;
-}
-
-.stats-summary {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 13px;
-  color: var(--secondary-text);
-  text-align: center;
-  padding: 20px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  margin-bottom: 40px;
-  line-height: 1.8;
-  text-transform: lowercase;
-}
-
+/* --- TOP 3 (Transformé en colonne à droite) --- */
 .stats-top {
-  margin-top: 16px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border-color);
+  flex: 0 0 200px; /* Largeur fixe de 200px pour la colonne de droite */
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+  border-left: 1px solid var(--border-color); /* Ligne de séparation verticale */
+  padding-left: 20px;
 }
 .stats-top-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 4px 0;
+  padding: 6px 0; /* Un peu plus d'aération vertical */
 }
 .stats-top-rank {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--link-color);
-  width: 20px;
+  font-size: 18px;
+  width: 24px;
   text-align: center;
-  opacity: 0.6;
 }
 .stats-top-name {
   font-family: 'Space Grotesk', sans-serif;
@@ -1143,7 +1173,31 @@ body:not(.dark-mode) .stats-total { opacity: 0.7; }
   font-family: 'Space Grotesk', sans-serif;
   font-size: 11px;
   color: var(--secondary-text);
-  opacity: 0.5;
+  opacity: 0.6;
+  white-space: nowrap; /* Empêche le texte d'aller à la ligne */
+  text-align: right; /* Aligne proprement à droite */
+}
+
+/* Sur mobile, on remet le Top 3 en dessous */
+@media(max-width:768px) {
+  .stats-main-flex {
+    flex-direction: column;
+  }
+  .stats-top {
+    flex: unset;
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+    padding-left: 0;
+    padding-top: 16px;
+    margin-top: 16px;
+  }
+}
+
+.sidebar-separator {
+  height: 1px;
+  background: var(--border-color);
+  margin: 20px 0;
+  width: 100%;
 }
 
 .player-widget {
