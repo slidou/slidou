@@ -178,4 +178,10 @@ const musicData = {
     { title: "Grandmaster Splinter", note: 2.5, cover: "music/grandmaster.jpg", link: "https://rateyourmusic.com/release/mixtape/grandmaster-splinter/grandmaster-splinter/", format: "mixtape" },
     { title: "Adios Bahamas", note: 4, cover: "music/adiosbahamas.webp", link: "https://rateyourmusic.com/release/album/nepal/adios-bahamas/", tags: ["réécoute"] },
   ],
+  "Knocked Loose": [
+    { title: "You Won't Go Before You're Supposed To", note: 4, cover: "music/youwontgo.webp", link: "https://rateyourmusic.com/release/album/knocked-loose/you-wont-go-before-youre-supposed-to/" },
+  ],
+  "Run the Jewels": [
+    { title: "RTJ4", note: 2, cover: "music/rtj.webp", link: "https://rateyourmusic.com/release/album/run-the-jewels/rtj4/" },
+  ],
 };

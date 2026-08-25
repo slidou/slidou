@@ -7589,5 +7589,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64093, title: "Campus Mode!!", note: 3, tags: ["music","+","archived"] },
   { id: 64852, title: "Oshiri Puri Ondo", note: 3, tags: ["music","archived"] },
   { id: 64854, title: "Nalsum", note: 4, tags: ["short","gem","archived"] },
+  { id: 64856, title: "Changga-ui Jageun Teotbat", note: 3.5, tags: ["short","archived"] },
+  { id: 64778, title: "Super ni Tojikomerareta Bokura", note: 3.5, tags: ["music","archived"] },
+  { id: 64850, title: "Continue", note: 4, tags: ["music","gem","archived"] },
+  { id: 64862, title: "I Found Me", note: 2.5, tags: ["music","archived"] },
+  { id: 933, title: "Dai Mahou Touge", note: 3.5, tags: ["normal episode"] },
+  { id: 1841, title: "Dai Mahou Touge Omake", note: 3.5, tags: ["short episode","+"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
