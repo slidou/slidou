@@ -184,4 +184,7 @@ const musicData = {
   "Run the Jewels": [
     { title: "RTJ4", note: 2, cover: "music/rtj.webp", link: "https://rateyourmusic.com/release/album/run-the-jewels/rtj4/" },
   ],
+  "Stan Getz & João Gilberto": [
+    { title: "Getz / Gilberto", note: 5, cover: "music/getz.webp", link: "https://rateyourmusic.com/release/album/stan-getz-and-joao-gilberto-featuring-antonio-carlos-jobim/getz-gilberto/" },
+  ],
 };

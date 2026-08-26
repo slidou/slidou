@@ -483,4 +483,8 @@ const journalData = [
 { d: "2026-08-25", t: "anime", title: "Dai Mahou Touge Omake", img: "anime/daimahoutougeomake.jpg", note: "short episode, 4/4" },
 { d: "2026-08-25", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "nouvelle session, pas dingue mais j'ai quand même battu isaac et blue baby avec isaac et je me suis bien amusé sur le mode greed avec des synergies bien pétées", status: "en cours" },
 { d: "2026-08-25", t: "film", title: "Déjà le sang de mai ensemençait novembre", img: "films/mainovembre.jpg", note: "documentaire, d'utilité publique" },
+{ d: "2026-08-26", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "challenges 8 et 16 faits !", status: "en cours" },
+{ d: "2026-08-26", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-08-26", t: "musique", title: "Getz / Gilberto", img: "music/getz.webp", note: "réécoute, chef-d'oeuvre" },
+{ d: "2026-08-26", t: "manga", title: "Furyou Taimashi Reina", img: "manga/reina.jpg", note: "10/78", status: "en cours" },
 ];
