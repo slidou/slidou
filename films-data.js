@@ -348,4 +348,7 @@ const filmsData = {
     { title: "Le Septième Sceau", note: 3, cover: "films/septiemesceau.webp", link: "https://www.senscritique.com/film/le_septieme_sceau/478206" },
     { title: "Persona", note: 3, cover: "films/persona.webp", link: "https://www.senscritique.com/film/persona/402466" },
   ],
+  "David Lynch": [
+    { title: "Mulholland Drive", note: 0.5, cover: "films/mulholland.png", link: "https://www.senscritique.com/film/mulholland_drive/411899" },
+  ],
 };
