@@ -344,4 +344,8 @@ const filmsData = {
   "René Vautier": [
     { title: "Déjà le sang de mai ensemençait novembre", note: 5, cover: "films/mainovembre.png", link: "https://www.senscritique.com/film/deja_le_sang_de_mai_ensemencait_novembre/22837356", tags: ["coup de coeur"] },
   ],
+  "Ingmar Bergman": [
+    { title: "Le Septième Sceau", note: 3, cover: "films/septiemesceau.webp", link: "https://www.senscritique.com/film/le_septieme_sceau/478206" },
+    { title: "Persona", note: 3, cover: "films/persona.webp", link: "https://www.senscritique.com/film/persona/402466" },
+  ],
 };

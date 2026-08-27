@@ -487,4 +487,7 @@ const journalData = [
 { d: "2026-08-26", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
 { d: "2026-08-26", t: "musique", title: "Getz / Gilberto", img: "music/getz.webp", note: "réécoute, chef-d'oeuvre" },
 { d: "2026-08-26", t: "manga", title: "Furyou Taimashi Reina", img: "manga/reina.jpg", note: "10/78", status: "en cours" },
+{ d: "2026-08-26", t: "film", title: "Le Septième Sceau", img: "films/septiemesceau.webp", note: "pas convaincu même si l'esthétique était au rendez-vous" },
+{ d: "2026-08-27", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-08-27", t: "film", title: "Persona", img: "films/persona.webp", note: "même constat que pour Le Septième Sceau" },
 ];
