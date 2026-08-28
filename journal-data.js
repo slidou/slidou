@@ -495,4 +495,8 @@ const journalData = [
 { d: "2026-08-28", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "deux runs de merde avec judas", status: "en cours" },
 { d: "2026-08-28", t: "manga", title: "Furyou Taimashi Reina", img: "manga/reina.jpg", note: "20/78", status: "en cours" },
 { d: "2026-08-28", t: "musique", title: "Blonde", img: "music/blonde.webp", note: "première écoute" },
+{ d: "2026-08-28", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-06-28", t: "film", title: "Brilliant Garden", img: "films/brillantgarden.jpg", note: "court-métrage, apaisant" },
+{ d: "2026-06-28", t: "film", title: "Motion Photograffiti", img: "films/photograffiti.jpg", note: "court-métrage, nostalgique d'une vie que je n'ai pas connue" },
+{ d: "2026-06-28", t: "film", title: "Border Land", img: "films/borderland.jpg", note: "court-métrage, la pov d'un alien qui débarque sur terre ?" },
 ];

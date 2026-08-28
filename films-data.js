@@ -321,10 +321,13 @@ const filmsData = {
   "Tsui Hark": [
     { title: "Time and Tide", note: 4, cover: "films/timeandtide.webp", link: "https://www.senscritique.com/film/time_and_tide/407152" },
   ],
-  "Jun Miyazaki": [
+  "Jun Miyazaki [completed]": [
     { title: "Plastic Tears", note: null, cover: "films/plastictears.jpg", link: "https://www.senscritique.com/film/plastic_tears/124956984" },
     { title: "Rapid Fire", note: null, cover: "films/rapidfire.webp", link: "https://www.senscritique.com/film/rapid_fire/54348922" },
     { title: "Flip Light Cruiser", note: null, cover: "films/fliplightcruiser.jpg", link: "https://www.senscritique.com/film/flip_light_cruiser/127647685" },
+    { title: "Brilliant Garden", note: null, cover: "films/brillantgarden.jpg", link: "https://www.senscritique.com/film/brilliant_garden/54348923" },
+    { title: "Motion Photograffiti", note: null, cover: "films/photograffiti.jpg", link: "https://www.senscritique.com/film/motion_photograffiti/130087983", tags: ["archived"] },
+    { title: "Border Land", note: null, cover: "films/borderland.jpg", link: "https://www.senscritique.com/film/border_land/102493311", tags: ["archived"] },
   ],
   "Arab Loutif": [
     { title: "Jamila's Mirror", note: 5, cover: "films/jamilasmirror.png", link: "https://www.senscritique.com/film/jamila_s_mirror/71632791" },
