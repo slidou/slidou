@@ -31,6 +31,10 @@
     <nav>
       <ul>
         <li><a href="#" data-page="home" class="active">Accueil</a></li>
+        <li style="position: relative;">
+          <input type="text" id="global-search" class="global-search-input" placeholder="🔎 recherche globale">
+          <div class="global-search-results" id="global-search-results"></div>
+        </li>
         <li class="sidebar-separator"></li>
         <li><a href="#" data-page="bibliographie">Bibliographie</a></li>
         <li><a href="#" data-page="ecrans">Écrans</a></li>
@@ -281,6 +285,8 @@
     <div class="review-popup-text" id="review-popup-text"></div>
   </div>
 </div>
+
+<div class="global-search-results" id="global-search-results"></div>
 
 <script src="player-data.js"></script>
 <script src="anime-data.js"></script>

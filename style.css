@@ -1730,3 +1730,99 @@ h2.collapsed-creator .creator-arrow {
 .hidden-books {
   display: none !important; /* Cache la grille et la moyenne */
 }
+
+/* ── RECHERCHE GLOBALE ── */
+.global-search-input {
+  width: 100%;
+  margin: 5px 0; /* Réduit l'écart avec Accueil et la barre */
+  padding: 6px 10px; /* Aligne bien le texte à l'intérieur */
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box; /* Assure que la barre prend exactement la bonne largeur */
+}
+.global-search-input:focus { border-color: var(--link-color); }
+.global-search-input::placeholder { color: var(--secondary-text); opacity: 0.6; }
+
+.global-search-results {
+  display: none;
+  position: absolute;
+  top: 45px; /* Juste sous la barre */
+  left: 0;
+  width: 400px; /* Largeur fixe pour bien lire les titres */
+  max-width: calc(100vw - 210px); /* S'adapte si l'écran est tout petit */
+  max-height: 65vh;
+  overflow-y: auto;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  z-index: 2000;
+  padding: 15px;
+  box-sizing: border-box;
+}
+.global-search-results.visible { display: block; }
+.gs-close {
+  position: absolute; top: 10px; right: 15px;
+  background: none; border: none; font-size: 22px;
+  cursor: pointer; color: var(--secondary-text); line-height: 1;
+}
+.gs-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px; border-radius: 6px;
+  text-decoration: none; color: var(--text-color);
+  transition: background 0.2s;
+}
+.gs-item:hover { background: var(--sidebar-bg); }
+.gs-item img {
+  width: 32px; height: 48px; object-fit: cover;
+  border-radius: 3px; box-shadow: 0 1px 3px var(--shadow-color);
+  flex-shrink: 0;
+}
+.gs-item-info { flex: 1; min-width: 0; text-align: left; }
+.gs-item-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px; font-weight: 500;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: var(--author-text);
+}
+.gs-item-sub {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px; color: var(--secondary-text);
+  text-transform: lowercase;
+}
+.gs-no-results {
+  text-align: center; padding: 30px 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; color: var(--secondary-text);
+}
+
+/* ── AVATAR PAR DÉFAUT (RECHERCHE) ── */
+.gs-creator-avatar {
+  width: 32px;
+  height: 48px;
+  background: var(--sidebar-bg);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px var(--shadow-color);
+}
+.gs-creator-avatar svg {
+  width: 20px;
+  height: 20px;
+  color: var(--secondary-text);
+}
+
+  /* Panneau de recherche sur mobile */
+  .global-search-results {
+    width: 250px;
+    max-width: calc(100vw - 30px);
+    top: 40px;
+  }
