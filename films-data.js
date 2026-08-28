@@ -349,6 +349,6 @@ const filmsData = {
     { title: "Persona", note: 3, cover: "films/persona.webp", link: "https://www.senscritique.com/film/persona/402466" },
   ],
   "David Lynch": [
-    { title: "Mulholland Drive", note: 0.5, cover: "films/mulholland.png", link: "https://www.senscritique.com/film/mulholland_drive/411899" },
+    { title: "Mulholland Drive", note: 0.5, cover: "films/mulholland.webp", link: "https://www.senscritique.com/film/mulholland_drive/411899" },
   ],
 };
