@@ -342,7 +342,7 @@ const filmsData = {
     { title: "La Brûlure de mille soleils", note: 3, cover: "films/millesoleils.png", link: "https://www.senscritique.com/film/la_brulure_de_mille_soleils/436654" },
   ],
   "René Vautier": [
-    { title: "Déjà le sang de mai ensemençait novembre", note: 5, cover: "films/mainovembre.png", link: "https://www.senscritique.com/film/deja_le_sang_de_mai_ensemencait_novembre/22837356", tags: ["coup de coeur"] },
+    { title: "Déjà le sang de mai ensemençait novembre", note: 5, cover: "films/mainovembre.jpg", link: "https://www.senscritique.com/film/deja_le_sang_de_mai_ensemencait_novembre/22837356", tags: ["coup de coeur"] },
   ],
   "Ingmar Bergman": [
     { title: "Le Septième Sceau", note: 3, cover: "films/septiemesceau.webp", link: "https://www.senscritique.com/film/le_septieme_sceau/478206" },
