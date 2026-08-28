@@ -187,4 +187,7 @@ const musicData = {
   "Stan Getz & João Gilberto": [
     { title: "Getz / Gilberto", note: 5, cover: "music/getz.webp", link: "https://rateyourmusic.com/release/album/stan-getz-and-joao-gilberto-featuring-antonio-carlos-jobim/getz-gilberto/" },
   ],
+  "Frank Ocean": [
+    { title: "Blonde", note: 3, cover: "music/blonde.webp", link: "https://rateyourmusic.com/release/album/frank-ocean/blonde/" },
+  ],
 };

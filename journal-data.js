@@ -493,4 +493,6 @@ const journalData = [
 { d: "2026-08-27", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "first time cain et j'ai fait mom, isaac, blue baby et delirium, ça avance petit à petit", status: "en cours" },
 { d: "2026-08-27", t: "film", title: "Mulholland Drive", img: "films/mulholland.webp", note: "l'un des pires films que j'ai regardé de ma vie" },
 { d: "2026-08-28", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "deux runs de merde avec judas", status: "en cours" },
+{ d: "2026-08-28", t: "manga", title: "Furyou Taimashi Reina", img: "manga/reina.jpg", note: "20/78", status: "en cours" },
+{ d: "2026-08-28", t: "musique", title: "Blonde", img: "music/blonde.webp", note: "première écoute" },
 ];
