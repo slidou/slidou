@@ -100,10 +100,15 @@ const musicData = {
     { title: "J.O.$", note: 4, cover: "music/J.O.$.webp", link: "https://rateyourmusic.com/release/album/josman/j_o/", tags: ["réécoute"] },
     { title: "M.A.N (Black Roses & Lost Feelings)", note: 3.5, cover: "music/M.A.N.webp", link: "https://rateyourmusic.com/release/album/josman/m_a_n-black-roses-and-lost-feelings/", tags: ["réécoute"] },
   ],
-  "Krisy": [
+  "Krisy [completed]": [
     { title: "Edward Risky", note: 3.5, cover: "music/edwardrisky.jpg", link: "https://rateyourmusic.com/release/album/krisy/edward-risky/" },
     { title: "Paradis d'amour", note: 4, cover: "music/paradisdamour.webp", link: "https://rateyourmusic.com/release/album/krisy/paradis-damour/", tags: ["réécoute"] },
     { title: "Euphoria", note: 3.5, cover: "music/euphoria.webp", link: "https://rateyourmusic.com/release/album/krisy/euphoria/", tags: ["réécoute"] },
+    { title: "tu sais", note: 3, cover: "music/tusais.webp", link: "https://rateyourmusic.com/release/single/krisy-alpha-wann/tu-sais/", format: "single", tags: ["réécoute"] },
+    { title: "ENTRE VOUS ET MOI... FROM BXL...", note: 2.5, cover: "music/bxl.webp", link: "https://rateyourmusic.com/release/single/krisy/entre-vous-et-moi-from-bxl/", format: "single" },
+    { title: "Hors de ma vue", note: 3.5, cover: "music/horsdemavue.webp", link: "https://rateyourmusic.com/release/single/krisy/hors-de-ma-vue/", format: "single", tags: ["réécoute"] },
+    { title: "Menthe à l'eau", note: 2.5, cover: "music/menthealeau.webp", link: "https://rateyourmusic.com/release/ep/krisy/menthe-a-leau/", format: "ep" },
+    { title: "Parmi vous", note: 2.5, cover: "music/parmivous.png", link: "https://rateyourmusic.com/release/ep/krisy/parmis-vous/", format: "ep" },
   ],
   "mage tears": [
     { title: "cats in the cold", note: 3, cover: "music/catsinthecold.webp", link: "https://rateyourmusic.com/release/album/mage-tears/cats-in-the-cold/" },
