@@ -515,4 +515,8 @@ const journalData = [
 { d: "2026-08-30", t: "musique", title: "Hors de ma vue", img: "music/horsdemavue.webp", note: "réécoute, single" },
 { d: "2026-08-30", t: "musique", title: "Menthe à l'eau", img: "music/menthealeau.webp", note: "première écoute, ep, le storytelling est sympa mais pour tout le reste c'est au mieux moyen" },
 { d: "2026-08-30", t: "musique", title: "Parmi vous", img: "music/parmivous.png", note: "première écoute, ep" },
+{ d: "2026-08-30", t: "anime", title: "Love Me: Kaede to Suzu The Animation", img: "anime/kaede.jpg", note: "hentai, 3/3", blur: true },
+{ d: "2026-08-30", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-08-30", t: "manga", title: "Furyou Taimashi Reina", img: "manga/reina.jpg", note: "78/78, j'ai vraiment passé un bon moment, l'oeuvre ne méritait pas de se faire axed, l'auteur a du talent" },
+{ d: "2026-08-30", t: "musique", title: "Matrix", img: "music/matrix.webp", note: "réécoute" },
 ];

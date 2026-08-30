@@ -824,5 +824,8 @@ const mangaData = {
     { id: 38859, title: "Shigatsu Tsuitachi", note: null, tags: ["one-shot","hentai"] },
     { id: 38857, title: "Summer Vacation", note: 4.5, tags: ["one-shot","hentai"] },
     { id: 53851, title: "Yareba Dekiruko", note: null, tags: ["one-shot","hentai"] },
+  ],
+  "OTOSAMA": [
+    { id: 125892, title: "Furyou Taimashi Reina", note: 3.5 },
   ]
 };
