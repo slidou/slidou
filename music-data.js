@@ -63,7 +63,7 @@ const musicData = {
     { title: "Tamara", note: 3, cover: "music/tamara.webp", link: "https://rateyourmusic.com/release/mixtape/ino-casablanca/tamara/", format: "mixtape" },
   ],
   "Mac Miller": [
-    { title: "Circles", note: 5, cover: "music/circles.webp", link: "https://rateyourmusic.com/release/album/mac-miller/circles/", tags: ["réécoute"] },
+    { title: "Circles", note: 5, cover: "music/circles.webp", link: "https://rateyourmusic.com/release/album/mac-miller/circles/", tags: ["réécoute","bought"] },
     { title: "Balloonerism", note: 3, cover: "music/balloonerism.webp", link: "https://rateyourmusic.com/release/album/mac-miller/balloonerism/" },
     { title: "The Divine Feminine", note: 3.5, cover: "music/divinefeminine.webp", link: "https://rateyourmusic.com/release/album/mac-miller/the-divine-feminine/" },
   ],
@@ -98,7 +98,7 @@ const musicData = {
     { title: "HHHH²", note: 2.5, cover: "music/hhhh².jpg", link: "https://rateyourmusic.com/release/album/josman/hhhh2/" },
     { title: "000$", note: 4.5, cover: "music/000$.webp", link: "https://rateyourmusic.com/release/mixtape/josman/000/", format: "mixtape", tags: ["réécoute"] },
     { title: "J.O.$", note: 4, cover: "music/J.O.$.webp", link: "https://rateyourmusic.com/release/album/josman/j_o/", tags: ["réécoute"] },
-    { title: "M.A.N (Black Roses & Lost Feelings)", note: 3.5, cover: "music/M.A.N.webp", link: "https://rateyourmusic.com/release/album/josman/m_a_n-black-roses-and-lost-feelings/", tags: ["réécoute"] },
+    { title: "M.A.N (Black Roses & Lost Feelings)", note: 3.5, cover: "music/M.A.N.webp", link: "https://rateyourmusic.com/release/album/josman/m_a_n-black-roses-and-lost-feelings/", tags: ["réécoute","bought"] },
     { title: "Matrix", note: 3.5, cover: "music/matrix.webp", link: "https://rateyourmusic.com/release/mixtape/josman/matrix/", format: "mixtape", tags: ["réécoute"] },
   ],
   "Krisy [completed]": [
@@ -115,7 +115,7 @@ const musicData = {
     { title: "cats in the cold", note: 3, cover: "music/catsinthecold.webp", link: "https://rateyourmusic.com/release/album/mage-tears/cats-in-the-cold/" },
   ],
   "Playboi Carti": [
-    { title: "Whole Lotta Red", note: 4, cover: "music/wholelottared.webp", link: "https://rateyourmusic.com/release/album/playboi-carti/whole-lotta-red/", tags: ["réécoute"] },
+    { title: "Whole Lotta Red", note: 4, cover: "music/wholelottared.webp", link: "https://rateyourmusic.com/release/album/playboi-carti/whole-lotta-red/", tags: ["réécoute","bought"] },
   ],
   "Future": [
     { title: "The Real Me", note: 2, cover: "music/therealme.webp", link: "https://rateyourmusic.com/release/album/future/the-real-me/" },
@@ -139,11 +139,12 @@ const musicData = {
     { title: "DOPAMINE", note: 3, cover: "music/dopamine.webp", link: "https://rateyourmusic.com/release/album/lil-tecca/dopamine/", tags: ["réécoute"] },
   ],
   "Damso": [
-    { title: "Batterie faible", note: 5, cover: "music/batteriefaible.webp", link: "https://rateyourmusic.com/release/album/damso/batterie-faible/", tags: ["réécoute","archived"] },
-    { title: "Ipséité", note: 4.5, cover: "music/ipséité.webp", link: "https://rateyourmusic.com/release/album/damso/ipseite/", tags: ["réécoute","archived"] },
+    { title: "Batterie faible", note: 5, cover: "music/batteriefaible.webp", link: "https://rateyourmusic.com/release/album/damso/batterie-faible/", tags: ["réécoute","archived","bought"] },
+    { title: "Ipséité", note: 4.5, cover: "music/ipséité.webp", link: "https://rateyourmusic.com/release/album/damso/ipseite/", tags: ["réécoute","archived","bought"] },
   ],
   "Stan Getz": [
     { title: "Jazz Samba Encore!", note: 4, cover: "music/jazzsambaencore.webp", link: "https://rateyourmusic.com/release/album/stan-getz-luiz-bonfa/jazz-samba-encore/" },
+    { title: "Getz / Gilberto", note: 5, cover: "music/getz.webp", link: "https://rateyourmusic.com/release/album/stan-getz-and-joao-gilberto-featuring-antonio-carlos-jobim/getz-gilberto/", tags: ["réécoute","bought"] },
   ],
   "Ken Carson": [
     { title: "A Great Chaos", note: 3.5, cover: "music/agreatchaos.webp", link: "https://rateyourmusic.com/release/album/ken-carson/a-great-chaos/", tags: ["réécoute"] },
@@ -182,7 +183,7 @@ const musicData = {
     { title: "16par16", note: 3, cover: "music/seize.webp", link: "https://rateyourmusic.com/release/ep/nepal/16par16/", format: "ep" },
     { title: "16par16 Remix", note: 3, cover: "music/seizer.webp", link: "https://rateyourmusic.com/release/ep/nepal/16par16-remix/", format: "ep" },
     { title: "Grandmaster Splinter", note: 2.5, cover: "music/grandmaster.jpg", link: "https://rateyourmusic.com/release/mixtape/grandmaster-splinter/grandmaster-splinter/", format: "mixtape" },
-    { title: "Adios Bahamas", note: 4, cover: "music/adiosbahamas.webp", link: "https://rateyourmusic.com/release/album/nepal/adios-bahamas/", tags: ["réécoute"] },
+    { title: "Adios Bahamas", note: 4, cover: "music/adiosbahamas.webp", link: "https://rateyourmusic.com/release/album/nepal/adios-bahamas/", tags: ["réécoute","bought"] },
   ],
   "Knocked Loose": [
     { title: "You Won't Go Before You're Supposed To", note: 4, cover: "music/youwontgo.webp", link: "https://rateyourmusic.com/release/album/knocked-loose/you-wont-go-before-youre-supposed-to/" },
@@ -190,10 +191,10 @@ const musicData = {
   "Run the Jewels": [
     { title: "RTJ4", note: 2, cover: "music/rtj.webp", link: "https://rateyourmusic.com/release/album/run-the-jewels/rtj4/" },
   ],
-  "Stan Getz & João Gilberto": [
-    { title: "Getz / Gilberto", note: 5, cover: "music/getz.webp", link: "https://rateyourmusic.com/release/album/stan-getz-and-joao-gilberto-featuring-antonio-carlos-jobim/getz-gilberto/" },
-  ],
   "Frank Ocean": [
     { title: "Blonde", note: 3, cover: "music/blonde.webp", link: "https://rateyourmusic.com/release/album/frank-ocean/blonde/" },
+  ],
+  "Coralie Clément": [
+    { title: "Salle des pas perdus", note: 4, cover: "music/pasperdus.webp", link: "https://rateyourmusic.com/release/album/coralie-clement/salle-des-pas-perdus/", tags: ["réécoute","bought"] },
   ],
 };

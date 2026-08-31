@@ -1298,7 +1298,7 @@ function generateMusique(data = musique, isSearch = false) {
     fC.appendChild(fmtSection);
 
     // SECTION COLLECTION MUSIQUE
-    var mCollCounts = { 'réécoute': 0, 'archived': 0 };
+    var mCollCounts = { 'réécoute': 0, 'archived': 0, 'bought': 0 };
     for (var art in musique) {
       musique[art].forEach(function(m) {
         if (m.tags) m.tags.forEach(function(t) { if (mCollCounts[t] !== undefined) mCollCounts[t]++; });

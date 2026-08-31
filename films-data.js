@@ -13,6 +13,8 @@ const filmsData = {
     { title: "Doodlebug", note: null, cover: "films/doodlebug.jpg", link: "https://www.senscritique.com/film/doodlebug/404551", tags: ["archived","court métrage"] },
     { title: "Tarantella", note: null, cover: "films/tarantella.jpg", link: "https://www.senscritique.com/film/tarantella/24971949", tags: ["archived","court métrage"] },
     { title: "L'Odyssée", note: 4, cover: "films/odyssee.webp", link: "https://www.senscritique.com/film/l_odyssee/81361437", tags: ["archived"] },
+    { title: "Quay", note: null, cover: "films/quay.jpg", link: "https://www.senscritique.com/film/quay/16742508", tags: ["archived","court métrage"] },
+    { title: "The Dark Knight Rises", note: 3, cover: "films/thedarkknightrises.webp", link: "https://www.senscritique.com/film/the_dark_knight_rises/427132", tags: ["archived"] },
   ],
     "Aleksandr Petrov [completed]": [
     { title: "Le Rêve d'un homme ridicule", note: 4.5, cover: "films/hommeridicule.jpg", link: "https://www.senscritique.com/film/le_reve_d_un_homme_ridicule/485462", tags: ["coup de coeur","court métrage"] },

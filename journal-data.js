@@ -520,4 +520,12 @@ const journalData = [
 { d: "2026-08-30", t: "manga", title: "Furyou Taimashi Reina", img: "manga/reina.jpg", note: "78/78, j'ai vraiment passé un bon moment, l'oeuvre ne méritait pas de se faire axed, l'auteur a du talent" },
 { d: "2026-08-30", t: "musique", title: "Matrix", img: "music/matrix.webp", note: "réécoute" },
 { d: "2026-08-31", t: "jeu", title: "Land of Ghosts", img: "games/landofghosts.jpg", note: "fini, j'ai adoré" },
+{ d: "2026-08-31", t: "film", title: "Quay", img: "films/quay.jpg", note: "court-métrage" },
+{ d: "2026-08-31", t: "film", title: "The Dark Knight Rises", img: "films/thedarkknightrises.webp", note: "j'ai enfin terminé la trilogie, le film est malheureusement en dessous des deux premiers mais pas mauvais non plus" },
+{ d: "2026-08-31", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "the beast battu pour la première fois avec azazel !", status: "en cours" },
+{ d: "2026-08-31", t: "anime", title: "Kurenazumu Yakusoku", img: "anime/kurenazumu.jpg", note: "music" },
+{ d: "2026-08-31", t: "anime", title: "Urei no Bakemono", img: "anime/ureibakemono.jpg", note: "music" },
+{ d: "2026-08-31", t: "anime", title: "Madame", img: "anime/madame.jpg", note: "music" },
+{ d: "2026-08-31", t: "anime", title: "Ai Ai A", img: "anime/aiaia.jpg", note: "music" },
+{ d: "2026-09-01", t: "musique", title: "Salle des pas perdus", img: "music/pasperdus.webp", note: "réécoute" },
 ];

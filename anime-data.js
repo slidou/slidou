@@ -7596,5 +7596,9 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 933, title: "Dai Mahou Touge", note: 3.5, tags: ["normal episode"] },
   { id: 1841, title: "Dai Mahou Touge Omake", note: 3.5, tags: ["short episode","+"] },
   { id: 50634, title: "Love Me: Kaede to Suzu The Animation", note: 4.5, tags: ["hentai","normal episode"] },
+  { id: 63757, title: "Kurenazumu Yakusoku", note: 3.5, tags: ["music","+","archived"] },
+  { id: 63733, title: "Urei no Bakemono", note: 3, tags: ["music","archived"] },
+  { id: 63723, title: "Madame", note: 2.5, tags: ["music","archived"] },
+  { id: 63770, title: "Ai Ai A", note: 2.5, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
