@@ -102,18 +102,20 @@
   <div class="counter" id="biblio-counter"></div>
   <div class="anime-sort" id="biblio-sort"></div>
 </div>
+      <div id="biblio-project-bar"></div>
       <input type="text" id="search-biblio" class="search-bar" placeholder="Rechercher un livre, un auteur...">
-      <button class="review-filter-btn" id="filter-reviews-biblio" style="display:none;">reviews</button>
+      <div id="biblio-filters" class="manga-filters"></div>
       <div id="bibliographyContent" class="text-content"></div>
     </div>
 
     <!-- ÉCRANS -->
     <div class="page" id="page-ecrans">
       <div class="ecrans-content">
-<div class="anime-top-controls">
-  <div class="counter" id="ecrans-counter"></div>
-  <div class="anime-sort" id="ecrans-sort"></div>
-</div>
+        <div class="anime-top-controls">
+          <div class="counter" id="ecrans-counter"></div>
+          <div class="anime-sort" id="ecrans-sort"></div>
+        </div>
+        <div id="ecrans-project-bar"></div>
         <input type="text" id="search-ecrans" class="search-bar" placeholder="Rechercher un film, un réalisateur...">
         <div class="sub-nav">
           <a href="#" class="sub-nav-link active" data-subpage="films">Films</a>
@@ -124,6 +126,7 @@
           <div id="filmsContent"></div>
         </div>
         <div class="sub-page" id="subpage-series">
+          <div id="series-filters" class="manga-filters"></div>
           <div id="seriesContent"></div>
         </div>
       </div>
@@ -135,6 +138,8 @@
   <div class="counter" id="jeux-counter"></div>
   <div class="anime-sort" id="jeux-sort"></div>
 </div>
+      <div id="jeux-project-bar"></div>
+      <div id="jeux-filters" class="manga-filters"></div>
       <input type="text" id="search-jeux" class="search-bar" placeholder="Rechercher un jeu, un développeur...">
       <div id="jeuxContent" class="text-content"></div>
     </div>
@@ -145,7 +150,7 @@
         <div class="counter" id="musique-counter"></div>
         <div class="anime-sort" id="musique-sort"></div>
       </div>
-      <div id="musique-relisten-bar" class="project-bar"></div>
+      <div id="musique-relisten-bar"></div>
       <input type="text" id="search-musique" class="search-bar" placeholder="Rechercher un album, un artiste...">
       <div class="player-widget" id="player-widget">
         <div class="player-now">

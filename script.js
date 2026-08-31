@@ -85,6 +85,32 @@ function getMusicFormatBadge(item) {
   return '';
 }
 
+// ── Helper pour les badges de Collection (Archived, Bought, Re-watch/read) ──
+function getCollectionBadges(item) {
+  var badges = '';
+  // On vérifie tous les tags possibles de re-conso
+  var hasRewatch = item.tags && (
+    item.tags.indexOf('re-watched') !== -1 || 
+    item.tags.indexOf('re-read') !== -1 || 
+    item.tags.indexOf('réécoute') !== -1 ||
+    item.tags.indexOf('rejoué') !== -1
+  );
+  var hasBought = item.tags && item.tags.indexOf('bought') !== -1;
+  var hasAr = item.tags && item.tags.indexOf('archived') !== -1;
+
+  if (hasRewatch || hasBought || hasAr) {
+    badges = '<div class="anime-badges">';
+    // L'icône de rewatch (la petite flèche qui tourne)
+    if (hasRewatch) badges += '<span class="anime-badge" title="re-watched"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></span>';
+    // L'icône archived (le petit livre)
+    if (hasAr) badges += '<span class="anime-badge" title="archived"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-9 9H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a9 9 0 0 1 9 9z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="9" x2="13" y2="9"/><line x1="9" y1="17" x2="15" y2="17"/></svg></span>';
+    // L'icône bought (le petit sac)
+    if (hasBought) badges += '<span class="anime-badge" title="bought"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>';
+    badges += '</div>';
+  }
+  return badges;
+}
+
 // ── Helper pour le badge Intégrale ──
 function getCreatorHeader(name, count) {
   var isIntegral = name.indexOf('[completed]') !== -1;
@@ -129,6 +155,14 @@ function getStars(note) {
   return stars;
 }
 
+// ── Helper pour l'ancienne note ──
+function getOldNote(item) {
+  if (item.oldNote !== undefined && item.oldNote !== null) {
+    return '<div class="old-note">anciennement ' + item.oldNote + '/5</div>';
+  }
+  return '';
+}
+
 document.getElementById('menu-toggle').addEventListener('click', () => {
   document.querySelector('.sidebar nav').classList.toggle('open');
 });
@@ -160,8 +194,8 @@ function navigateTo(page) {
   
   if (page === 'home') initHome();
   if (page === 'bibliographie') {
+    biblioCollectionFilter = null;
     showOnlyReviewsBiblio = false;
-    document.getElementById('filter-reviews-biblio').classList.remove('active');
     document.getElementById('bibliographyContent').dataset.initialized = '';
     document.getElementById('search-biblio').value = '';
     generateBibliography();
@@ -169,6 +203,7 @@ function navigateTo(page) {
   if (page === 'ecrans') {
     ecransSearchQuery = '';
     filmsFormatFilter = null;
+    ecransCollectionFilter = null;
     document.getElementById('search-ecrans').value = '';
     updateEcransCounter();
 
@@ -178,11 +213,13 @@ function navigateTo(page) {
     generateFilms();
   }
   if (page === 'jeux') {
+    jeuxCollectionFilter = null;
     document.getElementById('search-jeux').value = '';
     generateGames();
   }
   if (page === 'musique') {
     musiqueFormatFilter = null;
+    musiqueCollectionFilter = null;
     document.getElementById('search-musique').value = '';
     generateMusique();
   }
@@ -321,15 +358,95 @@ function generateBibliography(data = books, isSearch = false) {
   
   let totalBooks = 0;
   for (const author in data) totalBooks += data[author].length;
-  let label = totalBooks + " livre" + (totalBooks !== 1 ? "s" : "") + " lu" + (totalBooks !== 1 ? "s" : "");
+  let globalTotalBooks = 0;
+  for (const a in books) globalTotalBooks += books[a].length;
   
-  if (isSearch) {
-    label = totalBooks + " livre" + (totalBooks !== 1 ? "s" : "") + " trouvé" + (totalBooks !== 1 ? "s" : "");
+  let label;
+  if (isSearch || biblioCollectionFilter) {
+    label = totalBooks + " / " + globalTotalBooks + " livre" + (globalTotalBooks !== 1 ? "s" : "");
   } else if (showOnlyReviewsBiblio) {
-    label = totalBooks + " review" + (totalBooks !== 1 ? "s" : "");
+    label = totalBooks + " / " + globalTotalBooks + " review" + (globalTotalBooks !== 1 ? "s" : "");
+  } else {
+    label = totalBooks + " livre" + (totalBooks !== 1 ? "s" : "") + " lu" + (totalBooks !== 1 ? "s" : "");
   }
   
   document.getElementById('biblio-counter').textContent = label;
+
+  // --- FILTRES & BARRE COLLECTION BIBLIO ---
+  var bF = document.getElementById('biblio-filters');
+  if (bF) {
+    bF.innerHTML = '';
+    var collCounts = { 're-read': 0, 'bought': 0, 'archived': 0 };
+    var hasReview = false;
+    for (var aut in books) {
+      books[aut].forEach(function(b) {
+        if (b.review) hasReview = true;
+        if (b.tags) b.tags.forEach(function(t) { if (collCounts[t] !== undefined) collCounts[t]++; });
+      });
+    }
+    var topRow = document.createElement('div');
+    topRow.style.cssText = 'display: flex; gap: 8px; justify-content: center; margin-bottom: 10px;';
+    var allBtn = document.createElement('button');
+    allBtn.className = 'anime-tag-btn' + (biblioCollectionFilter === null && !showOnlyReviewsBiblio ? ' active' : '');
+    allBtn.textContent = 'tous';
+    allBtn.addEventListener('click', function() { biblioCollectionFilter = null; showOnlyReviewsBiblio = false; generateBibliography(); });
+    topRow.appendChild(allBtn);
+
+    if (hasReview) {
+      var reviewBtn = document.createElement('button');
+      reviewBtn.className = 'anime-tag-btn' + (showOnlyReviewsBiblio ? ' active' : '');
+      reviewBtn.textContent = 'reviews';
+      reviewBtn.addEventListener('click', function() {
+        showOnlyReviewsBiblio = !showOnlyReviewsBiblio;
+        biblioCollectionFilter = null;
+        document.getElementById('search-biblio').value = '';
+        generateBibliography(showOnlyReviewsBiblio ? filterByReview(books) : books);
+      });
+      topRow.appendChild(reviewBtn);
+    }
+    bF.appendChild(topRow);
+
+    var collSection = document.createElement('div'); collSection.className = 'anime-tag-section';
+    var collLabel = document.createElement('div'); collLabel.className = 'anime-tag-section-label'; collLabel.textContent = 'collection'; collSection.appendChild(collLabel);
+    var collWrap = document.createElement('div'); collWrap.className = 'anime-tag-section-tags';
+    
+    for (var tag in collCounts) {
+      if (collCounts[tag] > 0) {
+        var btn = document.createElement('button');
+        btn.className = 'anime-tag-btn' + (biblioCollectionFilter === tag ? ' active' : '');
+        btn.textContent = tag + ' (' + collCounts[tag] + ')';
+        btn.addEventListener('click', function(t) { return function() { biblioCollectionFilter = biblioCollectionFilter === t ? null : t; showOnlyReviewsBiblio = false; generateBibliography(); }; }(tag));
+        collWrap.appendChild(btn);
+      }
+    }
+    if (collWrap.children.length > 0) { collSection.appendChild(collWrap); bF.appendChild(collSection); }
+  }
+
+  var bBar = document.getElementById('biblio-project-bar');
+  if (bBar) {
+    var rereadCount = 0; var totalB = 0;
+    for (var a in books) {
+      books[a].forEach(function(b) {
+        totalB++;
+        if (b.tags && b.tags.indexOf('re-read') !== -1) rereadCount++;
+      });
+    }
+    if (totalB > 0) {
+      var pct = (rereadCount / totalB * 100).toFixed(1);
+      bBar.innerHTML = '<div class="project-bar"><span class="project-label">projet re-read : ' + rereadCount + ' / ' + totalB + ' (' + pct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + pct + '%"></div></div></div>';
+    } else { bBar.innerHTML = ''; }
+  }
+
+  if (biblioCollectionFilter) {
+    var filteredBiblio = {};
+    for (var auth in data) {
+      var validBooks = data[auth].filter(function(b) {
+        return b.tags && b.tags.indexOf(biblioCollectionFilter) !== -1;
+      });
+      if (validBooks.length > 0) filteredBiblio[auth] = validBooks;
+    }
+    data = filteredBiblio;
+  }
 
     // Tri Bibliographie
   var sortContainer = document.getElementById('biblio-sort');
@@ -375,7 +492,7 @@ function generateBibliography(data = books, isSearch = false) {
     });
 
     if (allBooks.length === 0) {
-      container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+      container.innerHTML = '<p class="empty-state">aucun résultat</p>';
       return;
     }
 
@@ -386,7 +503,7 @@ function generateBibliography(data = books, isSearch = false) {
       
       var card = document.createElement('a');
       card.href = book.link; card.target = "_blank"; card.className = 'book-card';
-      card.innerHTML = '<img loading="lazy" src="' + book.cover + '" alt="' + book.title + '">' + getArchivedBadge(book) + '<div class="book-title">' + book.title + '</div>' + starsHtml + reviewHtml;
+      card.innerHTML = '<img loading="lazy" src="' + book.cover + '" alt="' + book.title + '">' + getCollectionBadges(book) + '<div class="book-title">' + book.title + '</div>' + starsHtml + getOldNote(book) + reviewHtml;
       div.appendChild(card);
     });
     
@@ -415,7 +532,7 @@ function generateBibliography(data = books, isSearch = false) {
   listContainer.innerHTML = '';
 
   if (sortDataKeys(data).length === 0) {
-    listContainer.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+    listContainer.innerHTML = '<p class="empty-state">aucun résultat</p>';
     return;
   }
 
@@ -445,9 +562,10 @@ function generateBibliography(data = books, isSearch = false) {
       var reviewHtml = book.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(book.review) + '</span>' : '';
       card.innerHTML = `
         <img loading="lazy" src="${book.cover}" alt="${book.title}">
-        ${getArchivedBadge(book)}
+        ${getCollectionBadges(book)}
         <div class="book-title">${book.title}</div>
-        ${starsHtml}
+        ${starsHtml}\n
+        ${getOldNote(book)}\n
         ${reviewHtml}
       `;
       booksDiv.appendChild(card);
@@ -497,6 +615,7 @@ document.querySelectorAll('.sub-nav-link').forEach(link => {
     const subpage = link.dataset.subpage;
     
     filmsFormatFilter = null;
+    ecransCollectionFilter = null;
 
     setupEcransSort(subpage);
 
@@ -511,9 +630,15 @@ document.querySelectorAll('.sub-nav-link').forEach(link => {
     const isSearch = !!ecransSearchQuery;
 
     let totalFilms = Object.values(filteredFilms).reduce((acc, arr) => acc + arr.length, 0);
-    let totalSeries = Object.keys(filteredSeries).length;
-    let textFilms = isSearch ? totalFilms + " film" + (totalFilms !== 1 ? "s" : "") + " trouvé" + (totalFilms !== 1 ? "s" : "") : totalFilms + " film" + (totalFilms !== 1 ? "s" : "") + " vu" + (totalFilms !== 1 ? "s" : "");
-    let textSeries = isSearch ? totalSeries + " série" + (totalSeries !== 1 ? "s" : "") + " trouvée" + (totalSeries !== 1 ? "s" : "") : totalSeries + " série" + (totalSeries !== 1 ? "s" : "") + " suivie" + (totalSeries !== 1 ? "s" : "");
+    let totalSeries = Object.values(filteredSeries).reduce((acc, arr) => acc + arr.length, 0);
+    let globalFilms = Object.values(films).reduce((acc, arr) => acc + arr.length, 0);
+    let globalSeries = Object.values(series).reduce((acc, arr) => acc + arr.length, 0);
+    
+    let isFilmsFiltered = isSearch || filmsFormatFilter || ecransCollectionFilter;
+    let isSeriesFiltered = isSearch || ecransCollectionFilter;
+    
+    let textFilms = isFilmsFiltered ? totalFilms + " / " + globalFilms + " film" + (globalFilms !== 1 ? "s" : "") : globalFilms + " film" + (globalFilms !== 1 ? "s" : "") + " vu" + (globalFilms !== 1 ? "s" : "");
+    let textSeries = isSeriesFiltered ? totalSeries + " / " + globalSeries + " saison" + (globalSeries !== 1 ? "s" : "") : globalSeries + " saison" + (globalSeries !== 1 ? "s" : "") + " suivie" + (globalSeries !== 1 ? "s" : "");
     document.getElementById('ecrans-counter').textContent = textFilms + " • " + textSeries;
 
     if (subpage === 'films') generateFilms(filteredFilms, isSearch);
@@ -559,10 +684,11 @@ function generateFilms(data = films, isSearch = false) {
     row1.style.cssText = 'display: flex; gap: 8px; justify-content: center;';
     
     var allBtn = document.createElement('button');
-    allBtn.className = 'anime-tag-btn' + (filmsFormatFilter === null ? ' active' : '');
+    allBtn.className = 'anime-tag-btn' + (filmsFormatFilter === null && ecransCollectionFilter === null ? ' active' : '');
     allBtn.textContent = 'tous (' + (shortCount + featureCount) + ')';
     allBtn.addEventListener('click', function() { 
       filmsFormatFilter = null; 
+      ecransCollectionFilter = null; // <-- On ajoute ça pour vider la collection
       generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery); 
     });
     row1.appendChild(allBtn);
@@ -585,7 +711,8 @@ function generateFilms(data = films, isSearch = false) {
       featBtn.className = 'anime-tag-btn' + (filmsFormatFilter === 'long' ? ' active' : '');
       featBtn.textContent = 'longs métrages (' + featureCount + ')';
       featBtn.addEventListener('click', function() { 
-        filmsFormatFilter = 'long'; 
+        filmsFormatFilter = filmsFormatFilter === 'long' ? null : 'long';
+        ecransCollectionFilter = null;
         generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery); 
       });
       fmtWrap.appendChild(featBtn);
@@ -596,7 +723,8 @@ function generateFilms(data = films, isSearch = false) {
       shortBtn.className = 'anime-tag-btn' + (filmsFormatFilter === 'court' ? ' active' : '');
       shortBtn.textContent = 'courts métrages (' + shortCount + ')';
       shortBtn.addEventListener('click', function() { 
-        filmsFormatFilter = 'court'; 
+        filmsFormatFilter = filmsFormatFilter === 'court' ? null : 'court';
+        ecransCollectionFilter = null;
         generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery); 
       });
       fmtWrap.appendChild(shortBtn);
@@ -607,21 +735,111 @@ function generateFilms(data = films, isSearch = false) {
       fmtSection.appendChild(fmtWrap);
       fC.appendChild(fmtSection);
     }
+
+    // SECTION COLLECTION FILMS
+    var fCollCounts = { 're-watched': 0, 'archived': 0 };
+    for (var d in films) {
+      films[d].forEach(function(m) {
+        if (m.tags) m.tags.forEach(function(t) { if (fCollCounts[t] !== undefined) fCollCounts[t]++; });
+      });
+    }
+    var fCollSection = document.createElement('div'); fCollSection.className = 'anime-tag-section';
+    var fCollLabel = document.createElement('div'); fCollLabel.className = 'anime-tag-section-label'; fCollLabel.textContent = 'collection'; fCollSection.appendChild(fCollLabel);
+    var fCollWrap = document.createElement('div'); fCollWrap.className = 'anime-tag-section-tags';
+    for (var fTag in fCollCounts) {
+      if (fCollCounts[fTag] > 0) {
+        var fBtn = document.createElement('button');
+        fBtn.className = 'anime-tag-btn' + (ecransCollectionFilter === fTag ? ' active' : '');
+        fBtn.textContent = fTag + ' (' + fCollCounts[fTag] + ')';
+        fBtn.addEventListener('click', function(t) { return function() { ecransCollectionFilter = ecransCollectionFilter === t ? null : t; filmsFormatFilter = null; generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery); }; }(fTag));
+        fCollWrap.appendChild(fBtn);
+      }
+    }
+    if (fCollWrap.children.length > 0) { fCollSection.appendChild(fCollWrap); fC.appendChild(fCollSection); }
+
+    // SECTION QUALITÉ FILMS
+    var fQualCounts = { 'coup de coeur': 0 };
+    for (var d2 in films) {
+      films[d2].forEach(function(m2) {
+        if (m2.tags) m2.tags.forEach(function(t) { if (fQualCounts[t] !== undefined) fQualCounts[t]++; });
+      });
+    }
+    var fQualSection = document.createElement('div'); fQualSection.className = 'anime-tag-section';
+    var fQualLabel = document.createElement('div'); fQualLabel.className = 'anime-tag-section-label'; fQualLabel.textContent = 'qualité'; fQualSection.appendChild(fQualLabel);
+    var fQualWrap = document.createElement('div'); fQualWrap.className = 'anime-tag-section-tags';
+    for (var fQualTag in fQualCounts) {
+      if (fQualCounts[fQualTag] > 0) {
+        var fQualBtn = document.createElement('button');
+        fQualBtn.className = 'anime-tag-btn quality-tag' + (ecransCollectionFilter === fQualTag ? ' active' : '');
+        fQualBtn.textContent = fQualTag + ' (' + fQualCounts[fQualTag] + ')';
+        fQualBtn.addEventListener('click', function(t) { return function() { ecransCollectionFilter = ecransCollectionFilter === t ? null : t; filmsFormatFilter = null; generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery); }; }(fQualTag));
+        fQualWrap.appendChild(fQualBtn);
+      }
+    }
+    if (fQualWrap.children.length > 0) { fQualSection.appendChild(fQualWrap); fC.appendChild(fQualSection); }
+  }
+
+  // BARRE PROGRESSION RE-WATCH FILMS
+  var fBar = document.getElementById('films-project-bar');
+  if (fBar) {
+    var fRewatchCount = 0; var fTotal = 0;
+    for (var dir in films) {
+      films[dir].forEach(function(m) {
+        fTotal++;
+        if (m.tags && m.tags.indexOf('re-watched') !== -1) fRewatchCount++;
+      });
+    }
+    if (fTotal > 0) {
+      var fPct = (fRewatchCount / fTotal * 100).toFixed(1);
+      fBar.innerHTML = '<div class="project-bar"><span class="project-label">projet re-watch : ' + fRewatchCount + ' / ' + fTotal + ' (' + fPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + fPct + '%"></div></div></div>';
+    } else { fBar.innerHTML = ''; }
   }
 
   // 2. Application du filtre sur les données
-  if (filmsFormatFilter) {
+  if (filmsFormatFilter || ecransCollectionFilter) {
     var filteredData = {};
     for (var director in data) {
       var validMovies = data[director].filter(function(movie) {
         var isShort = movie.tags && movie.tags.indexOf('court métrage') !== -1;
-        if (filmsFormatFilter === 'court') return isShort;
-        if (filmsFormatFilter === 'long') return !isShort;
-        return true;
+        var fmtOk = true;
+        if (filmsFormatFilter === 'court') fmtOk = isShort;
+        if (filmsFormatFilter === 'long') fmtOk = !isShort;
+        var collOk = ecransCollectionFilter ? (movie.tags && movie.tags.indexOf(ecransCollectionFilter) !== -1) : true;
+        return fmtOk && collOk;
       });
       if (validMovies.length > 0) filteredData[director] = validMovies;
     }
     data = filteredData;
+  }
+
+  // Mise à jour du compteur Écrans (Films)
+  var fCount = Object.values(data).reduce(function(acc, arr) { return acc + arr.length; }, 0);
+  var fGlobal = Object.values(films).reduce(function(acc, arr) { return acc + arr.length; }, 0);
+  var isFilt = isSearch || filmsFormatFilter || ecransCollectionFilter;
+  var tFilms = isFilt ? fCount + " / " + fGlobal + " film" + (fGlobal !== 1 ? "s" : "") : fGlobal + " film" + (fGlobal !== 1 ? "s" : "") + " vu" + (fGlobal !== 1 ? "s" : "");
+
+  var sCount = Object.values(series).reduce(function(acc, arr) { 
+    return acc + (ecransCollectionFilter ? arr.filter(function(s) { return s.tags && s.tags.indexOf(ecransCollectionFilter) !== -1; }).length : arr.length); 
+  }, 0);
+  var sGlobal = Object.values(series).reduce(function(acc, arr) { return acc + arr.length; }, 0);
+  var tSeries = ecransCollectionFilter ? sCount + " / " + sGlobal + " saison" + (sGlobal !== 1 ? "s" : "") : sGlobal + " saison" + (sGlobal !== 1 ? "s" : "") + " suivie" + (sGlobal !== 1 ? "s" : "");
+
+  document.getElementById('ecrans-counter').textContent = tFilms + " • " + tSeries;
+
+  // Mise à jour de la barre de progression re-watch
+  var fBar = document.getElementById('ecrans-project-bar');
+  if (fBar) {
+    var fRewatchCount = 0; var fTotal = 0;
+    for (var dir in films) {
+      films[dir].forEach(function(m) {
+        fTotal++;
+        if (m.tags && m.tags.indexOf('re-watched') !== -1) fRewatchCount++;
+      });
+    }
+    if (fTotal > 0) {
+      var fPct = (fRewatchCount / fTotal * 100).toFixed(1);
+      fBar.innerHTML = '<div class="project-bar"><span class="project-label">projet re-watch : ' + fRewatchCount + ' / ' + fTotal + ' (' + fPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + fPct + '%"></div></div></div>';
+    } else { fBar.innerHTML = ''; }
   }
 
   // --- VUE GLOBALE FILMS ---
@@ -639,7 +857,7 @@ function generateFilms(data = films, isSearch = false) {
         return (a.title.localeCompare(b.title)) * ecransSortDir;
       }
     });
-    if (allMovies.length === 0) { container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>'; return; }
+    if (allMovies.length === 0) { container.innerHTML = '<p class="empty-state">aucun résultat</p>'; return; }
     var div = document.createElement('div'); div.className = 'books';
     allMovies.forEach(function(movie) {
       var starsHtml = movie.note !== null ? '<div class="book-meta">' + getStars(movie.note) + '</div>' : '';
@@ -647,7 +865,7 @@ function generateFilms(data = films, isSearch = false) {
       if (movie.tags && movie.tags.indexOf('coup de coeur') !== -1) var cdcClass = ' coup-de-coeur-card'; else var cdcClass = '';
       var card = document.createElement('a');
       card.href = movie.link; card.target = "_blank"; card.className = 'book-card' + cdcClass;
-      card.innerHTML = '<img loading="lazy" src="' + movie.cover + '" alt="' + movie.title + '">' + getArchivedBadge(movie) + '<div class="book-title">' + movie.title + '</div>' + starsHtml + reviewHtml;
+      card.innerHTML = '<img loading="lazy" src="' + movie.cover + '" alt="' + movie.title + '">' + getFilmFormatBadge(movie) + getCollectionBadges(movie) + '<div class="book-title">' + movie.title + '</div>' + starsHtml + getOldNote(movie) + reviewHtml;
       div.appendChild(card);
     });
     container.innerHTML = '';
@@ -658,7 +876,7 @@ function generateFilms(data = films, isSearch = false) {
   container.innerHTML = '';
 
   if (sortDataKeys(data).length === 0) {
-    container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+    container.innerHTML = '<p class="empty-state">aucun résultat</p>';
     return;
   }
 
@@ -686,7 +904,7 @@ function generateFilms(data = films, isSearch = false) {
       
       if (movie.tags && movie.tags.indexOf('coup de coeur') !== -1) card.className += ' coup-de-coeur-card';
       var reviewHtml = movie.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(movie.review) + '</span>' : '';
-      card.innerHTML = `<img loading="lazy" src="${movie.cover}" alt="${movie.title}">${getArchivedBadge(movie)}<div class="book-title">${movie.title}</div>${starsHtml}${reviewHtml}`;
+      card.innerHTML = `<img loading="lazy" src="${movie.cover}" alt="${movie.title}">${getFilmFormatBadge(movie)}${getCollectionBadges(movie)}<div class="book-title">${movie.title}</div>${starsHtml}${getOldNote(movie)}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
@@ -696,6 +914,142 @@ function generateFilms(data = films, isSearch = false) {
 // ── Generate Séries ──
 function generateSeries(data = series, isSearch = false) {
   const container = document.getElementById('seriesContent');
+
+  // Mise à jour du compteur Écrans
+  var sCount = Object.values(data).reduce(function(acc, arr) { return acc + arr.length; }, 0);
+  var sGlobal = Object.values(series).reduce(function(acc, arr) { return acc + arr.length; }, 0);
+  var sFilt = isSearch || ecransCollectionFilter;
+  var tSeries = sFilt ? sCount + " / " + sGlobal + " saison" + (sGlobal !== 1 ? "s" : "") : sGlobal + " saison" + (sGlobal !== 1 ? "s" : "") + " suivie" + (sGlobal !== 1 ? "s" : "");
+
+  var fCount = Object.values(films).reduce(function(acc, arr) { 
+    return acc + (ecransCollectionFilter ? arr.filter(function(m) { return m.tags && m.tags.indexOf(ecransCollectionFilter) !== -1; }).length : arr.length); 
+  }, 0);
+  var fGlobal = Object.values(films).reduce(function(acc, arr) { return acc + arr.length; }, 0);
+  var fFilt = ecransCollectionFilter || filmsFormatFilter;
+  var tFilms = fFilt ? fCount + " / " + fGlobal + " film" + (fGlobal !== 1 ? "s" : "") : fGlobal + " film" + (fGlobal !== 1 ? "s" : "") + " vu" + (fGlobal !== 1 ? "s" : "");
+
+  document.getElementById('ecrans-counter').textContent = tFilms + " • " + tSeries;
+
+  // 1. Filtres collection Séries
+  var sF = document.getElementById('series-filters');
+  if (sF) {
+    sF.innerHTML = '';
+    var sCollCounts = { 're-watched': 0, 'archived': 0 };
+    for (var show in series) {
+      series[show].forEach(function(s) {
+        if (s.tags) s.tags.forEach(function(t) { if (sCollCounts[t] !== undefined) sCollCounts[t]++; });
+      });
+    }
+    var sTopRow = document.createElement('div');
+    sTopRow.style.cssText = 'display: flex; gap: 8px; justify-content: center; margin-bottom: 10px;';
+    var sAllBtn = document.createElement('button');
+    sAllBtn.className = 'anime-tag-btn' + (ecransCollectionFilter === null ? ' active' : ''); // <-- Celle-ci est déjà bonne, mais vérifie juste qu'elle est bien là.
+    sAllBtn.textContent = 'tous';
+    sAllBtn.addEventListener('click', function() { ecransCollectionFilter = null; generateSeries(filterData(series, ecransSearchQuery), !!ecransSearchQuery); });
+    sTopRow.appendChild(sAllBtn);
+    sF.appendChild(sTopRow);
+
+    var sCollSection = document.createElement('div'); sCollSection.className = 'anime-tag-section';
+    var sCollLabel = document.createElement('div'); sCollLabel.className = 'anime-tag-section-label'; sCollLabel.textContent = 'collection'; sCollSection.appendChild(sCollLabel);
+    var sCollWrap = document.createElement('div'); sCollWrap.className = 'anime-tag-section-tags';
+    for (var sTag in sCollCounts) {
+      if (sCollCounts[sTag] > 0) {
+        var sBtn = document.createElement('button');
+        sBtn.className = 'anime-tag-btn' + (ecransCollectionFilter === sTag ? ' active' : '');
+        sBtn.textContent = sTag + ' (' + sCollCounts[sTag] + ')';
+        sBtn.addEventListener('click', function(t) { return function() { ecransCollectionFilter = ecransCollectionFilter === t ? null : t; generateSeries(filterData(series, ecransSearchQuery), !!ecransSearchQuery); }; }(sTag));
+        sCollWrap.appendChild(sBtn);
+      }
+    }
+    if (sCollWrap.children.length > 0) { sCollSection.appendChild(sCollWrap); sF.appendChild(sCollSection); }
+
+    // SECTION QUALITÉ SÉRIES
+    var sQualCounts = { 'coup de coeur': 0 };
+    for (var sh2 in series) {
+      series[sh2].forEach(function(s2) {
+        if (s2.tags) s2.tags.forEach(function(t) { if (sQualCounts[t] !== undefined) sQualCounts[t]++; });
+      });
+    }
+    var sQualSection = document.createElement('div'); sQualSection.className = 'anime-tag-section';
+    var sQualLabel = document.createElement('div'); sQualLabel.className = 'anime-tag-section-label'; sQualLabel.textContent = 'qualité'; sQualSection.appendChild(sQualLabel);
+    var sQualWrap = document.createElement('div'); sQualWrap.className = 'anime-tag-section-tags';
+    for (var sQualTag in sQualCounts) {
+      if (sQualCounts[sQualTag] > 0) {
+        var sQualBtn = document.createElement('button');
+        sQualBtn.className = 'anime-tag-btn quality-tag' + (ecransCollectionFilter === sQualTag ? ' active' : '');
+        sQualBtn.textContent = sQualTag + ' (' + sQualCounts[sQualTag] + ')';
+        sQualBtn.addEventListener('click', function(t) { return function() { ecransCollectionFilter = ecransCollectionFilter === t ? null : t; generateSeries(filterData(series, ecransSearchQuery), !!ecransSearchQuery); }; }(sQualTag));
+        sQualWrap.appendChild(sQualBtn);
+      }
+    }
+    if (sQualWrap.children.length > 0) { sQualSection.appendChild(sQualWrap); sF.appendChild(sQualSection); }
+  }
+
+  // Barre progression re-watch Séries
+  var sBar = document.getElementById('series-project-bar');
+  if (sBar) {
+    var sRewatchCount = 0; var sTotal = 0;
+    for (var sh in series) {
+      series[sh].forEach(function(s) {
+        sTotal++;
+        if (s.tags && s.tags.indexOf('re-watched') !== -1) sRewatchCount++;
+      });
+    }
+    if (sTotal > 0) {
+      var sPct = (sRewatchCount / sTotal * 100).toFixed(1);
+      sBar.innerHTML = '<div class="project-bar"><span class="project-label">projet re-watch : ' + sRewatchCount + ' / ' + sTotal + ' (' + sPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + sPct + '%"></div></div></div>';
+    } else { sBar.innerHTML = ''; }
+  }
+
+  // Application du filtre
+  if (ecransCollectionFilter) {
+    var filteredSeriesData = {};
+    for (var showKey in data) {
+      var validSeasons = data[showKey].filter(function(season) {
+        return season.tags && season.tags.indexOf(ecransCollectionFilter) !== -1;
+      });
+      if (validSeasons.length > 0) filteredSeriesData[showKey] = validSeasons;
+    }
+    data = filteredSeriesData;
+  }
+
+  // Mise à jour du compteur Écrans (Séries)
+  var sCount = Object.values(data).reduce(function(acc, arr) { return acc + arr.length; }, 0);
+  var sGlobal = Object.values(series).reduce(function(acc, arr) { return acc + arr.length; }, 0);
+  var sFilt = isSearch || ecransCollectionFilter;
+  var tSeries = sFilt ? sCount + " / " + sGlobal + " saison" + (sGlobal !== 1 ? "s" : "") : sGlobal + " saison" + (sGlobal !== 1 ? "s" : "") + " suivie" + (sGlobal !== 1 ? "s" : "");
+
+  var fCount = Object.values(films).reduce(function(acc, arr) { 
+    return acc + (ecransCollectionFilter || filmsFormatFilter ? arr.filter(function(m) { 
+      var isShort = m.tags && m.tags.indexOf('court métrage') !== -1;
+      var fmtOk = true;
+      if (filmsFormatFilter === 'court') fmtOk = isShort;
+      if (filmsFormatFilter === 'long') fmtOk = !isShort;
+      var collOk = ecransCollectionFilter ? (m.tags && m.tags.indexOf(ecransCollectionFilter) !== -1) : true;
+      return fmtOk && collOk; 
+    }).length : arr.length); 
+  }, 0);
+  var fGlobal = Object.values(films).reduce(function(acc, arr) { return acc + arr.length; }, 0);
+  var fFilt = ecransCollectionFilter || filmsFormatFilter;
+  var tFilms = fFilt ? fCount + " / " + fGlobal + " film" + (fGlobal !== 1 ? "s" : "") : fGlobal + " film" + (fGlobal !== 1 ? "s" : "") + " vu" + (fGlobal !== 1 ? "s" : "");
+
+  document.getElementById('ecrans-counter').textContent = tFilms + " • " + tSeries;
+
+  // Mise à jour de la barre de progression re-watch
+  var sBar = document.getElementById('ecrans-project-bar');
+  if (sBar) {
+    var sRewatchCount = 0; var sTotal = 0;
+    for (var sh in series) {
+      series[sh].forEach(function(s) {
+        sTotal++;
+        if (s.tags && s.tags.indexOf('re-watched') !== -1) sRewatchCount++;
+      });
+    }
+    if (sTotal > 0) {
+      var sPct = (sRewatchCount / sTotal * 100).toFixed(1);
+      sBar.innerHTML = '<div class="project-bar"><span class="project-label">projet re-watch : ' + sRewatchCount + ' / ' + sTotal + ' (' + sPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + sPct + '%"></div></div></div>';
+    } else { sBar.innerHTML = ''; }
+  }
 
   // --- VUE GLOBALE SÉRIES ---
   if (ecransSortMode !== 'réalisateur') {
@@ -712,7 +1066,7 @@ function generateSeries(data = series, isSearch = false) {
         return (a.title.localeCompare(b.title)) * ecransSortDir;
       }
     });
-    if (allSeries.length === 0) { container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>'; return; }
+    if (allSeries.length === 0) { container.innerHTML = '<p class="empty-state">aucun résultat</p>'; return; }
     var div = document.createElement('div'); div.className = 'books';
     allSeries.forEach(function(season) {
       var starsHtml = season.note !== null ? '<div class="book-meta">' + getStars(season.note) + '</div>' : '';
@@ -720,7 +1074,7 @@ function generateSeries(data = series, isSearch = false) {
       if (season.tags && season.tags.indexOf('coup de coeur') !== -1) var cdcClass = ' coup-de-coeur-card'; else var cdcClass = '';
       var card = document.createElement('a');
       card.href = season.link; card.target = "_blank"; card.className = 'book-card' + cdcClass;
-      card.innerHTML = '<img loading="lazy" src="' + season.cover + '" alt="' + season.title + '">' + getArchivedBadge(season) + '<div class="book-title">' + season.title + '</div>' + starsHtml + reviewHtml;
+      card.innerHTML = '<img loading="lazy" src="' + season.cover + '" alt="' + season.title + '">' + getCollectionBadges(season) + '<div class="book-title">' + season.title + '</div>' + starsHtml + getOldNote(season) + reviewHtml;
       div.appendChild(card);
     });
     container.innerHTML = '';
@@ -731,7 +1085,7 @@ function generateSeries(data = series, isSearch = false) {
   container.innerHTML = '';
 
   if (sortDataKeys(data).length === 0) {
-    container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+    container.innerHTML = '<p class="empty-state">aucun résultat</p>';
     return;
   }
 
@@ -757,7 +1111,7 @@ function generateSeries(data = series, isSearch = false) {
       
       if (season.tags && season.tags.indexOf('coup de coeur') !== -1) card.className += 'coup-de-coeur-card';
       var reviewHtml = season.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(season.review) + '</span>' : '';
-      card.innerHTML = `<img loading="lazy" src="${season.cover}" alt="${season.title}">${getArchivedBadge(season)}<div class="book-title">${season.title}</div>${starsHtml}${reviewHtml}`;
+      card.innerHTML = `<img loading="lazy" src="${season.cover}" alt="${season.title}">${getCollectionBadges(season)}<div class="book-title">${season.title}</div>${starsHtml}${getOldNote(season)}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
@@ -766,10 +1120,65 @@ function generateSeries(data = series, isSearch = false) {
 
 // ── Generate Jeux vidéo ──
 function generateGames(data = games, isSearch = false) {
+  
+  // 1. Filtres collection Jeux
+  var gF = document.getElementById('jeux-filters');
+  if (gF) {
+    gF.innerHTML = '';
+    var gCollCounts = { 'rejoué': 0, 'archived': 0 };
+    games.forEach(function(g) {
+      if (g.tags) g.tags.forEach(function(t) { if (gCollCounts[t] !== undefined) gCollCounts[t]++; });
+    });
+    var gTopRow = document.createElement('div');
+    gTopRow.style.cssText = 'display: flex; gap: 8px; justify-content: center; margin-bottom: 10px;';
+    var gAllBtn = document.createElement('button');
+    gAllBtn.className = 'anime-tag-btn' + (jeuxCollectionFilter === null ? ' active' : '');
+    gAllBtn.textContent = 'tous';
+    var gSearchVal = document.getElementById('search-jeux').value;
+    gAllBtn.addEventListener('click', function() { jeuxCollectionFilter = null; generateGames(filterData(games, gSearchVal), !!gSearchVal); });
+    gTopRow.appendChild(gAllBtn);
+    gF.appendChild(gTopRow);
+
+    var gCollSection = document.createElement('div'); gCollSection.className = 'anime-tag-section';
+    var gCollLabel = document.createElement('div'); gCollLabel.className = 'anime-tag-section-label'; gCollLabel.textContent = 'collection'; gCollSection.appendChild(gCollLabel);
+    var gCollWrap = document.createElement('div'); gCollWrap.className = 'anime-tag-section-tags';
+    for (var gTag in gCollCounts) {
+      if (gCollCounts[gTag] > 0) {
+        var gBtn = document.createElement('button');
+        gBtn.className = 'anime-tag-btn' + (jeuxCollectionFilter === gTag ? ' active' : '');
+        gBtn.textContent = gTag + ' (' + gCollCounts[gTag] + ')';
+        gBtn.addEventListener('click', function(t) { return function() { jeuxCollectionFilter = jeuxCollectionFilter === t ? null : t; generateGames(filterData(games, gSearchVal), !!gSearchVal); }; }(gTag));
+        gCollWrap.appendChild(gBtn);
+      }
+    }
+    if (gCollWrap.children.length > 0) { gCollSection.appendChild(gCollWrap); gF.appendChild(gCollSection); }
+  }
+
+  // Barre progression replay Jeux
+  var gBar = document.getElementById('jeux-project-bar');
+  if (gBar) {
+    var gReplayCount = 0; var gTotal = games.length;
+    games.forEach(function(g) {
+      if (g.tags && g.tags.indexOf('rejoué') !== -1) gReplayCount++;
+    });
+    if (gTotal > 0) {
+      var gPct = (gReplayCount / gTotal * 100).toFixed(1);
+      gBar.innerHTML = '<div class="project-bar"><span class="project-label">projet replay : ' + gReplayCount + ' / ' + gTotal + ' (' + gPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + gPct + '%"></div></div></div>';
+    } else { gBar.innerHTML = ''; }
+  }
+
+  // Application du filtre
+  if (jeuxCollectionFilter) {
+    data = data.filter(function(g) {
+      return g.tags && g.tags.indexOf(jeuxCollectionFilter) !== -1;
+    });
+  }
+
   // Comme data est maintenant une liste plate, on prend directement sa longueur
   let totalGames = data.length;
-  const label = isSearch 
-    ? totalGames + " jeu" + (totalGames !== 1 ? "x" : "") + " trouvé" + (totalGames !== 1 ? "s" : "")
+  let globalTotalGames = games.length;
+  const label = (isSearch || jeuxCollectionFilter) 
+    ? totalGames + " / " + globalTotalGames + " jeu" + (globalTotalGames !== 1 ? "x" : "")
     : totalGames + " jeu" + (totalGames !== 1 ? "x" : "") + " joué" + (totalGames !== 1 ? "s" : "");
   document.getElementById('jeux-counter').textContent = label;
 
@@ -812,7 +1221,7 @@ function generateGames(data = games, isSearch = false) {
   });
 
   if (allGames.length === 0) {
-    container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+    container.innerHTML = '<p class="empty-state">aucun résultat</p>';
     return;
   }
 
@@ -827,7 +1236,7 @@ function generateGames(data = games, isSearch = false) {
     card.href = game.link; 
     card.target = "_blank"; 
     card.className = 'book-card';
-    card.innerHTML = '<img loading="lazy" src="' + game.cover + '" alt="' + game.title + '">' + getArchivedBadge(game) + '<div class="book-title">' + game.title + '</div>' + starsHtml + reviewHtml;
+    card.innerHTML = '<img loading="lazy" src="' + game.cover + '" alt="' + game.title + '">' + getCollectionBadges(game) + '<div class="book-title">' + game.title + '</div>' + starsHtml + getOldNote(game) + reviewHtml;
     div.appendChild(card);
   });
   
@@ -851,11 +1260,12 @@ function generateMusique(data = musique, isSearch = false) {
     fC.innerHTML = '';
     var topRow = document.createElement('div'); topRow.style.cssText = 'display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;';
     var allBtn = document.createElement('button');
-    allBtn.className = 'anime-tag-btn' + (musiqueFormatFilter === null ? ' active' : '');
+    allBtn.className = 'anime-tag-btn' + (musiqueFormatFilter === null && musiqueCollectionFilter === null ? ' active' : '');
     var totalAll = formatCounts.album + formatCounts.ep + formatCounts.single + formatCounts.mixtape;
     allBtn.textContent = 'tous (' + totalAll + ')';
     allBtn.addEventListener('click', function() { 
       musiqueFormatFilter = null; 
+      musiqueCollectionFilter = null; // <-- On ajoute ça pour vider la collection
       generateMusique(filterData(musique, document.getElementById('search-musique').value), isSearch); 
     });
     topRow.appendChild(allBtn);
@@ -877,7 +1287,8 @@ function generateMusique(data = musique, isSearch = false) {
         btn.className = 'anime-tag-btn' + (musiqueFormatFilter === fmt ? ' active' : '');
         btn.textContent = fmt + ' (' + formatCounts[fmt] + ')';
         btn.addEventListener('click', function() { 
-          musiqueFormatFilter = musiqueFormatFilter === fmt ? null : fmt; // Si on reclique, ça remet à null (donc "tous")
+          musiqueFormatFilter = musiqueFormatFilter === fmt ? null : fmt;
+          musiqueCollectionFilter = null; // On coupe l'autre filtre
           generateMusique(filterData(musique, document.getElementById('search-musique').value), isSearch); 
         });
         fmtWrap.appendChild(btn);
@@ -885,15 +1296,39 @@ function generateMusique(data = musique, isSearch = false) {
     });
     fmtSection.appendChild(fmtWrap);
     fC.appendChild(fmtSection);
+
+    // SECTION COLLECTION MUSIQUE
+    var mCollCounts = { 'réécoute': 0, 'archived': 0 };
+    for (var art in musique) {
+      musique[art].forEach(function(m) {
+        if (m.tags) m.tags.forEach(function(t) { if (mCollCounts[t] !== undefined) mCollCounts[t]++; });
+      });
+    }
+    var mCollSection = document.createElement('div'); mCollSection.className = 'anime-tag-section';
+    var mCollLabel = document.createElement('div'); mCollLabel.className = 'anime-tag-section-label'; mCollLabel.textContent = 'collection'; mCollSection.appendChild(mCollLabel);
+    var mCollWrap = document.createElement('div'); mCollWrap.className = 'anime-tag-section-tags';
+    
+    for (var mTag in mCollCounts) {
+      if (mCollCounts[mTag] > 0) {
+        var mBtn = document.createElement('button');
+        mBtn.className = 'anime-tag-btn' + (musiqueCollectionFilter === mTag ? ' active' : '');
+        mBtn.textContent = mTag + ' (' + mCollCounts[mTag] + ')';
+        mBtn.addEventListener('click', function(t) { return function() { musiqueCollectionFilter = musiqueCollectionFilter === t ? null : t; musiqueFormatFilter = null; generateMusique(filterData(musique, document.getElementById('search-musique').value), isSearch); }; }(mTag));
+        mCollWrap.appendChild(mBtn);
+      }
+    }
+    if (mCollWrap.children.length > 0) { mCollSection.appendChild(mCollWrap); fC.appendChild(mCollSection); }
   }
 
   // 2. Application du filtre sur les données
-  if (musiqueFormatFilter) {
+  if (musiqueFormatFilter || musiqueCollectionFilter) {
     var filteredData = {};
     for (var artist in data) {
       var validAlbums = data[artist].filter(function(album) {
         var fmt = album.format ? album.format.toLowerCase() : 'album';
-        return fmt === musiqueFormatFilter;
+        var fmtOk = musiqueFormatFilter ? (fmt === musiqueFormatFilter) : true;
+        var collOk = musiqueCollectionFilter ? (album.tags && album.tags.indexOf(musiqueCollectionFilter) !== -1) : true;
+        return fmtOk && collOk;
       });
       if (validAlbums.length > 0) filteredData[artist] = validAlbums;
     }
@@ -906,8 +1341,11 @@ function generateMusique(data = musique, isSearch = false) {
     displayedAlbums += data[artist].length;
   }
 
-  const label = (isSearch || musiqueFormatFilter) 
-    ? displayedAlbums + " projet" + (displayedAlbums !== 1 ? "s" : "") + " trouvé" + (displayedAlbums !== 1 ? "s" : "")
+  let globalTotalMusique = 0;
+  for (const art in musique) globalTotalMusique += musique[art].length;
+
+  const label = (isSearch || musiqueFormatFilter || musiqueCollectionFilter) 
+    ? displayedAlbums + " / " + globalTotalMusique + " projet" + (globalTotalMusique !== 1 ? "s" : "")
     : displayedAlbums + " projet" + (displayedAlbums !== 1 ? "s" : "") + " écouté" + (displayedAlbums !== 1 ? "s" : "");
   document.getElementById('musique-counter').textContent = label;
 
@@ -925,7 +1363,7 @@ function generateMusique(data = musique, isSearch = false) {
     
     if (globalTotal > 0) {
       var percentage = (globalRelisten / globalTotal) * 100;
-      relistenBar.innerHTML = '<span class="project-label">projet réécoute : ' + globalRelisten + ' / ' + globalTotal + ' (' + percentage.toFixed(1) + '%)</span><div class="project-track"><div class="project-fill" style="width: ' + percentage + '%"></div></div>';
+      relistenBar.innerHTML = '<div class="project-bar"><span class="project-label">projet réécoute : ' + globalRelisten + ' / ' + globalTotal + ' (' + percentage.toFixed(1) + '%)</span><div class="project-track"><div class="project-fill" style="width: ' + percentage + '%"></div></div></div>';
     } else {
       relistenBar.innerHTML = '';
     }
@@ -973,7 +1411,7 @@ function generateMusique(data = musique, isSearch = false) {
     });
 
     if (allAlbums.length === 0) {
-      container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+      container.innerHTML = '<p class="empty-state">aucun résultat</p>';
       return;
     }
 
@@ -989,11 +1427,11 @@ if (album.tags && album.tags.indexOf('réécoute') !== -1) {
 if (album.tags && album.tags.indexOf('archived') !== -1) {
   badgesHtml += '<span class="anime-badge" title="archived"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-9 9H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a9 9 0 0 1 9 9z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="9" x2="13" y2="9"/><line x1="9" y1="17" x2="15" y2="17"/></svg></span>';
 }
-var relistenBadge = badgesHtml ? '<div class="anime-badges">' + badgesHtml + '</div>' : '';
-      
-      var card = document.createElement('a');
+var relistenBadge = getCollectionBadges(album);
+
+var card = document.createElement('a');
       card.href = album.link; card.target = "_blank"; card.className = 'book-card';
-      card.innerHTML = '<img loading="lazy" src="' + album.cover + '" alt="' + album.title + '">' + getMusicFormatBadge(album) + relistenBadge + '<div class="book-title">' + album.title + '</div>' + starsHtml + reviewHtml;
+      card.innerHTML = '<img loading="lazy" src="' + album.cover + '" alt="' + album.title + '">' + getMusicFormatBadge(album) + relistenBadge + '<div class="book-title">' + album.title + '</div>' + starsHtml + getOldNote(album) + reviewHtml;
       div.appendChild(card);
     });
     
@@ -1005,7 +1443,7 @@ var relistenBadge = badgesHtml ? '<div class="anime-badges">' + badgesHtml + '</
   container.innerHTML = '';
 
   if (sortDataKeys(data).length === 0) {
-    container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+    container.innerHTML = '<p class="empty-state">aucun résultat</p>';
     return;
   }
 
@@ -1033,20 +1471,21 @@ var relistenBadge = badgesHtml ? '<div class="anime-badges">' + badgesHtml + '</
 
       var reviewHtml = album.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(album.review) + '</span>' : '';
       
-var badgesHtml = '';
-if (album.tags && album.tags.indexOf('réécoute') !== -1) {
-  badgesHtml += '<span class="anime-badge" title="réécouté"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg></span>';
-}
-if (album.tags && album.tags.indexOf('archived') !== -1) {
-  badgesHtml += '<span class="anime-badge" title="archived"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-9 9H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a9 9 0 0 1 9 9z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="9" x2="13" y2="9"/><line x1="9" y1="17" x2="15" y2="17"/></svg></span>';
-}
-var relistenBadge = badgesHtml ? '<div class="anime-badges">' + badgesHtml + '</div>' : '';
+      var relistenBadge = getCollectionBadges(album);
       
-      card.innerHTML = `<img loading="lazy" src="${album.cover}" alt="${album.title}">${getMusicFormatBadge(album)}${relistenBadge}<div class="book-title">${album.title}</div>${starsHtml}${reviewHtml}`;
+      card.innerHTML = `<img loading="lazy" src="${album.cover}" alt="${album.title}">${getMusicFormatBadge(album)}${relistenBadge}<div class="book-title">${album.title}</div>${starsHtml}${getOldNote(album)}${reviewHtml}`;
       div.appendChild(card);
     });
     container.appendChild(div);
   });
+}
+
+// ── Helper pour le badge de format film ──
+function getFilmFormatBadge(movie) {
+  if (movie.tags && movie.tags.indexOf('court métrage') !== -1) {
+    return '<span class="film-format-badge">court métrage</span>';
+  }
+  return '';
 }
 
 // ── TAMAGOTCHI PERRUCHES ──
@@ -1304,24 +1743,6 @@ document.getElementById('cage-cielazur').addEventListener('click', () => petBird
   });
 });
 
-// ── Check bouton review Biblio ──
-function checkBiblioReviewBtn() {
-  const btn = document.getElementById('filter-reviews-biblio');
-  let hasReview = false;
-  for (const author in books) {
-    if (books[author].some(item => item.review)) { hasReview = true; break; }
-  }
-  btn.style.display = hasReview ? 'inline-block' : 'none';
-}
-checkBiblioReviewBtn();
-
-document.getElementById('filter-reviews-biblio').addEventListener('click', function() {
-  showOnlyReviewsBiblio = !showOnlyReviewsBiblio;
-  this.classList.toggle('active');
-  document.getElementById('search-biblio').value = '';
-  generateBibliography(showOnlyReviewsBiblio ? filterByReview(books) : books);
-});
-
 // ── Événements de Recherche ──
 document.getElementById('search-biblio').addEventListener('input', e => {
   const query = e.target.value;
@@ -1336,9 +1757,15 @@ document.getElementById('search-ecrans').addEventListener('input', e => {
   const isSearch = !!ecransSearchQuery;
 
   let totalFilms = Object.values(filteredFilms).reduce((acc, arr) => acc + arr.length, 0);
-  let totalSeries = Object.keys(filteredSeries).length;
-  let textFilms = isSearch ? totalFilms + " film" + (totalFilms !== 1 ? "s" : "") + " trouvé" + (totalFilms !== 1 ? "s" : "") : totalFilms + " film" + (totalFilms !== 1 ? "s" : "") + " vu" + (totalFilms !== 1 ? "s" : "");
-  let textSeries = isSearch ? totalSeries + " série" + (totalSeries !== 1 ? "s" : "") + " trouvée" + (totalSeries !== 1 ? "s" : "") : totalSeries + " série" + (totalSeries !== 1 ? "s" : "") + " suivie" + (totalSeries !== 1 ? "s" : "");
+  let totalSeries = Object.values(filteredSeries).reduce((acc, arr) => acc + arr.length, 0);
+  let globalFilms = Object.values(films).reduce((acc, arr) => acc + arr.length, 0);
+  let globalSeries = Object.values(series).reduce((acc, arr) => acc + arr.length, 0);
+  
+  let isFilmsFiltered = isSearch || filmsFormatFilter || ecransCollectionFilter;
+  let isSeriesFiltered = isSearch || ecransCollectionFilter;
+  
+  let textFilms = isFilmsFiltered ? totalFilms + " / " + globalFilms + " film" + (globalFilms !== 1 ? "s" : "") : globalFilms + " film" + (globalFilms !== 1 ? "s" : "") + " vu" + (globalFilms !== 1 ? "s" : "");
+  let textSeries = isSeriesFiltered ? totalSeries + " / " + globalSeries + " saison" + (globalSeries !== 1 ? "s" : "") : globalSeries + " saison" + (globalSeries !== 1 ? "s" : "") + " suivie" + (globalSeries !== 1 ? "s" : "");
   document.getElementById('ecrans-counter').textContent = textFilms + " • " + textSeries;
 
   generateFilms(filteredFilms, isSearch);
@@ -1774,7 +2201,7 @@ const ANIME_BATCH = 50;
 const TAG_BLACKLIST = ['+', '*', 'recap', 'arg', 'music.archived', 're-watched', 'watched', 'plan to watch', 'dropped', 'on hold', 'watching', 'rank', 'completed', ''];
 const FORMAT_TAGS = ['normal episode', 'short episode', 'movie', 'short film', 'music', 'short', 'commercial', 'hentai'];
 const QUALITY_TAGS = ['favorite', 'gem'];
-const COLLECTION_TAGS = ['bought', 'archived'];
+const COLLECTION_TAGS = ['bought', 'archived', 're-watched'];
 const TAG_REST_LIMIT = 20;
 let animeFiltered = [];
 let animeDisplayed = 0;
@@ -1853,7 +2280,7 @@ function replacePlaceholder(animeId, url) {
 // ── Tags ──
 function generateAnime() {
   if (typeof animeList === 'undefined') {
-    document.getElementById('animeContent').innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px;">Aucune donnée anime trouvée.</p>';
+    document.getElementById('animeContent').innerHTML = '<p class="empty-state">aucun résultat</p>';
     return;
   }
   loadImageCache();
@@ -1915,7 +2342,7 @@ function renderAnimeTags() {
   var allBtn = document.createElement('button');
   allBtn.className = 'anime-tag-btn' + (activeTag === null ? ' active' : '');
   allBtn.textContent = 'tous (' + animeList.length + ')';
-    allBtn.addEventListener('click', function() { activeTag = null; animeDisplayed = 0; renderAnimeTags(); applyAnimeFilter(); });
+    allBtn.addEventListener('click', function() { activeTag = null; showOnlyReviewsAnime = false; animeDisplayed = 0; renderAnimeTags(); applyAnimeFilter(); });
     
     // Petite boîte horizontale pour aligner "tous" et "reviews"
     var topRow = document.createElement('div');
@@ -1930,8 +2357,9 @@ function renderAnimeTags() {
       reviewBtn.textContent = 'reviews';
       reviewBtn.addEventListener('click', function() {
         showOnlyReviewsAnime = !showOnlyReviewsAnime;
-        this.classList.toggle('active');
+        activeTag = null; // On coupe l'autre filtre
         animeDisplayed = 0;
+        renderAnimeTags();
         applyAnimeFilter();
       });
       topRow.appendChild(reviewBtn); // On l'ajoute à la boîte, pas directement au container
@@ -2043,7 +2471,7 @@ function applyAnimeFilter() {
   document.getElementById('animeContent').innerHTML = '';
 
   if (animeFiltered.length === 0) {
-    document.getElementById('animeContent').innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+    document.getElementById('animeContent').innerHTML = '<p class="empty-state">aucun résultat</p>';
     document.getElementById('load-more-anime').style.display = 'none';
     return;
   }
@@ -2093,9 +2521,11 @@ function renderAnimeBatch() {
     card.target = '_blank';
     card.className = 'book-card anime-card';
     if (a.tags.indexOf('hentai') !== -1) card.className += ' hentai-card';
+    if (a.tags.indexOf('favorite') !== -1) card.className += ' coup-de-coeur-card';
+    if (a.tags.indexOf('gem') !== -1) card.className += ' gem-card';
     card.setAttribute('data-id', a.id);
     var reviewHtml = a.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(a.review) + '</span>' : '';
-    card.innerHTML = imgBlock + badges + '<div class="book-title">' + a.title + '</div>' + starsHtml + reviewHtml;
+    card.innerHTML = imgBlock + badges + '<div class="book-title">' + a.title + '</div>' + starsHtml + getOldNote(a) + reviewHtml;
     container.appendChild(card);
   }
 
@@ -2152,7 +2582,7 @@ function renderTopList(container, items, type) {
 // ── MANGA ──
 var MANGA_TAG_BLACKLIST = ['*', 're-read', 'watched', 'plan to read', 'dropped', 'on hold', 'reading', 'rank', 'completed', ''];
 var MANGA_FILTER_TAGS = ['one-shot', 'hentai', 'favorite', 'gem'];
-var MANGA_COLLECTION_TAGS = ['bought', 'archived'];
+var MANGA_COLLECTION_TAGS = ['bought', 'archived', 're-read'];
 var mangaActiveFilter = null;
 var mangaSortMode = 'auteur';
 var mangaSortDir = 1;
@@ -2162,13 +2592,17 @@ var mangaImageLoading = false;
 var mangaCacheDirty = false;
 let biblioSortMode = 'auteur';
 let biblioSortDir = 1;
+let biblioCollectionFilter = null;
 let musiqueSortMode = 'artiste';
 let musiqueFormatFilter = null;
+let musiqueCollectionFilter = null;
 let musiqueSortDir = 1;
 let jeuxSortMode = 'note';
 let jeuxSortDir = 1;
+let jeuxCollectionFilter = null;
 let ecransSortMode = 'réalisateur';
 let filmsFormatFilter = null;
+let ecransCollectionFilter = null;
 let ecransSortDir = 1;
 
 function loadMangaImageCache() {
@@ -2212,7 +2646,7 @@ function replaceMangaPlaceholder(mangaId, url) {
 
 function generateManga() {
   if (typeof mangaData === 'undefined') {
-    document.getElementById('mangaContent').innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px;">Aucune donnee manga trouvee.</p>';
+    document.getElementById('mangaContent').innerHTML = '<p class="empty-state">aucun résultat</p>';
     return;
   }
   loadMangaImageCache();
@@ -2353,7 +2787,7 @@ function renderManga() {
       });
     }
     if (allFav.length === 0) {
-      container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+      container.innerHTML = '<p class="empty-state">aucun résultat</p>';
       return;
     }
     document.getElementById('manga-counter').textContent = allFav.length + ' / ' + total + ' manga';
@@ -2400,7 +2834,7 @@ function renderManga() {
     document.getElementById('manga-counter').textContent = mangaLabel;
 
     if (filteredGlobal.length === 0) {
-      container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+      container.innerHTML = '<p class="empty-state">aucun résultat</p>';
       return;
     }
 
@@ -2430,9 +2864,11 @@ function renderManga() {
       card.href = 'https://myanimelist.net/manga/' + m.id; card.target = '_blank';
       card.className = 'book-card manga-card';
       if (m.tags.indexOf('hentai') !== -1) card.classList.add('hentai-card');
+      if (m.tags.indexOf('favorite') !== -1) card.classList.add('coup-de-coeur-card');
+      if (m.tags.indexOf('gem') !== -1) card.classList.add('gem-card');
       card.setAttribute('data-id', m.id);
       var reviewHtml = m.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(m.review) + '</span>' : '';
-      card.innerHTML = imgBlock + badges + '<div class="book-title">' + m.title + '</div>'  + stars + reviewHtml;
+      card.innerHTML = imgBlock + badges + '<div class="book-title">' + m.title + '</div>'  + stars + getOldNote(m) + reviewHtml;
       div.appendChild(card);
     });
     container.appendChild(div);
@@ -2481,7 +2917,7 @@ function renderManga() {
       document.getElementById('manga-counter').textContent = mangaLabel;
 
       if (totalFiltered === 0) {
-        container.innerHTML = '<p style="color:var(--secondary-text);font-family:Space Grotesk,sans-serif;padding:40px 0;">aucun résultat</p>';
+        container.innerHTML = '<p class="empty-state">aucun résultat</p>';
         return;
       }
     }
@@ -2529,9 +2965,11 @@ function renderManga() {
       card.href = 'https://myanimelist.net/manga/' + m.id; card.target = '_blank';
       card.className = 'book-card manga-card';
       if (m.tags.indexOf('hentai') !== -1) card.classList.add('hentai-card');
+      if (m.tags.indexOf('favorite') !== -1) card.classList.add('coup-de-coeur-card');
+      if (m.tags.indexOf('gem') !== -1) card.classList.add('gem-card');
       card.setAttribute('data-id', m.id);
       var reviewHtml = m.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(m.review) + '</span>' : '';
-      card.innerHTML = imgBlock + badges + '<div class="book-title">' + m.title + '</div>'  + stars + reviewHtml;
+      card.innerHTML = imgBlock + badges + '<div class="book-title">' + m.title + '</div>'  + stars + getOldNote(m) + reviewHtml;
       div.appendChild(card);
     });
     container.appendChild(div);
@@ -3021,3 +3459,11 @@ document.addEventListener('click', function(e) {
     resBox.classList.remove('visible');
   }
 });
+
+// ── Helper pour la classe de qualité (Coup de coeur / Gem) ──
+function getQualityClass(item) {
+  if (!item.tags) return '';
+  if (item.tags.indexOf('favorite') !== -1 || item.tags.indexOf('coup de coeur') !== -1) return ' coup-de-coeur-card';
+  if (item.tags.indexOf('gem') !== -1) return ' gem-card';
+  return '';
+}

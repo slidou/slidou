@@ -74,6 +74,16 @@ body {
 .book-title { font-size: 14px; margin-top: 8px; font-weight: 700; line-height: 1.3; color: var(--text-color); }
 .book-meta { font-size: 16px; color: var(--star-color); margin-top: 6px; letter-spacing: 2px; }
 
+.old-note {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  opacity: 0.5;
+  font-style: italic;
+  margin-top: 2px;
+  letter-spacing: 0;
+}
+
 /* ── Citation (Centrée, comme avant) ── */
 .random-quote {
   text-align: center;
@@ -90,10 +100,10 @@ body {
 
 /* ── PAGE À PROPOS ── */
 #page-apropos.active { display: block; padding-top: 40px; }
-.apropos-layout { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 40px; max-width: 950px; margin: 0 auto; border: 1px solid var(--border-color); padding: 40px; border-radius: 5px; background: var(--bg-color); }
+.apropos-layout { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 40px; max-width: 950px; margin: 0 auto; border: 1px solid var(--border-color); padding: 40px; border-radius: 8px; background: var(--bg-color); }
 .apropos-col { flex: 1; }
 .photo-col { text-align: center; }
-.apropos-pfp { width: 100%; max-width: 180px; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 5px; margin-bottom: 10px; }
+.apropos-pfp { width: 100%; max-width: 180px; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 2px; margin-bottom: 10px; }
 .pfp-credit { font-family: 'IM Fell English', serif; font-size: 12px; font-style: italic; color: var(--secondary-text); }
 .bio-col { text-align: center; border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color); padding: 0 30px; }
 .apropos-username { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 500; margin-bottom: 5px; text-transform: lowercase; color: var(--author-text); }
@@ -232,7 +242,7 @@ body {
   justify-content: center; 
   margin-bottom: 20px;
   background: var(--bg-color);
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid var(--border-color);
   transition: background 0.3s;
   cursor: pointer; 
@@ -302,7 +312,7 @@ body {
   color: var(--text-color); 
   background: transparent; 
   border: 1px solid var(--border-color); 
-  border-radius: 8px; 
+  border-radius: 20px; 
   padding: 8px 15px; 
   margin: 0 5px; 
   cursor: pointer; 
@@ -338,7 +348,7 @@ body {
   height: auto; /* Garde l'image entière, sans la couper */
   display: block;
   margin-bottom: 30px;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 /* Style de la liste "en ce moment" */
@@ -428,7 +438,7 @@ body {
 }
 .calendar-day { 
   aspect-ratio: 1 / 1; 
-  border-radius: 6px; 
+  border-radius: 8px; 
   background: var(--sidebar-bg); 
   border: 1px solid var(--border-color); 
   display: flex; 
@@ -504,7 +514,7 @@ body {
 .calendar-popup-content { 
   background: var(--bg-color); 
   padding: 30px; 
-  border-radius: 8px; 
+  border-radius: 12px; 
   max-width: 600px; 
   width: 90%; 
   max-height: 80vh; 
@@ -751,6 +761,24 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
   backdrop-filter: blur(4px);
 }
 
+/* ── BADGE FORMAT FILM ── */
+.film-format-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+
 /* ── BADGE INTÉGRALE ── */
 .integral-title {
   color: var(--star-color) !important;
@@ -943,7 +971,7 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
   margin-top: 6px;
   background: none;
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 2px 8px;
   cursor: pointer;
   color: var(--secondary-text);
@@ -970,7 +998,7 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 .review-popup-content {
   background: var(--bg-color);
   padding: 40px;
-  border-radius: 8px;
+  border-radius: 12px;
   max-width: 600px;
   width: 90%;
   max-height: 80vh;
@@ -1059,7 +1087,7 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 .stats-section {
   margin-bottom: 50px;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 20px 20px 10px 30px;
   position: relative;
 }
@@ -1231,7 +1259,7 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
   padding: 18px 24px;
   background: var(--quote-bg);
   border: 1px solid var(--border-color);
-  border-radius: 5px;
+  border-radius: 8px;
   text-align: center;
 }
 .player-now {
@@ -1737,7 +1765,7 @@ h2.collapsed-creator .creator-arrow {
   margin: 5px 0; /* Réduit l'écart avec Accueil et la barre */
   padding: 6px 10px; /* Aligne bien le texte à l'intérieur */
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 20px;
   background: var(--bg-color);
   color: var(--text-color);
   font-family: 'Space Grotesk', sans-serif;
@@ -1760,7 +1788,7 @@ h2.collapsed-creator .creator-arrow {
   overflow-y: auto;
   background: var(--bg-color);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.2);
   z-index: 2000;
   padding: 15px;
@@ -1826,3 +1854,21 @@ h2.collapsed-creator .creator-arrow {
     max-width: calc(100vw - 30px);
     top: 40px;
   }
+
+  /* ── ÉTATS VIDES ── */
+.empty-state {
+  color: var(--secondary-text);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.coup-de-coeur-card img {
+  box-shadow: 0 0 0 2px rgba(236, 64, 122, 0.6), 0 0 12px rgba(236, 64, 122, 0.4), 0 4px 8px var(--shadow-color) !important;
+}
+
+/* ── BADGE GEM (ANIME/MANGA) ── */
+.gem-card img {
+  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.6), 0 0 12px rgba(66, 165, 245, 0.4), 0 4px 8px var(--shadow-color) !important;
+}

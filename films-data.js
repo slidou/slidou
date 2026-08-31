@@ -196,7 +196,7 @@ const filmsData = {
     { title: "The God Man", note: 3.5, cover: "films/thegodman.jpg", link: "https://www.senscritique.com/film/the_god_man/112316892", tags: ["court métrage"] },
   ],
   "David Leitch": [
-    { title: "Bullet Train", note: 3.5, cover: "films/bulletrain.png", link: "https://www.senscritique.com/film/bullet_train/42556935" },
+    { title: "Bullet Train", note: 3.5, cover: "films/bulletrain.png", link: "https://www.senscritique.com/film/bullet_train/42556935", tags: ["re-watched"] },
   ],
   "Hideaki Anno": [
     { title: "Ryusei Kacho", note: 3.5, cover: "films/ryuseikacho.jpg", link: "https://www.senscritique.com/film/ryusei_kacho/17202295", tags: ["coup de coeur","court métrage"] },
