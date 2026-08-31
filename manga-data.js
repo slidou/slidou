@@ -826,6 +826,6 @@ const mangaData = {
     { id: 53851, title: "Yareba Dekiruko", note: null, tags: ["one-shot","hentai"] },
   ],
   "OTOSAMA": [
-    { id: 125892, title: "Furyou Taimashi Reina", note: 3.5 },
+    { id: 125892, title: "Furyou Taimashi Reina", note: 3.5, tags: [] },
   ]
 };
