@@ -168,6 +168,7 @@ function navigateTo(page) {
   }
   if (page === 'ecrans') {
     ecransSearchQuery = '';
+    filmsFormatFilter = null;
     document.getElementById('search-ecrans').value = '';
     updateEcransCounter();
 
@@ -494,6 +495,8 @@ document.querySelectorAll('.sub-nav-link').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
     const subpage = link.dataset.subpage;
+    
+    filmsFormatFilter = null;
 
     setupEcransSort(subpage);
 
@@ -536,6 +539,90 @@ function updateEcransCounter(filmsData = films, seriesData = series, isSearch = 
 // ── Generate Films ──
 function generateFilms(data = films, isSearch = false) {
   const container = document.getElementById('filmsContent');
+
+  // 1. Génération des boutons de filtre
+  var shortCount = 0;
+  var featureCount = 0;
+  for (var director in films) {
+    films[director].forEach(function(movie) {
+      if (movie.tags && movie.tags.indexOf('court métrage') !== -1) shortCount++;
+      else featureCount++;
+    });
+  }
+
+  var fC = document.getElementById('films-filters');
+  if (fC) {
+    fC.innerHTML = '';
+    
+    // LIGNE 1 : Le bouton "Tous" seul au centre
+    var row1 = document.createElement('div'); 
+    row1.style.cssText = 'display: flex; gap: 8px; justify-content: center;';
+    
+    var allBtn = document.createElement('button');
+    allBtn.className = 'anime-tag-btn' + (filmsFormatFilter === null ? ' active' : '');
+    allBtn.textContent = 'tous (' + (shortCount + featureCount) + ')';
+    allBtn.addEventListener('click', function() { 
+      filmsFormatFilter = null; 
+      generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery); 
+    });
+    row1.appendChild(allBtn);
+    fC.appendChild(row1);
+
+    // SECTION FORMAT : Longs et Courts métrages
+    var fmtSection = document.createElement('div');
+    fmtSection.className = 'anime-tag-section';
+
+    var fmtLabel = document.createElement('div');
+    fmtLabel.className = 'anime-tag-section-label';
+    fmtLabel.textContent = 'format';
+    fmtSection.appendChild(fmtLabel);
+
+    var fmtWrap = document.createElement('div');
+    fmtWrap.className = 'anime-tag-section-tags';
+
+    if (featureCount > 0) {
+      var featBtn = document.createElement('button');
+      featBtn.className = 'anime-tag-btn' + (filmsFormatFilter === 'long' ? ' active' : '');
+      featBtn.textContent = 'longs métrages (' + featureCount + ')';
+      featBtn.addEventListener('click', function() { 
+        filmsFormatFilter = 'long'; 
+        generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery); 
+      });
+      fmtWrap.appendChild(featBtn);
+    }
+
+    if (shortCount > 0) {
+      var shortBtn = document.createElement('button');
+      shortBtn.className = 'anime-tag-btn' + (filmsFormatFilter === 'court' ? ' active' : '');
+      shortBtn.textContent = 'courts métrages (' + shortCount + ')';
+      shortBtn.addEventListener('click', function() { 
+        filmsFormatFilter = 'court'; 
+        generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery); 
+      });
+      fmtWrap.appendChild(shortBtn);
+    }
+    
+    // On ajoute la section format seulement si elle contient au moins un bouton
+    if (fmtWrap.children.length > 0) {
+      fmtSection.appendChild(fmtWrap);
+      fC.appendChild(fmtSection);
+    }
+  }
+
+  // 2. Application du filtre sur les données
+  if (filmsFormatFilter) {
+    var filteredData = {};
+    for (var director in data) {
+      var validMovies = data[director].filter(function(movie) {
+        var isShort = movie.tags && movie.tags.indexOf('court métrage') !== -1;
+        if (filmsFormatFilter === 'court') return isShort;
+        if (filmsFormatFilter === 'long') return !isShort;
+        return true;
+      });
+      if (validMovies.length > 0) filteredData[director] = validMovies;
+    }
+    data = filteredData;
+  }
 
   // --- VUE GLOBALE FILMS ---
   if (ecransSortMode !== 'réalisateur') {
@@ -776,6 +863,12 @@ function generateMusique(data = musique, isSearch = false) {
 
     var formats = ['album', 'ep', 'single', 'mixtape'];
     var fmtSection = document.createElement('div'); fmtSection.className = 'anime-tag-section';
+    
+    var fmtLabel = document.createElement('div');
+    fmtLabel.className = 'anime-tag-section-label';
+    fmtLabel.textContent = 'format';
+    fmtSection.appendChild(fmtLabel);
+    
     var fmtWrap = document.createElement('div'); fmtWrap.className = 'anime-tag-section-tags';
     
     formats.forEach(function(fmt) {
@@ -2075,6 +2168,7 @@ let musiqueSortDir = 1;
 let jeuxSortMode = 'note';
 let jeuxSortDir = 1;
 let ecransSortMode = 'réalisateur';
+let filmsFormatFilter = null;
 let ecransSortDir = 1;
 
 function loadMangaImageCache() {
