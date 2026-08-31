@@ -52,5 +52,6 @@ const gamesData = [
   { title: "Reigns", note: null, cover: "games/reigns.jpg", link: "https://backloggd.com/games/reigns/" },
   { title: "Pacify", note: null, cover: "games/pacify.jpg", link: "https://backloggd.com/games/pacify/" },
   { title: "Fears to Fathom: Scratch Creek", note: 2, cover: "games/fearstofathom.jpg", link: "https://backloggd.com/games/fears-to-fathom-scratch-creek/" },
-  { title: "nophenia", note: 4, cover: "games/nophenia.jpg", link: "https://backloggd.com/games/nophenia/" }
+  { title: "nophenia", note: 4, cover: "games/nophenia.jpg", link: "https://backloggd.com/games/nophenia/" },
+  { title: "Land of Ghosts", note: 4, cover: "games/landofghosts.jpg", link: "https://backloggd.com/games/land-of-ghosts/" }
 ];

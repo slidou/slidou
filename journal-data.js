@@ -519,4 +519,5 @@ const journalData = [
 { d: "2026-08-30", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
 { d: "2026-08-30", t: "manga", title: "Furyou Taimashi Reina", img: "manga/reina.jpg", note: "78/78, j'ai vraiment passé un bon moment, l'oeuvre ne méritait pas de se faire axed, l'auteur a du talent" },
 { d: "2026-08-30", t: "musique", title: "Matrix", img: "music/matrix.webp", note: "réécoute" },
+{ d: "2026-08-31", t: "jeu", title: "Land of Ghosts", img: "games/landofghosts.jpg", note: "fini, j'ai adoré" },
 ];
