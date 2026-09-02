@@ -527,6 +527,7 @@ const journalData = [
 { d: "2026-08-31", t: "anime", title: "Urei no Bakemono", img: "anime/ureibakemono.jpg", note: "music" },
 { d: "2026-08-31", t: "anime", title: "Madame", img: "anime/madame.jpg", note: "music" },
 { d: "2026-08-31", t: "anime", title: "Ai Ai A", img: "anime/aiaia.jpg", note: "music" },
+{ d: "2026-09-01", t: "livre", title: "Marche ou crève", img: "covers/marcheoucreve.jpg", note: "poursuite de la lecture", status: "en cours" },
 { d: "2026-09-01", t: "musique", title: "Salle des pas perdus", img: "music/pasperdus.webp", note: "réécoute" },
 { d: "2026-09-01", t: "anime", title: "Kajirare Shima no Futatsu no Toudai", img: "anime/kajirare.jpg", note: "short film" },
 { d: "2026-09-01", t: "anime", title: "Jingzi", img: "anime/jingzi.jpg", note: "short" },
@@ -538,4 +539,5 @@ const journalData = [
 { d: "2026-09-01", t: "anime", title: "Hontou no Watashi ga Mieru?", img: "anime/hontounowatashi.jpg", note: "short" },
 { d: "2026-09-01", t: "anime", title: "Shinkokyuu no Riyuu", img: "anime/shinkokyuu.jpg", note: "music" },
 { d: "2026-09-02", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "mom et isaac battus avec eve", status: "en cours" },
+{ d: "2026-09-02", t: "livre", title: "Marche ou crève", img: "covers/marcheoucreve.jpg", note: "poursuite de la lecture", status: "en cours" },
 ];
