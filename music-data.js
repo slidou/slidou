@@ -197,4 +197,7 @@ const musicData = {
   "Coralie Clément": [
     { title: "Salle des pas perdus", note: 4, cover: "music/pasperdus.webp", link: "https://rateyourmusic.com/release/album/coralie-clement/salle-des-pas-perdus/", tags: ["réécoute","bought"] },
   ],
+  "Childish Gambino": [
+    { title: "Camp", note: 2.5, cover: "music/camp.webp", link: "https://rateyourmusic.com/release/album/childish-gambino/camp/" },
+  ],
 };
