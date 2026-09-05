@@ -200,4 +200,7 @@ const musicData = {
   "Childish Gambino": [
     { title: "Camp", note: 2.5, cover: "music/camp.webp", link: "https://rateyourmusic.com/release/album/childish-gambino/camp/" },
   ],
+  "Kaaris": [
+    { title: "Or noir, pt. 2", note: 3.5, cover: "music/ornoir2.webp", link: "https://rateyourmusic.com/release/album/kaaris/or-noir-pt-2/" },
+  ],
 };
