@@ -598,6 +598,7 @@ const journalData = [
 { d: "2026-09-05", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "greed battu avec eve, 350 pièces, plus que 150 pour enfin débloquer greedier", status: "en cours" },
 { d: "2026-09-05", t: "livre", title: "Marche ou crève", img: "covers/marcheoucreve.jpg", note: "poursuite de la lecture", status: "en cours" },
 { d: "2026-09-05", t: "film", title: "Violent Cop", img: "films/violentcop.webp", note: "un autre film de kitano" },
+{ d: "2026-09-06", t: "livre", title: "Marche ou crève", img: "covers/marcheoucreve.jpg", note: "poursuite de la lecture", status: "en cours" },
 { d: "2026-09-06", t: "anime", title: "3341", img: "anime/3341.jpg", note: "re-watched, music" },
 { d: "2026-09-06", t: "anime", title: "Aa Okashii ne", img: "anime/aaokashiine.jpg", note: "re-watched, music" },
 { d: "2026-09-06", t: "anime", title: "Aa Souka!", img: "anime/aasouka.jpg", note: "re-watched, music" },
@@ -605,4 +606,5 @@ const journalData = [
 { d: "2026-09-06", t: "anime", title: "Ai ga Oshigoto", img: "anime/aigaoshi.jpg", note: "re-watched, music" },
 { d: "2026-09-06", t: "anime", title: "Ai ni Iku no.", img: "anime/ainiikuno.jpg", note: "re-watched, music" },
 { d: "2026-09-06", t: "anime", title: "Ai W-kun", img: "anime/aiwkun.jpg", note: "re-watched, music" },
+{ d: "2026-09-06", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "runs horribles avec samson mais j'ai quand même fait mom, isaac et blue baby, c'est déjà ça", status: "en cours" },
 ];
