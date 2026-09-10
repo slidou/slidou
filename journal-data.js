@@ -607,4 +607,13 @@ const journalData = [
 { d: "2026-09-06", t: "anime", title: "Ai ni Iku no.", img: "anime/ainiikuno.jpg", note: "re-watched, music" },
 { d: "2026-09-06", t: "anime", title: "Ai W-kun", img: "anime/aiwkun.jpg", note: "re-watched, music" },
 { d: "2026-09-06", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "runs horribles avec samson mais j'ai quand même fait mom, isaac et blue baby, c'est déjà ça", status: "en cours" },
+{ d: "2026-09-07", t: "livre", title: "Marche ou crève", img: "covers/marcheoucreve.jpg", note: "fini" },
+{ d: "2026-09-07", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "mom, boss rush, isaac, blue baby & delirium battus avec lazarus", status: "en cours" },
+{ d: "2026-09-07", t: "livre", title: "Takeshi Kitano - Hors catégorie", img: "covers/takeshikitano.jpg", note: "one shot du livre, c'est enrichissant" },
+{ d: "2026-09-08", t: "livre", title: "Takeshi Kitano - Hors catégorie", img: "covers/takeshikitano.jpg", note: "one shot du livre, c'est enrichissant" },
+{ d: "2026-09-08", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-09-09", t: "livre", title: "Traité des cinq roues", img: "covers/traitédescinqroues.jpg", note: "début de la lecture", status: "en cours" },
+{ d: "2026-09-10", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-09-10", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1193/?", status: "en cours" },
+{ d: "2026-09-11", t: "film", title: "Le Père Noël a les yeux bleus", img: "films/perenoel.jpg", note: "je ne sais pas quoi en penser" },
 ];

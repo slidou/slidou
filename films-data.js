@@ -357,4 +357,7 @@ const filmsData = {
   "David Lynch": [
     { title: "Mulholland Drive", note: 0.5, cover: "films/mulholland.webp", link: "https://www.senscritique.com/film/mulholland_drive/411899" },
   ],
+  "Jean Eustache": [
+    { title: "Le Père Noël a les yeux bleus", note: null, cover: "films/perenoel.jpg", link: "https://www.senscritique.com/film/le_pere_noel_a_les_yeux_bleus/394316", tags: ["archived"] },
+  ],
 };

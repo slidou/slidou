@@ -480,5 +480,11 @@ Et je dois bien l’avouer, ça fait très bizarre de lire un roman aussi incisi
   ],
   "Léon Tolstoï": [
     { title: "La Mort d'Ivan Illitch suivi de Maître et serviteur et Trois morts", note: 3, cover: "covers/illitch.jpg", link: "https://www.goodreads.com/book/show/1990016.La_Mort_d_Ivan_Illitch" }
+  ],
+  "Stephen King": [
+    { title: "Marche ou crève", note: 3, cover: "covers/marcheoucreve.jpg", link: "https://www.goodreads.com/book/show/55988364-marche-ou-cr-ve" }
+  ],
+  "Lucas Aubry": [
+    { title: "Takeshi Kitano - Hors catégorie", note: 3, cover: "covers/takeshikitano.jpg", link: "https://www.goodreads.com/book/show/145524858-takeshi-kitano---hors-cat-gorie" }
   ]
 };
