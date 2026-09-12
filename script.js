@@ -433,7 +433,7 @@ function generateBibliography(data = books, isSearch = false) {
     }
     if (totalB > 0) {
       var pct = (rereadCount / totalB * 100).toFixed(1);
-      bBar.innerHTML = '<div class="project-bar"><span class="project-label">projet re-read : ' + rereadCount + ' / ' + totalB + ' (' + pct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + pct + '%"></div></div></div>';
+      bBar.innerHTML = '<div class="project-bar"><span class="project-label">projet relecture : ' + rereadCount + ' / ' + totalB + ' (' + pct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + pct + '%"></div></div></div>';
     } else { bBar.innerHTML = ''; }
   }
 
@@ -791,7 +791,7 @@ function generateFilms(data = films, isSearch = false) {
     }
     if (fTotal > 0) {
       var fPct = (fRewatchCount / fTotal * 100).toFixed(1);
-      fBar.innerHTML = '<div class="project-bar"><span class="project-label">projet re-watch : ' + fRewatchCount + ' / ' + fTotal + ' (' + fPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + fPct + '%"></div></div></div>';
+      fBar.innerHTML = '<div class="project-bar"><span class="project-label">projet revisionnage : ' + fRewatchCount + ' / ' + fTotal + ' (' + fPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + fPct + '%"></div></div></div>';
     } else { fBar.innerHTML = ''; }
   }
 
@@ -838,7 +838,7 @@ function generateFilms(data = films, isSearch = false) {
     }
     if (fTotal > 0) {
       var fPct = (fRewatchCount / fTotal * 100).toFixed(1);
-      fBar.innerHTML = '<div class="project-bar"><span class="project-label">projet re-watch : ' + fRewatchCount + ' / ' + fTotal + ' (' + fPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + fPct + '%"></div></div></div>';
+      fBar.innerHTML = '<div class="project-bar"><span class="project-label">projet revisionnage : ' + fRewatchCount + ' / ' + fTotal + ' (' + fPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + fPct + '%"></div></div></div>';
     } else { fBar.innerHTML = ''; }
   }
 
@@ -997,7 +997,7 @@ function generateSeries(data = series, isSearch = false) {
     }
     if (sTotal > 0) {
       var sPct = (sRewatchCount / sTotal * 100).toFixed(1);
-      sBar.innerHTML = '<div class="project-bar"><span class="project-label">projet re-watch : ' + sRewatchCount + ' / ' + sTotal + ' (' + sPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + sPct + '%"></div></div></div>';
+      gBar.innerHTML = '<div class="project-bar"><span class="project-label">projet rejeu : ' + gReplayCount + ' / ' + gTotal + ' (' + gPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + gPct + '%"></div></div></div>';
     } else { sBar.innerHTML = ''; }
   }
 
@@ -1047,7 +1047,7 @@ function generateSeries(data = series, isSearch = false) {
     }
     if (sTotal > 0) {
       var sPct = (sRewatchCount / sTotal * 100).toFixed(1);
-      sBar.innerHTML = '<div class="project-bar"><span class="project-label">projet re-watch : ' + sRewatchCount + ' / ' + sTotal + ' (' + sPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + sPct + '%"></div></div></div>';
+      sBar.innerHTML = '<div class="project-bar"><span class="project-label">projet revisionnage : ' + sRewatchCount + ' / ' + sTotal + ' (' + sPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + sPct + '%"></div></div></div>';
     } else { sBar.innerHTML = ''; }
   }
 
