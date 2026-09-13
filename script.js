@@ -2198,7 +2198,7 @@ document.addEventListener('keydown', e => {
 
 // ── ANIME ──
 const ANIME_BATCH = 50;
-const TAG_BLACKLIST = ['+', '*', 'recap', 'arg', 'music.archived', 're-watched', 'watched', 'plan to watch', 'dropped', 'on hold', 'watching', 'rank', 'completed', ''];
+const TAG_BLACKLIST = ['+', '*', 'recap', 'arg', 'music.archived', 'watched', 'plan to watch', 'dropped', 'on hold', 'watching', 'rank', 'completed', ''];
 const FORMAT_TAGS = ['normal episode', 'short episode', 'movie', 'short film', 'music', 'short', 'commercial', 'hentai'];
 const QUALITY_TAGS = ['favorite', 'gem'];
 const COLLECTION_TAGS = ['bought', 'archived', 're-watched'];
