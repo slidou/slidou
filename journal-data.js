@@ -681,4 +681,10 @@ const journalData = [
 { d: "2026-09-14", t: "anime", title: "Stars Align", img: "anime/starsalign.jpg", note: "music" },
 { d: "2026-09-14", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "une session de merde", status: "en cours" },
 { d: "2026-09-15", t: "film", title: "Taxi Driver", img: "films/taxidriver.webp", note: "l'esthétique générale du film et les plans étaient vraiment à un niveau au dessus" },
+{ d: "2026-09-15", t: "anime", title: "Koi to Missile feat. UG Noodle", img: "anime/koitomissile.jpg", note: "music" },
+{ d: "2026-09-15", t: "anime", title: "Maxi Tuan", img: "anime/maxituan.jpg", note: "music" },
+{ d: "2026-09-15", t: "anime", title: "Wishing Umbrella", img: "anime/umbrella.jpg", note: "music" },
+{ d: "2026-09-15", t: "anime", title: "Yuureikon", img: "anime/yuureikon.jpg", note: "music" },
+{ d: "2026-09-15", t: "anime", title: "Sakuraful March", img: "anime/sakuraful.jpg", note: "music" },
+{ d: "2026-09-15", t: "anime", title: "Takahashi Kazuki Gengaten: Yu☆Gi☆Oh! Art Works", img: "anime/takahashi.jpg", note: "short" },
 ];

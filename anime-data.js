@@ -7714,5 +7714,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 63683, title: "Wen", note: 3, tags: ["music","archived"] },
   { id: 63687, title: "Tianshi Zairu Zhong……^_−☆", note: 2.5, tags: ["music","archived"] },
   { id: 63678, title: "Stars Align", note: 3, tags: ["music","archived"] },
+  { id: 64975, title: "Koi to Missile feat. UG Noodle", note: 3, tags: ["music","archived"] },
+  { id: 64974, title: "Maxi Tuan", note: 2.5, tags: ["music","archived"] },
+  { id: 64972, title: "Wishing Umbrella", note: 3, tags: ["music","archived"] },
+  { id: 64980, title: "Yuureikon", note: 3, tags: ["music","archived"] },
+  { id: 64983, title: "Sakuraful March", note: 3, tags: ["music","archived"] },
+  { id: 64977, title: "Takahashi Kazuki Gengaten: Yu☆Gi☆Oh! Art Works", note: null, tags: ["short","+","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
