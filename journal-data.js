@@ -679,4 +679,6 @@ const journalData = [
 { d: "2026-09-14", t: "anime", title: "Wen", img: "anime/wen.jpg", note: "music" },
 { d: "2026-09-14", t: "anime", title: "Tianshi Zairu Zhong……^_−☆", img: "anime/tianshi.jpg", note: "music" },
 { d: "2026-09-14", t: "anime", title: "Stars Align", img: "anime/starsalign.jpg", note: "music" },
+{ d: "2026-09-14", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "une session de merde", status: "en cours" },
+{ d: "2026-09-15", t: "film", title: "Taxi Driver", img: "films/taxidriver.webp", note: "l'esthétique générale du film et les plans étaient vraiment à un niveau au dessus" },
 ];

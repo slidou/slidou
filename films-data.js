@@ -124,6 +124,7 @@ const filmsData = {
   ],
   "Martin Scorsese": [
     { title: "Shutter Island", note: 4.5, cover: "films/shutterisland.png", link: "https://www.senscritique.com/film/shutter_island/405140", tags: ["coup de coeur"] },
+    { title: "Taxi Driver", note: 3.5, cover: "films/taxidriver.webp", link: "https://www.senscritique.com/film/taxi_driver/467266", tags: ["coup de coeur","archived"] }
   ],
   "Patrick Imbert": [
     { title: "Le Sommet des dieux", note: 4.5, cover: "films/lesommetdesdieux.jpg", link: "https://www.senscritique.com/film/le_sommet_des_dieux/20012631", tags: ["coup de coeur"] },
