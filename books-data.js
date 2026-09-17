@@ -486,5 +486,8 @@ Et je dois bien l’avouer, ça fait très bizarre de lire un roman aussi incisi
   ],
   "Lucas Aubry": [
     { title: "Takeshi Kitano - Hors catégorie", note: 3, cover: "covers/takeshikitano.jpg", link: "https://www.goodreads.com/book/show/145524858-takeshi-kitano---hors-cat-gorie" }
+  ],
+  "Miyamoto Musashi": [
+    { title: "Traité des cinq roues", note: 2, cover: "covers/traitédescinqroues.jpg", link: "https://www.goodreads.com/book/show/899893.Trait_des_cinq_roues?ac=1&from_search=true&qid=MLZbzAMXRd&rank=1" }
   ]
 };
