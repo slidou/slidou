@@ -15,6 +15,7 @@ const filmsData = {
     { title: "L'Odyssée", note: 4, cover: "films/odyssee.webp", link: "https://www.senscritique.com/film/l_odyssee/81361437", tags: ["archived"] },
     { title: "Quay", note: null, cover: "films/quay.jpg", link: "https://www.senscritique.com/film/quay/16742508", tags: ["archived","court métrage"] },
     { title: "The Dark Knight Rises", note: 3, cover: "films/thedarkknightrises.webp", link: "https://www.senscritique.com/film/the_dark_knight_rises/427132", tags: ["archived"] },
+    { title: "Dunkerque", note: 2.5, cover: "films/dunkerque.jpg", link: "https://www.senscritique.com/film/dunkerque/17103116", tags: ["archived"] },
   ],
     "Aleksandr Petrov [completed]": [
     { title: "Le Rêve d'un homme ridicule", note: 4.5, cover: "films/hommeridicule.jpg", link: "https://www.senscritique.com/film/le_reve_d_un_homme_ridicule/485462", tags: ["coup de coeur","court métrage"] },
@@ -107,7 +108,7 @@ const filmsData = {
   "Daniel Kwan": [
     { title: "Everything Everywhere All at Once", note: 4.5, cover: "films/everything.webp", link: "https://www.senscritique.com/film/everything_everywhere_all_at_once/41357764", tags: ["coup de coeur"] },
   ],
-  "Georges Schwizgebel": [
+  "Georges Schwizgebel [completed]": [
     { title: "Fugue", note: 4.5, cover: "films/fugue.jpg", link: "https://www.senscritique.com/film/fugue/456566", tags: ["court métrage","archived"] },
     { title: "D'une peinture... à l'autre", note: 2.5, cover: "films/peinturealautre.webp", link: "https://www.senscritique.com/film/d_une_peinture_a_l_autre/56276766", tags: ["court métrage","archived"] },
     { title: "Zig Zag", note: null, cover: "films/zigzag.jpg", link: "https://www.senscritique.com/film/zig_zag/1341905", tags: ["court métrage","archived"] },
@@ -122,6 +123,11 @@ const filmsData = {
     { title: "L'Homme sans ombre", note: 3.5, cover: "films/hommesansombre.jpg", link: "https://www.senscritique.com/film/l_homme_sans_ombre/1358675", tags: ["court métrage","archived"] },
     { title: "Jeu", note: null, cover: "films/jeu.jpg", link: "https://www.senscritique.com/film/jeu/404875", tags: ["court métrage","archived"] },
     { title: "Retouches", note: 3.5, cover: "films/retouches.jpg", link: "https://www.senscritique.com/film/retouches/8287337", tags: ["court métrage","archived"] },
+    { title: "Romance", note: null, cover: "films/romance.jpg", link: "https://www.senscritique.com/film/romance/11770081", tags: ["court métrage","archived"] },
+    { title: "Chemin Faisant", note: null, cover: "films/cheminfaisant.jpg", link: "https://www.senscritique.com/film/chemin_faisant/377852", tags: ["court métrage","archived"] },
+    { title: "La Bataille de San Romano", note: null, cover: "films/sanromano.webp", link: "https://www.senscritique.com/film/la_bataille_de_san_romano/37840540", tags: ["court métrage","archived"] },
+    { title: "Le Journal de Darwin", note: 3.5, cover: "films/lejournaldedarwin.webp", link: "https://www.senscritique.com/film/le_journal_de_darwin/44865770", tags: ["court métrage","archived"] },
+    { title: "L'Année du daim", note: 3.5, cover: "films/daim.webp", link: "https://www.senscritique.com/film/l_annee_du_daim/432393", tags: ["court métrage","archived"] },
   ],
   "Alain Guiraudie": [
     { title: "Ce vieux rêve qui bouge", note: 4.5, cover: "films/cevieuxreve.jpg", link: "https://www.senscritique.com/film/ce_vieux_reve_qui_bouge/1333244", tags: ["coup de coeur"] },

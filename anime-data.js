@@ -7724,5 +7724,7 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64082, title: "Mission", note: 3, tags: ["music","archived"] },
   { id: 64256, title: "Top Secret", note: 3, tags: ["music","+","archived"] },
   { id: 64264, title: "Ming Chao: Er Zhounian Jinian Donghua - Turning Around Yujin Chong Ran", note: 3, tags: ["music","archived"] },
+  { id: 65018, title: "Shiwu Yu (Xin Ma Ban): Ban Zhounian Donghua - Xiangfeng Ban Zai, Yu Jun Tongxing", note: null, tags: ["short","archived"] },
+  { id: 65019, title: "Shiwu Yu: Hesui Donghua PV", note: null, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

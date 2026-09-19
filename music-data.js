@@ -207,4 +207,7 @@ const musicData = {
     { title: "Nacarat", note: 1, cover: "music/nacarat.webp", link: "https://rateyourmusic.com/release/album/marie-plassard/nacarat/" },
     { title: "SPLEEN", note: 1.5, cover: "music/SPLEEN.webp", link: "https://rateyourmusic.com/release/album/marie-plassard/spleen/" },
   ],
+  "Amaarae": [
+    { title: "Fountain Baby", note: 3, cover: "music/fountainbaby.webp", link: "https://rateyourmusic.com/release/album/amaarae/fountain-baby/" },
+  ],
 };
