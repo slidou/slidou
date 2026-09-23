@@ -718,4 +718,13 @@ const journalData = [
 { d: "2026-09-21", t: "livre", title: "Le Chrysanthème et le Sabre", img: "covers/chrysanthème.jpg", note: "poursuite de la lecture", status: "en cours" },
 { d: "2026-09-22", t: "livre", title: "Le Chrysanthème et le Sabre", img: "covers/chrysanthème.jpg", note: "poursuite de la lecture", status: "en cours" },
 { d: "2026-09-23", t: "musique", title: "The Price of Tea in China", img: "music/teainchina.webp", note: "première écoute" },
+{ d: "2026-09-23", t: "livre", title: "Le Chrysanthème et le Sabre", img: "covers/chrysanthème.jpg", note: "poursuite de la lecture", status: "en cours" },
+{ d: "2026-09-23", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-09-23", t: "anime", title: "Kome Rice Onigiri feat. Karubi Akami & Kyouitirou", img: "anime/komerice.jpg", note: "music" },
+{ d: "2026-09-23", t: "anime", title: "Benghuai 3rd: Linhai Qi Lu PV", img: "anime/beng.jpg", note: "commercial" },
+{ d: "2026-09-23", t: "anime", title: "Benghuai 3rd: Gainian Donghua Duanpian - Xialing Huixiang", img: "anime/bengh.jpg", note: "commercial" },
+{ d: "2026-09-23", t: "anime", title: "Me", img: "anime/me.jpg", note: "music" },
+{ d: "2026-09-24", t: "musique", title: "The Money Store", img: "music/themoneystore.webp", note: "première écoute, pas ma tasse de thé" },
+{ d: "2026-09-24", t: "anime", title: "Limbus Company 3rd Anniversary Animation", img: "anime/limbus.jpg", note: "commercial" },
+{ d: "2026-09-24", t: "anime", title: "Doron", img: "anime/doron.jpg", note: "music" },
 ];

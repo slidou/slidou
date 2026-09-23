@@ -7731,5 +7731,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 61602, title: "Benghuai: Xing Qiong Tiedao - Yanchanghui Donghua CM: Paishe Jinxing Zhong", note: null, tags: ["short","commercial","archived"] },
   { id: 65027, title: "Norari Kurarism", note: 3.5, tags: ["music","gem","archived"] },
   { id: 65033, title: "Moon Fighters! CM", note: null, tags: ["short","commercial","archived"] },
+  { id: 65034, title: "Kome Rice Onigiri feat. Karubi Akami & Kyouitirou", note: 3, tags: ["music","archived"] },
+  { id: 58156, title: "Benghuai 3rd: Linhai Qi Lu PV", note: null, tags: ["short","commercial","archived"] },
+  { id: 59347, title: "Benghuai 3rd: Gainian Donghua Duanpian - Xialing Huixiang", note: null, tags: ["short","commercial","archived"] },
+  { id: 65030, title: "Me", note: 2.5, tags: ["music","+","archived"] },
+  { id: 65043, title: "Limbus Company 3rd Anniversary Animation", note: null, tags: ["short","commercial","archived"] },
+  { id: 65044, title: "Doron", note: 3, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

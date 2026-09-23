@@ -213,4 +213,7 @@ const musicData = {
   "Boldy James": [
     { title: "The Price of Tea in China", note: 3.5, cover: "music/teainchina.webp", link: "https://rateyourmusic.com/release/album/boldy-james-and-the-alchemist/the-price-of-tea-in-china/" },
   ],
+  "Death Grips": [
+    { title: "The Money Store", note: 2, cover: "music/themoneystore.webp", link: "https://rateyourmusic.com/release/album/death-grips/the-money-store/" },
+  ]
 };
