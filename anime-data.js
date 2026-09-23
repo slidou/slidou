@@ -7726,5 +7726,10 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64264, title: "Ming Chao: Er Zhounian Jinian Donghua - Turning Around Yujin Chong Ran", note: 3, tags: ["music","archived"] },
   { id: 65018, title: "Shiwu Yu (Xin Ma Ban): Ban Zhounian Donghua - Xiangfeng Ban Zai, Yu Jun Tongxing", note: null, tags: ["short","archived"] },
   { id: 65019, title: "Shiwu Yu: Hesui Donghua PV", note: null, tags: ["short","archived"] },
+  { id: 65021, title: "Tsuki ni Kaeru", note: 2.5, tags: ["music","archived"] },
+  { id: 65022, title: "Abyssal Hymn", note: 3.5, tags: ["music","gem","archived"] },
+  { id: 61602, title: "Benghuai: Xing Qiong Tiedao - Yanchanghui Donghua CM: Paishe Jinxing Zhong", note: null, tags: ["short","commercial","archived"] },
+  { id: 65027, title: "Norari Kurarism", note: 3.5, tags: ["music","gem","archived"] },
+  { id: 65033, title: "Moon Fighters! CM", note: null, tags: ["short","commercial","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

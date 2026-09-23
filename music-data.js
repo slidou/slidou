@@ -210,4 +210,7 @@ const musicData = {
   "Amaarae": [
     { title: "Fountain Baby", note: 3, cover: "music/fountainbaby.webp", link: "https://rateyourmusic.com/release/album/amaarae/fountain-baby/" },
   ],
+  "Boldy James": [
+    { title: "The Price of Tea in China", note: 3.5, cover: "music/teainchina.webp", link: "https://rateyourmusic.com/release/album/boldy-james-and-the-alchemist/the-price-of-tea-in-china/" },
+  ],
 };
