@@ -727,4 +727,12 @@ const journalData = [
 { d: "2026-09-24", t: "musique", title: "The Money Store", img: "music/themoneystore.webp", note: "première écoute, pas ma tasse de thé" },
 { d: "2026-09-24", t: "anime", title: "Limbus Company 3rd Anniversary Animation", img: "anime/limbus.jpg", note: "commercial" },
 { d: "2026-09-24", t: "anime", title: "Doron", img: "anime/doron.jpg", note: "music" },
+{ d: "2026-09-24", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-09-24", t: "anime", title: "Tokyo (Music, 2026)", img: "anime/tokyomusic.jpg", note: "music" },
+{ d: "2026-09-24", t: "anime", title: "Furutte.", img: "anime/furutte.jpg", note: "music" },
+{ d: "2026-09-24", t: "anime", title: "Banyuu Inryoku", img: "anime/banyuu.jpg", note: "music" },
+{ d: "2026-09-24", t: "anime", title: "Buddy", img: "anime/buddy.jpg", note: "music" },
+{ d: "2026-09-24", t: "anime", title: "Chanchanko: Kanreki 60", img: "anime/chanchanko.jpg", note: "music" },
+{ d: "2026-09-24", t: "anime", title: "Benghuai: Xing Qiong Tiedao x MAPPA Yuanchuang Donghua Gainian PV - Si Yu Wuhou", img: "anime/yuanchuang.jpg", note: "commercial" },
+{ d: "2026-09-24", t: "anime", title: "Baoh Raihousha", img: "anime/baoh.jpg", note: "movie, on voit directement toutes les idées reprises plus tard pour jojo, j'aime beaucoup le design de la transformation, après le film en lui même n'est pas exceptionnel mais je n'ai pas passé un mauvais moment" },
 ];

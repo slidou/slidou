@@ -7737,5 +7737,12 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 65030, title: "Me", note: 2.5, tags: ["music","+","archived"] },
   { id: 65043, title: "Limbus Company 3rd Anniversary Animation", note: null, tags: ["short","commercial","archived"] },
   { id: 65044, title: "Doron", note: 3, tags: ["music","archived"] },
+  { id: 65048, title: "Tokyo (Music, 2026)", note: 3.5, tags: ["music","archived"] },
+  { id: 65049, title: "Furutte.", note: 3, tags: ["music","archived"] },
+  { id: 62153, title: "Banyuu Inryoku", note: 3.5, tags: ["music","archived"] },
+  { id: 63496, title: "Buddy", note: 3.5, tags: ["music","archived"] },
+  { id: 61818, title: "Chanchanko: Kanreki 60", note: 1, tags: ["music","archived"] },
+  { id: 63935, title: "Benghuai: Xing Qiong Tiedao x MAPPA Yuanchuang Donghua Gainian PV - Si Yu Wuhou", note: null, tags: ["short","commercial","archived"] },
+  { id: 1468, title: "Baoh Raihousha", note: 3, tags: ["movie"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
