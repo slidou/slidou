@@ -215,5 +215,11 @@ const musicData = {
   ],
   "Death Grips": [
     { title: "The Money Store", note: 2, cover: "music/themoneystore.webp", link: "https://rateyourmusic.com/release/album/death-grips/the-money-store/" },
+  ],
+  "By Storm": [
+    { title: "My Ghosts Go Ghost", note: 1, cover: "music/ghosts.webp", link: "https://rateyourmusic.com/release/album/by-storm/my-ghosts-go-ghost/" },
+  ],
+  "Oxmo Puccino": [
+    { title: "Le cactus de Sibérie", note: 3, cover: "music/cactussiberie.webp", link: "https://rateyourmusic.com/release/album/oxmo-puccino/le-cactus-de-siberie/" },
   ]
 };
