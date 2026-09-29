@@ -773,4 +773,11 @@ const journalData = [
 { d: "2026-09-28", t: "anime", title: "The Dappies", img: "anime/thedappies.jpg", note: "music" },
 { d: "2026-09-28", t: "anime", title: "Doko? Doko?", img: "anime/dokodoko.jpg", note: "music" },
 { d: "2026-09-28", t: "anime", title: "Kodama deshou ka", img: "anime/kodama.jpg", note: "music" },
+{ d: "2026-09-28", t: "livre", title: "Le Chrysanthème et le Sabre", img: "covers/chrysanthème.jpg", note: "poursuite de la lecture", status: "en cours" },
+{ d: "2026-09-29", t: "anime", title: "Sora", img: "anime/sora.jpg", note: "music" },
+{ d: "2026-09-29", t: "anime", title: "Sound of Music (2025)", img: "anime/soundofmusic.jpg", note: "music" },
+{ d: "2026-09-29", t: "anime", title: "Kirakira Mirai", img: "anime/kirakira.jpg", note: "music" },
+{ d: "2026-09-29", t: "anime", title: "Kakurenbo no Tatsujin", img: "anime/kakurenbo.jpg", note: "music" },
+{ d: "2026-09-29", t: "anime", title: "Egao no Loop", img: "anime/egao.jpg", note: "music" },
+{ d: "2026-09-29", t: "anime", title: "Inochi Meguru", img: "anime/inochimeguru.jpg", note: "music" },
 ];
