@@ -7778,5 +7778,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 62608, title: "Kakurenbo no Tatsujin", note: 2.5, tags: ["music","archived"] },
   { id: 51080, title: "Egao no Loop", note: 3, tags: ["music","archived"] },
   { id: 63470, title: "Inochi Meguru", note: 3, tags: ["music","archived"] },
+  { id: 65084, title: "Mo Bi Wu Si Huan", note: 3, tags: ["short","archived"] },
+  { id: 56984, title: "Nakayoshi Family", note: 1.5, tags: ["music","archived"] },
+  { id: 57007, title: "Futari de Hanbunko", note: 2.5, tags: ["music","+","archived"] },
+  { id: 57010, title: "Kimi to Ha no Uta", note: 2.5, tags: ["music","archived"] },
+  { id: 57028, title: "Konoha-kun", note: 2.5, tags: ["music","archived"] },
+  { id: 57032, title: "Let's Be Friends: Tomodachi ni Narou yo", note: 2.5, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

@@ -780,4 +780,11 @@ const journalData = [
 { d: "2026-09-29", t: "anime", title: "Kakurenbo no Tatsujin", img: "anime/kakurenbo.jpg", note: "music" },
 { d: "2026-09-29", t: "anime", title: "Egao no Loop", img: "anime/egao.jpg", note: "music" },
 { d: "2026-09-29", t: "anime", title: "Inochi Meguru", img: "anime/inochimeguru.jpg", note: "music" },
+{ d: "2026-09-30", t: "livre", title: "Le Chrysanthème et le Sabre", img: "covers/chrysanthème.jpg", note: "poursuite de la lecture", status: "en cours" },
+{ d: "2026-09-30", t: "anime", title: "Mo Bi Wu Si Huan", img: "anime/mobius.jpg", note: "short" },
+{ d: "2026-09-30", t: "anime", title: "Nakayoshi Family", img: "anime/nakayoshi.jpg", note: "music" },
+{ d: "2026-09-30", t: "anime", title: "Futari de Hanbunko", img: "anime/hanbunko.jpg", note: "music" },
+{ d: "2026-09-30", t: "anime", title: "Kimi to Ha no Uta", img: "anime/kimitoha.jpg", note: "music" },
+{ d: "2026-09-30", t: "anime", title: "Konoha-kun", img: "anime/konoha.jpg", note: "music" },
+{ d: "2026-09-30", t: "anime", title: "Let's Be Friends: Tomodachi ni Narou yo", img: "anime/letsbefriends.jpg", note: "music" },
 ];
