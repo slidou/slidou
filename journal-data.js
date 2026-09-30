@@ -787,4 +787,11 @@ const journalData = [
 { d: "2026-09-30", t: "anime", title: "Kimi to Ha no Uta", img: "anime/kimitoha.jpg", note: "music" },
 { d: "2026-09-30", t: "anime", title: "Konoha-kun", img: "anime/konoha.jpg", note: "music" },
 { d: "2026-09-30", t: "anime", title: "Let's Be Friends: Tomodachi ni Narou yo", img: "anime/letsbefriends.jpg", note: "music" },
+{ d: "2026-10-01", t: "anime", title: "Agitato", img: "anime/agitato.jpg", note: "music" },
+{ d: "2026-10-01", t: "anime", title: "Nukazuke no Uta", img: "anime/nukazuke.jpg", note: "music" },
+{ d: "2026-10-01", t: "anime", title: "Tsuki", img: "anime/tsuki.jpg", note: "music" },
+{ d: "2026-10-01", t: "anime", title: "Watashi no Ningyou", img: "anime/watashinoningyou.jpg", note: "music" },
+{ d: "2026-10-01", t: "anime", title: "Mushi no Tsubuyaki", img: "anime/tsubuyaki.jpg", note: "music" },
+{ d: "2026-10-01", t: "anime", title: "Kotae wo Dasu no Da", img: "anime/kotaewodasu.jpg", note: "music" },
+{ d: "2026-10-01", t: "anime", title: "Nanatsu no Umi", img: "anime/nanatsunoumi.jpg", note: "music" },
 ];
