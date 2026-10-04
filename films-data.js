@@ -371,4 +371,7 @@ const filmsData = {
   "Jean Eustache": [
     { title: "Le Père Noël a les yeux bleus", note: null, cover: "films/perenoel.jpg", link: "https://www.senscritique.com/film/le_pere_noel_a_les_yeux_bleus/394316", tags: ["archived"] },
   ],
+  "Nanako Hirose": [
+    { title: "book-paper-scissors", note: 4, cover: "films/bps.jpg", link: "https://www.senscritique.com/film/book_paper_scissors/41323664", tags: ["archived"] },
+  ],
 };

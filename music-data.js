@@ -221,5 +221,12 @@ const musicData = {
   ],
   "Oxmo Puccino": [
     { title: "Le cactus de Sibérie", note: 3, cover: "music/cactussiberie.webp", link: "https://rateyourmusic.com/release/album/oxmo-puccino/le-cactus-de-siberie/" },
+  ],
+  "ptite soeur": [
+    { title: "Pretty Dollcorpse", note: 4, cover: "music/dollcorpse.webp", link: "https://rateyourmusic.com/release/album/ptite-soeur-neophron-femtogo/pretty-dollcorpse/" },
+    { title: "NODA", note: 2, cover: "music/noda.webp", link: "https://rateyourmusic.com/release/album/ptite-soeur-neophron/noda/" },
+  ],
+  "Jamiroquai": [
+    { title: "A Funk Odyssey", note: 4, cover: "music/funkodyssey.webp", link: "https://rateyourmusic.com/release/album/jamiroquai/a-funk-odyssey/" },
   ]
 };
