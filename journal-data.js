@@ -849,4 +849,12 @@ const journalData = [
 { d: "2026-10-04", t: "anime", title: "Sekai wa Melody", img: "anime/sekaiwamelody.jpg", note: "music" },
 { d: "2026-10-04", t: "anime", title: "Panda Da Pa Ya", img: "anime/pandadapaya.jpg", note: "music" },
 { d: "2026-10-04", t: "anime", title: "Hajimete no Boku desu", img: "anime/hajimetenoboku.jpg", note: "music" },
+{ d: "2026-10-05", t: "jeu", title: "Cirno! Lifts a Boulder", img: "games/cirno.jpg", note: "à la moitié du jeu", status: "en cours" },
+{ d: "2026-10-05", t: "livre", title: "Le Chrysanthème et le Sabre", img: "covers/chrysanthème.jpg", note: "poursuite de la lecture", status: "en cours" },
+{ d: "2026-10-05", t: "anime", title: "Bokura wa Ikimono Dakara", img: "anime/ikimono.jpg", note: "music" },
+{ d: "2026-10-05", t: "anime", title: "Nan no Koreshiki Furoshikiman", img: "anime/furoshikiman.jpg", note: "music" },
+{ d: "2026-10-05", t: "anime", title: "Wakiaiai", img: "anime/wakiaiai.jpg", note: "music" },
+{ d: "2026-10-05", t: "anime", title: "Gorilla no Mentama", img: "anime/gorilla.jpg", note: "music" },
+{ d: "2026-10-05", t: "anime", title: "Kurikaeshi no Uta", img: "anime/kurikaeshi.jpg", note: "music" },
+{ d: "2026-10-05", t: "anime", title: "QIRR Animal Dance", img: "anime/qirr.jpg", note: "music" },
 ];

@@ -7841,5 +7841,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 59269, title: "Sekai wa Melody", note: 2.5, tags: ["music","archived"] },
   { id: 59538, title: "Panda Da Pa Ya", note: 2, tags: ["music","archived"] },
   { id: 59355, title: "Hajimete no Boku desu", note: 1.5, tags: ["music","archived"] },
+  { id: 59477, title: "Bokura wa Ikimono Dakara", note: 3, tags: ["music","archived"] },
+  { id: 59333, title: "Nan no Koreshiki Furoshikiman", note: 2, tags: ["music","archived"] },
+  { id: 59323, title: "Wakiaiai", note: 1.5, tags: ["music","archived"] },
+  { id: 59314, title: "Gorilla no Mentama", note: 2.5, tags: ["music","archived"] },
+  { id: 59483, title: "Kurikaeshi no Uta", note: 2.5, tags: ["music","archived"] },
+  { id: 59502, title: "QIRR Animal Dance", note: 2.5, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
