@@ -53,5 +53,6 @@ const gamesData = [
   { title: "Pacify", note: null, cover: "games/pacify.jpg", link: "https://backloggd.com/games/pacify/" },
   { title: "Fears to Fathom: Scratch Creek", note: 2, cover: "games/fearstofathom.jpg", link: "https://backloggd.com/games/fears-to-fathom-scratch-creek/" },
   { title: "nophenia", note: 4, cover: "games/nophenia.jpg", link: "https://backloggd.com/games/nophenia/" },
-  { title: "Land of Ghosts", note: 4, cover: "games/landofghosts.jpg", link: "https://backloggd.com/games/land-of-ghosts/" }
+  { title: "Land of Ghosts", note: 4, cover: "games/landofghosts.jpg", link: "https://backloggd.com/games/land-of-ghosts/" },
+  { title: "Cirno! Lifts a Boulder", note: 3, cover: "games/cirno.jpg", link: "https://backloggd.com/games/cirno-lifts-a-boulder/" }
 ];

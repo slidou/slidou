@@ -228,5 +228,8 @@ const musicData = {
   ],
   "Jamiroquai": [
     { title: "A Funk Odyssey", note: 4, cover: "music/funkodyssey.webp", link: "https://rateyourmusic.com/release/album/jamiroquai/a-funk-odyssey/" },
+  ],
+  "Huntrill": [
+    { title: "Nouvelle Trap 2", note: 3.5, cover: "music/nouvelletrap2.webp", link: "https://rateyourmusic.com/release/album/huntrill/nouvelle-trap-2/" },
   ]
 };
