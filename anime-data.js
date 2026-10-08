@@ -7859,5 +7859,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 61955, title: "Nezha Zhi Sanbao Chuang Shi Yun", note: null, tags: ["short","commercial","+","archived"] },
   { id: 59168, title: "Scenario", note: 2.5, tags: ["music","+","archived"] },
   { id: 58422, title: "Funkorogashi wa, Isogashii.", note: 1, tags: ["music","archived"] },
+  { id: 65130, title: "My Bad", note: 3, tags: ["music","archived"] },
+  { id: 65138, title: "Respawn!!", note: 3, tags: ["music","+","archived"] },
+  { id: 59023, title: "Kaze ni Nare", note: 3, tags: ["music","archived"] },
+  { id: 62348, title: "Shinkalion: Change the World - L0 Tokubetsu PV", note: null, tags: ["short","+","archived"] },
+  { id: 61766, title: "Shinkalion: Change the World - E4 Max Toki Tokubetsu PV", note: null, tags: ["short","+","archived"] },
+  { id: 53933, title: "Futari-bun no Shoumei", note: null, tags: ["short","commercial","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

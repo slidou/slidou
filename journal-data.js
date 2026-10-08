@@ -874,4 +874,13 @@ const journalData = [
 { d: "2026-10-06", t: "anime", title: "Scenario", img: "anime/scenario.jpg", note: "music" },
 { d: "2026-10-06", t: "anime", title: "Funkorogashi wa, Isogashii.", img: "anime/funkorogashi.jpg", note: "music" },
 { d: "2026-10-07", t: "manga", title: "No.5", img: "manga/no5.jpg", note: "7-8/37", status: "en cours" },
+{ d: "2026-10-07", t: "musique", title: "Nouvelle Trap 2", img: "music/nouvelletrap2.webp", note: "réécoute" },
+{ d: "2026-10-07", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-10-08", t: "anime", title: "My Bad", img: "anime/mybad.jpg", note: "music" },
+{ d: "2026-10-08", t: "anime", title: "Respawn!!", img: "anime/respawn.jpg", note: "music" },
+{ d: "2026-10-08", t: "anime", title: "Kaze ni Nare", img: "anime/kazeninare.jpg", note: "music" },
+{ d: "2026-10-08", t: "anime", title: "Shinkalion: Change the World - L0 Tokubetsu PV", img: "anime/tokubetsu.jpg", note: "short" },
+{ d: "2026-10-08", t: "anime", title: "Shinkalion: Change the World - E4 Max Toki Tokubetsu PV", img: "anime/tokubetsutoki.jpg", note: "short" },
+{ d: "2026-10-08", t: "anime", title: "Futari-bun no Shoumei", img: "anime/futaribun.jpg", note: "commercial" },
+{ d: "2026-10-08", t: "manga", title: "No.5", img: "manga/no5.jpg", note: "9-12/37", status: "en cours" },
 ];
