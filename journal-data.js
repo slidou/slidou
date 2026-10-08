@@ -883,4 +883,11 @@ const journalData = [
 { d: "2026-10-08", t: "anime", title: "Shinkalion: Change the World - E4 Max Toki Tokubetsu PV", img: "anime/tokubetsutoki.jpg", note: "short" },
 { d: "2026-10-08", t: "anime", title: "Futari-bun no Shoumei", img: "anime/futaribun.jpg", note: "commercial" },
 { d: "2026-10-08", t: "manga", title: "No.5", img: "manga/no5.jpg", note: "9-12/37", status: "en cours" },
+{ d: "2026-10-08", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1195/?", status: "en cours" },
+{ d: "2026-10-09", t: "anime", title: "Kitchen Lady", img: "anime/kitchenlady.jpg", note: "music" },
+{ d: "2026-10-09", t: "anime", title: "Google Play de Chou Musou!? Tensei shitara Android User Datta.", img: "anime/googleplay.jpg", note: "commercial" },
+{ d: "2026-10-09", t: "anime", title: "Majo no Takkyuubin x McDonald's CMs", img: "anime/takmc.jpg", note: "commercial" },
+{ d: "2026-10-09", t: "anime", title: "Jantama CMs", img: "anime/jantama.jpg", note: "commercial" },
+{ d: "2026-10-09", t: "anime", title: "Blue Gale Xabungle Side L", img: "anime/xabungle.jpg", note: "short" },
+{ d: "2026-10-09", t: "anime", title: "Yuanshen: Tiwate Pian - Mujian PV: Dong Ye Yu Xi", img: "anime/tiwate.jpg", note: "short" },
 ];

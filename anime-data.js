@@ -7865,5 +7865,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 62348, title: "Shinkalion: Change the World - L0 Tokubetsu PV", note: null, tags: ["short","+","archived"] },
   { id: 61766, title: "Shinkalion: Change the World - E4 Max Toki Tokubetsu PV", note: null, tags: ["short","+","archived"] },
   { id: 53933, title: "Futari-bun no Shoumei", note: null, tags: ["short","commercial","archived"] },
+  { id: 59195, title: "Kitchen Lady", note: 2, tags: ["music","archived"] },
+  { id: 61862, title: "Google Play de Chou Musou!? Tensei shitara Android User Datta.", note: null, tags: ["short","commercial","archived"] },
+  { id: 59105, title: "Majo no Takkyuubin x McDonald's CMs", note: null, tags: ["short","commercial","+","archived"] },
+  { id: 55394, title: "Jantama CMs", note: null, tags: ["short","commercial","+","archived"] },
+  { id: 62530, title: "Blue Gale Xabungle Side L", note: null, tags: ["short","+","archived"] },
+  { id: 58537, title: "Yuanshen: Tiwate Pian - Mujian PV: Dong Ye Yu Xi", note: null, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
