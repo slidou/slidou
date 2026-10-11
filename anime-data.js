@@ -7871,5 +7871,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 55394, title: "Jantama CMs", note: null, tags: ["short","commercial","+","archived"] },
   { id: 62530, title: "Blue Gale Xabungle Side L", note: null, tags: ["short","+","archived"] },
   { id: 58537, title: "Yuanshen: Tiwate Pian - Mujian PV: Dong Ye Yu Xi", note: null, tags: ["short","archived"] },
+  { id: 65148, title: "Monster Factory", note: 3, tags: ["music","archived"] },
+  { id: 65153, title: "On and On", note: 3, tags: ["music","archived"] },
+  { id: 65152, title: "Castle", note: 3, tags: ["music","archived"] },
+  { id: 12867, title: "Tsuki no Sango", note: null, tags: ["short","commercial","archived"] },
+  { id: 34264, title: "Ninja Bear the Animation★ PV", note: null, tags: ["short","commercial","archived"] },
+  { id: 1223, title: "Ame to Shoujo to Watashi no Tegami", note: null, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

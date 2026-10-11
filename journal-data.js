@@ -890,4 +890,12 @@ const journalData = [
 { d: "2026-10-09", t: "anime", title: "Jantama CMs", img: "anime/jantama.jpg", note: "commercial" },
 { d: "2026-10-09", t: "anime", title: "Blue Gale Xabungle Side L", img: "anime/xabungle.jpg", note: "short" },
 { d: "2026-10-09", t: "anime", title: "Yuanshen: Tiwate Pian - Mujian PV: Dong Ye Yu Xi", img: "anime/tiwate.jpg", note: "short" },
+{ d: "2026-10-10", t: "anime", title: "Steel Ball Run: JoJo no Kimyou na Bouken", img: "anime/jojo7.jpg", note: "normal episode, 4/?", status: "en cours" },
+{ d: "2026-10-10", t: "anime", title: "Monster Factory", img: "anime/monsterfactory.jpg", note: "music" },
+{ d: "2026-10-10", t: "anime", title: "On and On", img: "anime/onadnon.jpg", note: "music" },
+{ d: "2026-10-10", t: "anime", title: "Castle", img: "anime/castle.png", note: "music" },
+{ d: "2026-10-10", t: "manga", title: "No.5", img: "manga/no5.jpg", note: "13-16/37", status: "en cours" },
+{ d: "2026-10-10", t: "anime", title: "Tsuki no Sango", img: "anime/tsukinosango.jpg", note: "commercial" },
+{ d: "2026-10-10", t: "anime", title: "Ninja Bear the Animation★ PV", img: "anime/ninjabear.jpg", note: "commercial" },
+{ d: "2026-10-10", t: "anime", title: "Ame to Shoujo to Watashi no Tegami", img: "anime/tegami.jpg", note: "short" },
 ];
