@@ -665,7 +665,6 @@ function updateEcransCounter(filmsData = films, seriesData = series, isSearch = 
 function generateFilms(data = films, isSearch = false) {
   const container = document.getElementById('filmsContent');
 
-  // 1. Génération des boutons de filtre
   var shortCount = 0;
   var featureCount = 0;
   for (var director in films) {
@@ -679,62 +678,38 @@ function generateFilms(data = films, isSearch = false) {
   if (fC) {
     fC.innerHTML = '';
     
-    // LIGNE 1 : Le bouton "Tous" seul au centre
     var row1 = document.createElement('div'); 
-    row1.style.cssText = 'display: flex; gap: 8px; justify-content: center;';
+    row1.style.cssText = 'display: flex; gap: 8px; justify-content: center; margin-bottom: 10px;';
     
     var allBtn = document.createElement('button');
     allBtn.className = 'anime-tag-btn' + (filmsFormatFilter === null && ecransCollectionFilter === null ? ' active' : '');
     allBtn.textContent = 'tous (' + (shortCount + featureCount) + ')';
     allBtn.addEventListener('click', function() { 
       filmsFormatFilter = null; 
-      ecransCollectionFilter = null; // <-- On ajoute ça pour vider la collection
+      ecransCollectionFilter = null; 
       generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery); 
     });
     row1.appendChild(allBtn);
     fC.appendChild(row1);
 
-    // SECTION FORMAT : Longs et Courts métrages
-    var fmtSection = document.createElement('div');
-    fmtSection.className = 'anime-tag-section';
-
-    var fmtLabel = document.createElement('div');
-    fmtLabel.className = 'anime-tag-section-label';
-    fmtLabel.textContent = 'format';
-    fmtSection.appendChild(fmtLabel);
-
-    var fmtWrap = document.createElement('div');
-    fmtWrap.className = 'anime-tag-section-tags';
-
+    var fmtSection = document.createElement('div'); fmtSection.className = 'anime-tag-section';
+    var fmtLabel = document.createElement('div'); fmtLabel.className = 'anime-tag-section-label'; fmtLabel.textContent = 'format'; fmtSection.appendChild(fmtLabel);
+    var fmtWrap = document.createElement('div'); fmtWrap.className = 'anime-tag-section-tags';
     if (featureCount > 0) {
       var featBtn = document.createElement('button');
       featBtn.className = 'anime-tag-btn' + (filmsFormatFilter === 'long' ? ' active' : '');
       featBtn.textContent = 'longs métrages (' + featureCount + ')';
-      featBtn.addEventListener('click', function() { 
-        filmsFormatFilter = filmsFormatFilter === 'long' ? null : 'long';
-        ecransCollectionFilter = null;
-        generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery); 
-      });
+      featBtn.addEventListener('click', function() { filmsFormatFilter = filmsFormatFilter === 'long' ? null : 'long'; ecransCollectionFilter = null; generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery); });
       fmtWrap.appendChild(featBtn);
     }
-
     if (shortCount > 0) {
       var shortBtn = document.createElement('button');
       shortBtn.className = 'anime-tag-btn' + (filmsFormatFilter === 'court' ? ' active' : '');
       shortBtn.textContent = 'courts métrages (' + shortCount + ')';
-      shortBtn.addEventListener('click', function() { 
-        filmsFormatFilter = filmsFormatFilter === 'court' ? null : 'court';
-        ecransCollectionFilter = null;
-        generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery); 
-      });
+      shortBtn.addEventListener('click', function() { filmsFormatFilter = filmsFormatFilter === 'court' ? null : 'court'; ecransCollectionFilter = null; generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery); });
       fmtWrap.appendChild(shortBtn);
     }
-    
-    // On ajoute la section format seulement si elle contient au moins un bouton
-    if (fmtWrap.children.length > 0) {
-      fmtSection.appendChild(fmtWrap);
-      fC.appendChild(fmtSection);
-    }
+    if (fmtWrap.children.length > 0) { fmtSection.appendChild(fmtWrap); fC.appendChild(fmtSection); }
 
     // SECTION GENRE FILMS
     var fGenreCounts = { 'documentaire': 0 };
@@ -758,7 +733,7 @@ function generateFilms(data = films, isSearch = false) {
     if (fGenreWrap.children.length > 0) { fGenreSection.appendChild(fGenreWrap); fC.appendChild(fGenreSection); }
 
     // SECTION COLLECTION FILMS
-    var fCollCounts = { 're-watched': 0, 'archived': 0 };
+    var fCollCounts = { 're-watched': 0, 'archived': 0, 'bought': 0 };
     for (var d in films) {
       films[d].forEach(function(m) {
         if (m.tags) m.tags.forEach(function(t) { if (fCollCounts[t] !== undefined) fCollCounts[t]++; });
@@ -800,23 +775,6 @@ function generateFilms(data = films, isSearch = false) {
     if (fQualWrap.children.length > 0) { fQualSection.appendChild(fQualWrap); fC.appendChild(fQualSection); }
   }
 
-  // BARRE PROGRESSION RE-WATCH FILMS
-  var fBar = document.getElementById('films-project-bar');
-  if (fBar) {
-    var fRewatchCount = 0; var fTotal = 0;
-    for (var dir in films) {
-      films[dir].forEach(function(m) {
-        fTotal++;
-        if (m.tags && m.tags.indexOf('re-watched') !== -1) fRewatchCount++;
-      });
-    }
-    if (fTotal > 0) {
-      var fPct = (fRewatchCount / fTotal * 100).toFixed(1);
-      fBar.innerHTML = '<div class="project-bar"><span class="project-label">projet revisionnage : ' + fRewatchCount + ' / ' + fTotal + ' (' + fPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + fPct + '%"></div></div></div>';
-    } else { fBar.innerHTML = ''; }
-  }
-
-  // 2. Application du filtre sur les données
   if (filmsFormatFilter || ecransCollectionFilter) {
     var filteredData = {};
     for (var director in data) {
@@ -833,7 +791,6 @@ function generateFilms(data = films, isSearch = false) {
     data = filteredData;
   }
 
-  // Mise à jour du compteur Écrans (Films)
   var fCount = Object.values(data).reduce(function(acc, arr) { return acc + arr.length; }, 0);
   var fGlobal = Object.values(films).reduce(function(acc, arr) { return acc + arr.length; }, 0);
   var isFilt = isSearch || filmsFormatFilter || ecransCollectionFilter;
@@ -847,7 +804,6 @@ function generateFilms(data = films, isSearch = false) {
 
   document.getElementById('ecrans-counter').textContent = tFilms + " • " + tSeries;
 
-  // Mise à jour de la barre de progression re-watch
   var fBar = document.getElementById('ecrans-project-bar');
   if (fBar) {
     var fRewatchCount = 0; var fTotal = 0;
@@ -863,7 +819,6 @@ function generateFilms(data = films, isSearch = false) {
     } else { fBar.innerHTML = ''; }
   }
 
-  // --- VUE GLOBALE FILMS ---
   if (ecransSortMode !== 'réalisateur') {
     var allMovies = [];
     for (var dir in data) {
@@ -895,34 +850,22 @@ function generateFilms(data = films, isSearch = false) {
   }
 
   container.innerHTML = '';
-
-  if (sortDataKeys(data).length === 0) {
-    container.innerHTML = '<p class="empty-state">aucun résultat</p>';
-    return;
-  }
+  if (sortDataKeys(data).length === 0) { container.innerHTML = '<p class="empty-state">aucun résultat</p>'; return; }
 
   sortDataKeys(data).forEach(function(director) {
     container.insertAdjacentHTML('beforeend', getCreatorHeader(director, data[director].length));
-
     const notesValides = data[director].map(m => m.note).filter(n => n !== null);
     if (notesValides.length > 1) {
       const moyenne = (notesValides.reduce((acc, note) => acc + note, 0) / notesValides.length).toFixed(1);
       const avgDiv = document.createElement('div');
-      avgDiv.className = 'show-average';
-      avgDiv.textContent = "moyenne : " + moyenne;
+      avgDiv.className = 'show-average'; avgDiv.textContent = "moyenne : " + moyenne;
       container.appendChild(avgDiv);
     }
-
-    const div = document.createElement('div');
-    div.className = 'books';
+    const div = document.createElement('div'); div.className = 'books';
     sortEntriesByNote(data[director]).forEach(function(movie) {
       const card = document.createElement('a');
-      card.href = movie.link; 
-      card.target = "_blank"; 
-      card.className = 'book-card';
-      
+      card.href = movie.link; card.target = "_blank"; card.className = 'book-card';
       const starsHtml = movie.note !== null ? `<div class="book-meta">${getStars(movie.note)}</div>` : '';
-      
       if (movie.tags && movie.tags.indexOf('coup de coeur') !== -1) card.className += ' coup-de-coeur-card';
       var reviewHtml = movie.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(movie.review) + '</span>' : '';
       card.innerHTML = `<img loading="lazy" src="${movie.cover}" alt="${movie.title}">${getFilmFormatBadge(movie)}${getCollectionBadges(movie)}<div class="book-title">${movie.title}</div>${starsHtml}${getOldNote(movie)}${reviewHtml}`;
@@ -936,105 +879,6 @@ function generateFilms(data = films, isSearch = false) {
 function generateSeries(data = series, isSearch = false) {
   const container = document.getElementById('seriesContent');
 
-  // Mise à jour du compteur Écrans
-  var sCount = Object.values(data).reduce(function(acc, arr) { return acc + arr.length; }, 0);
-  var sGlobal = Object.values(series).reduce(function(acc, arr) { return acc + arr.length; }, 0);
-  var sFilt = isSearch || ecransCollectionFilter;
-  var tSeries = sFilt ? sCount + " / " + sGlobal + " saison" + (sGlobal !== 1 ? "s" : "") : sGlobal + " saison" + (sGlobal !== 1 ? "s" : "") + " suivie" + (sGlobal !== 1 ? "s" : "");
-
-  var fCount = Object.values(films).reduce(function(acc, arr) { 
-    return acc + (ecransCollectionFilter ? arr.filter(function(m) { return m.tags && m.tags.indexOf(ecransCollectionFilter) !== -1; }).length : arr.length); 
-  }, 0);
-  var fGlobal = Object.values(films).reduce(function(acc, arr) { return acc + arr.length; }, 0);
-  var fFilt = ecransCollectionFilter || filmsFormatFilter;
-  var tFilms = fFilt ? fCount + " / " + fGlobal + " film" + (fGlobal !== 1 ? "s" : "") : fGlobal + " film" + (fGlobal !== 1 ? "s" : "") + " vu" + (fGlobal !== 1 ? "s" : "");
-
-  document.getElementById('ecrans-counter').textContent = tFilms + " • " + tSeries;
-
-  // 1. Filtres collection Séries
-  var sF = document.getElementById('series-filters');
-  if (sF) {
-    sF.innerHTML = '';
-    var sCollCounts = { 're-watched': 0, 'archived': 0 };
-    for (var show in series) {
-      series[show].forEach(function(s) {
-        if (s.tags) s.tags.forEach(function(t) { if (sCollCounts[t] !== undefined) sCollCounts[t]++; });
-      });
-    }
-    var sTopRow = document.createElement('div');
-    sTopRow.style.cssText = 'display: flex; gap: 8px; justify-content: center; margin-bottom: 10px;';
-    var sAllBtn = document.createElement('button');
-    sAllBtn.className = 'anime-tag-btn' + (ecransCollectionFilter === null ? ' active' : ''); // <-- Celle-ci est déjà bonne, mais vérifie juste qu'elle est bien là.
-    sAllBtn.textContent = 'tous';
-    sAllBtn.addEventListener('click', function() { ecransCollectionFilter = null; generateSeries(filterData(series, ecransSearchQuery), !!ecransSearchQuery); });
-    sTopRow.appendChild(sAllBtn);
-    sF.appendChild(sTopRow);
-
-    var sCollSection = document.createElement('div'); sCollSection.className = 'anime-tag-section';
-    var sCollLabel = document.createElement('div'); sCollLabel.className = 'anime-tag-section-label'; sCollLabel.textContent = 'collection'; sCollSection.appendChild(sCollLabel);
-    var sCollWrap = document.createElement('div'); sCollWrap.className = 'anime-tag-section-tags';
-    for (var sTag in sCollCounts) {
-      if (sCollCounts[sTag] > 0) {
-        var sBtn = document.createElement('button');
-        sBtn.className = 'anime-tag-btn' + (ecransCollectionFilter === sTag ? ' active' : '');
-        sBtn.textContent = sTag + ' (' + sCollCounts[sTag] + ')';
-        sBtn.addEventListener('click', function(t) { return function() { ecransCollectionFilter = ecransCollectionFilter === t ? null : t; generateSeries(filterData(series, ecransSearchQuery), !!ecransSearchQuery); }; }(sTag));
-        sCollWrap.appendChild(sBtn);
-      }
-    }
-    if (sCollWrap.children.length > 0) { sCollSection.appendChild(sCollWrap); sF.appendChild(sCollSection); }
-
-    // SECTION QUALITÉ SÉRIES
-    var sQualCounts = { 'coup de coeur': 0 };
-    for (var sh2 in series) {
-      series[sh2].forEach(function(s2) {
-        if (s2.tags) s2.tags.forEach(function(t) { if (sQualCounts[t] !== undefined) sQualCounts[t]++; });
-      });
-    }
-    var sQualSection = document.createElement('div'); sQualSection.className = 'anime-tag-section';
-    var sQualLabel = document.createElement('div'); sQualLabel.className = 'anime-tag-section-label'; sQualLabel.textContent = 'qualité'; sQualSection.appendChild(sQualLabel);
-    var sQualWrap = document.createElement('div'); sQualWrap.className = 'anime-tag-section-tags';
-    for (var sQualTag in sQualCounts) {
-      if (sQualCounts[sQualTag] > 0) {
-        var sQualBtn = document.createElement('button');
-        sQualBtn.className = 'anime-tag-btn quality-tag' + (ecransCollectionFilter === sQualTag ? ' active' : '');
-        sQualBtn.textContent = sQualTag + ' (' + sQualCounts[sQualTag] + ')';
-        sQualBtn.addEventListener('click', function(t) { return function() { ecransCollectionFilter = ecransCollectionFilter === t ? null : t; generateSeries(filterData(series, ecransSearchQuery), !!ecransSearchQuery); }; }(sQualTag));
-        sQualWrap.appendChild(sQualBtn);
-      }
-    }
-    if (sQualWrap.children.length > 0) { sQualSection.appendChild(sQualWrap); sF.appendChild(sQualSection); }
-  }
-
-  // Barre progression re-watch Séries
-  var sBar = document.getElementById('series-project-bar');
-  if (sBar) {
-    var sRewatchCount = 0; var sTotal = 0;
-    for (var sh in series) {
-      series[sh].forEach(function(s) {
-        sTotal++;
-        if (s.tags && s.tags.indexOf('re-watched') !== -1) sRewatchCount++;
-      });
-    }
-    if (sTotal > 0) {
-      var sPct = (sRewatchCount / sTotal * 100).toFixed(1);
-      gBar.innerHTML = '<div class="project-bar"><span class="project-label">projet rejeu : ' + gReplayCount + ' / ' + gTotal + ' (' + gPct + '%)</span><div class="project-track"><div class="project-fill" style="width:' + gPct + '%"></div></div></div>';
-    } else { sBar.innerHTML = ''; }
-  }
-
-  // Application du filtre
-  if (ecransCollectionFilter) {
-    var filteredSeriesData = {};
-    for (var showKey in data) {
-      var validSeasons = data[showKey].filter(function(season) {
-        return season.tags && season.tags.indexOf(ecransCollectionFilter) !== -1;
-      });
-      if (validSeasons.length > 0) filteredSeriesData[showKey] = validSeasons;
-    }
-    data = filteredSeriesData;
-  }
-
-  // Mise à jour du compteur Écrans (Séries)
   var sCount = Object.values(data).reduce(function(acc, arr) { return acc + arr.length; }, 0);
   var sGlobal = Object.values(series).reduce(function(acc, arr) { return acc + arr.length; }, 0);
   var sFilt = isSearch || ecransCollectionFilter;
@@ -1056,7 +900,59 @@ function generateSeries(data = series, isSearch = false) {
 
   document.getElementById('ecrans-counter').textContent = tFilms + " • " + tSeries;
 
-  // Mise à jour de la barre de progression re-watch
+  var sF = document.getElementById('series-filters');
+  if (sF) {
+    sF.innerHTML = '';
+    var sCollCounts = { 're-watched': 0, 'archived': 0 };
+    for (var show in series) {
+      series[show].forEach(function(s) {
+        if (s.tags) s.tags.forEach(function(t) { if (sCollCounts[t] !== undefined) sCollCounts[t]++; });
+      });
+    }
+    var sTopRow = document.createElement('div');
+    sTopRow.style.cssText = 'display: flex; gap: 8px; justify-content: center; margin-bottom: 10px;';
+    var sAllBtn = document.createElement('button');
+    sAllBtn.className = 'anime-tag-btn' + (ecransCollectionFilter === null ? ' active' : '');
+    sAllBtn.textContent = 'tous';
+    sAllBtn.addEventListener('click', function() { ecransCollectionFilter = null; generateSeries(filterData(series, ecransSearchQuery), !!ecransSearchQuery); });
+    sTopRow.appendChild(sAllBtn);
+    sF.appendChild(sTopRow);
+
+    var sCollSection = document.createElement('div'); sCollSection.className = 'anime-tag-section';
+    var sCollLabel = document.createElement('div'); sCollLabel.className = 'anime-tag-section-label'; sCollLabel.textContent = 'collection'; sCollSection.appendChild(sCollLabel);
+    var sCollWrap = document.createElement('div'); sCollWrap.className = 'anime-tag-section-tags';
+    for (var sTag in sCollCounts) {
+      if (sCollCounts[sTag] > 0) {
+        var sBtn = document.createElement('button');
+        sBtn.className = 'anime-tag-btn' + (ecransCollectionFilter === sTag ? ' active' : '');
+        sBtn.textContent = sTag + ' (' + sCollCounts[sTag] + ')';
+        sBtn.addEventListener('click', function(t) { return function() { ecransCollectionFilter = ecransCollectionFilter === t ? null : t; generateSeries(filterData(series, ecransSearchQuery), !!ecransSearchQuery); }; }(sTag));
+        sCollWrap.appendChild(sBtn);
+      }
+    }
+    if (sCollWrap.children.length > 0) { sCollSection.appendChild(sCollWrap); sF.appendChild(sCollSection); }
+
+    var sQualCounts = { 'coup de coeur': 0 };
+    for (var sh2 in series) {
+      series[sh2].forEach(function(s2) {
+        if (s2.tags) s2.tags.forEach(function(t) { if (sQualCounts[t] !== undefined) sQualCounts[t]++; });
+      });
+    }
+    var sQualSection = document.createElement('div'); sQualSection.className = 'anime-tag-section';
+    var sQualLabel = document.createElement('div'); sQualLabel.className = 'anime-tag-section-label'; sQualLabel.textContent = 'qualité'; sQualSection.appendChild(sQualLabel);
+    var sQualWrap = document.createElement('div'); sQualWrap.className = 'anime-tag-section-tags';
+    for (var sQualTag in sQualCounts) {
+      if (sQualCounts[sQualTag] > 0) {
+        var sQualBtn = document.createElement('button');
+        sQualBtn.className = 'anime-tag-btn quality-tag' + (ecransCollectionFilter === sQualTag ? ' active' : '');
+        sQualBtn.textContent = sQualTag + ' (' + sQualCounts[sQualTag] + ')';
+        sQualBtn.addEventListener('click', function(t) { return function() { ecransCollectionFilter = ecransCollectionFilter === t ? null : t; generateSeries(filterData(series, ecransSearchQuery), !!ecransSearchQuery); }; }(sQualTag));
+        sQualWrap.appendChild(sQualBtn);
+      }
+    }
+    if (sQualWrap.children.length > 0) { sQualSection.appendChild(sQualWrap); sF.appendChild(sQualSection); }
+  }
+
   var sBar = document.getElementById('ecrans-project-bar');
   if (sBar) {
     var sRewatchCount = 0; var sTotal = 0;
@@ -1072,7 +968,17 @@ function generateSeries(data = series, isSearch = false) {
     } else { sBar.innerHTML = ''; }
   }
 
-  // --- VUE GLOBALE SÉRIES ---
+  if (ecransCollectionFilter) {
+    var filteredSeriesData = {};
+    for (var showKey in data) {
+      var validSeasons = data[showKey].filter(function(season) {
+        return season.tags && season.tags.indexOf(ecransCollectionFilter) !== -1;
+      });
+      if (validSeasons.length > 0) filteredSeriesData[showKey] = validSeasons;
+    }
+    data = filteredSeriesData;
+  }
+
   if (ecransSortMode !== 'réalisateur') {
     var allSeries = [];
     for (var show in data) {
@@ -1104,32 +1010,22 @@ function generateSeries(data = series, isSearch = false) {
   }
 
   container.innerHTML = '';
-
-  if (sortDataKeys(data).length === 0) {
-    container.innerHTML = '<p class="empty-state">aucun résultat</p>';
-    return;
-  }
+  if (sortDataKeys(data).length === 0) { container.innerHTML = '<p class="empty-state">aucun résultat</p>'; return; }
 
   sortDataKeys(data).forEach(function(show) {
     container.insertAdjacentHTML('beforeend', getCreatorHeader(show, data[show].length));
-
     const notesValides = data[show].map(s => s.note).filter(n => n !== null);
     if (notesValides.length > 1) {
       const moyenne = (notesValides.reduce((acc, note) => acc + note, 0) / notesValides.length).toFixed(1);
       const avgDiv = document.createElement('div');
-      avgDiv.className = 'show-average';
-      avgDiv.textContent = "moyenne : " + moyenne;
+      avgDiv.className = 'show-average'; avgDiv.textContent = "moyenne : " + moyenne;
       container.appendChild(avgDiv);
     }
-
-    const div = document.createElement('div');
-    div.className = 'books';
-        sortEntriesByNote(data[show]).forEach(function(season) {
+    const div = document.createElement('div'); div.className = 'books';
+    sortEntriesByNote(data[show]).forEach(function(season) {
       const card = document.createElement('a');
       card.href = season.link; card.target = "_blank"; card.className = 'book-card';
-      
       const starsHtml = season.note !== null ? `<div class="book-meta">${getStars(season.note)}</div>` : '';
-      
       if (season.tags && season.tags.indexOf('coup de coeur') !== -1) card.className += 'coup-de-coeur-card';
       var reviewHtml = season.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(season.review) + '</span>' : '';
       card.innerHTML = `<img loading="lazy" src="${season.cover}" alt="${season.title}">${getCollectionBadges(season)}<div class="book-title">${season.title}</div>${starsHtml}${getOldNote(season)}${reviewHtml}`;
