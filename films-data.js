@@ -116,7 +116,7 @@ const filmsData = {
     { title: "Hors-jeu", note: 3.5, cover: "films/horsjeu.webp", link: "https://www.senscritique.com/film/hors_jeu/471721", tags: ["court métrage","archived"] },
     { title: "Le Ravissement de Frank N. Stein", note: 3.5, cover: "films/ravissementfrank.jpg", link: "https://www.senscritique.com/film/le_ravissement_de_frank_n_stein/441831", tags: ["court métrage","archived"] },
     { title: "78 Tours", note: 3, cover: "films/78tours.jpg", link: "https://www.senscritique.com/film/78_tours/422398", tags: ["court métrage","archived"] },
-    { title: "Nakounine", note: null, cover: "films/nakounine.jpg", link: "https://www.senscritique.com/film/nakounine/436751", tags: ["court métrage","archived","documentaire"] },
+    { title: "Nakounine", note: null, cover: "films/nakounine.jpg", link: "https://www.senscritique.com/film/nakounine/436751", tags: ["documentaire","court métrage","archived"] },
     { title: "Le sujet du tableau", note: 2.5, cover: "films/lesujetdutableau.jpg", link: "https://www.senscritique.com/film/le_sujet_du_tableau/484121", tags: ["court métrage","archived"] },
     { title: "La Course à l'abîme", note: 3.5, cover: "films/lacoursealabime.jpg", link: "https://www.senscritique.com/film/la_course_a_l_abime/367926", tags: ["court métrage","archived"] },
     { title: "La jeune fille et les nuages", note: null, cover: "films/lajeunefille.webp", link: "https://www.senscritique.com/film/la_jeune_fille_et_les_nuages/487606", tags: ["court métrage","archived"] },
@@ -359,7 +359,7 @@ const filmsData = {
     { title: "La Brûlure de mille soleils", note: 3, cover: "films/millesoleils.png", link: "https://www.senscritique.com/film/la_brulure_de_mille_soleils/436654", tags: ["court métrage"] },
   ],
   "René Vautier": [
-    { title: "Déjà le sang de mai ensemençait novembre", note: 5, cover: "films/mainovembre.jpg", link: "https://www.senscritique.com/film/deja_le_sang_de_mai_ensemencait_novembre/22837356", tags: ["coup de coeur","documentaire"] },
+    { title: "Déjà le sang de mai ensemençait novembre", note: 5, cover: "films/mainovembre.jpg", link: "https://www.senscritique.com/film/deja_le_sang_de_mai_ensemencait_novembre/22837356", tags: ["documentaire","coup de coeur"] },
   ],
   "Ingmar Bergman": [
     { title: "Le Septième Sceau", note: 3, cover: "films/septiemesceau.webp", link: "https://www.senscritique.com/film/le_septieme_sceau/478206" },
@@ -372,6 +372,6 @@ const filmsData = {
     { title: "Le Père Noël a les yeux bleus", note: null, cover: "films/perenoel.jpg", link: "https://www.senscritique.com/film/le_pere_noel_a_les_yeux_bleus/394316", tags: ["archived"] },
   ],
   "Nanako Hirose": [
-    { title: "book-paper-scissors", note: 4, cover: "films/bps.jpg", link: "https://www.senscritique.com/film/book_paper_scissors/41323664", tags: ["archived","documentaire"] },
+    { title: "book-paper-scissors", note: 4, cover: "films/bps.jpg", link: "https://www.senscritique.com/film/book_paper_scissors/41323664", tags: ["documentaire","archived"] },
   ],
 };
