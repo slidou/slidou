@@ -1402,6 +1402,9 @@ function getFilmFormatBadge(movie) {
   if (movie.tags && movie.tags.indexOf('court métrage') !== -1) {
     return '<span class="film-format-badge">court métrage</span>';
   }
+  if (movie.tags && movie.tags.indexOf('documentaire') !== -1) {
+    return '<span class="film-format-badge">documentaire</span>';
+  }
   return '';
 }
 
