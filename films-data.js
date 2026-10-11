@@ -116,7 +116,7 @@ const filmsData = {
     { title: "Hors-jeu", note: 3.5, cover: "films/horsjeu.webp", link: "https://www.senscritique.com/film/hors_jeu/471721", tags: ["court métrage","archived"] },
     { title: "Le Ravissement de Frank N. Stein", note: 3.5, cover: "films/ravissementfrank.jpg", link: "https://www.senscritique.com/film/le_ravissement_de_frank_n_stein/441831", tags: ["court métrage","archived"] },
     { title: "78 Tours", note: 3, cover: "films/78tours.jpg", link: "https://www.senscritique.com/film/78_tours/422398", tags: ["court métrage","archived"] },
-    { title: "Nakounine", note: null, cover: "films/nakounine.jpg", link: "https://www.senscritique.com/film/nakounine/436751", tags: ["court métrage","archived"] },
+    { title: "Nakounine", note: null, cover: "films/nakounine.jpg", link: "https://www.senscritique.com/film/nakounine/436751", tags: ["court métrage","archived","documentaire"] },
     { title: "Le sujet du tableau", note: 2.5, cover: "films/lesujetdutableau.jpg", link: "https://www.senscritique.com/film/le_sujet_du_tableau/484121", tags: ["court métrage","archived"] },
     { title: "La Course à l'abîme", note: 3.5, cover: "films/lacoursealabime.jpg", link: "https://www.senscritique.com/film/la_course_a_l_abime/367926", tags: ["court métrage","archived"] },
     { title: "La jeune fille et les nuages", note: null, cover: "films/lajeunefille.webp", link: "https://www.senscritique.com/film/la_jeune_fille_et_les_nuages/487606", tags: ["court métrage","archived"] },
@@ -299,13 +299,13 @@ const filmsData = {
     { title: "Rubber Johnny", note: null, cover: "films/rubberjohnny.jpg", link: "https://www.senscritique.com/film/rubber_johnny/491614", tags: ["court métrage"] },
   ],
   "Harun Farocki": [
-    { title: "Feu inextinguible", note: null, cover: "films/feuinextinguible.jpg", link: "https://www.senscritique.com/film/feu_inextinguible/485078", tags: ["court métrage"] },
+    { title: "Feu inextinguible", note: null, cover: "films/feuinextinguible.jpg", link: "https://www.senscritique.com/film/feu_inextinguible/485078", tags: ["court métrage","documentaire"] },
   ],
   "Clément Freze": [
-    { title: "Mindliar - Le Dernier Mensonge", note: null, cover: "films/mindliar.jpg", link: "https://www.senscritique.com/film/mindliar_le_dernier_mensonge/103459923" },
+    { title: "Mindliar - Le Dernier Mensonge", note: null, cover: "films/mindliar.jpg", link: "https://www.senscritique.com/film/mindliar_le_dernier_mensonge/103459923", tags: ["documentaire"] },
   ],
   "Simon Shack": [
-    { title: "September Clues", note: null, cover: "films/septemberclues.jpg", link: "https://www.senscritique.com/film/september_clues/39789827" },
+    { title: "September Clues", note: null, cover: "films/septemberclues.jpg", link: "https://www.senscritique.com/film/september_clues/39789827", tags: ["documentaire"] },
   ],
   "Jérémy Clapin": [
     { title: "J'ai perdu mon corps", note: null, cover: "films/jaiperdumoncorps.png", link: "https://www.senscritique.com/film/j_ai_perdu_mon_corps/39006031" },
@@ -316,7 +316,7 @@ const filmsData = {
     { title: "Violent Cop", note: 4, cover: "films/violentcop.webp", link: "https://www.senscritique.com/film/violent_cop/477454", tags: ["coup de coeur"] },
   ],
   "David Dufresne": [
-    { title: "Un pays qui se tient sage", note: null, cover: "films/unpayssage.jpg", link: "https://www.senscritique.com/film/un_pays_qui_se_tient_sage/42372324" },
+    { title: "Un pays qui se tient sage", note: null, cover: "films/unpayssage.jpg", link: "https://www.senscritique.com/film/un_pays_qui_se_tient_sage/42372324", tags: ["documentaire"] },
   ],
   "Takahide Hori": [
     { title: "Junk Head", note: 4, cover: "films/junkhead.webp", link: "https://www.senscritique.com/film/junk_head/29568884", tags: ["coup de coeur"] },
@@ -344,7 +344,7 @@ const filmsData = {
     { title: "Border Land", note: null, cover: "films/borderland.jpg", link: "https://www.senscritique.com/film/border_land/102493311", tags: ["archived","court métrage"] },
   ],
   "Arab Loutif": [
-    { title: "Jamila's Mirror", note: 5, cover: "films/jamilasmirror.png", link: "https://www.senscritique.com/film/jamila_s_mirror/71632791" },
+    { title: "Jamila's Mirror", note: 5, cover: "films/jamilasmirror.png", link: "https://www.senscritique.com/film/jamila_s_mirror/71632791", tags: ["documentaire"] },
   ],
   "Andreï Khrjanovski": [
     { title: "Il était une fois Koziavine", note: 4, cover: "films/koziavine.jpg", link: "https://www.senscritique.com/film/il_etait_une_fois_koziavine/468399", tags: ["coup de coeur","court métrage"] },
@@ -359,7 +359,7 @@ const filmsData = {
     { title: "La Brûlure de mille soleils", note: 3, cover: "films/millesoleils.png", link: "https://www.senscritique.com/film/la_brulure_de_mille_soleils/436654", tags: ["court métrage"] },
   ],
   "René Vautier": [
-    { title: "Déjà le sang de mai ensemençait novembre", note: 5, cover: "films/mainovembre.jpg", link: "https://www.senscritique.com/film/deja_le_sang_de_mai_ensemencait_novembre/22837356", tags: ["coup de coeur"] },
+    { title: "Déjà le sang de mai ensemençait novembre", note: 5, cover: "films/mainovembre.jpg", link: "https://www.senscritique.com/film/deja_le_sang_de_mai_ensemencait_novembre/22837356", tags: ["coup de coeur","documentaire"] },
   ],
   "Ingmar Bergman": [
     { title: "Le Septième Sceau", note: 3, cover: "films/septiemesceau.webp", link: "https://www.senscritique.com/film/le_septieme_sceau/478206" },
@@ -372,6 +372,6 @@ const filmsData = {
     { title: "Le Père Noël a les yeux bleus", note: null, cover: "films/perenoel.jpg", link: "https://www.senscritique.com/film/le_pere_noel_a_les_yeux_bleus/394316", tags: ["archived"] },
   ],
   "Nanako Hirose": [
-    { title: "book-paper-scissors", note: 4, cover: "films/bps.jpg", link: "https://www.senscritique.com/film/book_paper_scissors/41323664", tags: ["archived"] },
+    { title: "book-paper-scissors", note: 4, cover: "films/bps.jpg", link: "https://www.senscritique.com/film/book_paper_scissors/41323664", tags: ["archived","documentaire"] },
   ],
 };

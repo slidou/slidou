@@ -7877,5 +7877,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 12867, title: "Tsuki no Sango", note: null, tags: ["short","commercial","archived"] },
   { id: 34264, title: "Ninja Bear the Animation★ PV", note: null, tags: ["short","commercial","archived"] },
   { id: 1223, title: "Ame to Shoujo to Watashi no Tegami", note: null, tags: ["short","archived"] },
+  { id: 65097, title: "AIYOU", note: 3.5, tags: ["music","+","archived"] },
+  { id: 65157, title: "Yumegokochi", note: 3, tags: ["music","+","archived"] },
+  { id: 65159, title: "Orbit (2026)", note: 4, tags: ["music","archived"] },
+  { id: 56367, title: "009-1 Pilot Movie", note: null, tags: ["short","+"] },
+  { id: 48577, title: "Home!", note: 3.5, tags: ["short","archived"] },
+  { id: 61788, title: "Netorareta Bakunyuu Tsuma-tachi", note: 3.5, tags: ["normal episode","hentai"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

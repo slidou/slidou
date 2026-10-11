@@ -736,6 +736,27 @@ function generateFilms(data = films, isSearch = false) {
       fC.appendChild(fmtSection);
     }
 
+    // SECTION GENRE FILMS
+    var fGenreCounts = { 'documentaire': 0 };
+    for (var dG in films) {
+      films[dG].forEach(function(mG) {
+        if (mG.tags) mG.tags.forEach(function(t) { if (fGenreCounts[t] !== undefined) fGenreCounts[t]++; });
+      });
+    }
+    var fGenreSection = document.createElement('div'); fGenreSection.className = 'anime-tag-section';
+    var fGenreLabel = document.createElement('div'); fGenreLabel.className = 'anime-tag-section-label'; fGenreLabel.textContent = 'genre'; fGenreSection.appendChild(fGenreLabel);
+    var fGenreWrap = document.createElement('div'); fGenreWrap.className = 'anime-tag-section-tags';
+    for (var fGT in fGenreCounts) {
+      if (fGenreCounts[fGT] > 0) {
+        var fGBTn = document.createElement('button');
+        fGBTn.className = 'anime-tag-btn' + (ecransCollectionFilter === fGT ? ' active' : '');
+        fGBTn.textContent = fGT + ' (' + fGenreCounts[fGT] + ')';
+        fGBTn.addEventListener('click', function(t) { return function() { ecransCollectionFilter = ecransCollectionFilter === t ? null : t; filmsFormatFilter = null; generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery); }; }(fGT));
+        fGenreWrap.appendChild(fGBTn);
+      }
+    }
+    if (fGenreWrap.children.length > 0) { fGenreSection.appendChild(fGenreWrap); fC.appendChild(fGenreSection); }
+
     // SECTION COLLECTION FILMS
     var fCollCounts = { 're-watched': 0, 'archived': 0 };
     for (var d in films) {
