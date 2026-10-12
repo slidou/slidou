@@ -1399,11 +1399,12 @@ var card = document.createElement('a');
 
 // ── Helper pour le badge de format film ──
 function getFilmFormatBadge(movie) {
-  if (movie.tags && movie.tags.indexOf('court métrage') !== -1) {
-    return '<span class="film-format-badge">court métrage</span>';
-  }
+  // On vérifie "documentaire" en premier pour qu'il prenne le dessus
   if (movie.tags && movie.tags.indexOf('documentaire') !== -1) {
     return '<span class="film-format-badge">documentaire</span>';
+  }
+  if (movie.tags && movie.tags.indexOf('court métrage') !== -1) {
+    return '<span class="film-format-badge">court métrage</span>';
   }
   return '';
 }

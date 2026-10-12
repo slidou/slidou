@@ -905,4 +905,5 @@ const journalData = [
 { d: "2026-10-11", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "tainted eden débloqué", status: "en cours" },
 { d: "2026-10-11", t: "anime", title: "009-1 Pilot Movie", img: "anime/009.jpg", note: "short" },
 { d: "2026-10-11", t: "anime", title: "Home!", img: "anime/home.jpg", note: "short" },
+{ d: "2026-10-12", t: "anime", title: "Marriagetoxin", img: "anime/marriagetoxin.jpg", note: "normal episode, 7-8/12", status: "en cours" },
 ];
