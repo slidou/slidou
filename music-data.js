@@ -215,6 +215,7 @@ const musicData = {
   ],
   "Death Grips": [
     { title: "The Money Store", note: 2, cover: "music/themoneystore.webp", link: "https://rateyourmusic.com/release/album/death-grips/the-money-store/" },
+    { title: "Bottomless Pit", note: 2.5, cover: "music/bottomlesspit.webp", link: "https://rateyourmusic.com/release/album/death-grips/bottomless-pit/" },
   ],
   "By Storm": [
     { title: "My Ghosts Go Ghost", note: 1, cover: "music/ghosts.webp", link: "https://rateyourmusic.com/release/album/by-storm/my-ghosts-go-ghost/" },
