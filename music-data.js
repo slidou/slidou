@@ -71,6 +71,7 @@ const musicData = {
     { title: "Iceman", note: 1, cover: "music/iceman.webp", link: "https://rateyourmusic.com/release/album/drake/iceman/" },
     { title: "Maid of Honour", note: 1, cover: "music/maidofhonour.webp", link: "https://rateyourmusic.com/release/album/drake/maid-of-honour/" },
     { title: "Habibti", note: 1, cover: "music/habibti.webp", link: "https://rateyourmusic.com/release/album/drake/habibti/" },
+    { title: "Certified Lover Boy", note: 3.5, cover: "music/clb.webp", link: "https://rateyourmusic.com/release/album/drake/certified-lover-boy/" },
   ],
   "Hiroshi Suzuki": [
     { title: "キャット", note: 3, cover: "music/キャット.webp", link: "https://rateyourmusic.com/release/album/%E9%88%B4%E6%9C%A8%E5%BC%98/%E3%82%AD%E3%83%A3%E3%83%83%E3%83%88/" },
@@ -232,5 +233,8 @@ const musicData = {
   ],
   "Huntrill": [
     { title: "Nouvelle Trap 2", note: 3.5, cover: "music/nouvelletrap2.webp", link: "https://rateyourmusic.com/release/album/huntrill/nouvelle-trap-2/", tags: ["réécoute"] },
+  ],
+  "Laufey": [
+    { title: "Bewitched", note: 3.5, cover: "music/bewitched.webp", link: "https://rateyourmusic.com/release/album/laufey/bewitched/" },
   ]
 };
