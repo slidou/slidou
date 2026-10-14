@@ -117,6 +117,7 @@ const musicData = {
   ],
   "Playboi Carti": [
     { title: "Whole Lotta Red", note: 4, cover: "music/wholelottared.webp", link: "https://rateyourmusic.com/release/album/playboi-carti/whole-lotta-red/", tags: ["réécoute","bought"] },
+    { title: "Music", note: 3, cover: "music/music.webp", link: "https://rateyourmusic.com/release/album/playboi-carti/music/", tags: ["réécoute"] },
   ],
   "Future": [
     { title: "The Real Me", note: 2, cover: "music/therealme.webp", link: "https://rateyourmusic.com/release/album/future/the-real-me/" },
@@ -236,5 +237,8 @@ const musicData = {
   ],
   "Laufey": [
     { title: "Bewitched", note: 3.5, cover: "music/bewitched.webp", link: "https://rateyourmusic.com/release/album/laufey/bewitched/" },
+  ],
+  "Ariana Grande": [
+    { title: "Positions", note: 3.5, cover: "music/positions.webp", link: "https://rateyourmusic.com/release/album/ariana-grande/positions/" },
   ]
 };

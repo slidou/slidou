@@ -7895,5 +7895,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 64126, title: "Summertime Girl with Awesome Robot", note: 2.5, tags: ["short","archived"] },
   { id: 59550, title: "Wonderer", note: 1.5, tags: ["short","archived"] },
   { id: 60809, title: "Yoru Neko", note: 3.5, tags: ["short","archived"] },
+  { id: 62601, title: "Marriagetoxin", note: 3.5, tags: ["normal episode","archived"] },
+  { id: 24047, title: "Kaseki Dorobou to Kyouryuuseki", note: null, tags: ["short","archived"] },
+  { id: 24045, title: "Monster ni Natta Domerica", note: null, tags: ["short","archived"] },
+  { id: 1984, title: "Memory", note: 2.5, tags: ["short","archived"] },
+  { id: 31984, title: "Lupin Shanshei Pilot", note: null, tags: ["short","+","archived"] },
+  { id: 65185, title: "Pon-derful!!!", note: 2.5, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
