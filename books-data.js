@@ -489,5 +489,8 @@ Et je dois bien l’avouer, ça fait très bizarre de lire un roman aussi incisi
   ],
   "Miyamoto Musashi": [
     { title: "Traité des cinq roues", note: 2, cover: "covers/traitédescinqroues.jpg", link: "https://www.goodreads.com/book/show/899893.Trait_des_cinq_roues?ac=1&from_search=true&qid=MLZbzAMXRd&rank=1" }
+  ],
+  "Ruth Benedict": [
+    { title: "Le Chrysanthème et le Sabre", note: 3, cover: "covers/chrysanthème.jpg", link: "https://www.goodreads.com/book/show/2289554.Le_Chrysanth_me_et_le_Sabre?ac=1&from_search=true&qid=u3mjAgtsp0&rank=1" }
   ]
 };

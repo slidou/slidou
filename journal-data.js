@@ -948,4 +948,12 @@ const journalData = [
 { d: "2026-10-17", t: "anime", title: "Koneko no Haitatsuin Uunyan", img: "anime/haitatsuin.jpg", note: "short" },
 { d: "2026-10-17", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
 { d: "2026-10-18", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-10-18", t: "anime", title: "Kawaru Machi, Kawareru Machi, Ishinomaki feat. Jun", img: "anime/kawareru.jpg", note: "short" },
+{ d: "2026-10-18", t: "anime", title: "Hei He", img: "anime/heihe.jpg", note: "short film" },
+{ d: "2026-10-18", t: "anime", title: "Kkeutnal-ui Bam", img: "anime/kkeutnal.jpg", note: "short" },
+{ d: "2026-10-18", t: "anime", title: "Puripuri Princess", img: "anime/puripuriprincess.jpg", note: "music" },
+{ d: "2026-10-18", t: "anime", title: "For Rose Marie", img: "anime/forrosemarie.jpg", note: "music" },
+{ d: "2026-10-18", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "fiche complète pour magdalene !", status: "en cours" },
+{ d: "2026-10-18", t: "livre", title: "Le Chrysanthème et le Sabre", img: "covers/chrysanthème.jpg", note: "poursuite de la lecture", status: "en cours" },
+{ d: "2026-10-19", t: "livre", title: "Le Chrysanthème et le Sabre", img: "covers/chrysanthème.jpg", note: "fini" },
 ];

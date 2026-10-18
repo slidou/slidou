@@ -7910,5 +7910,10 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 33914, title: "Nineko Gelée", note: null, tags: ["short","archived"] },
   { id: 54330, title: "Koneko no Haitatsuin Uunyan", note: 3, tags: ["short","archived"] },
   { id: 62689, title: "Oshikake! Bakunyuu Gal Harem Seikatsu", note: 4, tags: ["normal episode","hentai"] },
+  { id: 51008, title: "Kawaru Machi, Kawareru Machi, Ishinomaki feat. Jun", note: null, tags: ["short","archived"] },
+  { id: 50452, title: "Hei He", note: 3.5, tags: ["short film","gem","archived"] },
+  { id: 52996, title: "Kkeutnal-ui Bam", note: 2.5, tags: ["short","archived"] },
+  { id: 65158, title: "Puripuri Princess", note: 3, tags: ["music","archived"] },
+  { id: 65174, title: "For Rose Marie", note: 2.5, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
