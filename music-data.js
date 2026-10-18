@@ -101,6 +101,8 @@ const musicData = {
     { title: "J.O.$", note: 4, cover: "music/J.O.$.webp", link: "https://rateyourmusic.com/release/album/josman/j_o/", tags: ["réécoute"] },
     { title: "M.A.N (Black Roses & Lost Feelings)", note: 3.5, cover: "music/M.A.N.webp", link: "https://rateyourmusic.com/release/album/josman/m_a_n-black-roses-and-lost-feelings/", tags: ["réécoute","bought"] },
     { title: "Matrix", note: 3.5, cover: "music/matrix.webp", link: "https://rateyourmusic.com/release/mixtape/josman/matrix/", format: "mixtape", tags: ["réécoute"] },
+    { title: "Split", note: 3.5, cover: "music/split.webp", link: "https://rateyourmusic.com/release/album/josman/split/", tags: ["réécoute"] },
+    { title: "J.000.$", note: 3.5, cover: "music/j000.webp", link: "https://rateyourmusic.com/release/mixtape/josman/j_000/", format: "mixtape", tags: ["réécoute"] },
   ],
   "Krisy [completed]": [
     { title: "Edward Risky", note: 3.5, cover: "music/edwardrisky.jpg", link: "https://rateyourmusic.com/release/album/krisy/edward-risky/" },
@@ -240,5 +242,8 @@ const musicData = {
   ],
   "Ariana Grande": [
     { title: "Positions", note: 3.5, cover: "music/positions.webp", link: "https://rateyourmusic.com/release/album/ariana-grande/positions/" },
+  ],
+  "Denzel Curry": [
+    { title: "Melt My Eyez See Your Future", note: 3.5, cover: "music/eyez.webp", link: "https://rateyourmusic.com/release/album/denzel-curry/melt-my-eyez-see-your-future/" },
   ]
 };
