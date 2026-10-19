@@ -180,6 +180,7 @@ const filmsData = {
   ],
   "Wim Wenders": [
     { title: "Perfect Days", note: 3.5, cover: "films/perfectdays.png", link: "https://www.senscritique.com/film/perfect_days/55674665" },
+    { title: "Chambre 666", note: 2.5, cover: "films/chambre666.png", link: "https://www.senscritique.com/film/chambre_666/379708", tags: ["archived"] },
   ],
   "Sogo Ishii": [
     { title: "Mirrored Mind", note: 3.5, cover: "films/mirroredmind.jpg", link: "https://www.senscritique.com/film/mirrored_mind/38280622" },
