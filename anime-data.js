@@ -7925,5 +7925,7 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 57286, title: "Bai Yao Pu Special: Meng Hui Youhun", note: null, tags: ["short","+","archived"] },
   { id: 57678, title: "Chaotic Order", note: null, tags: ["short","archived"] },
   { id: 62238, title: "Dungeons & Television", note: 2.5, tags: ["short","archived"] },
+  { id: 57415, title: "The Happy Dorm", note: null, tags: ["short","commercial","archived"] },
+  { id: 57398, title: "Azur Lane 5th Anniversary: The Best Gift From Enterprise", note: null, tags: ["short","commercial","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

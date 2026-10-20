@@ -967,4 +967,8 @@ const journalData = [
 { d: "2026-10-20", t: "anime", title: "Bai Yao Pu Special: Meng Hui Youhun", img: "anime/youhun.jpg", note: "short" },
 { d: "2026-10-20", t: "anime", title: "Chaotic Order", img: "anime/chaoticorder.jpg", note: "short" },
 { d: "2026-10-20", t: "anime", title: "Dungeons & Television", img: "anime/dungeonstele.jpg", note: "short" },
+{ d: "2026-10-20", t: "livre", title: "Ma dark romance avec wakamatsu", img: "covers/mdw.jpg", note: "lu en une fois, c'était vraiment chouette" },
+{ d: "2026-10-20", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-10-20", t: "anime", title: "The Happy Dorm", img: "anime/thehappydorm.jpg", note: "commercial" },
+{ d: "2026-10-20", t: "anime", title: "Azur Lane 5th Anniversary: The Best Gift From Enterprise", img: "anime/enterprise.jpg", note: "commercial" },
 ];

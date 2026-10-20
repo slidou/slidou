@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Slidou</title>
+  <title>Slidou — l'antre culturelle</title>
+  <meta name="description" content="Slidou — l'antre culturelle : livres, films, séries, jeux, musique, anime et manga consommés, notés et chroniqués.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="pfp.jpg" type="image/jpeg">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#e9e4d8">
 <meta property="og:title" content="Slidou — l'antre culturelle">
 <meta property="og:description" content="Perdre son temps, c'est la plus merveilleuse façon de le gagner. - Bernard Montangero">
 <meta property="og:type" content="website">
@@ -56,9 +62,9 @@
     <div class="page active" id="page-home">
       <div class="home-wrapper">
         <div class="home-dashboard" id="home-dashboard"></div>
-        
+
       <button id="toggle-recap-btn" class="home-recap-toggle">bilan 2026</button>
-      
+
       <!-- CONTENEUR DU RECAP (Caché par défaut) -->
       <div class="home-recap" id="home-recap">
         <div class="home-recap-nav">
@@ -66,13 +72,13 @@
           <div class="home-month-title" id="recap-year-title">2026</div>
           <button class="calendar-nav-btn" id="recap-next-year">›</button>
         </div>
-        
+
         <div class="recap-main">
           <div class="recap-main-count" id="recap-main-count">0</div>
           <div class="recap-main-label">œuvres uniques</div>
           <div class="recap-main-breakdown" id="recap-main-breakdown"></div>
         </div>
-        
+
         <div class="recap-secondary">
           <div class="recap-secondary-header">+ <span id="recap-secondary-count">0</span> activités secondaires</div>
           <div class="recap-secondary-breakdown" id="recap-secondary-breakdown"></div>
@@ -90,7 +96,7 @@
         </div>
         <div class="home-calendar-grid" id="home-calendar-grid"></div>
       </div>
-      
+
       <div class="calendar-popup" id="calendar-popup">
         <div class="calendar-popup-content" id="calendar-popup-content"></div>
       </div>
@@ -214,7 +220,7 @@
 <!-- À PROPOS -->
 <div class="page" id="page-apropos">
   <div class="apropos-layout">
-    
+
     <!-- 1. LA GRANDE BANNIÈRE -->
     <img src="image.jpg" alt="Bannière" class="apropos-bio-img">
 
@@ -291,8 +297,6 @@
     <div class="review-popup-text" id="review-popup-text"></div>
   </div>
 </div>
-
-<div class="global-search-results" id="global-search-results"></div>
 
 <script src="player-data.js"></script>
 <script src="anime-data.js"></script>

@@ -104,10 +104,8 @@ body {
 .apropos-col { flex: 1; }
 .photo-col { text-align: center; }
 .apropos-pfp { width: 100%; max-width: 180px; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 2px; margin-bottom: 10px; }
-.pfp-credit { font-family: 'IM Fell English', serif; font-size: 12px; font-style: italic; color: var(--secondary-text); }
 .bio-col { text-align: center; border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color); padding: 0 30px; }
 .apropos-username { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 500; margin-bottom: 5px; text-transform: lowercase; color: var(--author-text); }
-.carrd-divider { color: var(--secondary-text); letter-spacing: 2px; margin: 20px 0; font-size: 14px; }
 .carrd-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 500; margin-bottom: 15px; color: var(--text-color); }
 .carrd-list { list-style: none; text-align: left; font-family: 'IM Fell English', serif; font-size: 15px; line-height: 1.8; padding: 0; }
 .carrd-list li { margin-bottom: 5px; }
@@ -640,15 +638,6 @@ body {
   line-height: 1.4; 
   color: var(--text-color);
 }
-.dash-note { 
-  display: block; 
-  font-family: 'IM Fell English', serif; 
-  font-size: 12px; 
-  color: var(--secondary-text); 
-  font-style: italic; 
-  margin-top: 4px; 
-}
-
 /* ── FOOTER ── */
 .site-footer {
   text-align: center;
@@ -732,6 +721,11 @@ body.dark-mode .anime-placeholder::after {
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color: transparent; }
+
+/* Image introuvable (404 Jikan) : on arrête le spinner et on rend l'icône visible */
+.anime-placeholder.img-failed::after { display: none; }
+.anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 60%); }
+body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%); }
 
 .anime-badges {
   position: absolute; top: 6px; right: 6px;
@@ -1352,30 +1346,6 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
   transition: width 0.1s linear;
 }
 
-/* ── FILTRE REVIEWS ── */
-.review-filter-btn {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 11px;
-  color: var(--secondary-text);
-  background: transparent;
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  padding: 5px 13px;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-transform: lowercase;
-  margin-bottom: 20px;
-}
-.review-filter-btn:hover {
-  border-color: var(--link-color);
-  color: var(--link-color);
-}
-.review-filter-btn.active {
-  background: var(--link-color);
-  color: #fff;
-  border-color: var(--link-color);
-}
-
 /* ── ANIMATIONS PERRUCHES ── */
 /* Il faut que la cage soit "relative" pour que les animations restent à l'intérieur */
 .tamagotchi-cage { position: relative; overflow: hidden; }
@@ -1706,32 +1676,8 @@ body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color
 .calendar-status-dot.ongoing { background: var(--link-color); }
 .calendar-status-dot.dropped { background: #e57373; }
 
-/* ── BADGE RÉÉCOUTE MUSIQUE ── */
+/* ── POSITIONNEMENT DES BADGES SUR LES CARTES ── */
 .book-card { position: relative; }
-.music-badge {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  background: rgba(0,0,0,0.65);
-  border-radius: 50%;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  backdrop-filter: blur(4px);
-}
-.music-badge svg {
-  width: 12px;
-  height: 12px;
-}
-.music-badge svg {
-  width: 12px;
-  height: 12px;
-}
 
 /* ── RÉDUIRE LES CRÉATEURS ── */
 h2.creator-toggle {
@@ -1848,12 +1794,15 @@ h2.collapsed-creator .creator-arrow {
   color: var(--secondary-text);
 }
 
-  /* Panneau de recherche sur mobile */
+/* Panneau de recherche sur mobile.
+   (Cette règle était sortie de son @media et écrasait la largeur desktop de 400px → 250px) */
+@media(max-width:768px) {
   .global-search-results {
     width: 250px;
     max-width: calc(100vw - 30px);
     top: 40px;
   }
+}
 
   /* ── ÉTATS VIDES ── */
 .empty-state {
