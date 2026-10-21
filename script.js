@@ -1806,130 +1806,274 @@ document.getElementById('recap-next-year').addEventListener('click', () => {
 });
 
 // ── RECAP ANNUEL (Calcul des données) ──
+const RECAP_CATS = ['livre', 'film', 'série', 'anime', 'manga', 'jeu', 'musique'];
+const RECAP_PLURAL = { livre: 'livres', film: 'films', série: 'séries', anime: 'animes', manga: 'mangas', jeu: 'jeux', musique: 'projets' };
+// Jeux « sans fin » : jouables à l'infini, jamais comptés « en cours »
+const ENDLESS_GAMES = ['Minecraft', 'Valorant', 'Counter-Strike 2'];
+
+// Une entrée anime est « principale » si… (règle auteur, étendue aux films d'animation)
+function recapIsMainAnime(note) {
+  if (!note) return true;
+  const n = note.toLowerCase();
+  if (n.includes('épisode') || n.includes('episode')) return true;
+  if (/\d+\/\d+/.test(n)) return true;
+  if (n.includes('short film')) return true;
+  if (n.includes('hentai')) return true;
+  if (n.includes('movie')) return true;
+  return false;
+}
+
+// Unités d'une entrée chiffrée : « 3/12 » → 3 ; « 2-3/13 » → 2 ; « 2-3-4/24 » → 3 ; « 1/? » → 1
+function recapUnits(note) {
+  const m = (note || '').match(/(\d+(?:-\d+)*)\/(\d+|\?)/);
+  if (!m) return 0;
+  const parts = m[1].split('-').map(Number);
+  if (m[2] === '?') return parts.length;
+  return Math.max(1, parts[parts.length - 1] - parts[0] + 1);
+}
+
 function renderRecap() {
   const yearStr = recapYear.toString();
-  const yearJournal = journal.filter(j => j.d.startsWith(yearStr));
-  
-  if (yearJournal.length === 0) {
-    document.getElementById('recap-main-count').textContent = '0';
-    document.getElementById('recap-main-breakdown').textContent = 'aucune activité cette année';
-    document.getElementById('recap-secondary-count').textContent = '0';
-    document.getElementById('recap-secondary-breakdown').textContent = '';
-    document.getElementById('recap-visual').innerHTML = '';
+  const yearEntries = journal.filter(e => (e.d || '').startsWith(yearStr))
+    .slice()
+    .sort((a, b) => (a.d < b.d ? -1 : a.d > b.d ? 1 : 0));
+
+  const elEmpty = document.getElementById('recap-empty');
+  const elContent = document.getElementById('recap-content');
+
+  if (yearEntries.length === 0) {
+    elEmpty.style.display = '';
+    elContent.style.display = 'none';
     return;
   }
+  elEmpty.style.display = 'none';
+  elContent.style.display = '';
 
-  // On utilise des Map pour stocker le titre ET l'image, sans doublons
-  const mainItems = {
-    livre: new Map(),
-    film: new Map(),
-    série: new Map(),
-    anime: new Map(),
-    manga: new Map(),
-    jeu: new Map(),
-    musique: new Map()
-  };
-  
-  const secondaryCounts = { anime: { short: 0, music: 0, commercial: 0, 'short film': 0 } };
-
-  function isMainAnime(note) {
-    if (!note) return true;
-    const n = note.toLowerCase();
-    if (n.includes('épisode') || n.includes('episode')) return true;
-    if (/\d+\/\d+/.test(n)) return true; 
-    if (n.includes('short film')) return true; // Ajouté
-    if (n.includes('hentai')) return true;     // Ajouté
-    return false;
-  }
-
-  yearJournal.forEach(entry => {
-    if (entry.t === 'anime') {
-      if (isMainAnime(entry.note)) {
-        // .set ignore automatiquement le doublon si le titre est identique
-        mainItems.anime.set(entry.title, { title: entry.title, img: entry.img, blur: entry.blur || false });
-      } else {
-        const n = entry.note.toLowerCase();
-        if (n.includes('short')) secondaryCounts.anime.short++;
-        else if (n.includes('music')) secondaryCounts.anime.music++;
-        else if (n.includes('commercial') || n.includes('cms')) secondaryCounts.anime.commercial++;
-      }
-    } else if (mainItems[entry.t]) {
-      mainItems[entry.t].set(entry.title, { title: entry.title, img: entry.img, blur: entry.blur || false });
-    }
+  // Œuvres uniques de l'année (titre + type), entrées triées chronologiquement
+  const works = {};
+  yearEntries.forEach(e => {
+    const k = e.t + '|' + e.title;
+    if (!works[k]) works[k] = { t: e.t, title: e.title, img: e.img, blur: !!e.blur, entries: [] };
+    works[k].entries.push(e);
   });
 
-  // --- PARTIE TEXTE (Compteurs) ---
-  const pluralMap = { livre: 'livres', film: 'films', série: 'séries', anime: 'animes', manga: 'mangas', jeu: 'jeux', musique: 'albums' };
-  let totalMain = 0;
-  const mainParts = [];
-  
-  for (const cat in mainItems) {
-    const count = mainItems[cat].size;
-    if (count > 0) {
-      totalMain += count;
-      const label = count > 1 ? pluralMap[cat] : cat;
-      mainParts.push(count + ' ' + label);
+  // Classement : terminées / en cours / sans fin (+ entrées anime 100 % secondaires écartées)
+  const finished = {}, ongoing = {}, endless = [];
+  RECAP_CATS.forEach(t => { finished[t] = []; ongoing[t] = []; });
+  Object.values(works).forEach(w => {
+    // Type improvisé dans le journal (hors des 7 catégories connues) → géré à la volée
+    if (RECAP_CATS.indexOf(w.t) === -1) {
+      RECAP_CATS.push(w.t);
+      RECAP_PLURAL[w.t] = w.t + 's';
+      finished[w.t] = []; ongoing[w.t] = [];
     }
+    if (w.t === 'anime' && !w.entries.some(e => recapIsMainAnime(e.note))) return; // clips, pubs…
+    if (w.t === 'jeu' && ENDLESS_GAMES.indexOf(w.title) !== -1) { endless.push(w); return; }
+    const last = w.entries[w.entries.length - 1];
+    (last.status === 'en cours' ? ongoing[w.t] : finished[w.t]).push(w);
+  });
+
+  // ── Bandeau principal ──
+  const totalFinished = RECAP_CATS.reduce((n, t) => n + finished[t].length, 0);
+  const totalOngoing = RECAP_CATS.reduce((n, t) => n + ongoing[t].length, 0);
+  const fmtCat = arr => arr.length + ' ' + (arr.length > 1 ? RECAP_PLURAL[arr[0].t] : arr[0].t);
+  document.getElementById('recap-finished-count').textContent = totalFinished;
+  document.getElementById('recap-finished-detail').textContent =
+    RECAP_CATS.map(t => finished[t]).filter(a => a.length > 0).map(fmtCat).join(' · ');
+  document.getElementById('recap-ongoing-count').textContent = totalOngoing;
+  document.getElementById('recap-ongoing-detail').textContent =
+    RECAP_CATS.map(t => ongoing[t]).filter(a => a.length > 0).map(fmtCat).join(' · ') || '—';
+
+  // ── Heatmap ──
+  buildRecapHeatmap(yearStr, yearEntries);
+
+  // ── Précisions ──
+  let epNormaux = 0, epShorts = 0, secShorts = 0, secClips = 0, secPubs = 0;
+  yearEntries.forEach(e => {
+    if (e.t !== 'anime') return;
+    if (recapIsMainAnime(e.note)) {
+      if (/short episode/i.test(e.note || '')) epShorts += recapUnits(e.note);
+      else epNormaux += recapUnits(e.note);
+    } else {
+      const n = (e.note || '').toLowerCase();
+      if (n.includes('short')) secShorts++;
+      else if (n.includes('music')) secClips++;
+      else if (n.includes('commercial') || n.includes('cms')) secPubs++;
+    }
+  });
+  // Chapitres de manga : delta entre entrées successives d'une même œuvre
+  let chapitres = 0;
+  Object.values(works).forEach(w => {
+    if (w.t !== 'manga') return;
+    let prev = 0;
+    w.entries.forEach(e => {
+      const m = (e.note || '').match(/(\d+(?:-\d+)*)\/(\d+|\?)/);
+      if (!m) return;
+      const nums = m[1].split('-').map(Number);
+      const pos = nums[nums.length - 1];
+      chapitres += (prev === 0 ? nums.length : Math.max(1, pos - prev));
+      prev = pos;
+    });
+  });
+  // Films : courts-métrages détectés dans les notes
+  const courtMetra = new Set();
+  yearEntries.forEach(e => {
+    if (e.t === 'film' && /court[- ](métrage|metrage|documentaire)/i.test(e.note || '')) courtMetra.add(e.title);
+  });
+  // Musique : premières écoutes / réécoutes
+  const mus = yearEntries.filter(e => e.t === 'musique');
+  const premE = mus.filter(e => /premi[èe]re écoute/i.test(e.note || '')).length;
+  const reE = mus.filter(e => /r[ée][ée]coute/i.test(e.note || '')).length;
+
+  const precisionLines = [];
+  if (finished.livre.length) precisionLines.push('livres — ' + finished.livre.length + ' terminé' + (finished.livre.length > 1 ? 's' : ''));
+  if (finished.film.length) precisionLines.push('films — ' + finished.film.length + ' vu' + (finished.film.length > 1 ? 's' : '') + (courtMetra.size ? ', dont ' + courtMetra.size + ' courts-métrages' : ''));
+  if (finished.anime.length || ongoing.anime.length) {
+    let l = 'animes — ';
+    const p = [];
+    if (finished.anime.length) p.push(finished.anime.length + ' terminé' + (finished.anime.length > 1 ? 's' : ''));
+    if (ongoing.anime.length) p.push(ongoing.anime.length + ' en cours');
+    l += p.join(' · ');
+    if (epNormaux || epShorts) l += ' · ~' + epNormaux + ' épisodes vus' + (epShorts ? ' + ~' + epShorts + ' shorts' : '');
+    const secTot = secShorts + secClips + secPubs;
+    if (secTot) {
+      // « musics » = tag auteur pour les clips musicaux anime (note « music »)
+      const secParts = [];
+      if (secShorts) secParts.push(secShorts + ' courts');
+      if (secClips) secParts.push(secClips + ' musics');
+      if (secPubs) secParts.push(secPubs + ' pubs');
+      l += ' · ' + secTot + ' à côté (' + secParts.join(', ') + ')';
+    }
+    precisionLines.push(l);
+  }
+  if (finished.manga.length || ongoing.manga.length) {
+    let l = 'mangas — ';
+    const p = [];
+    if (finished.manga.length) p.push(finished.manga.length + ' terminé' + (finished.manga.length > 1 ? 's' : ''));
+    if (ongoing.manga.length) p.push(ongoing.manga.length + ' en cours');
+    l += p.join(' · ');
+    if (chapitres) l += ' · ~' + chapitres + ' chapitres lus';
+    precisionLines.push(l);
+  }
+  if (ongoing.série.length) precisionLines.push('séries — ' + ongoing.série.length + ' en cours');
+  if (finished.jeu.length || ongoing.jeu.length || endless.length) {
+    let l = 'jeux — ';
+    const p = [];
+    if (finished.jeu.length) p.push(finished.jeu.length + ' terminé' + (finished.jeu.length > 1 ? 's' : ''));
+    if (ongoing.jeu.length) p.push(ongoing.jeu.length + ' en cours');
+    l += p.join(' · ');
+    if (endless.length) l += (p.length ? ' · ' : '') + 'des sessions sans fin sur ' + endless.map(w => w.title).join(', ');
+    precisionLines.push(l);
+  }
+  if (finished.musique.length) {
+    precisionLines.push('projets — ' + finished.musique.length + ' écouté' + (finished.musique.length > 1 ? 's' : '') + (premE ? ' · ' + premE + ' premières écoutes' : '') + (reE ? ' · ' + reE + ' réécoutes' : ''));
+  }
+  document.getElementById('recap-precision').innerHTML =
+    precisionLines.map(l => '<div class="recap-precision-row">' + l + '</div>').join('');
+
+  // ── Coups de cœur (note 5/5, via les listes du site) ──
+  const noteLookup = {};
+  function feedLookup(type, items) {
+    (items || []).forEach(it => { if (it && it.title && typeof it.note === 'number') noteLookup[type + '|' + it.title.toLowerCase()] = it.note; });
+  }
+  try { Object.values(books).forEach(arr => feedLookup('livre', arr)); } catch (e) {}
+  try { Object.values(films).forEach(arr => feedLookup('film', arr)); } catch (e) {}
+  try { Object.values(musique).forEach(arr => feedLookup('musique', arr)); } catch (e) {}
+  try { feedLookup('jeu', Array.isArray(games) ? games : []); } catch (e) {}
+  const favs = [];
+  RECAP_CATS.forEach(t => finished[t].forEach(w => {
+    if (noteLookup[t + '|' + w.title.toLowerCase()] === 5) favs.push(w);
+  }));
+  const favSection = document.getElementById('recap-favorites-section');
+  const favGrid = document.getElementById('recap-favorites');
+  favGrid.innerHTML = '';
+  if (favs.length > 0) {
+    favSection.style.display = '';
+    favs.forEach(w => {
+      const card = document.createElement('div');
+      card.className = 'book-card';
+      const blurStyle = w.blur ? ' style="filter:blur(6px);transition:filter .3s;"' : '';
+      card.innerHTML = '<img loading="lazy" src="' + w.img + '" alt="' + w.title + '"' + blurStyle + '><div class="book-title">' + w.title + '</div>';
+      favGrid.appendChild(card);
+    });
+  } else {
+    favSection.style.display = 'none';
   }
 
-  let totalSecondary = 0;
-  const secParts = [];
-  for (const type in secondaryCounts.anime) {
-    const count = secondaryCounts.anime[type];
-    if (count > 0) {
-      totalSecondary += count;
-      secParts.push(count + ' ' + type + (count > 1 ? 's' : ''));
-    }
-  }
-
-  document.getElementById('recap-main-count').textContent = totalMain;
-  document.getElementById('recap-main-breakdown').textContent = mainParts.join(' · ');
-  document.getElementById('recap-secondary-count').textContent = totalSecondary;
-  document.getElementById('recap-secondary-breakdown').textContent = secParts.length > 0 ? ('animes : ' + secParts.join(' · ')) : '';
-
-
-  // --- PARTIE VISUELLE (Les images) ---
+  // ── Galerie par catégorie (en-têtes enrichis terminés/en cours) ──
   const visualContainer = document.getElementById('recap-visual');
   visualContainer.innerHTML = '';
 
-  // L'ordre dans lequel on veut afficher les catégories
-  const categoryOrder = ['livre', 'film', 'série', 'anime', 'manga', 'jeu', 'musique'];
+  RECAP_CATS.forEach(cat => {
+    const all = cat === 'jeu'
+      ? finished[cat].concat(ongoing[cat], endless)
+      : finished[cat].concat(ongoing[cat]);
+    if (all.length === 0) return;
 
-  categoryOrder.forEach(cat => {
-    if (mainItems[cat].size === 0) return; // On saute si vide
-    
-    const count = mainItems[cat].size;
-    const label = count > 1 ? pluralMap[cat] : cat;
-
-    // Le titre de la catégorie (ex: "animes (3)")
+    const label = all.length > 1 ? RECAP_PLURAL[cat] : cat;
+    let header = label + ' (' + all.length + ')';
+    if (ongoing[cat].length > 0) {
+      header += ' — ' + finished[cat].length + ' terminé' + (finished[cat].length > 1 ? 's' : '') + ' · ' + ongoing[cat].length + ' en cours';
+    }
     const h2 = document.createElement('h2');
-    h2.textContent = label + ' (' + count + ')';
+    h2.textContent = header;
     visualContainer.appendChild(h2);
 
-    // La grille d'images
     const grid = document.createElement('div');
-    grid.className = 'books'; // On réutilise TA classe CSS !
+    grid.className = 'books';
 
-    mainItems[cat].forEach(item => {
+    all.forEach(item => {
       const card = document.createElement('div');
       card.className = 'book-card';
-      
-      // Ajout des classes spéciales selon le format
       if (cat === 'musique') card.classList.add('recap-music-card');
       if (cat === 'film' || cat === 'série') card.classList.add('recap-ecrans-card');
-      
-      // Ajout du flou si besoin (avec la transition pour que ça disparaisse doucement au survol)
-      const blurStyle = item.blur ? 'style="filter:blur(6px); transition: filter 0.3s;"' : '';
-      
-      card.innerHTML = `
-        <img loading="lazy" src="${item.img}" alt="${item.title}" ${blurStyle}>
-        <div class="book-title">${item.title}</div>
-      `;
+      const blurStyle = item.blur ? ' style="filter:blur(6px);transition:filter .3s;"' : '';
+      card.innerHTML = '<img loading="lazy" src="' + item.img + '" alt="' + item.title + '"' + blurStyle + '><div class="book-title">' + item.title + '</div>';
       grid.appendChild(card);
     });
 
     visualContainer.appendChild(grid);
   });
+
+  // ── Pied : contrôle d'intégrité ──
+  document.getElementById('recap-footer').textContent =
+    yearEntries.length + " entrées de journal analysées · une œuvre est « en cours » tant que sa dernière entrée l'est encore";
+}
+
+// Grille d'activité annuelle : colonnes = semaines, lignes = jours, intensité = entrées
+function buildRecapHeatmap(yearStr, yearEntries) {
+  const host = document.getElementById('recap-heatmap');
+  const counts = {};
+  yearEntries.forEach(e => { counts[e.d] = (counts[e.d] || 0) + 1; });
+
+  const start = Date.UTC(+yearStr, 0, 1);
+  const totalDays = (Date.UTC(+yearStr + 1, 0, 1) - start) / 86400000;
+  const offset = (new Date(start).getUTCDay() + 6) % 7; // lundi = 0
+  const weeks = Math.ceil((offset + totalDays) / 7);
+  const MONTHS = ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'août', 'sep', 'oct', 'nov', 'déc'];
+
+  // Étiquettes de mois, placées sur la colonne du 1er du mois
+  const labels = new Array(weeks).fill('');
+  for (let m = 0; m < 12; m++) {
+    const w = Math.floor(((Date.UTC(+yearStr, m, 1) - start) / 86400000 + offset) / 7);
+    if (labels[w] === '') labels[w] = MONTHS[m];
+  }
+  let monthsHtml = '';
+  for (let w = 0; w < weeks; w++) monthsHtml += '<span>' + labels[w] + '</span>';
+
+  let cellsHtml = '';
+  for (let w = 0; w < weeks; w++) {
+    for (let d = 0; d < 7; d++) {
+      const dayIndex = w * 7 + d - offset;
+      if (dayIndex < 0 || dayIndex >= totalDays) { cellsHtml += '<span class="hm-cell hm-off"></span>'; continue; }
+      const dt = new Date(start + dayIndex * 86400000);
+      const iso = dt.toISOString().slice(0, 10);
+      const c = counts[iso] || 0;
+      const lvl = c >= 7 ? 'hm-l4' : c >= 4 ? 'hm-l3' : c >= 2 ? 'hm-l2' : c >= 1 ? 'hm-l1' : 'hm-l0';
+      cellsHtml += '<span class="hm-cell ' + lvl + '" title="' + (dayIndex + 1) + ' ' + MONTHS[dt.getUTCMonth()] + ' · ' + c + (c > 1 ? ' activités' : ' activité') + '"></span>';
+    }
+  }
+  host.innerHTML = '<div class="hm-inner"><div class="hm-months">' + monthsHtml + '</div><div class="hm-grid">' + cellsHtml + '</div></div>';
 }
 
 function initHome() {

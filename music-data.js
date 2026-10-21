@@ -245,5 +245,8 @@ const musicData = {
   ],
   "Denzel Curry": [
     { title: "Melt My Eyez See Your Future", note: 3.5, cover: "music/eyez.webp", link: "https://rateyourmusic.com/release/album/denzel-curry/melt-my-eyez-see-your-future/" },
+  ],
+  "Olivia Dean": [
+    { title: "The Art of Loving", note: 3.5, cover: "music/artofloving.webp", link: "https://rateyourmusic.com/release/album/olivia-dean/the-art-of-loving/" },
   ]
 };

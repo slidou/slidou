@@ -73,16 +73,41 @@
           <button class="calendar-nav-btn" id="recap-next-year">›</button>
         </div>
 
-        <div class="recap-main">
-          <div class="recap-main-count" id="recap-main-count">0</div>
-          <div class="recap-main-label">œuvres uniques</div>
-          <div class="recap-main-breakdown" id="recap-main-breakdown"></div>
-        </div>
+        <div class="recap-empty" id="recap-empty" style="display:none">aucune activité cette année</div>
 
-        <div class="recap-secondary">
-          <div class="recap-secondary-header">+ <span id="recap-secondary-count">0</span> activités secondaires</div>
-          <div class="recap-secondary-breakdown" id="recap-secondary-breakdown"></div>
+        <div id="recap-content">
+          <div class="recap-headline">
+            <div class="recap-stat">
+              <div class="recap-stat-num" id="recap-finished-count">0</div>
+              <div class="recap-stat-label">œuvres terminées</div>
+              <div class="recap-stat-detail" id="recap-finished-detail"></div>
+            </div>
+            <div class="recap-stat">
+              <div class="recap-stat-num" id="recap-ongoing-count">0</div>
+              <div class="recap-stat-label">encore en cours</div>
+              <div class="recap-stat-detail" id="recap-ongoing-detail"></div>
+            </div>
+          </div>
+
+          <div class="recap-section">
+            <div class="recap-section-title">activité de l'année</div>
+            <div class="recap-heatmap" id="recap-heatmap"></div>
+            <div class="recap-heatmap-legend">moins <span class="hm-cell hm-l0"></span><span class="hm-cell hm-l1"></span><span class="hm-cell hm-l2"></span><span class="hm-cell hm-l3"></span><span class="hm-cell hm-l4"></span> plus</div>
+          </div>
+
+          <div class="recap-section">
+            <div class="recap-section-title">en précision</div>
+            <div class="recap-precision" id="recap-precision"></div>
+          </div>
+
+          <div class="recap-section" id="recap-favorites-section" style="display:none">
+            <div class="recap-section-title">coups de cœur <span class="recap-fav-note">5 / 5</span></div>
+            <div class="books" id="recap-favorites"></div>
+          </div>
+
           <div class="text-content" id="recap-visual"></div>
+
+          <div class="recap-footer" id="recap-footer"></div>
         </div>
       </div>
 

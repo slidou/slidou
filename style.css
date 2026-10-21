@@ -10,6 +10,11 @@
   --star-color: #b8860b; /* Une étoile un chouïa plus sombre pour ressortir */
   --shadow-color: rgba(40, 30, 10, 0.1); /* Ombres légèrement chaudes */
   --quote-bg: #e9e4d8; /* Fond des citations assorti à la sidebar */
+  --hm-0: rgba(43, 91, 158, 0.07); /* Heatmap du bilan : rampes sur le bleu des liens */
+  --hm-1: rgba(43, 91, 158, 0.25);
+  --hm-2: rgba(43, 91, 158, 0.45);
+  --hm-3: rgba(43, 91, 158, 0.65);
+  --hm-4: rgba(43, 91, 158, 0.9);
 }
 
 /* ── MODE SOMBRE ── */
@@ -24,6 +29,11 @@ body.dark-mode {
   --star-color: #f5c542;
   --shadow-color: rgba(0,0,0,0.4);
   --quote-bg: #1e1e1e;
+  --hm-0: rgba(123, 170, 247, 0.06);
+  --hm-1: rgba(123, 170, 247, 0.22);
+  --hm-2: rgba(123, 170, 247, 0.4);
+  --hm-3: rgba(123, 170, 247, 0.6);
+  --hm-4: rgba(123, 170, 247, 0.85);
 }
 
 /* ── BASE ── */
@@ -1490,47 +1500,129 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
   margin-bottom: 40px;
 }
 
-.recap-main-count {
+/* ── Bandeau principal du bilan ── */
+.recap-headline {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+.recap-stat-num {
   font-family: 'IM Fell English', serif;
   font-size: 64px;
   font-weight: 400;
   color: var(--author-text);
   line-height: 1;
 }
-.recap-main-label {
+.recap-stat-label {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 13px;
   color: var(--secondary-text);
   text-transform: lowercase;
   letter-spacing: 1px;
   margin-top: 10px;
-  margin-bottom: 20px;
 }
-.recap-main-breakdown {
+.recap-stat-detail {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-color);
-  line-height: 1.6;
+  line-height: 1.7;
+  margin-top: 8px;
+  max-width: 300px;
 }
 
-.recap-secondary {
-  margin-top: 40px;
-  padding-top: 30px;
-  border-top: 1px solid var(--border-color);
-}
-.recap-secondary-header {
+/* ── Sections du bilan ── */
+.recap-section { margin-top: 45px; }
+.recap-section-title {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 12px;
   color: var(--secondary-text);
   text-transform: lowercase;
-  margin-bottom: 15px;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
 }
-.recap-secondary-breakdown {
+.recap-empty {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--secondary-text);
-  line-height: 1.8;
-  text-transform: lowercase;
+  padding: 30px 0 10px;
+}
+
+/* ── Heatmap annuelle (façon contributions) ── */
+.recap-heatmap { overflow-x: auto; padding-bottom: 8px; }
+.hm-inner { width: max-content; margin: 0 auto; }
+.hm-months {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 11px;
+  gap: 3px;
+  margin-bottom: 4px;
+}
+.hm-months span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  color: var(--secondary-text);
+  white-space: nowrap;
+}
+.hm-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, 11px);
+  grid-auto-columns: 11px;
+  gap: 3px;
+}
+.hm-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  display: block;
+}
+.hm-off { visibility: hidden; }
+.hm-l0 { background: var(--hm-0); }
+.hm-l1 { background: var(--hm-1); }
+.hm-l2 { background: var(--hm-2); }
+.hm-l3 { background: var(--hm-3); }
+.hm-l4 { background: var(--hm-4); }
+.recap-heatmap-legend {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.recap-heatmap-legend .hm-cell { width: 9px; height: 9px; }
+
+/* ── Précisions ── */
+.recap-precision-row {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--text-color);
+  line-height: 2;
+}
+
+/* ── Coups de cœur ── */
+.recap-fav-note {
+  display: inline-block;
+  font-size: 10px;
+  color: var(--star-color);
+  border: 1px solid var(--star-color);
+  border-radius: 10px;
+  padding: 1px 8px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* ── Pied du bilan ── */
+.recap-footer {
+  margin-top: 50px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  opacity: 0.8;
 }
 
 /* ── FORMAT MUSIQUE RECAP ── */

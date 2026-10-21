@@ -971,4 +971,10 @@ const journalData = [
 { d: "2026-10-20", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
 { d: "2026-10-20", t: "anime", title: "The Happy Dorm", img: "anime/thehappydorm.jpg", note: "commercial" },
 { d: "2026-10-20", t: "anime", title: "Azur Lane 5th Anniversary: The Best Gift From Enterprise", img: "anime/enterprise.jpg", note: "commercial" },
+{ d: "2026-10-21", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "session de merde", status: "en cours" },
+{ d: "2026-10-21", t: "musique", title: "The Art of Loving", img: "music/artofloving.webp", note: "première écoute" },
+{ d: "2026-10-21", t: "anime", title: "Kagami no Genon", img: "anime/genon.jpg", note: "short" },
+{ d: "2026-10-21", t: "anime", title: "Azur Lane 4th Anniversary: A Day at the Port Ice Cream Shop", img: "anime/azuricecream.jpg", note: "commercial" },
+{ d: "2026-10-21", t: "anime", title: "Sonic X Pilot", img: "anime/sonicxpilot.jpg", note: "short" },
+{ d: "2026-10-21", t: "anime", title: "Dead or Arrive", img: "anime/deadorarrive.jpg", note: "commercial" },
 ];
