@@ -977,4 +977,6 @@ const journalData = [
 { d: "2026-10-21", t: "anime", title: "Azur Lane 4th Anniversary: A Day at the Port Ice Cream Shop", img: "anime/azuricecream.jpg", note: "commercial" },
 { d: "2026-10-21", t: "anime", title: "Sonic X Pilot", img: "anime/sonicxpilot.jpg", note: "short" },
 { d: "2026-10-21", t: "anime", title: "Dead or Arrive", img: "anime/deadorarrive.jpg", note: "commercial" },
+{ d: "2026-10-21", t: "anime", title: "Dead or Arrive 2: Dance of Auto", img: "anime/deadorarrive2.jpg", note: "commercial" },
+{ d: "2026-10-21", t: "anime", title: "Appaga Piryohae", img: "anime/piryohae.jpg", note: "short" },
 ];

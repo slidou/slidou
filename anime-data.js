@@ -7931,5 +7931,7 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 57358, title: "Azur Lane 4th Anniversary: A Day at the Port Ice Cream Shop", note: null, tags: ["short","commercial","archived"] },
   { id: 10263, title: "Sonic X Pilot", note: null, tags: ["short","+","archived"] },
   { id: 56529, title: "Dead or Arrive", note: null, tags: ["commercial","archived"] },
+  { id: 56629, title: "Dead or Arrive 2: Dance of Auto", note: null, tags: ["short","commercial","archived"] },
+  { id: 4099, title: "Appaga Piryohae", note: 2.5, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
