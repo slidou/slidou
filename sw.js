@@ -15,7 +15,7 @@
    suffit, ce worker se revalide tout seul à chaque visite.
    ═══════════════════════════════════════════════════════════════ */
 
-var VERSION = 'v1';
+var VERSION = 'v2';  // v2 : icônes régénérées plein cadre (sans fond beige)
 var SHELL_CACHE = 'slidou-shell-' + VERSION;
 var IMG_CACHE = 'slidou-img-' + VERSION;
 var MEDIA_CACHE = 'slidou-media-' + VERSION;
