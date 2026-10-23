@@ -7933,5 +7933,9 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 56529, title: "Dead or Arrive", note: null, tags: ["commercial","archived"] },
   { id: 56629, title: "Dead or Arrive 2: Dance of Auto", note: null, tags: ["short","commercial","archived"] },
   { id: 4099, title: "Appaga Piryohae", note: 2.5, tags: ["short","archived"] },
+  { id: 65224, title: "Fukai desu!", note: 3, tags: ["music","archived"] },
+  { id: 65233, title: "Pupa (Music)", note: 3, tags: ["music","archived"] },
+  { id: 65232, title: "Garou Densetsu: CotW x Tokyo Revengers", note: null, tags: ["short","commercial","+","archived"] },
+  { id: 58333, title: "Uji ni wa Monogatari ga Aru", note: 3, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

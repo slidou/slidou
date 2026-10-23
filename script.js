@@ -3406,172 +3406,273 @@ function renderCurrently() {
   }
 }
 
-// ── RECHERCHE GLOBALE ──
-let globalSearchTimeout;
-document.addEventListener('input', function(e) {
-  if (e.target.id !== 'global-search') return;
-  
-  clearTimeout(globalSearchTimeout);
-  var val = e.target.value.trim();
-  var resBox = document.getElementById('global-search-results');
-  
-  if (val.length < 2) {
-    resBox.classList.remove('visible');
-    return;
-  }
-  
-  globalSearchTimeout = setTimeout(function() {
-    var norm = function(str) { return (str || '').normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); };
-    var q = norm(val);
-    var matches = [];
-    var typeColors = { 
-      'Livre': "#ef5350", 'Film': "#42A5F5", 'Série': "#26A69A", 
-      'Jeu': "#66BB6A", 'Musique': "#AB47BC", 'Anime': "#EC407A", 'Manga': "#FF7043" 
-    };
-    
-    // La fonction qui scanne
-    function searchCat(data, catName, isGrouped, creatorLabel) {
-      if (!data) return;
-      if (isGrouped) {
-        for (var key in data) {
-          var cleanKey = key.replace(' [completed]', '');
-          var matchKey = norm(cleanKey).includes(q);
-          
-          // 1. Si le nom de l'auteur/artiste correspond, on crée une entrée "Créateur"
-          if (matchKey) {
-            matches.push({ 
-              cat: catName, 
-              title: cleanKey, 
-              sub: creatorLabel + ' · ' + data[key].length + ' œuvres', 
-              isCreator: true 
-            });
-          }
-          
-          // 2. On cherche aussi dans les titres des œuvres
-          data[key].forEach(function(item) {
-            if (norm(item.title).includes(q)) {
-              var cover = item.cover || (catName === 'Anime' && typeof animeImageCache !== 'undefined' && animeImageCache.has(item.id) ? animeImageCache.get(item.id) : '') || (catName === 'Manga' && typeof mangaImageCache !== 'undefined' && mangaImageCache.has(item.id) ? mangaImageCache.get(item.id) : '');
-              matches.push({ cat: catName, title: item.title, sub: cleanKey, img: cover, isCreator: false });
-            }
-          });
-        }
-      } else { // Pour les listes plates (Jeux, Animés)
-        data.forEach(function(item) {
-          if (norm(item.title).includes(q)) {
-            var cover = item.cover || (catName === 'Anime' && typeof animeImageCache !== 'undefined' && animeImageCache.has(item.id) ? animeImageCache.get(item.id) : '');
-            matches.push({ cat: catName, title: item.title, sub: '', img: cover, isCreator: false });
-          }
-        });
-      }
+// ── RECHERCHE GLOBALE (palette Ctrl+K) ──
+// Palette centrée ouverte par Ctrl+K / ⌘K, l'input de la sidebar ou un bouton loupe (mobile).
+// Moteur : ET multi-mots insensible accents/casse, score préfixe > début de mot > sous-chaîne,
+// créateurs favorisés (règle historique), surlignage des fragments, limite par catégorie.
+(function() {
+  const palette = document.getElementById('search-palette');
+  const input = document.getElementById('palette-input');
+  const results = document.getElementById('palette-results');
+  const trigger = document.getElementById('global-search');
+  const mobileBtn = document.getElementById('search-toggle');
+  if (!palette || !input || !results || !trigger) return;
+
+  const typeColors = {
+    'Livre': "#ef5350", 'Film': "#42A5F5", 'Série': "#26A69A",
+    'Jeu': "#66BB6A", 'Musique': "#AB47BC", 'Anime': "#EC407A", 'Manga': "#FF7043"
+  };
+  const pageMap = {
+    'Livre': { page: 'bibliographie', input: 'search-biblio' },
+    'Film': { page: 'ecrans', input: 'search-ecrans' },
+    'Série': { page: 'ecrans', input: 'search-ecrans' },
+    'Jeu': { page: 'jeux', input: 'search-jeux' },
+    'Musique': { page: 'musique', input: 'search-musique' },
+    'Anime': { page: 'anime', input: 'search-anime' },
+    'Manga': { page: 'manga', input: 'search-manga' }
+  };
+  const MAX_PAR_CATEGORIE = { creator: 3, oeuvre: 6 };
+  const MAX_TOTAL = 40;
+
+  let items = [];       // éléments .gs-item affichés (navigation clavier)
+  let selIndex = -1;
+  let lastMatches = [];
+  let candidats = null; // cache : listes aplaties en candidats de recherche
+
+  const norm = function(str) { return (str || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); };
+
+  // Normalise en conservant la correspondance vers les indices d'origine (pour le surlignage)
+  function normMap(str) {
+    const src = String(str || '');
+    const nfd = src.normalize('NFD');
+    let out = '', map = [];
+    for (let i = 0; i < nfd.length; i++) {
+      const ch = nfd[i];
+      if (ch >= '\u0300' && ch <= '\u036f') continue; // diacritiques
+      out += ch.toLowerCase();
+      map.push(i);
     }
-    
-    if (typeof books !== 'undefined') searchCat(books, 'Livre', true, 'Auteur');
-    if (typeof films !== 'undefined') searchCat(films, 'Film', true, 'Réalisateur');
-    if (typeof series !== 'undefined') searchCat(series, 'Série', true, 'Série');
-    if (typeof games !== 'undefined' && games.length) searchCat(games, 'Jeu', false, 'Studio');
-    if (typeof musique !== 'undefined') searchCat(musique, 'Musique', true, 'Artiste');
-    if (typeof animeList !== 'undefined') searchCat(animeList, 'Anime', false, '');
-    if (typeof mangaData !== 'undefined') searchCat(mangaData, 'Manga', true, 'Auteur');
-    
-    // On met les créateurs en premier, puis par ordre alphabétique
-    matches.sort(function(a, b) {
-      if (a.isCreator !== b.isCreator) return b.isCreator - a.isCreator; // Créateurs en haut
-      if (a.cat === b.cat) return a.title.localeCompare(b.title);
-      return a.cat.localeCompare(b.cat);
+    return { s: out, map: map };
+  }
+
+  // Entoure de <mark> chaque fragment qui matche un token (indices remappés sur la chaîne d'origine)
+  function highlight(text, tokens) {
+    const src = String(text || '');
+    const nm = normMap(src);
+    const ranges = [];
+    tokens.forEach(function(tk) {
+      let from = 0, idx;
+      while ((idx = nm.s.indexOf(tk, from)) !== -1) {
+        const s = nm.map[idx], e = nm.map[idx + tk.length - 1];
+        if (s !== undefined && e !== undefined) ranges.push([s, e + 1]);
+        from = idx + 1;
+      }
+    });
+    if (!ranges.length) return escapeHtml(src);
+    ranges.sort(function(a, b) { return a[0] - b[0]; });
+    const merged = [ranges[0]];
+    for (let i = 1; i < ranges.length; i++) {
+      const last = merged[merged.length - 1];
+      if (ranges[i][0] <= last[1]) last[1] = Math.max(last[1], ranges[i][1]);
+      else merged.push(ranges[i]);
+    }
+    let out = '', pos = 0;
+    merged.forEach(function(r) {
+      out += escapeHtml(src.slice(pos, r[0])) + '<mark>' + escapeHtml(src.slice(r[0], r[1])) + '</mark>';
+      pos = r[1];
+    });
+    return out + escapeHtml(src.slice(pos));
+  }
+
+  // Aplatit les 7 listes en candidats {cat, title, sub, isCreator, creator, item}
+  function collectCandidats() {
+    const cands = [];
+    function scanGrouped(data, catName, creatorLabel) {
+      if (!data) return;
+      Object.keys(data).forEach(function(key) {
+        const cleanKey = key.replace(' [completed]', '');
+        cands.push({ cat: catName, title: cleanKey, sub: creatorLabel + ' · ' + data[key].length + ' œuvres', isCreator: true, creator: '' });
+        data[key].forEach(function(item) {
+          cands.push({ cat: catName, title: item.title, sub: cleanKey, isCreator: false, creator: cleanKey, item: item });
+        });
+      });
+    }
+    function scanFlat(data, catName) {
+      if (!data) return;
+      (Array.isArray(data) ? data : []).forEach(function(item) {
+        cands.push({ cat: catName, title: item.title, sub: '', isCreator: false, creator: '', item: item });
+      });
+    }
+    if (typeof books !== 'undefined') scanGrouped(books, 'Livre', 'Auteur');
+    if (typeof films !== 'undefined') scanGrouped(films, 'Film', 'Réalisateur');
+    if (typeof series !== 'undefined') scanGrouped(series, 'Série', 'Série');
+    if (typeof games !== 'undefined' && games.length) scanFlat(games, 'Jeu');
+    if (typeof musique !== 'undefined') scanGrouped(musique, 'Musique', 'Artiste');
+    if (typeof animeList !== 'undefined') scanFlat(animeList, 'Anime');
+    if (typeof mangaData !== 'undefined') scanGrouped(mangaData, 'Manga', 'Auteur');
+    return cands;
+  }
+
+  // -1 = ne matche pas, sinon score (chaque token doit matcher titre OU créateur)
+  function scoreCandidat(m, tokens) {
+    const t = norm(m.title);
+    const c = m.isCreator ? '' : norm(m.creator);
+    let score = 0;
+    for (let i = 0; i < tokens.length; i++) {
+      const tk = tokens[i];
+      const ti = t.indexOf(tk), ci = c ? c.indexOf(tk) : -1;
+      if (ti === -1 && ci === -1) return -1;
+      let best = 0;
+      if (ti !== -1) {
+        if (ti === 0) best = 60;                                   // préfixe du titre
+        else if (/[^a-z0-9]/.test(t.charAt(ti - 1))) best = 35;    // début de mot
+        else best = 10;                                            // sous-chaîne
+      }
+      if (ci !== -1) best = Math.max(best, 20);                    // match créateur
+      score += best;
+    }
+    if (t === tokens.join(' ')) score += 300;                      // titre exact
+    return score;
+  }
+
+  function coverOf(m) {
+    if (!m.item) return '';
+    return m.item.cover
+      || (m.cat === 'Anime' && typeof animeImageCache !== 'undefined' && animeImageCache.has(m.item.id) ? animeImageCache.get(m.item.id) : '')
+      || (m.cat === 'Manga' && typeof mangaImageCache !== 'undefined' && mangaImageCache.has(m.item.id) ? mangaImageCache.get(m.item.id) : '');
+  }
+
+  function showHint(html) {
+    items = []; selIndex = -1; lastMatches = [];
+    results.innerHTML = '<div class="search-palette-hint">' + html + '</div>';
+  }
+
+  function runSearch(qRaw) {
+    const tokens = norm(qRaw).split(/\s+/).filter(Boolean);
+    if (!tokens.length) { showHint('commence à taper pour chercher dans toutes les listes…'); return; }
+    if (!candidats) candidats = collectCandidats();
+
+    const scored = [];
+    candidats.forEach(function(m) {
+      const s = scoreCandidat(m, tokens);
+      if (s > 0) scored.push({ m: m, s: s });
+    });
+    scored.sort(function(a, b) {
+      if (a.m.isCreator !== b.m.isCreator) return a.m.isCreator ? -1 : 1; // créateurs en haut (règle historique)
+      if (b.s !== a.s) return b.s - a.s;
+      if (a.m.title.length !== b.m.title.length) return a.m.title.length - b.m.title.length;
+      return a.m.title.localeCompare(b.m.title);
     });
 
-    resBox.innerHTML = '<button class="gs-close" onclick="document.getElementById(\'global-search-results\').classList.remove(\'visible\')">&times;</button>';
-    
-    if (matches.length === 0) {
-      resBox.innerHTML += '<div class="gs-no-results">Aucun résultat pour « ' + escapeHtml(val) + ' »</div>';
-    } else {
-      var limit = Math.min(matches.length, 30);
-      var pageMap = {
-        'Livre': { page: 'bibliographie', input: 'search-biblio' },
-        'Film': { page: 'ecrans', input: 'search-ecrans' },
-        'Série': { page: 'ecrans', input: 'search-ecrans' },
-        'Jeu': { page: 'jeux', input: 'search-jeux' },
-        'Musique': { page: 'musique', input: 'search-musique' },
-        'Anime': { page: 'anime', input: 'search-anime' },
-        'Manga': { page: 'manga', input: 'search-manga' }
-      };
+    // limite par catégorie pour que toutes les familles restent visibles
+    const parCat = {}, final = [];
+    for (let i = 0; i < scored.length && final.length < MAX_TOTAL; i++) {
+      const m = scored[i].m;
+      const cap = m.isCreator ? MAX_PAR_CATEGORIE.creator : MAX_PAR_CATEGORIE.oeuvre;
+      parCat[m.cat] = parCat[m.cat] || 0;
+      if (parCat[m.cat] >= cap) continue;
+      parCat[m.cat]++;
+      final.push(m);
+    }
 
-      for (var i = 0; i < limit; i++) {
-        var m = matches[i];
-        var itemWrap = document.createElement('div');
-        itemWrap.className = 'gs-item';
-        itemWrap.style.cursor = 'pointer';
-        
-        // Si c'est un créateur, on met l'avatar par défaut, sinon l'image de l'œuvre
-        var imgHtml = '';
-        if (m.isCreator) {
-          imgHtml = '<div class="gs-creator-avatar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>';
-        } else if (m.img) {
-          imgHtml = '<img src="'+m.img+'" alt="">';
-        } else {
-          imgHtml = '<div style="width:32px;height:48px;background:var(--border-color);border-radius:3px;flex-shrink:0;"></div>';
-        }
-        
-        var dot = '<span class="popup-type-dot" style="background:'+typeColors[m.cat]+'; margin-right:0; flex-shrink:0;"></span>';
-        var subHtml = m.isCreator ? m.sub : (m.cat.toLowerCase() + (m.sub ? ' · ' + m.sub : ''));
-        
-        itemWrap.innerHTML = dot + imgHtml + '<div class="gs-item-info"><div class="gs-item-title">'+m.title+'</div><div class="gs-item-sub">'+subHtml+'</div></div>';
-        
-        // Action de clic (unifiée)
-        itemWrap.addEventListener('click', function(e) {
-          var cat = this.dataset.cat;
-          var title = this.dataset.title;
-          
-          resBox.classList.remove('visible');
-          document.getElementById('global-search').value = '';
-          
-          navigateTo(pageMap[cat].page);
-          
-          var localInput = document.getElementById(pageMap[cat].input);
-          if (localInput) {
-            localInput.value = title;
-            localInput.dispatchEvent(new Event('input'));
-          }
-
-          // Page Écrans : on bascule sur la bonne sous-page (Films ou Séries) selon le type du résultat
-          if (cat === 'Film' || cat === 'Série') {
-            var targetSub = (cat === 'Série') ? 'series' : 'films';
-            var activeSub = document.querySelector('.sub-nav-link.active');
-            if (!activeSub || activeSub.dataset.subpage !== targetSub) {
-              var subLink = document.querySelector('.sub-nav-link[data-subpage="' + targetSub + '"]');
-              if (subLink) subLink.click();
-            }
-          }
-        });
-        
-        itemWrap.dataset.cat = m.cat;
-        itemWrap.dataset.title = m.title;
-        
-        resBox.appendChild(itemWrap);
+    // rendu
+    items = []; selIndex = -1; lastMatches = final;
+    results.innerHTML = '';
+    if (!final.length) {
+      results.innerHTML = '<div class="search-palette-hint">aucun résultat pour « ' + escapeHtml(qRaw) + ' »</div>';
+      return;
+    }
+    const frag = document.createDocumentFragment();
+    final.forEach(function(m, i) {
+      const el = document.createElement('div');
+      el.className = 'gs-item';
+      el.style.cursor = 'pointer';
+      const dot = '<span class="popup-type-dot" style="background:' + typeColors[m.cat] + '; margin-right:0; flex-shrink:0;"></span>';
+      let imgHtml;
+      if (m.isCreator) {
+        imgHtml = '<div class="gs-creator-avatar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>';
+      } else {
+        const cov = coverOf(m);
+        imgHtml = cov ? '<img src="' + cov + '" alt="">' : '<div style="width:32px;height:48px;background:var(--border-color);border-radius:3px;flex-shrink:0;"></div>';
       }
-      
-      if (matches.length > 30) {
-        var moreDiv = document.createElement('div');
-        moreDiv.className = 'gs-no-results';
-        moreDiv.textContent = '+' + (matches.length - 30) + ' autres résultats...';
-        resBox.appendChild(moreDiv);
+      const subHtml = m.isCreator ? escapeHtml(m.sub) : escapeHtml(m.cat.toLowerCase() + (m.sub ? ' · ' + m.sub : ''));
+      el.innerHTML = dot + imgHtml + '<div class="gs-item-info"><div class="gs-item-title">' + highlight(m.title, tokens) + '</div><div class="gs-item-sub">' + subHtml + '</div></div>';
+      el.addEventListener('click', function() { openResult(m); });
+      el.addEventListener('mousemove', function() { select(i); });
+      frag.appendChild(el);
+      items.push(el);
+    });
+    results.appendChild(frag);
+  }
+
+  function select(i) {
+    if (!items.length) return;
+    if (selIndex >= 0 && items[selIndex]) items[selIndex].classList.remove('selected');
+    selIndex = i;
+    items[selIndex].classList.add('selected');
+    items[selIndex].scrollIntoView({ block: 'nearest' });
+  }
+
+  function openResult(m) {
+    closePalette();
+    navigateTo(pageMap[m.cat].page);
+    const localInput = document.getElementById(pageMap[m.cat].input);
+    if (localInput) {
+      localInput.value = m.title;
+      localInput.dispatchEvent(new Event('input'));
+    }
+    // Page Écrans : bascule sur la bonne sous-page (films ou séries)
+    if (m.cat === 'Film' || m.cat === 'Série') {
+      const targetSub = (m.cat === 'Série') ? 'series' : 'films';
+      const activeSub = document.querySelector('.sub-nav-link.active');
+      if (!activeSub || activeSub.dataset.subpage !== targetSub) {
+        const subLink = document.querySelector('.sub-nav-link[data-subpage="' + targetSub + '"]');
+        if (subLink) subLink.click();
       }
     }
-    resBox.classList.add('visible');
-  }, 250);
-});
-
-// Fermer la recherche si on clique en dehors ou sur Escape
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') document.getElementById('global-search-results').classList.remove('visible');
-});
-document.addEventListener('click', function(e) {
-  var resBox = document.getElementById('global-search-results');
-  var searchInput = document.getElementById('global-search');
-  if (resBox.classList.contains('visible') && !resBox.contains(e.target) && e.target !== searchInput) {
-    resBox.classList.remove('visible');
   }
-});
+
+  function openPalette() {
+    palette.classList.add('open');
+    input.value = '';
+    showHint('commence à taper pour chercher dans toutes les listes…');
+    input.focus();
+  }
+  function closePalette() {
+    palette.classList.remove('open');
+    input.blur();
+  }
+
+  // Déclencheurs
+  trigger.addEventListener('click', openPalette);
+  if (mobileBtn) mobileBtn.addEventListener('click', openPalette);
+  palette.addEventListener('click', function(e) { if (e.target === palette) closePalette(); });
+
+  // Raccourcis clavier globaux : Ctrl+K / ⌘K ouvre, Échap ferme
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && String(e.key).toLowerCase() === 'k') {
+      e.preventDefault();
+      if (palette.classList.contains('open')) input.focus(); else openPalette();
+    } else if (e.key === 'Escape' && palette.classList.contains('open')) {
+      closePalette();
+    }
+  });
+
+  // Clavier dans la palette : ↑ ↓ naviguent, Entrée ouvre
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); if (items.length) select((selIndex + 1) % items.length); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); if (items.length) select((selIndex - 1 + items.length) % items.length); }
+    else if (e.key === 'Enter') { e.preventDefault(); if (selIndex >= 0 && items[selIndex]) items[selIndex].click(); }
+  });
+
+  // Recherche à la frappe (léger debounce)
+  let searchTimer;
+  input.addEventListener('input', function() {
+    clearTimeout(searchTimer);
+    const v = input.value;
+    searchTimer = setTimeout(function() { runSearch(v); }, 120);
+  });
+})();
 
 // ── PWA : enregistrement du service worker ──
 // (uniquement en contexte sécurisé : https en production, localhost en test local)

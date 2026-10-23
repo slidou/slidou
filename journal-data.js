@@ -979,4 +979,11 @@ const journalData = [
 { d: "2026-10-21", t: "anime", title: "Dead or Arrive", img: "anime/deadorarrive.jpg", note: "commercial" },
 { d: "2026-10-21", t: "anime", title: "Dead or Arrive 2: Dance of Auto", img: "anime/deadorarrive2.jpg", note: "commercial" },
 { d: "2026-10-21", t: "anime", title: "Appaga Piryohae", img: "anime/piryohae.jpg", note: "short" },
+{ d: "2026-10-22", t: "livre", title: "Voyage au bout de la nuit", img: "covers/voyage.jpg", note: "je commence le livre", status: "en cours" },
+{ d: "2026-10-22", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "un défi de fait", status: "en cours" },
+{ d: "2026-10-22", t: "anime", title: "Fukai desu!", img: "anime/fukaidesu.jpg", note: "music" },
+{ d: "2026-10-22", t: "anime", title: "Pupa (Music)", img: "anime/pupa.jpg", note: "music" },
+{ d: "2026-10-22", t: "anime", title: "Garou Densetsu: CotW x Tokyo Revengers", img: "anime/garoud.jpg", note: "commercial" },
+{ d: "2026-10-23", t: "anime", title: "Uji ni wa Monogatari ga Aru", img: "anime/monogatariaru.jpg", note: "short" },
+{ d: "2026-10-23", t: "manga", title: "No.5", img: "manga/no5.jpg", note: "17-19/37", status: "en cours" },
 ];

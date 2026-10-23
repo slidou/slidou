@@ -1815,28 +1815,48 @@ h2.collapsed-creator .creator-arrow {
 .global-search-input:focus { border-color: var(--link-color); }
 .global-search-input::placeholder { color: var(--secondary-text); opacity: 0.6; }
 
-.global-search-results {
+/* ── PALETTE DE RECHERCHE GLOBALE (CTRL+K) ── */
+#global-search { cursor: pointer; }
+.search-palette {
   display: none;
-  position: absolute;
-  top: 45px; /* Juste sous la barre */
-  left: 0;
-  width: 400px; /* Largeur fixe pour bien lire les titres */
-  max-width: calc(100vw - 210px); /* S'adapte si l'écran est tout petit */
-  max-height: 65vh;
-  overflow-y: auto;
+  position: fixed; inset: 0; z-index: 3000;
+  background: rgba(0,0,0,0.45);
+  align-items: flex-start; justify-content: center;
+  padding: 10vh 15px 15px;
+}
+.search-palette.open { display: flex; }
+.search-palette-panel {
+  width: 560px; max-width: 100%; max-height: 72vh;
+  display: flex; flex-direction: column;
   background: var(--bg-color);
   border: 1px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-  z-index: 2000;
-  padding: 15px;
-  box-sizing: border-box;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  overflow: hidden;
+  animation: palette-in 0.15s ease;
 }
-.global-search-results.visible { display: block; }
-.gs-close {
-  position: absolute; top: 10px; right: 15px;
-  background: none; border: none; font-size: 22px;
-  cursor: pointer; color: var(--secondary-text); line-height: 1;
+@keyframes palette-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+.search-palette-input {
+  width: 100%; box-sizing: border-box;
+  padding: 15px 18px;
+  border: none; border-bottom: 1px solid var(--border-color);
+  background: transparent; color: var(--text-color);
+  font-family: 'Space Grotesk', sans-serif; font-size: 16px; outline: none;
+  flex-shrink: 0;
+}
+.search-palette-input::placeholder { color: var(--secondary-text); opacity: 0.6; }
+.search-palette-results { overflow-y: auto; padding: 8px; flex: 1; }
+.search-palette-hint {
+  text-align: center; padding: 30px 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px; color: var(--secondary-text);
+}
+.gs-item.selected { background: var(--sidebar-bg); }
+.gs-item mark { background: none; color: var(--link-color); }
+.search-palette-footer {
+  padding: 8px 14px; border-top: 1px solid var(--border-color);
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--secondary-text);
+  display: flex; gap: 16px; flex-shrink: 0;
 }
 .gs-item {
   display: flex; align-items: center; gap: 12px;
@@ -1886,14 +1906,11 @@ h2.collapsed-creator .creator-arrow {
   color: var(--secondary-text);
 }
 
-/* Panneau de recherche sur mobile.
-   (Cette règle était sortie de son @media et écrasait la largeur desktop de 400px → 250px) */
+/* Bouton loupe : ouvre la palette de recherche sur mobile
+   (le trigger sidebar n'y est pas toujours visible). */
+#search-toggle { display: none; }
 @media(max-width:768px) {
-  .global-search-results {
-    width: 250px;
-    max-width: calc(100vw - 30px);
-    top: 40px;
-  }
+  #search-toggle { display: block; background: none; border: none; font-size: 18px; cursor: pointer; color: var(--text-color); }
 }
 
   /* ── ÉTATS VIDES ── */

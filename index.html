@@ -30,6 +30,7 @@
     <div class="sidebar-header">
       <h1>Slidou</h1>
       <div class="sidebar-header-actions">
+        <button id="search-toggle" title="recherche">🔎</button>
         <button id="menu-toggle">☰</button>
         <button id="theme-toggle">🌙</button>
       </div>
@@ -37,9 +38,8 @@
     <nav>
       <ul>
         <li><a href="#" data-page="home" class="active">Accueil</a></li>
-        <li style="position: relative;">
-          <input type="text" id="global-search" class="global-search-input" placeholder="🔎 recherche globale">
-          <div class="global-search-results" id="global-search-results"></div>
+        <li>
+          <input type="text" id="global-search" class="global-search-input" placeholder="🔎 recherche globale" readonly autocomplete="off" title="Ouvre la recherche (Ctrl+K)">
         </li>
         <li class="sidebar-separator"></li>
         <li><a href="#" data-page="bibliographie">Bibliographie</a></li>
@@ -320,6 +320,15 @@
     <button class="review-popup-close" id="review-popup-close">&times;</button>
     <div class="review-popup-title" id="review-popup-title"></div>
     <div class="review-popup-text" id="review-popup-text"></div>
+  </div>
+</div>
+
+<!-- Palette de recherche globale (Ctrl+K) -->
+<div class="search-palette" id="search-palette" role="dialog" aria-modal="true" aria-label="Recherche globale">
+  <div class="search-palette-panel">
+    <input type="text" id="palette-input" class="search-palette-input" placeholder="🔎 rechercher un titre ou un créateur…" autocomplete="off">
+    <div class="search-palette-results" id="palette-results"></div>
+    <div class="search-palette-footer"><span>↑ ↓ naviguer</span><span>↵ ouvrir</span><span>échap fermer</span></div>
   </div>
 </div>
 
