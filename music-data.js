@@ -124,6 +124,7 @@ const musicData = {
   ],
   "Future": [
     { title: "The Real Me", note: 2, cover: "music/therealme.webp", link: "https://rateyourmusic.com/release/album/future/the-real-me/" },
+    { title: "Future Hndrxx Presents: The WIZRD", note: 3, cover: "music/hndrxx.webp", link: "https://rateyourmusic.com/release/album/future/future-hndrxx-presents-the-wizrd/" },
   ],
   "Nirvana": [
     { title: "Nevermind", note: 2.5, cover: "music/nevermind.webp", link: "https://rateyourmusic.com/release/album/nirvana/nevermind/" },

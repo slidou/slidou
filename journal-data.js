@@ -990,4 +990,13 @@ const journalData = [
 { d: "2026-10-23", t: "livre", title: "Voyage au bout de la nuit", img: "covers/voyage.jpg", note: "poursuite de la lecture", status: "en cours" },
 { d: "2026-10-24", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "j'ai clear 4 défis", status: "en cours" },
 { d: "2026-10-24", t: "musique", title: "EXTASIAAAAA", img: "music/EXTASIAAAAA.webp", note: "première écoute" },
+{ d: "2026-10-24", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-10-24", t: "anime", title: "Watashi no Me ni Utsuru Tsumi, Anata no Me ni Utsuru Watashi", img: "anime/watashi.jpg", note: "short" },
+{ d: "2026-10-24", t: "anime", title: "Pop Pop City", img: "anime/popopcity.jpg", note: "short" },
+{ d: "2026-10-24", t: "anime", title: "Zaiyuki Pilot", img: "anime/zaiyuki.jpg", note: "short" },
+{ d: "2026-10-24", t: "anime", title: "Chichi no Yukue", img: "anime/chichinoyukue.jpg", note: "short" },
+{ d: "2026-10-24", t: "anime", title: "Furyou Ritsu", img: "anime/furyou.jpg", note: "short" },
+{ d: "2026-10-24", t: "anime", title: "Com Rade Zhi Ni Hao", img: "anime/rade.jpg", note: "short" },
+{ d: "2026-10-24", t: "musique", title: "Future Hndrxx Presents: The WIZRD", img: "music/hndrxx.webp", note: "première écoute" },
+{ d: "2026-10-24", t: "manga", title: "No.5", img: "manga/no5.jpg", note: "20-21/37", status: "en cours" },
 ];

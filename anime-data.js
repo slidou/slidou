@@ -7937,5 +7937,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 65233, title: "Pupa (Music)", note: 3, tags: ["music","archived"] },
   { id: 65232, title: "Garou Densetsu: CotW x Tokyo Revengers", note: null, tags: ["short","commercial","+","archived"] },
   { id: 58333, title: "Uji ni wa Monogatari ga Aru", note: 3, tags: ["short","archived"] },
+  { id: 65091, title: "Watashi no Me ni Utsuru Tsumi, Anata no Me ni Utsuru Watashi", note: null, tags: ["short","archived"] },
+  { id: 58318, title: "Pop Pop City", note: 3.5, tags: ["short","archived"] },
+  { id: 57702, title: "Zaiyuki Pilot", note: 4, tags: ["short","gem","archived"] },
+  { id: 65134, title: "Chichi no Yukue", note: 4, tags: ["short","gem","archived"] },
+  { id: 62914, title: "Furyou Ritsu", note: null, tags: ["short","archived"] },
+  { id: 62515, title: "Com Rade Zhi Ni Hao", note: 0.5, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
