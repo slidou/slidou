@@ -1930,3 +1930,330 @@ h2.collapsed-creator .creator-arrow {
 .gem-card img {
   box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.6), 0 0 12px rgba(66, 165, 245, 0.4), 0 4px 8px var(--shadow-color) !important;
 }
+
+/* ═══ PANTHÉON (STATS) — carrousels horizontaux des 5/5 ═══ */
+.pantheon {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+.pantheon .stats-header { margin-bottom: 15px; }
+.pantheon-total {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--star-color);
+}
+.pantheon-row { margin-bottom: 18px; }
+.pantheon-row:last-child { margin-bottom: 5px; }
+.pantheon-row-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--secondary-text);
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.pantheon-row-count { font-size: 11px; color: var(--link-color); }
+.pantheon-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+.pantheon-strip::-webkit-scrollbar { height: 6px; }
+.pantheon-strip::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+.pantheon-strip::-webkit-scrollbar-track { background: transparent; }
+.pantheon-cover {
+  flex: 0 0 auto;
+  height: 110px;
+  min-width: 74px;
+  background: var(--sidebar-bg);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.pantheon-cover img {
+  display: block;
+  height: 110px;
+  width: auto;
+  max-width: 165px;
+  transition: filter 0.15s;
+  box-shadow: 0 0 0 1px rgba(184, 134, 11, 0.45), 0 4px 8px var(--shadow-color);
+}
+.pantheon-cover.no-cover { box-shadow: inset 0 0 0 1px var(--border-color); }
+.pantheon-cover.has-link { cursor: pointer; }
+.pantheon-cover.has-link:hover img { filter: brightness(1.12); }
+
+/* ═══ SÉVÉRITÉ COMPARÉE (STATS) ═══ */
+.sev-block {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+.sev-head-note {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--secondary-text);
+}
+.sev-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.sev-label {
+  flex: 0 0 150px;
+  text-align: right;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--secondary-text);
+  text-transform: lowercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sev-asterisk { color: var(--star-color); }
+.sev-track {
+  flex: 1 1 auto;
+  height: 14px;
+  background: var(--sidebar-bg);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.sev-fill { height: 100%; border-radius: 7px; }
+.sev-val {
+  flex: 0 0 42px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--author-text);
+}
+.sev-sub {
+  margin: 0 0 10px 162px;
+  text-align: left;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+}
+.sev-note {
+  margin: 16px 0 0 162px;
+  text-align: left;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--secondary-text);
+  border-top: 1px solid var(--border-color);
+  padding-top: 10px;
+}
+@media (max-width: 768px) {
+  .sev-label { flex: 0 0 92px; font-size: 10px; }
+  .sev-val { flex: 0 0 36px; font-size: 12px; }
+  .sev-sub { margin-left: 104px; }
+  .sev-note { margin-left: 0; }
+  .pantheon { padding: 15px; }
+  .pantheon-cover { height: 92px; min-width: 62px; }
+  .pantheon-cover img { height: 92px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PERRUCHES PASSIVES — le perchoir ambulant
+   Une perruche quitte parfois sa cage (page à propos), vient
+   se poser en bas à droite pendant que l'on navigue, fait sa
+   vie (picore, lisse ses plumes, somnole…), puis rentre au nid.
+   100 % décoratif : pointer-events none, zéro impact sur la page.
+   ═══════════════════════════════════════════════════════════ */
+.budgie-ambient {
+  position: fixed;
+  right: 18px;
+  bottom: 10px;
+  width: 84px;
+  height: 104px;
+  z-index: 40; /* au-dessus du contenu, sous la palette (3000) et les popups (1000) */
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.budgie-ambient.ba-visible { opacity: 1; visibility: visible; }
+
+/* ── Vols d'aller-retour ── */
+.budgie-ambient.ba-fly-in { animation: budgieFlyIn 1.05s cubic-bezier(0.34, 0.72, 0.32, 1) both; }
+.budgie-ambient.ba-fly-out { animation: budgieFlyOut 0.85s ease-in both; }
+@keyframes budgieFlyIn {
+  0%   { opacity: 0; transform: translate(160px, -48px) rotate(14deg); }
+  55%  { opacity: 1; transform: translate(-12px, 5px) rotate(-5deg); }
+  76%  { transform: translate(3px, -2px) rotate(2deg); }
+  100% { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+}
+@keyframes budgieFlyOut {
+  0%   { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+  100% { opacity: 0; transform: translate(170px, -72px) rotate(16deg); }
+}
+/* battement d'ailes pendant les vols */
+.budgie-ambient.flying .ab-wing { animation: abFlap 0.18s ease-in-out infinite alternate; }
+@keyframes abFlap {
+  from { transform: rotate(-34deg); }
+  to   { transform: rotate(18deg); }
+}
+/* petit amortissement d'atterrissage */
+.budgie-ambient.ba-landed .ab-all { animation: abLand 0.38s cubic-bezier(0.3, 1.6, 0.5, 1) 1; }
+@keyframes abLand {
+  0%   { transform: scaleY(0.9) scaleX(1.08); }
+  100% { transform: scaleY(1) scaleX(1); }
+}
+
+/* ── Le support : oiseau + branche ── */
+.ba-bird-zone { position: relative; width: 100%; }
+.ba-bird-holder { position: relative; width: 100%; height: 84px; margin-bottom: -4px; }
+.ba-bird-holder svg { width: 100%; height: 100%; display: block; }
+.ba-perch { display: block; width: 88%; margin: 0 auto; height: 14px; opacity: 0.9; }
+.ba-shadow { display: block; width: 34px; height: 4px; margin: 1px auto 0; border-radius: 50%; background: var(--shadow-color); }
+
+/* ── Poses (classes posées sur .budgie-ambient, animations sur les groupes SVG) ── */
+.budgie-ambient .ab-all  { transform-box: fill-box; transform-origin: 50% 100%; animation: abBreathe 3.4s ease-in-out infinite; }
+.budgie-ambient .ab-head { transform-box: fill-box; transform-origin: 50% 96%; }
+.budgie-ambient .ab-wing { transform-box: fill-box; transform-origin: 78% 18%; }
+.budgie-ambient .ab-eye-open  { transform-box: fill-box; transform-origin: center; animation: abBlink 4.8s infinite; }
+.budgie-ambient .ab-eye-closed,
+.budgie-ambient .ab-zzz { opacity: 0; }
+@keyframes abBlink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  94%, 97% { transform: scaleY(0.08); }
+}
+@keyframes abBreathe {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.985); }
+}
+
+/* regarder autour */
+.budgie-ambient.pose-look .ab-head { animation: abLook 5.2s ease-in-out infinite; }
+@keyframes abLook {
+  0%, 100% { transform: rotate(0deg); }
+  22% { transform: rotate(-11deg); }
+  45% { transform: rotate(-11deg); }
+  68% { transform: rotate(7deg); }
+}
+
+/* picorer */
+.budgie-ambient.pose-peck .ab-all { animation: abPeck 3.1s ease-in-out infinite; }
+@keyframes abPeck {
+  0%, 62%, 100% { transform: rotate(0deg) translateY(0); }
+  8%  { transform: rotate(25deg) translateY(7px); }
+  16% { transform: rotate(0deg) translateY(0); }
+  26% { transform: rotate(25deg) translateY(7px); }
+  36% { transform: rotate(0deg) translateY(0); }
+  48% { transform: rotate(16deg) translateY(4px); }
+}
+
+/* lisser ses plumes */
+.budgie-ambient.pose-preen .ab-head { animation: abPreenHead 4.4s ease-in-out infinite; }
+.budgie-ambient.pose-preen .ab-wing { animation: abPreenWing 4.4s ease-in-out infinite; }
+@keyframes abPreenHead {
+  0%, 100% { transform: rotate(0deg); }
+  30%, 70% { transform: rotate(-24deg) translate(-2px, 1px); }
+}
+@keyframes abPreenWing {
+  0%, 100% { transform: rotate(0deg); }
+  30%, 70% { transform: rotate(-52deg); }
+}
+
+/* somnoler */
+.budgie-ambient.pose-sleep .ab-all { animation: abSleepBody 3.8s ease-in-out infinite; }
+.budgie-ambient.pose-sleep .ab-eye-open { opacity: 0; animation: none; }
+.budgie-ambient.pose-sleep .ab-eye-closed { opacity: 1; }
+.budgie-ambient.pose-sleep .ab-zzz { opacity: 1; }
+.budgie-ambient.pose-sleep .ab-zzz text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  fill: var(--link-color);
+  transform-box: fill-box;
+  animation: abZzzFloat 2.6s ease-in-out infinite;
+}
+.budgie-ambient.pose-sleep .ab-zzz text:nth-child(2) { animation-delay: 0.5s; }
+.budgie-ambient.pose-sleep .ab-zzz text:nth-child(3) { animation-delay: 1s; }
+@keyframes abZzzFloat {
+  0% { opacity: 0; transform: translateY(2px); }
+  35% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-7px); }
+}
+@keyframes abSleepBody {
+  0%, 100% { transform: translateY(4px) scaleY(1); }
+  50% { transform: translateY(4px) scaleY(0.96); }
+}
+
+/* ── Réactions ponctuelles ── */
+/* petit saut (chips de filtres, retrouvailles…) */
+.budgie-ambient.act-hop .ba-bird-holder { animation: abHop 0.55s cubic-bezier(0.3, 1.5, 0.5, 1) 1; }
+@keyframes abHop {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  35% { transform: translateY(-12px) scaleY(1.04); }
+  58% { transform: translateY(0) scaleY(0.92); }
+  78% { transform: translateY(0) scaleY(1); }
+}
+/* « ? » — recherche sans résultat */
+.budgie-ambient .ba-mark {
+  position: absolute;
+  top: -8px;
+  right: 4px;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--link-color);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.budgie-ambient.act-mark .ba-mark { opacity: 1; transform: scale(1) rotate(9deg); }
+.budgie-ambient.act-mark .ab-head { animation: abCurious 1.5s ease-in-out infinite; }
+@keyframes abCurious {
+  0%, 100% { transform: rotate(0deg); }
+  30%, 70% { transform: rotate(-13deg); }
+}
+/* cœurs / notes de musique qui montent */
+.budgie-ambient .ba-fx { position: absolute; inset: 0; }
+.budgie-ambient .ba-fx span {
+  position: absolute;
+  top: 4px;
+  left: 20px;
+  font-size: 16px;
+  pointer-events: none;
+  animation: baRise 1.05s ease-out forwards;
+}
+@keyframes baRise {
+  0% { opacity: 0; transform: translateY(6px) scale(0.5); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-28px) scale(1.15); }
+}
+
+/* ── Cage vide quand l'oiseau explore ── */
+.cage-away {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--secondary-text);
+  text-align: center;
+  padding: 0 8px;
+  opacity: 0.85;
+}
+
+/* ── Mobile : plus petite, s'efface pendant le scroll ── */
+.budgie-ambient.ba-scroll-hide { opacity: 0 !important; }
+@media (max-width: 768px) {
+  .budgie-ambient { right: 6px; bottom: 6px; width: 58px; height: 74px; }
+  .ba-bird-holder { height: 58px; }
+  .budgie-ambient .ba-mark { font-size: 15px; top: -4px; right: 0; }
+  .budgie-ambient .ba-fx span { font-size: 12px; left: 12px; }
+}
+
+/* ── Accessibilité : mouvement réduit → apparitions fondues, poses statiques ── */
+@media (prefers-reduced-motion: reduce) {
+  .budgie-ambient,
+  .budgie-ambient * { animation: none !important; }
+  .budgie-ambient { transition: opacity 0.25s ease; }
+}

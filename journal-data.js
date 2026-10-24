@@ -986,4 +986,8 @@ const journalData = [
 { d: "2026-10-22", t: "anime", title: "Garou Densetsu: CotW x Tokyo Revengers", img: "anime/garoud.jpg", note: "commercial" },
 { d: "2026-10-23", t: "anime", title: "Uji ni wa Monogatari ga Aru", img: "anime/monogatariaru.jpg", note: "short" },
 { d: "2026-10-23", t: "manga", title: "No.5", img: "manga/no5.jpg", note: "17-19/37", status: "en cours" },
+{ d: "2026-10-23", t: "anime", title: "Steel Ball Run: JoJo no Kimyou na Bouken", img: "anime/jojo7.jpg", note: "normal episode, 6/?", status: "en cours" },
+{ d: "2026-10-23", t: "livre", title: "Voyage au bout de la nuit", img: "covers/voyage.jpg", note: "poursuite de la lecture", status: "en cours" },
+{ d: "2026-10-24", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "j'ai clear 4 défis", status: "en cours" },
+{ d: "2026-10-24", t: "musique", title: "EXTASIAAAAA", img: "music/EXTASIAAAAA.webp", note: "première écoute" },
 ];

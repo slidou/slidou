@@ -15,7 +15,7 @@
    suffit, ce worker se revalide tout seul à chaque visite.
    ═══════════════════════════════════════════════════════════════ */
 
-var VERSION = 'v6';  // v6 : palette de recherche Ctrl+K (multi-mots, clavier, surlignage) à la place du dropdown
+var VERSION = 'v10';  // v10 : perruches passives (perchoir ambulant, poses CSS, pensées vivantes) + style.css associé
 var SHELL_CACHE = 'slidou-shell-' + VERSION;
 var IMG_CACHE = 'slidou-img-' + VERSION;
 var MEDIA_CACHE = 'slidou-media-' + VERSION;

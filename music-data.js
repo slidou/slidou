@@ -61,6 +61,7 @@ const musicData = {
   "Ino Casablanca": [
     { title: "Extasia", note: 4, cover: "music/extasia.webp", link: "https://rateyourmusic.com/release/mixtape/ino-casablanca/extasia/", format: "mixtape", tags: ["réécoute"] },
     { title: "Tamara", note: 3, cover: "music/tamara.webp", link: "https://rateyourmusic.com/release/mixtape/ino-casablanca/tamara/", format: "mixtape" },
+    { title: "EXTASIAAAAA", note: 3.5, cover: "music/EXTASIAAAAA.webp", link: "https://rateyourmusic.com/release/album/ino-casablanca/extasiaaaaa/" },
   ],
   "Mac Miller": [
     { title: "Circles", note: 5, cover: "music/circles.webp", link: "https://rateyourmusic.com/release/album/mac-miller/circles/", tags: ["réécoute","bought"] },
