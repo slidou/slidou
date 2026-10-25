@@ -6,22 +6,21 @@
                             le cache ne sert qu'en hors-ligne)
    • CSS / JS / données   : CACHE PUIS REVALIDATION (affichage
                             instantané, mise à jour en arrière-plan)
-   • Images locales       : CACHE D'ABORD
+   • Images locales       : CACHE D'ABORD (covers immuables incluses)
    • Images distantes     : CACHE D'ABORD (plafonné, FIFO)
    • Audio (player)       : CACHE D'ABORD (plafonné, FIFO)
    • Polices Google       : CACHE D'ABORD
-   • API Jikan            : LAISSÉE AU RÉSEAU (gérée par script.js)
    Mises à jour : rien à faire côté contenu — pusher sur GitHub
    suffit, ce worker se revalide tout seul à chaque visite.
    ═══════════════════════════════════════════════════════════════ */
 
-var VERSION = 'v10';  // v10 : perruches passives (perchoir ambulant, poses CSS, pensées vivantes) + style.css associé
+var VERSION = 'v14';  // v14 : perchoir ambulant — la perruche redécolle vers d'autres coins de l'écran
 var SHELL_CACHE = 'slidou-shell-' + VERSION;
 var IMG_CACHE = 'slidou-img-' + VERSION;
 var MEDIA_CACHE = 'slidou-media-' + VERSION;
 var FONT_CACHE = 'slidou-fonts-' + VERSION;
 
-var IMG_LIMIT = 1500;  // max de covers gardées en cache (FIFO)
+var IMG_LIMIT = 2500;  // max d'images gardées en cache (FIFO) — covers locales ~10 Ko, hors-ligne au fil des visites
 var MEDIA_LIMIT = 40;  // max de fichiers audio gardés en cache (FIFO)
 
 /* Fichiers indispensables au démarrage hors-ligne (install bloquante si l'un manque) */
@@ -201,10 +200,6 @@ self.addEventListener('fetch', function(event) {
   if (request.method !== 'GET') return;
 
   var url = new URL(request.url);
-
-  /* L'API Jikan est déjà gérée (file d'attente + cache localStorage)
-     par script.js : on ne l'intercepte pas du tout. */
-  if (url.hostname === 'api.jikan.moe') return;
 
   /* Page HTML → toujours à jour */
   if (request.mode === 'navigate') {

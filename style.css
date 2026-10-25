@@ -2070,8 +2070,8 @@ h2.collapsed-creator .creator-arrow {
    ═══════════════════════════════════════════════════════════ */
 .budgie-ambient {
   position: fixed;
-  right: 18px;
-  bottom: 10px;
+  right: var(--br, 18px); /* position pilotée par JS : le perchoir ambulant */
+  bottom: var(--bb, 10px);
   width: 84px;
   height: 104px;
   z-index: 40; /* au-dessus du contenu, sous la palette (3000) et les popups (1000) */
@@ -2095,6 +2095,14 @@ h2.collapsed-creator .creator-arrow {
   0%   { opacity: 1; transform: translate(0, 0) rotate(0deg); }
   100% { opacity: 0; transform: translate(170px, -72px) rotate(16deg); }
 }
+/* ── Perchoir ambulant : elle redécolle vers un autre spot de la page ── */
+.budgie-ambient.ba-across { animation: budgieFlyAcross 1.15s cubic-bezier(0.45, 0.05, 0.35, 1) both; }
+@keyframes budgieFlyAcross {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  14%  { transform: translate(calc(var(--wx, 0px) * 0.08), -16px) rotate(-8deg); }
+  52%  { transform: translate(calc(var(--wx, 0px) * 0.55), calc(var(--wy, 0px) * 0.55 - 34px)) rotate(4deg); }
+  100% { transform: translate(var(--wx, 0px), var(--wy, 0px)) rotate(0deg); }
+}
 /* battement d'ailes pendant les vols */
 .budgie-ambient.flying .ab-wing { animation: abFlap 0.18s ease-in-out infinite alternate; }
 @keyframes abFlap {
@@ -2113,7 +2121,8 @@ h2.collapsed-creator .creator-arrow {
 .ba-bird-holder { position: relative; width: 100%; height: 84px; margin-bottom: -4px; }
 .ba-bird-holder svg { width: 100%; height: 100%; display: block; }
 .ba-perch { display: block; width: 88%; margin: 0 auto; height: 14px; opacity: 0.9; }
-.ba-shadow { display: block; width: 34px; height: 4px; margin: 1px auto 0; border-radius: 50%; background: var(--shadow-color); }
+.ba-shadow { display: block; width: 34px; height: 4px; margin: 1px auto 0; border-radius: 50%; background: var(--shadow-color); transition: opacity 0.3s ease; }
+.budgie-ambient.flying .ba-shadow { opacity: 0; } /* pas d'ombre au sol en plein vol */
 
 /* ── Poses (classes posées sur .budgie-ambient, animations sur les groupes SVG) ── */
 .budgie-ambient .ab-all  { transform-box: fill-box; transform-origin: 50% 100%; animation: abBreathe 3.4s ease-in-out infinite; }
@@ -2245,7 +2254,7 @@ h2.collapsed-creator .creator-arrow {
 /* ── Mobile : plus petite, s'efface pendant le scroll ── */
 .budgie-ambient.ba-scroll-hide { opacity: 0 !important; }
 @media (max-width: 768px) {
-  .budgie-ambient { right: 6px; bottom: 6px; width: 58px; height: 74px; }
+  .budgie-ambient { right: var(--br, 6px); bottom: var(--bb, 6px); width: 58px; height: 74px; }
   .ba-bird-holder { height: 58px; }
   .budgie-ambient .ba-mark { font-size: 15px; top: -4px; right: 0; }
   .budgie-ambient .ba-fx span { font-size: 12px; left: 12px; }

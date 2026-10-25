@@ -1,9 +1,9 @@
 // ── Bibliography data ──
 const booksData = {
     "Fyodor Dostoevsky": [
-    { title: "Les nuits blanches", note: 4, cover: "covers/les-nuits-blanches.jpg", link: "https://www.goodreads.com/book/show/1772910.White_Nights" },
-    { title: "Les carnets du sous-sol", note: 4, cover: "covers/carnets-du-sous-sol.jpg", link: "https://www.goodreads.com/book/show/1424502.Les_Carnets_du_sous_sol" },
-    { title: "Le Rêve d'un homme ridicule", note: 4, cover: "covers/reve-homme-ridicule.jpg", link: "https://www.goodreads.com/book/show/1424499.Le_R_ve_d_un_homme_ridicule", review: `Une étoile et un revolver, une petite fille et un rêve.
+    { title: "Les nuits blanches", note: 4, cover: "books/les-nuits-blanches.jpg", link: "https://www.goodreads.com/book/show/1772910.White_Nights" },
+    { title: "Les carnets du sous-sol", note: 4, cover: "books/carnets-du-sous-sol.jpg", link: "https://www.goodreads.com/book/show/1424502.Les_Carnets_du_sous_sol" },
+    { title: "Le Rêve d'un homme ridicule", note: 4, cover: "books/reve-homme-ridicule.jpg", link: "https://www.goodreads.com/book/show/1424499.Le_R_ve_d_un_homme_ridicule", review: `Une étoile et un revolver, une petite fille et un rêve.
 
 Lire cette nouvelle me trottait dans la tête depuis un assez long moment, évidemment il m'a déjà été donné de lire quelques livres de Dostoïevski, sans pour autant plonger pour le moment dans ses œuvres les plus fournies.
 
@@ -35,8 +35,8 @@ Il finit à la fin par retrouver la fille, et cette fois-ci, il ira.
 On comprendra tout de suite que le texte, que ce soit par le monde miroir dans le rêve avant tout décrit comme étant paradisiaque ou par l'origine de l'amour, renvoie explicitement à une vision christique de la rédemption, ce qui n'est pas étonnant venant de Dostoïevski (le bagne l'ayant profondément marqué).
 
 Et moi aussi, je finis d’écrire ces quelques lignes, à quelques instants de succomber à mon tour à Morphée, assis devant mon bureau.` },
-    { title: "Un Voleur Honnête", note: 4, cover: "covers/unvoleurhonnete.jpg", link: "https://www.goodreads.com/book/show/2360416.Un_Voleur_Honn_te" },
-    { title: "Un cœur faible", note: 3, cover: "covers/coeurfaible.jpg", link: "https://www.goodreads.com/book/show/3548787-un-c-ur-faible", review: `Le personnage principal se crée une dette morale imaginaire tout le long de l'histoire, il n'arrête pas de répéter qu'il reçoit beaucoup trop de bonheur de la part de son meilleur ami et de sa fiancée pendant que lui ne leur donne rien en retour. Et c'est là que son ami lui répond qu'il n'a rien à rembourser du tout, que c'était ça l'amitié. Il avait transformé l'amour en obligation morale.
+    { title: "Un Voleur Honnête", note: 4, cover: "books/unvoleurhonnete.jpg", link: "https://www.goodreads.com/book/show/2360416.Un_Voleur_Honn_te" },
+    { title: "Un cœur faible", note: 3, cover: "books/coeurfaible.jpg", link: "https://www.goodreads.com/book/show/3548787-un-c-ur-faible", review: `Le personnage principal se crée une dette morale imaginaire tout le long de l'histoire, il n'arrête pas de répéter qu'il reçoit beaucoup trop de bonheur de la part de son meilleur ami et de sa fiancée pendant que lui ne leur donne rien en retour. Et c'est là que son ami lui répond qu'il n'a rien à rembourser du tout, que c'était ça l'amitié. Il avait transformé l'amour en obligation morale.
 
 Il y a aussi un aspect toujours d'actualité de nos jours, au cours de l'histoire il doit rendre un travail important selon lui, écrire 6 carnets, sauf qu'il ne lui reste que deux jours pour tout finir et il n'a même pas fait 1/4. Et c'est à ce moment là que s'installe la procrastination anxieuse, il pense au travail titanesque qu'il lui reste à faire, commence à paniquer, fait autre chose pour ne pas y penser, et la catastrophe se rapproche de plus en plus dangereusement. S'installe alors une spirale qui le pousse littéralement dans la folie mentale.
 Il devient fou non pas à cause du réel en lui-même, mais à cause du scénario qu'il s'est créé dans sa tête.
@@ -49,23 +49,23 @@ Vers la fin son ami dit : "Ce fut comme s’il venait de comprendre, seulement �
 
 Tout le monde autour de lui est bienveillant, que ce soit son ami, sa fiancée ou son patron, mais il transforme cet amour en fardeau moral écrasant.
 Ce n’est pas la cruauté du monde qui détruit Vassia, mais son incapacité à accepter simplement d’être aimé.` },
-    { title: "Le joueur", note: 2, cover: "covers/le-joueur-dostoievski.jpg", link: "https://www.goodreads.com/book/show/1389044.Le_Joueur", review: `Franchement, j’ai trouvé que l’auteur passait complètement à côté de son sujet. Le jeu, qui aurait dû être au cœur du récit, est relégué au second plan. C’était sûrement un choix, mais je m’attendais à une vraie réflexion sur la dépendance et l’obsession des joueurs, comme le laissait entendre la quatrième de couverture. Au final, tout ça est à peine effleuré.
+    { title: "Le joueur", note: 2, cover: "books/le-joueur-dostoievski.jpg", link: "https://www.goodreads.com/book/show/1389044.Le_Joueur", review: `Franchement, j’ai trouvé que l’auteur passait complètement à côté de son sujet. Le jeu, qui aurait dû être au cœur du récit, est relégué au second plan. C’était sûrement un choix, mais je m’attendais à une vraie réflexion sur la dépendance et l’obsession des joueurs, comme le laissait entendre la quatrième de couverture. Au final, tout ça est à peine effleuré.
 
 Les personnages sont mis en avant, mais aucun ne m’a vraiment intéressé, impossible de m’y attacher. Leurs intrigues me passaient au-dessus de la tête. Seule l’histoire de la grand-mère apporte une touche d’humour bienvenue, mais à part ça, rien de marquant.
 
 Ni les dialogues ni le style de l’auteur ne m’ont touché. Une lecture qui ne m’a pas convaincu.` },
-    { title: "Le Bouffon", note: 2, cover: "covers/lebouffon.jpg", link: "https://www.goodreads.com/book/show/34694060-le-bouffon" },
+    { title: "Le Bouffon", note: 2, cover: "books/lebouffon.jpg", link: "https://www.goodreads.com/book/show/34694060-le-bouffon" },
   ],
   "Franz Kafka": [
-    { title: "La métamorphose", note: 4, cover: "covers/la-metamorphose.jpg", link: "https://www.goodreads.com/book/show/193988.La_M_tamorphose", review: `Ce qui est intéressant dans ce livre, c'est que l'auteur ne prend pas la démarche classique de montrer uniquement la transformation et l'évolution d'un personnage dans son changement physique. Là, nous suivons surtout la métamorphose de tout un groupe, la métamorphose des liens qu'ils ont avec le personnage principal, le propos ici n'est pas vraiment l'insecte qu'il est devenu mais l'isolement social derrière qui en résulte.
+    { title: "La métamorphose", note: 4, cover: "books/la-metamorphose.jpg", link: "https://www.goodreads.com/book/show/193988.La_M_tamorphose", review: `Ce qui est intéressant dans ce livre, c'est que l'auteur ne prend pas la démarche classique de montrer uniquement la transformation et l'évolution d'un personnage dans son changement physique. Là, nous suivons surtout la métamorphose de tout un groupe, la métamorphose des liens qu'ils ont avec le personnage principal, le propos ici n'est pas vraiment l'insecte qu'il est devenu mais l'isolement social derrière qui en résulte.
 Il passe d'un pilier de groupe au rejeté absolu. On pourrait très bien remplacer sa transformation en une personne qui tombe malade, un "déchet social" ou ce que vous voulez, ce serait pareil. On passe d'une famille aimante quand tout se passe bien dans le meilleur des mondes, à une hostilité sans nom quand le pilier s'écroule, la compassion et l'amour disparaissent pour laisser place au dégoût dans un premier temps puis à l'indifférence la plus totale. Sa disparition ne serait que bénéfique pour tout le monde.
 
 Ça ne dérangeait personne quand notre protagoniste troquait sa liberté contre de l’argent pour payer les dettes de sa famille.
 
 Vous imaginez bien que j'ai vraiment bien apprécié le livre parce que je me reconnais d’une certaine manière, ce n’est pas très long en plus, je l'ai lu en deux fois, je vous le conseille grandement.` },
-    { title: "Lettre au père", note: 3, cover: "covers/lettre-au-pere.jpg", link: "https://www.goodreads.com/book/show/1289568.Lettre_au_p_re" },
-    { title: "Devant la loi", note: 3, cover: "covers/devant-la-loi.jpg", link: "https://www.goodreads.com/book/show/36275000-before-the-law" },
-    { title: "La Sentence - Dans la colonie pénitentiaire", note: 3, cover: "covers/la-sentence.jpg", link: "https://www.goodreads.com/book/show/177198041-la-sentence---dans-la-colonie-p-nitentiaire", review: `Une lecture intéressante, mais qui ne m'a pas transcendé. Heureusement, c'était court.
+    { title: "Lettre au père", note: 3, cover: "books/lettre-au-pere.jpg", link: "https://www.goodreads.com/book/show/1289568.Lettre_au_p_re" },
+    { title: "Devant la loi", note: 3, cover: "books/devant-la-loi.jpg", link: "https://www.goodreads.com/book/show/36275000-before-the-law" },
+    { title: "La Sentence - Dans la colonie pénitentiaire", note: 3, cover: "books/la-sentence.jpg", link: "https://www.goodreads.com/book/show/177198041-la-sentence---dans-la-colonie-p-nitentiaire", review: `Une lecture intéressante, mais qui ne m'a pas transcendé. Heureusement, c'était court.
 
 Pour commencer, si je devais interpréter "La Sentence", je verrais en elle la figure d'un parent ultra-toxique et autoritaire qui juge et condamne selon son propre narratif, sans jamais écouter sa progéniture. Il incarne cette volonté de contrôle absolu sur la vie d’autrui, comme si le lien du sang signifiait une propriété totale. L’enfant, quant à lui, se soumet entièrement à la figure paternelle. En connaissant la relation entre Kafka et son père, cette lecture prend tout son sens.  
 
@@ -76,10 +76,10 @@ Ce qui rend l’histoire encore plus ironique, c’est l’aveuglement total de 
 L'ancien commandant, quant à lui, est décrit comme une figure quasi-divine, omnipotente et créatrice de règles. Il est à la fois juge, soldat, ingénieur, chimiste et dessinateur. L’officier parle de lui comme d’un guide infaillible. Comme je disais plus haut, une prophétie annonce même que l'officier va renaître, à la manière du commandant, pour guider les hommes. Cependant, cette attente messianique est d’autant plus absurde qu’elle appartient à un monde révolu, où le système qu’il défend est en train de s’effondrer. Kafka joue ici avec l’absurde et tourne en dérision les idéologies totalitaires et religieuses qui survivent malgré leur propre décrépitude.  
 
 La scène finale est également marquante : le visiteur rejette le système de la colonie, mais refuse aussi d’en devenir un acteur. Il demeure un observateur extérieur, refusant même d’embarquer le soldat et le condamné avec lui. Ce choix souligne une indifférence presque cruelle : plutôt que d’intervenir pour sauver ces deux hommes d’un destin incertain, il les abandonne, comme s’ils faisaient partie intégrante d’un système voué à l’effondrement.` },
-    { title: "Le Terrier", note: 2, cover: "covers/le-terrier.jpg", link: "https://www.goodreads.com/book/show/199745510-le-terrier" }
+    { title: "Le Terrier", note: 2, cover: "books/le-terrier.jpg", link: "https://www.goodreads.com/book/show/199745510-le-terrier" }
   ],
   "Albert Camus": [
-    { title: "La Chute", note: 5, cover: "covers/la-chute.jpg", link: "https://www.goodreads.com/book/show/774027.La_chute", review: `C'est à partir de cet événement fatidique (la chute de la femme dans la Seine) que le personnage principal commence à vaciller. Il prend conscience qu'il est lui aussi sujet au jugement, car il n'a rien fait pour la sauver cette nuit-là. Son image d’homme parfait se fissure peu à peu. Dès lors, il a l'impression que les gens autour de lui affichent des sourires en coin et rient dans son dos, ce qui le rend de plus en plus maladroit, persuadé d’être constamment jugé.
+    { title: "La Chute", note: 5, cover: "books/la-chute.jpg", link: "https://www.goodreads.com/book/show/774027.La_chute", review: `C'est à partir de cet événement fatidique (la chute de la femme dans la Seine) que le personnage principal commence à vaciller. Il prend conscience qu'il est lui aussi sujet au jugement, car il n'a rien fait pour la sauver cette nuit-là. Son image d’homme parfait se fissure peu à peu. Dès lors, il a l'impression que les gens autour de lui affichent des sourires en coin et rient dans son dos, ce qui le rend de plus en plus maladroit, persuadé d’être constamment jugé.
 
 Bien sûr, tout cela se passe avant tout dans sa psyché, Il croit être jugé, alors il projette ce jugement sur les autres, qui deviennent le reflet de sa propre culpabilité. Il s'enferme lui-même dans sa propre prison mentale dont il est à la fois le geôlier et le captif. 
 Il n'est pas "bon" par nature, il veut l’être parce qu'il s'aime lui-même. Il est même prêt à devenir immortel pour pouvoir s’admirer éternellement. Ce qu’il cherche, ce n’est pas tant la vertu que l’image parfaite de lui-même dans le regard des autres. Il ne veut pas seulement être parfait, il veut que le monde le voie comme tel. Conscient de son hypocrisie, il préfère pourtant maintenir l’illusion, pour lui comme pour les autres.
@@ -87,19 +87,19 @@ Il n'est pas "bon" par nature, il veut l’être parce qu'il s'aime lui-même. I
 La dernière phrase du livre résume toute cette mécanique et sa culpabilité : "Ô jeune fille, jette-toi encore dans l'eau pour que j'aie une seconde fois la chance de nous sauver tous les deux !" Cette femme qui tombe symbolise littéralement la chute mentale du personnage principal. Il va même jusqu'à montrer un tableau volé à un inconnu, comme si, au fond, il espérait être arrêté. Ce tableau représente des juges, une présence symbolique qui semble le scruter en permanence, jusque chez lui, il se sent coupable.
 
 Un chef-d'œuvre dont certaines citations m'ont marqué à jamais.` },
-    { title: "L'Étranger", note: 4, cover: "covers/letranger.jpg", link: "https://www.goodreads.com/book/show/15688.L_tranger", review: `"Du moment qu'on meurt, comment et quand, cela n'importe pas, c'était évident."` },
-    { title: "La Peste", note: 3, cover: "covers/la-peste.jpg", link: "https://www.goodreads.com/book/show/770754.La_peste", review: `La résistance face au mal absurde.` },
-    { title: "L'été", note: 3, cover: "covers/lete.jpg", link: "https://www.goodreads.com/book/show/12922533-l-t" },
-    { title: "Le Malentendu", note: 3, cover: "covers/le-malentendu.jpg", link: "https://www.goodreads.com/book/show/168813720-by-albert-camus---le-malentendu-folio-theatre-french-edition-1995-0" }
+    { title: "L'Étranger", note: 4, cover: "books/letranger.jpg", link: "https://www.goodreads.com/book/show/15688.L_tranger", review: `"Du moment qu'on meurt, comment et quand, cela n'importe pas, c'était évident."` },
+    { title: "La Peste", note: 3, cover: "books/la-peste.jpg", link: "https://www.goodreads.com/book/show/770754.La_peste", review: `La résistance face au mal absurde.` },
+    { title: "L'été", note: 3, cover: "books/lete.jpg", link: "https://www.goodreads.com/book/show/12922533-l-t" },
+    { title: "Le Malentendu", note: 3, cover: "books/le-malentendu.jpg", link: "https://www.goodreads.com/book/show/168813720-by-albert-camus---le-malentendu-folio-theatre-french-edition-1995-0" }
   ],
   "Stefan Zweig": [
-    { title: "Le Joueur d'échecs", note: 4, cover: "covers/joueur-echecs.jpg", link: "https://www.goodreads.com/book/show/1393712.Le_Joueur_d_checs", review: `C'était très bon, rien de spécial à dire.
+    { title: "Le Joueur d'échecs", note: 4, cover: "books/joueur-echecs.jpg", link: "https://www.goodreads.com/book/show/1393712.Le_Joueur_d_checs", review: `C'était très bon, rien de spécial à dire.
 On voit vraiment à quel point les joueurs d'échecs sont dans un monde à part, un peu comme les artistes. Le côté obsessionnel est très bien retranscrit, et l'auteur mêle de véritables références historiques à une histoire fictive, tout est parfaitement géré.
 On comprend vraiment que ce n'est pas simplement un jeu. Certains y mettent littéralement toute leur vie dans ces 64 carrés noirs et blancs, C'est un mélange entre l'art et la science, et aucun hasard n'y est possible.` },
-    { title: "Lettre d'une inconnue", note: 4, cover: "covers/lettre-inconnue.jpg", link: "https://www.goodreads.com/book/show/6427100-lettre-d-une-inconnue", review: `Un livre qui parle de l'amour obsessionnel d'une femme pour un homme, pour qui elle est restée une inconnue, de son enfance jusqu'à la fin. Elle a dédié toute sa vie, toute son âme, à cette personne, mais la vie ne lui fera pas de cadeau et un destin tragique finira par l'emporter dans l'indifférence générale.
+    { title: "Lettre d'une inconnue", note: 4, cover: "books/lettre-inconnue.jpg", link: "https://www.goodreads.com/book/show/6427100-lettre-d-une-inconnue", review: `Un livre qui parle de l'amour obsessionnel d'une femme pour un homme, pour qui elle est restée une inconnue, de son enfance jusqu'à la fin. Elle a dédié toute sa vie, toute son âme, à cette personne, mais la vie ne lui fera pas de cadeau et un destin tragique finira par l'emporter dans l'indifférence générale.
 
 Une très bonne lecture. J'étais déjà d'humeur morose ce soir, et cela n'a fait qu'ajouter une couche à cet état.` },
-    { title: "La Confusion des sentiments", note: 3, cover: "covers/confusion-sentiments.jpg", link: "https://www.goodreads.com/book/show/1393713.La_Confusion_des_sentiments", review: `Lecture agréable même si j'ai plus apprécié les deux autres livres de l’auteur que j'ai lus.
+    { title: "La Confusion des sentiments", note: 3, cover: "books/confusion-sentiments.jpg", link: "https://www.goodreads.com/book/show/1393713.La_Confusion_des_sentiments", review: `Lecture agréable même si j'ai plus apprécié les deux autres livres de l’auteur que j'ai lus.
 Peut-être que le sujet me parlait moins ou que je suis passé un peu à côté. 
 
 L’histoire raconte celle d'un homme totalement fasciné et admiratif d’un de ses maîtres, ce qui engendre un tas de sentiments confus.
@@ -108,13 +108,13 @@ L’histoire raconte celle d'un homme totalement fasciné et admiratif d’un de
 Après, étant donné que le livre est paru en 1927, ça devait être quelque chose pour l’époque, je n’en doute pas.` }
   ],
   "Antoine de Saint-Exupéry": [
-    { title: "Le Petit Prince", note: 5, cover: "covers/petit-prince.jpg", link: "https://www.goodreads.com/book/show/43827544-the-little-prince", review: `Le Petit Prince, rien de spécial à dire dessus si ce n'est que c'est un chef-d'œuvre, je l'avais lu quand j'étais en primaire, mais avec la relecture, je me suis rendu compte que je n'avais pas compris énormément de sous-texte (ce qui est logique).
+    { title: "Le Petit Prince", note: 5, cover: "books/petit-prince.jpg", link: "https://www.goodreads.com/book/show/43827544-the-little-prince", review: `Le Petit Prince, rien de spécial à dire dessus si ce n'est que c'est un chef-d'œuvre, je l'avais lu quand j'étais en primaire, mais avec la relecture, je me suis rendu compte que je n'avais pas compris énormément de sous-texte (ce qui est logique).
 
 Pour moi, le livre, c'est avant tout un appel à ne pas oublier l'humain en devenant une grande personne, à ne pas oublier de regarder avec le cœur et non avec les yeux.
 Tout comme ce qui fait la beauté du désert (le puits), de la maison (le trésor) ou de l'étoile (la rose) est invisible, ce qui fait la beauté de l'homme est une chose invisible que l'on nomme les liens du cœur.
 
 Et je tiens à dire que la version physique du livre est magnifique, avec ses différents dessins à l'intérieur. Je suis bien content de l'avoir.` },
-    { title: "Lettre à un otage", note: 5, cover: "covers/lettre-otage.jpg", link: "https://www.goodreads.com/book/show/1289991.Lettre_un_otage", review: `L'amitié et l'amour de la France, l'espoir de sa libération, le remords de l'avoir quittée en pleine occupation allemande... Pourtant, il se dit voyageur et non émigré, contrairement à beaucoup d'autres, car plus que tout, il rêve de retrouver ses racines un jour.
+    { title: "Lettre à un otage", note: 5, cover: "books/lettre-otage.jpg", link: "https://www.goodreads.com/book/show/1289991.Lettre_un_otage", review: `L'amitié et l'amour de la France, l'espoir de sa libération, le remords de l'avoir quittée en pleine occupation allemande... Pourtant, il se dit voyageur et non émigré, contrairement à beaucoup d'autres, car plus que tout, il rêve de retrouver ses racines un jour.
 
 C'est son amitié qui le fait passer d’émigrant à voyageur. C'est grâce à cette amitié, pour cet homme jamais nommé (afin de ne pas le mettre en danger), qu'il reste fidèle à ses racines.
 
@@ -123,24 +123,24 @@ C'est son amitié qui le fait passer d’émigrant à voyageur. C'est grâce à 
 Lettre à un otage, ou plutôt lettre à un ami... Un ami resté en France.` }
   ],
   "Arthur Schopenhauer": [
-    { title: "L'art d'avoir toujours raison", note: 5, cover: "covers/art-avoir-raison.jpg", link: "https://www.goodreads.com/book/show/36493598-l-art-d-avoir-toujours-raison-suivi-de-la-lecture-et-les-livres-et-pens" },
-    { title: "Essai sur les femmes", note: 5, cover: "covers/essai-femmes.jpg", link: "https://www.goodreads.com/book/show/6779945-essai-sur-les-femmes" }
+    { title: "L'art d'avoir toujours raison", note: 5, cover: "books/art-avoir-raison.jpg", link: "https://www.goodreads.com/book/show/36493598-l-art-d-avoir-toujours-raison-suivi-de-la-lecture-et-les-livres-et-pens" },
+    { title: "Essai sur les femmes", note: 5, cover: "books/essai-femmes.jpg", link: "https://www.goodreads.com/book/show/6779945-essai-sur-les-femmes" }
   ],
   "Emil M. Cioran": [
-    { title: "De l'inconvénient d'être né", note: 5, cover: "covers/inconvenient-etre-ne.jpg", link: "https://www.goodreads.com/book/show/1768286.De_l_inconv_nient_d_tre_n_", review: `Le livre est un chef-d'œuvre à mes yeux et me parle énormément. Ici, on ne suit pas une histoire mais plutôt une suite de pensées et d’anecdotes de l'auteur dans lesquelles il est facile de se projeter. Compliqué donc de résumer le livre tant il est riche, mais il aborde la naissance, la mort et ce qu'il y a entre ces deux états, dont la notion de liberté. 
+    { title: "De l'inconvénient d'être né", note: 5, cover: "books/inconvenient-etre-ne.jpg", link: "https://www.goodreads.com/book/show/1768286.De_l_inconv_nient_d_tre_n_", review: `Le livre est un chef-d'œuvre à mes yeux et me parle énormément. Ici, on ne suit pas une histoire mais plutôt une suite de pensées et d’anecdotes de l'auteur dans lesquelles il est facile de se projeter. Compliqué donc de résumer le livre tant il est riche, mais il aborde la naissance, la mort et ce qu'il y a entre ces deux états, dont la notion de liberté. 
 
 Ici on change de focale : on ne méprise plus la mort pour ce qu'elle est, mais la naissance (une malédiction) pour ce qu'elle nous impose. On ne regarde pas devant nous mais derrière, d'où tout découle. Exister, venir au monde, c'est avoir perdu d'avance. Vous l'aurez deviner rien qu'au titre, c'est fataliste et pessimiste à souhait, avec une touche d'humour parfois. Mais il y'a du bon à en tirer, tant l'auteur est en contradiction avec lui-même tout au long du livre. 
 
 Ça n'aide en rien ma santé mentale, ça c'est sûr, mais je suis quand même curieux de lire les autres ouvrages qu'il a pu sortir.` },
-    { title: "Sur les cimes du désespoir", note: 4, cover: "covers/cimes-desespoir.jpg", link: "https://www.goodreads.com/book/show/117546.Sur_les_cimes_du_d_sespoir" }
+    { title: "Sur les cimes du désespoir", note: 4, cover: "books/cimes-desespoir.jpg", link: "https://www.goodreads.com/book/show/117546.Sur_les_cimes_du_d_sespoir" }
   ],
   "Victor Hugo": [
-    { title: "Le dernier jour d'un condamné", note: 4, cover: "covers/dernier-jour-condamne.jpg", link: "https://www.goodreads.com/book/show/1638232.Le_Dernier_Jour_d_un_condamn_", review: `Suite à Claude Gueux, j'ai lu Le Dernier Jour d'un Condamné, un très bon livre, rien à redire.
+    { title: "Le dernier jour d'un condamné", note: 4, cover: "books/dernier-jour-condamne.jpg", link: "https://www.goodreads.com/book/show/1638232.Le_Dernier_Jour_d_un_condamn_", review: `Suite à Claude Gueux, j'ai lu Le Dernier Jour d'un Condamné, un très bon livre, rien à redire.
 
 C'est avant tout un livre sur l'humain. On est plongé dans la souffrance et détresse psychologique d’un condamné, à l’aube de sa dernière heure dont on ignore jusqu’au crime. C'est une œuvre qui se veut entièrement politique et dénonce l'absurdité de la peine de mort.
 
 Bien que ce sujet date de 1800, il reste d'actualité. N'ayant aucune information sur le crime, nous, lecteurs, ne pouvons juger l'homme, mais seulement sa peine.` },
-    { title: "Claude gueux", note: 4, cover: "covers/claude-gueux.jpg", link: "https://www.goodreads.com/book/show/125527590-claude-gueux", review: `Je viens de finir Claude Gueux, un livre parfaitement en vigueur même en 2023 malgré que l'histoire se déroule en 1830 avec des enjeux importants dans une société saine.
+    { title: "Claude gueux", note: 4, cover: "books/claude-gueux.jpg", link: "https://www.goodreads.com/book/show/125527590-claude-gueux", review: `Je viens de finir Claude Gueux, un livre parfaitement en vigueur même en 2023 malgré que l'histoire se déroule en 1830 avec des enjeux importants dans une société saine.
 
 Victor Hugo constate à travers cette affaire que le peuple souffre, et que c'est cette détresse qui le pousse au crime.
 Il a voulu faire de Claude le représentant du peuple misérable. Le personnage incarne cette identité sociale jusque dans son nom : Gueux.
@@ -174,32 +174,32 @@ Et pour finir la phrase la plus importante du livre :
 "Cette tête de l'homme du peuple, cultivez-la, défrichez-la, arrosez-la, fécondez-la, éclairez-la, moralisez-la, utilisez-la ; vous n'aurez pas besoin de la couper."` }
   ],
   "Jean Racine": [
-    { title: "Phèdre", note: 4, cover: "covers/phedre.jpg", link: "https://www.goodreads.com/book/show/81864.Ph_dre" },
-    { title: "Andromaque", note: 4, cover: "covers/andromaque.jpg", link: "https://www.goodreads.com/book/show/33517073-andromaque" }
+    { title: "Phèdre", note: 4, cover: "books/phedre.jpg", link: "https://www.goodreads.com/book/show/81864.Ph_dre" },
+    { title: "Andromaque", note: 4, cover: "books/andromaque.jpg", link: "https://www.goodreads.com/book/show/33517073-andromaque" }
   ],
   "Osamu Dazai": [
-    { title: "La Déchéance d'un homme", note: 4, cover: "covers/decheance-homme.jpg", link: "https://www.goodreads.com/book/show/11222940-no-longer-human", review: `J'avais déjà lu la version manga avant cela et c'est exactement la même histoire, hormis la fin qui change légèrement. La version manga est un peu plus modernisée. Bonne lecture, tout le monde peut se reconnaître, à un certain degré qui varie selon ce que l'on a vécu ou non, dans la psyché du personnage principal.` },
-    { title: "Soleil couchant", note: 4, cover: "covers/soleil-couchant.jpg", link: "https://www.goodreads.com/book/show/194740.The_Setting_Sun" }
+    { title: "La Déchéance d'un homme", note: 4, cover: "books/decheance-homme.jpg", link: "https://www.goodreads.com/book/show/11222940-no-longer-human", review: `J'avais déjà lu la version manga avant cela et c'est exactement la même histoire, hormis la fin qui change légèrement. La version manga est un peu plus modernisée. Bonne lecture, tout le monde peut se reconnaître, à un certain degré qui varie selon ce que l'on a vécu ou non, dans la psyché du personnage principal.` },
+    { title: "Soleil couchant", note: 4, cover: "books/soleil-couchant.jpg", link: "https://www.goodreads.com/book/show/194740.The_Setting_Sun" }
   ],
   "Jordan Bardella [completed]": [
-    { title: "Ce Que Je Cherche", note: 1, cover: "covers/ce-que-je-cherche.jpg", link: "https://www.goodreads.com/book/show/220459830-ce-que-je-cherche", review: `Fond absolument désastreux et ennuyeux à mourir, au point que je me passerai de commentaire par flemme. Mais cerise sur le gâteau, la forme pêche aussi : faire une faute de paronymie entre 'dénote' et 'détonne' dans un livre qui se veut un minimum sérieux, fallait le faire. D'autant plus quand l’auteur, en plus d’être bourré de contradictions, n’a sans doute même pas écrit seul.` },
-    { title: "Ce que veulent les Français", note: 1, cover: "covers/ce-que-veulent-francais.jpg", link: "https://www.goodreads.com/book/show/237782229-ce-que-veulent-les-fran-ais", review: `Quelle misère, quelle souffrance.
+    { title: "Ce Que Je Cherche", note: 1, cover: "books/ce-que-je-cherche.jpg", link: "https://www.goodreads.com/book/show/220459830-ce-que-je-cherche", review: `Fond absolument désastreux et ennuyeux à mourir, au point que je me passerai de commentaire par flemme. Mais cerise sur le gâteau, la forme pêche aussi : faire une faute de paronymie entre 'dénote' et 'détonne' dans un livre qui se veut un minimum sérieux, fallait le faire. D'autant plus quand l’auteur, en plus d’être bourré de contradictions, n’a sans doute même pas écrit seul.` },
+    { title: "Ce que veulent les Français", note: 1, cover: "books/ce-que-veulent-francais.jpg", link: "https://www.goodreads.com/book/show/237782229-ce-que-veulent-les-fran-ais", review: `Quelle misère, quelle souffrance.
 Un livre fantasmé et médiocre contenant la même structure narrative en boucle.` }
   ],
   "Léo Etchar [completed]": [
-    { title: "COVID-19 : Une crise sanitaire névrosée", note: 5, cover: "covers/covid-etchar.jpg", link: "https://www.goodreads.com/book/show/87062089-covid-19", review: `Livre du GOAT.` }
+    { title: "COVID-19 : Une crise sanitaire névrosée", note: 5, cover: "books/covid-etchar.jpg", link: "https://www.goodreads.com/book/show/87062089-covid-19", review: `Livre du GOAT.` }
   ],
   "Sarah Kane": [
-    { title: "4.48 Psychosis", note: 5, cover: "covers/4-48-psychosis.jpg", link: "https://www.goodreads.com/book/show/146548.4_48_Psychosis" }
+    { title: "4.48 Psychosis", note: 5, cover: "books/4-48-psychosis.jpg", link: "https://www.goodreads.com/book/show/146548.4_48_Psychosis" }
   ],
   "Yoshida Kenkō": [
-    { title: "A Cup of Sake Beneath the Cherry Trees", note: 5, cover: "covers/cup-of-sake.jpg", link: "https://www.goodreads.com/book/show/24874345-a-cup-of-sake-beneath-the-cherry-trees" }
+    { title: "A Cup of Sake Beneath the Cherry Trees", note: 5, cover: "books/cup-of-sake.jpg", link: "https://www.goodreads.com/book/show/24874345-a-cup-of-sake-beneath-the-cherry-trees" }
   ],
   "Stig Dagerman": [
-    { title: "Notre besoin de consolation est impossible à rassasier", note: 5, cover: "covers/besoin-consolation.jpg", link: "https://www.goodreads.com/book/show/1495836.Notre_besoin_de_consolation_est_impossible_rassasier" }
+    { title: "Notre besoin de consolation est impossible à rassasier", note: 5, cover: "books/besoin-consolation.jpg", link: "https://www.goodreads.com/book/show/1495836.Notre_besoin_de_consolation_est_impossible_rassasier" }
   ],
   "Ivan Turgenev": [
-    { title: "Le Journal d'un homme de trop", note: 5, cover: "covers/journal-homme-de-trop.jpg", link: "https://www.goodreads.com/book/show/2082727.Le_Journal_d_un_homme_de_trop", review: `Le journal d'un homme de trop, je l'ai lu en une fois, je n'ai pas su m'arrêter.
+    { title: "Le Journal d'un homme de trop", note: 5, cover: "books/journal-homme-de-trop.jpg", link: "https://www.goodreads.com/book/show/2082727.Le_Journal_d_un_homme_de_trop", review: `Le journal d'un homme de trop, je l'ai lu en une fois, je n'ai pas su m'arrêter.
 Un homme sur son lit de mort qui tente de raconter sa vie dans un journal, deux semaines avant sa mort et de nous prouver qu'il a toujours été un homme de trop pour cette vie, que la nature même n'a pas voulu en premier lieu.
 Mais très vite, il se concentre surtout sur son premier amour et les relations autour dans lesquelles il s'est toujours senti de trop, une cinquième roue, un cinquième destrier dont on pourrait aisément se passer, un oiseau de trop.
 
@@ -208,7 +208,7 @@ Je vais m'arrêter là pour ne pas spoiler l’histoire mais vraiment j'ai dévo
 "Mon Dieu ! mon Dieu ! je vais mourir... Ce coeur avide et capable d'amour va bientôt cesser de battre... Est-il possible qu'il se taise à jamais sans avoir une seule fois connu le bonheur".` }
   ],
   "Michel Onfray": [
-    { title: "Traité d'athéologie", note: 5, cover: "covers/traite-atheologie.jpg", link: "https://www.goodreads.com/book/show/1838025.Trait_d_ath_ologie", review: `Je connaissais déjà la majorité des informations présentes dans le livre, suivant depuis un bon moment la sphère des apostats sur Internet, mais j’ai particulièrement apprécié le rappel de l’abomination qu’est la circoncision. Et même si cela devrait aller de soi, le fait que chaque point soit systématiquement sourcé pour démonter tout l’attirail religieux est excellent. Malgré cela, ceux qui se trouvent dans l'obscurité fuiront toujours la lumière afin d'éviter de voir leur monde s'écrouler sous le poids du réel. L'endoctrinement est une puissance terrifiante, capable d'enfermer l'esprit dans une prison mentale dont il ne s'évadera jamais.
+    { title: "Traité d'athéologie", note: 5, cover: "books/traite-atheologie.jpg", link: "https://www.goodreads.com/book/show/1838025.Trait_d_ath_ologie", review: `Je connaissais déjà la majorité des informations présentes dans le livre, suivant depuis un bon moment la sphère des apostats sur Internet, mais j’ai particulièrement apprécié le rappel de l’abomination qu’est la circoncision. Et même si cela devrait aller de soi, le fait que chaque point soit systématiquement sourcé pour démonter tout l’attirail religieux est excellent. Malgré cela, ceux qui se trouvent dans l'obscurité fuiront toujours la lumière afin d'éviter de voir leur monde s'écrouler sous le poids du réel. L'endoctrinement est une puissance terrifiante, capable d'enfermer l'esprit dans une prison mentale dont il ne s'évadera jamais.
 
 J’aime beaucoup la façon dont l'auteur tape sur toutes les religions. Même si je suis plus calé sur l’islam que sur le christianisme, c’était intéressant de lire l’histoire du premier État totalitaire chrétien, né des folies de Constantin et de Paul avant lui. L’ouvrage déconstruit méthodiquement les trois grandes religions, avec sources à l’appui et esprit critique. Et quelle meilleure période pour le lire que celle du ramadan et du carême ?
 
@@ -218,47 +218,47 @@ Je conclurai avec une phrase de Lucrèce, tirée de son génialissime "De la nat
 "La science peut seule éveiller dans les âmes, à défaut du soleil, l'astre de la raison."` }
   ],
   "Khalil Gibran": [
-    { title: "Le Prophète", note: 5, cover: "covers/le-prophete.jpg", link: "https://www.goodreads.com/book/show/59605643-le-proph-te", review: `Ce livre dégage une sagesse absolue.
+    { title: "Le Prophète", note: 5, cover: "books/le-prophete.jpg", link: "https://www.goodreads.com/book/show/59605643-le-proph-te", review: `Ce livre dégage une sagesse absolue.
 Excellente lecture, je comprends mieux pourquoi il est qualifié de 'livre de chevet'. C'est le genre de livre qu'on peut relire à n'importe quel moment de sa vie, en fonction de ce qu'on traverse et des thèmes qui nous interpellent. Il aborde la vie sous tous ses aspects : la mort, le plaisir, l'amour, la notion de bien et de mal, le temps, la liberté, sans oublier la vie en société avec des sujets comme le travail, le crime, le châtiment, et la loi. Cela pourrait sembler un peu simpliste ou démago, mais ce que j'aime particulièrement, c'est que chaque sujet est traité sans jugement, avec l'objectif de comprendre l'essence même de chaque terme. Le blanc et le noir existent en même temps pour laisser place au gris, à la sagesse. La raison a besoin de la passion pour exister, tout comme le mal n'est que le bien torturé par sa propre faim et sa propre soif.` }
   ],
   "Stéphane Michaka": [
-    { title: "La mémoire des couleurs", note: 5, cover: "covers/memoire-couleurs.jpg", link: "https://www.goodreads.com/book/show/42752899-la-m-moire-des-couleurs", review: `Enfin fini de lire La Mémoire des couleurs, c'était incroyable, rien de plus à ajouter sans spoiler, j'étais vraiment happé par l'histoire du début à la fin. Pour vous donnez une idée, c'est un mélange entre 1984, de la science-fiction et Houseki no Kuni, le tout saupoudré d'amnésie et de quête de soi. C'est le plus gros livre que j'ai lu jusqu'à présent, avec 425 pages.` }
+    { title: "La mémoire des couleurs", note: 5, cover: "books/memoire-couleurs.jpg", link: "https://www.goodreads.com/book/show/42752899-la-m-moire-des-couleurs", review: `Enfin fini de lire La Mémoire des couleurs, c'était incroyable, rien de plus à ajouter sans spoiler, j'étais vraiment happé par l'histoire du début à la fin. Pour vous donnez une idée, c'est un mélange entre 1984, de la science-fiction et Houseki no Kuni, le tout saupoudré d'amnésie et de quête de soi. C'est le plus gros livre que j'ai lu jusqu'à présent, avec 425 pages.` }
   ],
   "Roald Dahl": [
-    { title: "Charlie et la Chocolaterie", note: 5, cover: "covers/charlie-chocolaterie.jpg", link: "https://www.goodreads.com/book/show/524352.Charlie_et_la_chocolaterie" }
+    { title: "Charlie et la Chocolaterie", note: 5, cover: "books/charlie-chocolaterie.jpg", link: "https://www.goodreads.com/book/show/524352.Charlie_et_la_chocolaterie" }
   ],
   "Karl Marx": [
-    { title: "Manifeste du parti communiste", note: 4, cover: "covers/manifeste-communiste.jpg", link: "https://www.goodreads.com/book/show/2021781.Manifeste_du_parti_communiste" }
+    { title: "Manifeste du parti communiste", note: 4, cover: "books/manifeste-communiste.jpg", link: "https://www.goodreads.com/book/show/2021781.Manifeste_du_parti_communiste" }
   ],
   "Louisa Yousfi": [
-    { title: "Rester barbare", note: 4, cover: "covers/rester-barbare.jpg", link: "https://www.goodreads.com/book/show/60605405-rester-barbare" }
+    { title: "Rester barbare", note: 4, cover: "books/rester-barbare.jpg", link: "https://www.goodreads.com/book/show/60605405-rester-barbare" }
   ],
   "Léane Alestra": [
-    { title: "Les Hommes hétéros le sont-ils vraiment ?", note: 4, cover: "covers/hommes-heteros.jpg", link: "https://www.goodreads.com/book/show/123162762-les-hommes-h-t-ros-le-sont-ils-vraiment" }
+    { title: "Les Hommes hétéros le sont-ils vraiment ?", note: 4, cover: "books/hommes-heteros.jpg", link: "https://www.goodreads.com/book/show/123162762-les-hommes-h-t-ros-le-sont-ils-vraiment" }
   ],
   "Charles Baudelaire": [
-    { title: "Les Fleurs du Mal", note: 4, cover: "covers/fleurs-du-mal.jpg", link: "https://www.goodreads.com/book/show/207354.Les_Fleurs_du_Mal", review: `Les Métamorphoses du Vampire. Rien de plus à ajouter.` }
+    { title: "Les Fleurs du Mal", note: 4, cover: "books/fleurs-du-mal.jpg", link: "https://www.goodreads.com/book/show/207354.Les_Fleurs_du_Mal", review: `Les Métamorphoses du Vampire. Rien de plus à ajouter.` }
   ],
   "Alfred de Musset": [
-    { title: "On ne badine pas avec l'amour", note: 4, cover: "covers/badine-amour.jpg", link: "https://www.goodreads.com/book/show/570255.On_ne_badine_pas_avec_l_amour", review: `C'était la première pièce de théâtre que je lisais, et j'ai trouvé ça excellent. J'ai vraiment pris plaisir à la lire. On ne plaisante pas avec l'amour sans en goûter les conséquences.` }
+    { title: "On ne badine pas avec l'amour", note: 4, cover: "books/badine-amour.jpg", link: "https://www.goodreads.com/book/show/570255.On_ne_badine_pas_avec_l_amour", review: `C'était la première pièce de théâtre que je lisais, et j'ai trouvé ça excellent. J'ai vraiment pris plaisir à la lire. On ne plaisante pas avec l'amour sans en goûter les conséquences.` }
   ],
   "Michael Morpurgo": [
-    { title: "Soldat Peaceful", note: 4, cover: "covers/soldat-peaceful.jpg", link: "https://www.goodreads.com/book/show/15908589-soldat-peaceful" }
+    { title: "Soldat Peaceful", note: 4, cover: "books/soldat-peaceful.jpg", link: "https://www.goodreads.com/book/show/15908589-soldat-peaceful" }
   ],
   "Harlan Ellison": [
-    { title: "I Have No Mouth & I Must Scream", note: 4, cover: "covers/i-have-no-mouth.jpg", link: "https://www.goodreads.com/book/show/20813135-i-have-no-mouth-i-must-scream" }
+    { title: "I Have No Mouth & I Must Scream", note: 4, cover: "books/i-have-no-mouth.jpg", link: "https://www.goodreads.com/book/show/20813135-i-have-no-mouth-i-must-scream" }
   ],
   "Nemo Ramjet": [
-    { title: "All Tomorrows", note: 4, cover: "covers/all-tomorrows.jpg", link: "https://www.goodreads.com/book/show/16143402-all-tomorrows" }
+    { title: "All Tomorrows", note: 4, cover: "books/all-tomorrows.jpg", link: "https://www.goodreads.com/book/show/16143402-all-tomorrows" }
   ],
   "Franck Pavloff": [
-    { title: "Matin Brun", note: 4, cover: "covers/matin-brun.jpg", link: "https://www.goodreads.com/book/show/2110174.Matin_Brun" }
+    { title: "Matin Brun", note: 4, cover: "books/matin-brun.jpg", link: "https://www.goodreads.com/book/show/2110174.Matin_Brun" }
   ],
   "Stéphane Hessel": [
-    { title: "Indignez-vous !", note: 4, cover: "covers/indignez-vous.jpg", link: "https://www.goodreads.com/book/show/9638101-indignez-vous" }
+    { title: "Indignez-vous !", note: 4, cover: "books/indignez-vous.jpg", link: "https://www.goodreads.com/book/show/9638101-indignez-vous" }
   ],
   "Emile Zola": [
-    { title: "J'accuse!", note: 4, cover: "covers/jaccuse.jpg", link: "https://www.goodreads.com/book/show/816964.J_accuse_", review: `Un combat engagé pour la vérité et la justice. Zola, poursuivi pour diffamation après la publication de son article en 1898, doit s’exiler en Angleterre. Il ne verra jamais le triomphe de sa cause : Dreyfus ne sera réhabilité qu’en 1906, quatre ans après la mort mystérieuse de l’écrivain en 1902 (certains ont spéculé sur un assassinat). Mais son courage et sa détermination à exposer la Vérité marqueront l’histoire.
+    { title: "J'accuse!", note: 4, cover: "books/jaccuse.jpg", link: "https://www.goodreads.com/book/show/816964.J_accuse_", review: `Un combat engagé pour la vérité et la justice. Zola, poursuivi pour diffamation après la publication de son article en 1898, doit s’exiler en Angleterre. Il ne verra jamais le triomphe de sa cause : Dreyfus ne sera réhabilité qu’en 1906, quatre ans après la mort mystérieuse de l’écrivain en 1902 (certains ont spéculé sur un assassinat). Mais son courage et sa détermination à exposer la Vérité marqueront l’histoire.
 
 Sans détour, il dénonce les coupables et souligne le rôle crucial de la presse, une arme qu’il manie lui-même dans cet article brûlant. Conscient des risques, il assume pleinement sa prise de position :
 
@@ -277,25 +277,25 @@ Un texte brûlant, animé par une passion absolue pour la justice et la lumière
 "Je n'ai qu'une passion, celle de la lumière, au nom de l'humanité qui a tant souffert et qui a droit au bonheur. Ma protestation enflammée n'est que le cri de mon âme. Qu'on ose donc me traduire en cour d'assises et que l’enquête ait lieu au grand jour !".` }
   ],
   "Frank Elgar": [
-    { title: "Van Gogh", note: 4, cover: "covers/van-gogh-elgar.jpg", link: "https://www.goodreads.com/book/show/181685869-van-gogh-par-frank-elgar-hazan-peinture-beaux-arts-aldine-des-arts-daran" }
+    { title: "Van Gogh", note: 4, cover: "books/van-gogh-elgar.jpg", link: "https://www.goodreads.com/book/show/181685869-van-gogh-par-frank-elgar-hazan-peinture-beaux-arts-aldine-des-arts-daran" }
   ],
   "Jean-Paul Sartre": [
-    { title: "La Nausée", note: 3, cover: "covers/la-nausee.jpg", link: "https://www.goodreads.com/book/show/87302.La_naus_e" }
+    { title: "La Nausée", note: 3, cover: "books/la-nausee.jpg", link: "https://www.goodreads.com/book/show/87302.La_naus_e" }
   ],
   "Jean-François Amadieu": [
-    { title: "Le Poids Des Apparences", note: 3, cover: "covers/poids-apparences.jpg", link: "https://www.goodreads.com/book/show/1043993.Le_Poids_Des_Apparences", review: `C'était sympa, mais sans plus. Pour quelqu'un comme moi, qui a été nourri aux redpills de JVC depuis toujours, c'était un peu comme enfoncer des portes ouvertes. Le physique compte pour tout dans la vie, et cela de manière inhérente chez l'homme, depuis son enfance jusqu'à en dicter sa destinée.
+    { title: "Le Poids Des Apparences", note: 3, cover: "books/poids-apparences.jpg", link: "https://www.goodreads.com/book/show/1043993.Le_Poids_Des_Apparences", review: `C'était sympa, mais sans plus. Pour quelqu'un comme moi, qui a été nourri aux redpills de JVC depuis toujours, c'était un peu comme enfoncer des portes ouvertes. Le physique compte pour tout dans la vie, et cela de manière inhérente chez l'homme, depuis son enfance jusqu'à en dicter sa destinée.
 Mais il faut aussi voir cela comme un composant qui s'ajoute à la reproduction sociale et au réseau humain que l'on possède. Cette réflexion est personnelle et ne provient pas du livre. À part ça, rien de spécial à ajouter.
 
 Une lecture intéressante, mais j'avais parfois le sentiment que c'était long à lire, vu le nombre d'informations et de chiffres par page.` }
   ],
   "Sénèque": [
-    { title: "La Brièveté de la vie", note: 3, cover: "covers/brievete-vie.jpg", link: "https://www.goodreads.com/book/show/200094601-la-bri-vet-de-la-vie-suivi-de-lettres-lucilius", review: `J'ai trouvé la lecture ok sans plus. Un mélange d'épicurisme, dont l'auteur ne se cache même pas d'avoir repris, et de stoïcisme. Ça parle du fait d'apprendre à accepter la mort, je dirais même à mourir : "Qui sait mourir ne sait plus être esclave", mais aussi du fait que la vie est loin d'être courte, bien qu'on passe la majorité de notre temps à la perdre. 
+    { title: "La Brièveté de la vie", note: 3, cover: "books/brievete-vie.jpg", link: "https://www.goodreads.com/book/show/200094601-la-bri-vet-de-la-vie-suivi-de-lettres-lucilius", review: `J'ai trouvé la lecture ok sans plus. Un mélange d'épicurisme, dont l'auteur ne se cache même pas d'avoir repris, et de stoïcisme. Ça parle du fait d'apprendre à accepter la mort, je dirais même à mourir : "Qui sait mourir ne sait plus être esclave", mais aussi du fait que la vie est loin d'être courte, bien qu'on passe la majorité de notre temps à la perdre. 
 "La vie qui sait l'employer, est assez longue." Il nous incite à prendre conscience de la valeur du temps, à se le réapproprier et à ne pas le consacrer tout entier notre vie professionnelle, à des ivresses passagères ou encore à des personnes qui ne le méritent pas.
 
 La phrase qui résume parfaitement le livre pour moi : "Ainsi, parce qu'un homme a des cheveux blancs et des rides, ne va pas croire qu'il ait vécu longtemps ; il n'a pas longtemps vécu, mais longtemps duré".` }
   ],
   "Hermann Hesse": [
-    { title: "Siddhartha", note: 3, cover: "covers/siddhartha.jpg", link: "https://www.goodreads.com/book/show/42639871-siddharta", review: `Durant l'histoire, Siddhartha finit par comprendre qu'il n'a en aucun cas besoin d'une doctrine ou d'un guide à penser pour saisir la personne qu'il est vraiment, son moi, et le monde qui l'entoure. Lorsqu'il s'en rendit compte, il regarda autour de lui. Il eut alors l'impression de découvrir le monde pour la première fois, tant sa beauté lui apparaissait.
+    { title: "Siddhartha", note: 3, cover: "books/siddhartha.jpg", link: "https://www.goodreads.com/book/show/42639871-siddharta", review: `Durant l'histoire, Siddhartha finit par comprendre qu'il n'a en aucun cas besoin d'une doctrine ou d'un guide à penser pour saisir la personne qu'il est vraiment, son moi, et le monde qui l'entoure. Lorsqu'il s'en rendit compte, il regarda autour de lui. Il eut alors l'impression de découvrir le monde pour la première fois, tant sa beauté lui apparaissait.
 Au lieu de diriger ses pensées vers un monde qui n'existe pas, il réalise la beauté et l'enchantement du monde réel, celui qui l'entoure. Il voit désormais les choses telles qu'elles sont, sans les filtrer à travers un voile mystique.
 
 "Non, le vrai chercheur, celui qui a vraiment le désir de trouver, ne devrait embrasser aucune doctrine."
@@ -338,16 +338,16 @@ Cette citation me rappelle celle que j'avais lu dans le manga Vagabon :
 - "Préoccupé par une seule feuille... vous ne verrez pas l'arbre. Si vous êtes préoccupé par un seul arbre... vous manquerez toute la forêt."` }
   ],
   "Arthur Rimbaud": [
-    { title: "Les Cahiers de Douai", note: 3, cover: "covers/cahiers-douai.jpg", link: "https://www.goodreads.com/book/show/35377217-les-cahiers-de-douai", review: `C'est le premier livre que je lis de Rimbaud. Je ne suis pas spécialement un mordu de poésie, ni un professionnel pour comprendre toutes les subtilités, mais ça reste néanmoins une lecture agréable.` }
+    { title: "Les Cahiers de Douai", note: 3, cover: "books/cahiers-douai.jpg", link: "https://www.goodreads.com/book/show/35377217-les-cahiers-de-douai", review: `C'est le premier livre que je lis de Rimbaud. Je ne suis pas spécialement un mordu de poésie, ni un professionnel pour comprendre toutes les subtilités, mais ça reste néanmoins une lecture agréable.` }
   ],
   "Maxence Fermine": [
-    { title: "Neige", note: 3, cover: "covers/neige-fermine.jpg", link: "https://www.goodreads.com/book/show/107946.Neige_Points_" }
+    { title: "Neige", note: 3, cover: "books/neige-fermine.jpg", link: "https://www.goodreads.com/book/show/107946.Neige_Points_" }
   ],
   "Gaël Faye": [
-    { title: "Petit pays", note: 3, cover: "covers/petit-pays.jpg", link: "https://www.goodreads.com/book/show/36075029-petit-pays" }
+    { title: "Petit pays", note: 3, cover: "books/petit-pays.jpg", link: "https://www.goodreads.com/book/show/36075029-petit-pays" }
   ],
   "Elsa Marpeau": [
-    { title: "Carpe Diem", note: 3, cover: "covers/carpe-diem-marpeau.jpg", link: "https://www.goodreads.com/book/show/169829072-carpe-diem", review: `L'art du bonheur… Haha ! Ceux qui me connaissent bien savent que je suis un amoureux du bonheur.
+    { title: "Carpe Diem", note: 3, cover: "books/carpe-diem-marpeau.jpg", link: "https://www.goodreads.com/book/show/169829072-carpe-diem", review: `L'art du bonheur… Haha ! Ceux qui me connaissent bien savent que je suis un amoureux du bonheur.
 
 Bon, avant toute chose, que veut dire ce satané carpe diem ? Eh bien, tout simplement : "cueille le jour", ou plutôt "profite du jour présent". La phrase assimile implicitement le jour à une fleur, qu'il faut cueillir dans l'instant fragile où elle est éclose. L'image rappelle donc que la vie, tout comme la rose, fane si rapidement qu'il faut en jouir au moment où elle est encore belle.
 
@@ -417,10 +417,10 @@ Voilà comment le carpe diem a évolué durant ces siècles.
 Par contre, pour le coup, j'ai trouvé le livre sympa, sans plus. On est plus sur une synthèse globale classée selon des périodes qu’une réelle réflexion.` }
   ],
   "Charles Robin": [
-    { title: "Tous philosophes?", note: 3, cover: "covers/tous-philosophes.jpg", link: "https://www.goodreads.com/book/show/59815825-tous-philosophes" }
+    { title: "Tous philosophes?", note: 3, cover: "books/tous-philosophes.jpg", link: "https://www.goodreads.com/book/show/59815825-tous-philosophes" }
   ],
   "Eric Bénier-Bürckel": [
-    { title: "Un prof bien sous tout rapport", note: 3, cover: "covers/prof-bien-rapport.jpg", link: "https://www.goodreads.com/book/show/482179.Un_prof_bien_sous_tout_rapport_", review: `Très violent et trash, ce n’est clairement pas une lecture pour tout le monde. Cela étant dit, le livre n’en reste pas moins divertissant et intéressant sur bien des aspects.
+    { title: "Un prof bien sous tout rapport", note: 3, cover: "books/prof-bien-rapport.jpg", link: "https://www.goodreads.com/book/show/482179.Un_prof_bien_sous_tout_rapport_", review: `Très violent et trash, ce n’est clairement pas une lecture pour tout le monde. Cela étant dit, le livre n’en reste pas moins divertissant et intéressant sur bien des aspects.
 
 Notre cher tueur en série pense que le divertissement ne sert qu’à faire diversion face à la mort inéluctable. Il tue parce qu’il a peur de sa propre mortalité. Dans ces moments, il se sent en contrôle ; il s’érige au-dessus de la mort. Il devient le bourreau de sa propre mortalité : "J’ai peur de mourir, donc je tue", comme si, à chaque victime, c’était sa propre finitude qui volait en éclats. De même, en tuant, il s’assure de réellement exister : je tue, donc j’existe. La personne qu’il mutile souffre clairement, et cette souffrance est due à sa propre action, preuve irréfutable de son existence. Tuer, c’est savoir que l’on n’est pas encore mort.
 
@@ -440,60 +440,60 @@ Finalement, la citation en exergue du livre, tirée de Dostoïevski, résume tr�
 Et je dois bien l’avouer, ça fait très bizarre de lire un roman aussi incisif en sachant que l’auteur a déjà été mon prof de philo en terminale.` }
   ],
   "Octave Houdas": [
-    { title: "Ethnographie de l'Algérie", note: 3, cover: "covers/ethnographie-algerie.jpg", link: "https://www.goodreads.com/book/show/22680330-ethnographie-de-l-alg-rie-d-1886-sciences-sociales" }
+    { title: "Ethnographie de l'Algérie", note: 3, cover: "books/ethnographie-algerie.jpg", link: "https://www.goodreads.com/book/show/22680330-ethnographie-de-l-alg-rie-d-1886-sciences-sociales" }
   ],
   "Jean-Jacques Rousseau": [
-    { title: "Les Rêveries du promeneur solitaire", note: 2, cover: "covers/reveries-promeneur.jpg", link: "https://www.goodreads.com/book/show/58698503-les-r-veries-du-promeneur-solitaire", review: `Je déteste la façon d'écrire de Rousseau.` }
+    { title: "Les Rêveries du promeneur solitaire", note: 2, cover: "books/reveries-promeneur.jpg", link: "https://www.goodreads.com/book/show/58698503-les-r-veries-du-promeneur-solitaire", review: `Je déteste la façon d'écrire de Rousseau.` }
   ],
   "Jean-Luc Lagarce": [
-    { title: "Juste la fin du monde", note: 2, cover: "covers/juste-fin-monde.jpg", link: "https://www.goodreads.com/book/show/1084444.Juste_la_fin_du_monde" }
+    { title: "Juste la fin du monde", note: 2, cover: "books/juste-fin-monde.jpg", link: "https://www.goodreads.com/book/show/1084444.Juste_la_fin_du_monde" }
   ],
   "Niccolò Machiavelli": [
-    { title: "Le Prince", note: 1, cover: "covers/le-prince.jpg", link: "https://www.goodreads.com/book/show/54411076-le-prince-de-machiavel", review: `Pire livre que j'ai lu jusqu'à présent, c'est juste nul. Je me suis ennuyé, je m'en fous complètement du sujet même du livre. Ce livre a été écrit pour un prince, mais je suis un bouffon, donc forcément, ça ne fait pas mouche.` }
+    { title: "Le Prince", note: 1, cover: "books/le-prince.jpg", link: "https://www.goodreads.com/book/show/54411076-le-prince-de-machiavel", review: `Pire livre que j'ai lu jusqu'à présent, c'est juste nul. Je me suis ennuyé, je m'en fous complètement du sujet même du livre. Ce livre a été écrit pour un prince, mais je suis un bouffon, donc forcément, ça ne fait pas mouche.` }
   ],
   "Alain Soral": [
-    { title: "Sociologie du dragueur", note: 1, cover: "covers/socio-dragueur.jpg", link: "https://www.goodreads.com/book/show/1484348.Sociologie_du_dragueur" }
+    { title: "Sociologie du dragueur", note: 1, cover: "books/socio-dragueur.jpg", link: "https://www.goodreads.com/book/show/1484348.Sociologie_du_dragueur" }
   ],
   "Matthieu Meriot": [
-    { title: "The Legend of Zelda : souvenirs d'enfance", note: 1, cover: "covers/zelda-souvenirs.jpg", link: "https://www.goodreads.com/book/show/63219063-the-legend-of-zelda" }
+    { title: "The Legend of Zelda : souvenirs d'enfance", note: 1, cover: "books/zelda-souvenirs.jpg", link: "https://www.goodreads.com/book/show/63219063-the-legend-of-zelda" }
   ],
   "Éric Zemmour": [
-    { title: "La messe n'est pas dite", note: 1, cover: "covers/messe-pas-dite.jpg", link: "https://www.goodreads.com/book/show/241169518-la-messe-n-est-pas-dite" }
+    { title: "La messe n'est pas dite", note: 1, cover: "books/messe-pas-dite.jpg", link: "https://www.goodreads.com/book/show/241169518-la-messe-n-est-pas-dite" }
   ],
   "Nicolas Sarkozy": [
-    { title: "Le journal d'un prisonnier", note: 1, cover: "covers/journal-prisonnier.jpg", link: "https://www.goodreads.com/book/show/244241204-le-journal-d-un-prisonnier" }
+    { title: "Le journal d'un prisonnier", note: 1, cover: "books/journal-prisonnier.jpg", link: "https://www.goodreads.com/book/show/244241204-le-journal-d-un-prisonnier" }
   ],
   "Giovanni Boccaccio": [
-    { title: "Mrs Rosie and the Priest", note: 1, cover: "covers/mrs-rosie-priest.jpg", link: "https://www.goodreads.com/book/show/24874328-mrs-rosie-and-the-priest" }
+    { title: "Mrs Rosie and the Priest", note: 1, cover: "books/mrs-rosie-priest.jpg", link: "https://www.goodreads.com/book/show/24874328-mrs-rosie-and-the-priest" }
   ],
   "Mikhaïl Boulgakov": [
-    { title: "Morphine", note: 3, cover: "covers/morphine.jpg", link: "https://www.goodreads.com/book/show/125084812-morphine" }
+    { title: "Morphine", note: 3, cover: "books/morphine.jpg", link: "https://www.goodreads.com/book/show/125084812-morphine" }
   ],
   "Nikolai Gogol": [
-    { title: "Le Nez", note: 4, cover: "covers/lenez.jpg", link: "https://www.goodreads.com/book/show/24311743-le-nez" }
+    { title: "Le Nez", note: 4, cover: "books/lenez.jpg", link: "https://www.goodreads.com/book/show/24311743-le-nez" }
   ],
   "Christine Kelly": [
-    { title: "Libertés sans expression", note: 1, cover: "covers/libertesansexpression.jpg", link: "https://www.goodreads.com/book/show/61741943-libert-s-sans-expression" }
+    { title: "Libertés sans expression", note: 1, cover: "books/libertesansexpression.jpg", link: "https://www.goodreads.com/book/show/61741943-libert-s-sans-expression" }
   ],
   "Le Monde": [
-    { title: "Schopenhauer", note: 4, cover: "covers/schopenhauer.jpg", link: "https://www.goodreads.com/book/show/46011341-schopenhauer" }
+    { title: "Schopenhauer", note: 4, cover: "books/schopenhauer.jpg", link: "https://www.goodreads.com/book/show/46011341-schopenhauer" }
   ],
   "Léon Tolstoï": [
-    { title: "La Mort d'Ivan Illitch suivi de Maître et serviteur et Trois morts", note: 3, cover: "covers/illitch.jpg", link: "https://www.goodreads.com/book/show/1990016.La_Mort_d_Ivan_Illitch" }
+    { title: "La Mort d'Ivan Illitch suivi de Maître et serviteur et Trois morts", note: 3, cover: "books/illitch.jpg", link: "https://www.goodreads.com/book/show/1990016.La_Mort_d_Ivan_Illitch" }
   ],
   "Stephen King": [
-    { title: "Marche ou crève", note: 3, cover: "covers/marcheoucreve.jpg", link: "https://www.goodreads.com/book/show/55988364-marche-ou-cr-ve" }
+    { title: "Marche ou crève", note: 3, cover: "books/marcheoucreve.jpg", link: "https://www.goodreads.com/book/show/55988364-marche-ou-cr-ve" }
   ],
   "Lucas Aubry": [
-    { title: "Takeshi Kitano - Hors catégorie", note: 3, cover: "covers/takeshikitano.jpg", link: "https://www.goodreads.com/book/show/145524858-takeshi-kitano---hors-cat-gorie" }
+    { title: "Takeshi Kitano - Hors catégorie", note: 3, cover: "books/takeshikitano.jpg", link: "https://www.goodreads.com/book/show/145524858-takeshi-kitano---hors-cat-gorie" }
   ],
   "Miyamoto Musashi": [
-    { title: "Traité des cinq roues", note: 2, cover: "covers/traitédescinqroues.jpg", link: "https://www.goodreads.com/book/show/899893.Trait_des_cinq_roues?ac=1&from_search=true&qid=MLZbzAMXRd&rank=1" }
+    { title: "Traité des cinq roues", note: 2, cover: "books/traitédescinqroues.jpg", link: "https://www.goodreads.com/book/show/899893.Trait_des_cinq_roues?ac=1&from_search=true&qid=MLZbzAMXRd&rank=1" }
   ],
   "Ruth Benedict": [
-    { title: "Le Chrysanthème et le Sabre", note: 3, cover: "covers/chrysanthème.jpg", link: "https://www.goodreads.com/book/show/2289554.Le_Chrysanth_me_et_le_Sabre?ac=1&from_search=true&qid=u3mjAgtsp0&rank=1" }
+    { title: "Le Chrysanthème et le Sabre", note: 3, cover: "books/chrysanthème.jpg", link: "https://www.goodreads.com/book/show/2289554.Le_Chrysanth_me_et_le_Sabre?ac=1&from_search=true&qid=u3mjAgtsp0&rank=1" }
   ],
   "ANTOINE GOYA": [
-    { title: "Ma dark romance avec wakamatsu", note: 3.5, cover: "covers/mdw.jpg", link: "https://www.goodreads.com/book/show/254191594-ma-dark-romance-avec-wakamatsu" }
+    { title: "Ma dark romance avec wakamatsu", note: 3.5, cover: "books/mdw.jpg", link: "https://www.goodreads.com/book/show/254191594-ma-dark-romance-avec-wakamatsu" }
   ]
 };

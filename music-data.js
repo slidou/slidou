@@ -250,5 +250,8 @@ const musicData = {
   ],
   "Olivia Dean": [
     { title: "The Art of Loving", note: 3.5, cover: "music/artofloving.webp", link: "https://rateyourmusic.com/release/album/olivia-dean/the-art-of-loving/" },
+  ],
+  "劣": [
+    { title: "垃圾场", note: 3, cover: "music/垃圾场.webp", link: "https://rateyourmusic.com/release/album/%E5%8A%A3/%E5%9E%83%E5%9C%BE%E5%9C%BA/" },
   ]
 };

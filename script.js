@@ -1673,9 +1673,10 @@ document.getElementById('cage-cielazur').addEventListener('click', () => petBird
 
 // ════════════════════════════════════════════════════════════
 // ── PERRUCHES PASSIVES : le perchoir ambulant ──
-// Une perruche sort parfois de sa cage, vient se poser en bas à
-// droite de la page en cours, vit sa vie (picore, lisse ses
-// plumes, somnole…), puis rentre au nid (page à propos).
+// Une perruche sort parfois de sa cage, vient se poser sur la page en
+// cours, vit sa vie (picore, lisse ses plumes, somnole…), REDÉCOLLE de
+// temps en temps vers un autre coin de l'écran (perchoir ambulant),
+// puis rentre au nid (page à propos).
 // 100 % décoratif : pointer-events none, aucune interaction captée.
 // ════════════════════════════════════════════════════════════
 var budgieAmbient = {
@@ -1686,6 +1687,9 @@ var budgieAmbient = {
   page: '',
   arrivalTimer: null, poseTimer: null, leaveTimer: null, safetyTimer: null,
   hopTimer: null, markTimer: null, landTimer: null, scrollTimer: null,
+  wanderTimer: null,   // perchoir ambulant : prochain déménagement
+  spot: null,          // position actuelle { r, b } en px (right / bottom)
+  wanderTo: null,      // destination du vol en cours
   reducedMotion: false
 };
 
@@ -1729,6 +1733,7 @@ var BUDGIE_POSE_POOL = ['idle', 'idle', 'look', 'look', 'peck', 'peck', 'preen',
   el.addEventListener('animationend', function(e) {
     if (e.target !== budgieAmbient.el) return;
     if (e.animationName === 'budgieFlyIn') budgieLanded();
+    else if (e.animationName === 'budgieFlyAcross') budgieWanderEnd();
     else if (e.animationName === 'budgieFlyOut') budgieCleanup();
   });
 })();
@@ -1778,11 +1783,83 @@ function scheduleBudgiePoses() {
   if (budgieAmbient.pose === 'sleep') delay += 5200;
   budgieAmbient.poseTimer = setTimeout(function() {
     if (budgieAmbient.state !== 'perched') return;
+    // en plein déménagement : on ne pose pas, on retentera plus tard
+    if (budgieAmbient.el && budgieAmbient.el.classList.contains('ba-across')) { scheduleBudgiePoses(); return; }
     var next = BUDGIE_POSE_POOL[Math.floor(Math.random() * BUDGIE_POSE_POOL.length)];
     if (next === budgieAmbient.pose) next = 'idle';
     setBudgiePose(next);
     scheduleBudgiePoses();
   }, delay);
+}
+
+// ── Le perchoir ambulant : elle redécolle vers un autre spot de l'écran ──
+function budgieHomeSpot() {
+  return window.innerWidth <= 768 ? { r: 6, b: 6 } : { r: 18, b: 10 };
+}
+
+function budgieScheduleWander(extra) {
+  clearTimeout(budgieAmbient.wanderTimer);
+  if (budgieAmbient.reducedMotion) return; // mouvement réduit : elle reste sage
+  budgieAmbient.wanderTimer = setTimeout(budgieWander, (extra || 0) + 9000 + Math.random() * 14000);
+}
+
+function budgieWanderSpots() {
+  var w = window.innerWidth, h = window.innerHeight;
+  if (w <= 768) {
+    return [
+      { r: 6, b: 6 },
+      { r: Math.round(w * 0.3), b: 8 },
+      { r: 8, b: Math.round(h * 0.16) }
+    ];
+  }
+  var spots = [
+    { r: 18, b: 10 },                                                   // le perchoir d'origine
+    { r: Math.round(w * 0.24), b: 14 },                                 // bas de page, à gauche
+    { r: Math.round(w * 0.46), b: 12 },                                 // bas centre
+    { r: 14, b: Math.round(h * 0.22) },                                 // bord droit, plus haut
+    { r: Math.round(w * 0.2), b: Math.round(h * 0.18) }                 // en plein vol libre
+  ];
+  if (budgieAmbient.page === 'musique') spots.splice(2, 1); // ne pas se poser sur le lecteur
+  return spots;
+}
+
+function budgieWander() {
+  var a = budgieAmbient;
+  if (!a.el || a.state !== 'perched' || a.reducedMotion || !a.spot) return;
+  if (a.el.classList.contains('ba-scroll-hide')) { budgieScheduleWander(4000); return; }
+  var spots = budgieWanderSpots();
+  var pick = spots[Math.floor(Math.random() * spots.length)];
+  var guard = 0;
+  while (guard < 8 && Math.abs(pick.r - a.spot.r) < 60 && Math.abs(pick.b - a.spot.b) < 60) {
+    pick = spots[Math.floor(Math.random() * spots.length)];
+    guard++;
+  }
+  a.wanderTo = pick;
+  a.el.style.setProperty('--wx', (a.spot.r - pick.r) + 'px'); // droite positive
+  a.el.style.setProperty('--wy', (a.spot.b - pick.b) + 'px'); // bas positif
+  ['pose-idle', 'pose-look', 'pose-peck', 'pose-preen', 'pose-sleep', 'act-hop', 'act-mark'].forEach(function(c) { a.el.classList.remove(c); });
+  a.el.classList.add('flying', 'ba-across');
+  clearTimeout(a.safetyTimer);
+  a.safetyTimer = setTimeout(budgieWanderEnd, 1600); // filet si animationend manque
+}
+
+function budgieWanderEnd() {
+  var a = budgieAmbient;
+  if (!a.el || a.state !== 'perched' || !a.el.classList.contains('ba-across')) return;
+  clearTimeout(a.safetyTimer);
+  if (a.wanderTo) a.spot = a.wanderTo;
+  a.wanderTo = null;
+  a.el.style.setProperty('--br', a.spot.r + 'px');
+  a.el.style.setProperty('--bb', a.spot.b + 'px');
+  a.el.style.removeProperty('--wx');
+  a.el.style.removeProperty('--wy');
+  a.el.classList.remove('flying', 'ba-across');
+  a.el.classList.add('ba-landed');
+  clearTimeout(a.landTimer);
+  a.landTimer = setTimeout(function() { a.el.classList.remove('ba-landed'); }, 460);
+  setBudgiePose('idle');
+  scheduleBudgiePoses();
+  budgieScheduleWander();
 }
 
 function budgieFlyIn(birdId, page) {
@@ -1810,6 +1887,10 @@ function budgieLanded() {
   a.state = 'perched';
   clearTimeout(a.safetyTimer);
   a.el.classList.remove('flying', 'ba-fly-in');
+  // ancre sa position de départ (le perchoir ambulant partira d'ici)
+  a.spot = budgieHomeSpot();
+  a.el.style.setProperty('--br', a.spot.r + 'px');
+  a.el.style.setProperty('--bb', a.spot.b + 'px');
   setBudgiePose('idle');
   if (!a.reducedMotion) {
     a.el.classList.add('ba-landed');
@@ -1821,6 +1902,7 @@ function budgieLanded() {
   else if (a.page === 'anime' || a.page === 'manga') setBudgiePose('look');
   if (a.page === 'musique') setTimeout(function() { budgieReact('note'); }, 750);
   scheduleBudgiePoses();
+  budgieScheduleWander();
   clearTimeout(a.leaveTimer);
   a.leaveTimer = setTimeout(budgieFlyOut, 46000 + Math.random() * 34000);
 }
@@ -1831,6 +1913,17 @@ function budgieFlyOut() {
   if (a.state !== 'perched') return;
   a.state = 'flying-out';
   clearTimeout(a.poseTimer); clearTimeout(a.leaveTimer); clearTimeout(a.safetyTimer);
+  clearTimeout(a.wanderTimer);
+  if (a.el && a.el.classList.contains('ba-across')) {
+    // elle était en plein déménagement : on ancre la destination avant le départ
+    if (a.wanderTo) a.spot = a.wanderTo;
+    a.wanderTo = null;
+    a.el.style.setProperty('--br', a.spot.r + 'px');
+    a.el.style.setProperty('--bb', a.spot.b + 'px');
+    a.el.style.removeProperty('--wx');
+    a.el.style.removeProperty('--wy');
+    a.el.classList.remove('ba-across');
+  }
   if (!a.el || a.reducedMotion) { budgieCleanup(); return; }
   a.el.classList.remove('pose-idle', 'pose-look', 'pose-peck', 'pose-preen', 'pose-sleep', 'ba-landed', 'act-hop', 'act-mark');
   a.el.classList.add('flying', 'ba-fly-out');
@@ -1840,11 +1933,13 @@ function budgieFlyOut() {
 
 function budgieCleanup() {
   var a = budgieAmbient;
-  clearTimeout(a.safetyTimer); clearTimeout(a.poseTimer); clearTimeout(a.leaveTimer);
+  clearTimeout(a.safetyTimer); clearTimeout(a.poseTimer); clearTimeout(a.leaveTimer); clearTimeout(a.wanderTimer);
   var who = a.bird;
   a.bird = null; a.state = 'home'; a.pose = 'idle'; a.page = '';
+  a.wanderTo = null; a.spot = null;
   if (a.el) {
     a.el.className = 'budgie-ambient';
+    ['--br', '--bb', '--wx', '--wy'].forEach(function(p) { a.el.style.removeProperty(p); });
     if (a.holder) a.holder.innerHTML = '';
     if (a.fx) a.fx.innerHTML = '';
   }
@@ -1969,7 +2064,8 @@ function budgieSiteStats() {
   var animes = typeof animeList !== 'undefined' ? flattenWorks(animeList) : [];
   s.animeNormal = animes.filter(function(x) { return (x.tags || []).indexOf('normal episode') !== -1; }).length;
   var jd = typeof journalData !== 'undefined' ? journalData : [];
-  jd.forEach(function(en) { if (en && en.d && en.title && (!s.dernier || en.d > s.dernier.d)) s.dernier = en; });
+  // À date égale, la dernière entrée saisie dans la journée gagne (>= et non >)
+  jd.forEach(function(en) { if (en && en.d && en.title && (!s.dernier || en.d >= s.dernier.d)) s.dernier = en; });
   budgieStatsCache = s;
   return s;
 }
@@ -2444,8 +2540,8 @@ const labels = {
     
     if (catEntries.length > 0) {
       hasAnyActivity = true;
-      // On prend l'entrée la plus récente (tri par date, peu importe l'ordre du fichier)
-      const latestEntry = catEntries.slice().sort((x, y) => (x.d < y.d ? 1 : x.d > y.d ? -1 : 0))[0];
+      // On prend l'entrée la plus récente ; à date égale, la dernière saisie de la journée gagne
+      const latestEntry = catEntries.reduce((best, e) => (!best || e.d >= best.d ? e : best), null);
       
       var blurStyle = latestEntry.blur ? 'filter:blur(6px);transition:filter 0.3s;' : '';
       var ratioClass = cat === 'musique' ? ' dash-card-square' : ' dash-card-cover';
@@ -2623,81 +2719,65 @@ let animeSortMode = 'note';
 let animeSortDir = 1; // 1 = Normal, -1 = Inversé
 let _fmtE = [], _quaE = [], _rstE = [], _colE = [];
 
-// ── Images via API Jikan avec cache persistant ──
-const animeImageCache = new Map();
-let imageQueue = [];
-let imageLoading = false;
-let cacheDirty = false;
+// ── Covers 100 % locales (chantier 3) ──
+// Chaîne de résolution : img de l'entrée → image du journal (titre normalisé) → covers/{type}/{id}.webp → placeholder.
+// Plus AUCUNE requête externe : tout est servi depuis le site (dossiers journal + covers/).
+function coverNormKey(t) {
+  return String(t || '')
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 
-let animeImgCacheLoaded = false;
-function loadImageCache() {
-  if (animeImgCacheLoaded) return; // le cache mémoire est ensuite la source de vérité
-  animeImgCacheLoaded = true;
+/* Mapping auto titre → image du journal, construit au chargement.
+   Les titres homonymes (plusieurs œuvres du même type) sont écartés :
+   ces œuvres-là utilisent leur cover par id (covers/{type}/{id}.webp). */
+var journalCoverMap = { anime: Object.create(null), manga: Object.create(null) };
+(function() {
   try {
-    const data = JSON.parse(localStorage.getItem('anime_img_cache'));
-    if (data) Object.entries(data).forEach(([id, url]) => animeImageCache.set(parseInt(id), url));
+    var counts = { anime: Object.create(null), manga: Object.create(null) };
+    if (typeof animeList !== 'undefined') animeList.forEach(function(a) {
+      var k = coverNormKey(a.title); if (k) counts.anime[k] = (counts.anime[k] || 0) + 1;
+    });
+    if (typeof mangaData !== 'undefined') flattenWorks(mangaData).forEach(function(m) {
+      var k = coverNormKey(m.title); if (k) counts.manga[k] = (counts.manga[k] || 0) + 1;
+    });
+    if (typeof journalData !== 'undefined') journalData.forEach(function(e) {
+      if ((e.t !== 'anime' && e.t !== 'manga') || !e.title || !e.img) return;
+      var k = coverNormKey(e.title);
+      if (!k || counts[e.t][k] !== 1) return;
+      if (!journalCoverMap[e.t][k]) journalCoverMap[e.t][k] = e.img;
+    });
   } catch (e) {}
+})();
+
+/* Résout la source d'image d'une œuvre anime/manga. */
+function coverSrc(type, id, title, entryImg) {
+  if (entryImg) return entryImg;
+  var k = coverNormKey(title);
+  if (k && journalCoverMap[type][k]) return journalCoverMap[type][k];
+  return 'covers/' + type + '/' + id + '.webp';
 }
 
-const MAX_IMG_CACHE = 500;
-
-function saveImageCache() {
-  if (!cacheDirty) return;
-  cacheDirty = false;
-  if (animeImageCache.size > MAX_IMG_CACHE) {
-    var entries = Array.from(animeImageCache.entries());
-    animeImageCache = new Map(entries.slice(entries.length - MAX_IMG_CACHE));
+/* Fallback : cover absente (404) → placeholder définitif, aucune requête externe.
+   Avec data-ph : remplace l'<img> par le placeholder fourni (cartes, top-lists).
+   Sans data-ph (palette Ctrl+K) : l'<img> devient une simple pastille grise. */
+function coverImgFallback(img) {
+  var ph = img.getAttribute('data-ph');
+  if (ph) {
+    var holder = document.createElement('div');
+    holder.innerHTML = decodeURIComponent(ph);
+    var node = holder.firstChild;
+    if (node) { img.replaceWith(node); return; }
   }
-  try { localStorage.setItem('anime_img_cache', JSON.stringify(Object.fromEntries(animeImageCache))); } catch (e) {}
+  img.removeAttribute('src');
+  img.style.cssText = 'width:32px;height:48px;background:var(--border-color);border-radius:3px;flex-shrink:0;display:inline-block;';
 }
 
-function queueImageLoad(animeId) {
-  if (animeImageCache.has(animeId)) return;
-  if (imageQueue.includes(animeId)) return;
-  imageQueue.push(animeId);
-  if (!imageLoading) processImageQueue();
-}
-
-function processImageQueue() {
-  if (imageQueue.length === 0) { imageLoading = false; saveImageCache(); return; }
-  imageLoading = true;
-  const id = imageQueue.shift();
-  fetch('https://api.jikan.moe/v4/anime/' + id)
-    .then(r => { if (!r.ok) { var err = new Error('HTTP ' + r.status); err.status = r.status; throw err; } return r.json(); })
-    .then(data => {
-      if (data.data && data.data.images) {
-        const url = data.data.images.jpg?.image_url || data.data.images.webp?.image_url;
-        if (url) {
-          animeImageCache.set(id, url);
-          cacheDirty = true;
-          replacePlaceholder(id, url);
-        }
-      }
-    })
-    .catch(e => { if (e && e.status === 404) failImagePlaceholder(id); }) // 404 = œuvre absente de MAL : on arrête le spinner (429/erreur réseau : on retentera au prochain rendu)
-    .finally(() => { setTimeout(processImageQueue, 300); saveImageCache(); });
-}
-
-function replacePlaceholder(animeId, url) {
-  const card = document.querySelector('.anime-card[data-id="' + animeId + '"]');
-  if (!card) return;
-  const placeholder = card.querySelector('.anime-placeholder');
-  if (!placeholder) return;
-  const img = document.createElement('img');
-  img.src = url;
-  img.alt = '';
-  img.style.cssText = 'width:100%;height:220px;object-fit:cover;object-position:center;border-radius:2px;box-shadow:0 4px 8px var(--shadow-color);display:block;opacity:0;transition:opacity 0.4s;';
-  img.onload = () => { placeholder.replaceWith(img); requestAnimationFrame(() => { img.style.opacity = '1'; }); };
-  img.onerror = () => { img.remove(); };
-}
-
-// Marque le placeholder comme "image introuvable" (404) : stoppe le spinner, montre l'icône
-function failImagePlaceholder(animeId) {
-  var card = document.querySelector('.anime-card[data-id="' + animeId + '"]');
-  if (!card) return;
-  var placeholder = card.querySelector('.anime-placeholder');
-  if (placeholder) placeholder.classList.add('img-failed');
-}
+/* Purge des anciens caches Jikan (devenus inutiles). */
+try { localStorage.removeItem('anime_img_cache'); localStorage.removeItem('manga_img_cache'); } catch (e) {}
 
 // ── Tags ──
 function generateAnime() {
@@ -2705,7 +2785,6 @@ function generateAnime() {
     document.getElementById('animeContent').innerHTML = '<p class="empty-state">aucun résultat</p>';
     return;
   }
-  loadImageCache();
   document.getElementById('anime-counter').textContent = animeList.length + " animes terminés";
 
   var rewatches = animeList.filter(function(a) { return a.tags.indexOf('re-watched') !== -1; }).length;
@@ -2863,7 +2942,6 @@ function applyAnimeFilter() {
 
   var displayedIds = {};
   animeFiltered.forEach(function(a) { displayedIds[a.id] = true; });
-  imageQueue = imageQueue.filter(function(id) { return displayedIds[id]; });
 
   var counterText = '';
   if (showOnlyReviewsAnime) {
@@ -2918,12 +2996,8 @@ function renderAnimeBatch() {
     }
 
     var imgBlock;
-    if (animeImageCache.has(a.id)) {
-      imgBlock = '<img loading="lazy" src="' + animeImageCache.get(a.id) + '" alt="" style="width:100%;height:220px;object-fit:cover;object-position:center;border-radius:2px;box-shadow:0 4px 8px var(--shadow-color);display:block;">';
-    } else {
-      imgBlock = '<div class="anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>';
-      queueImageLoad(a.id);
-    }
+    var phAnime = '<div class="anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>';
+    imgBlock = '<img loading="lazy" src="' + coverSrc('anime', a.id, a.title, a.img) + '" alt="" style="width:100%;height:220px;object-fit:cover;object-position:center;border-radius:2px;box-shadow:0 4px 8px var(--shadow-color);display:block;" data-ph="' + encodeURIComponent(phAnime) + '" onerror="coverImgFallback(this)">';
 
     var card = document.createElement('a');
     card.href = 'https://myanimelist.net/anime/' + a.id;
@@ -2968,14 +3042,8 @@ function renderTopList(container, items, type) {
     var starsHtml = item.note !== null ? '<div class="top-stars">' + getStars(item.note) + '</div>' : '';
 
     var imgBlock;
-    var cache = type === 'anime' ? animeImageCache : mangaImageCache;
-    var queueFn = type === 'anime' ? queueImageLoad : queueMangaImage;
-    if (cache.has(item.id)) {
-      imgBlock = '<img loading="lazy" src="' + cache.get(item.id) + '" alt="">';
-    } else {
-      imgBlock = '<div class="' + (type === 'manga' ? 'manga-placeholder' : '') + ' anime-placeholder" style="--hue:' + hue + '"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>';
-      queueFn(item.id);
-    }
+    var phTop = '<div class="' + (type === 'manga' ? 'manga-placeholder' : '') + ' anime-placeholder" style="--hue:' + hue + '"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>';
+    imgBlock = '<img loading="lazy" src="' + coverSrc(type, item.id, item.title, item.img) + '" alt="" data-ph="' + encodeURIComponent(phTop) + '" onerror="coverImgFallback(this)">';
 
     var card = document.createElement('a');
     card.href = 'https://myanimelist.net/' + type + '/' + item.id;
@@ -2993,10 +3061,6 @@ var MANGA_COLLECTION_TAGS = ['bought', 'archived', 're-read'];
 var mangaActiveTags = [];
 var mangaSortMode = 'auteur';
 var mangaSortDir = 1;
-var mangaImageCache = new Map();
-var mangaImageQueue = [];
-var mangaImageLoading = false;
-var mangaCacheDirty = false;
 let biblioSortMode = 'auteur';
 let biblioSortDir = 1;
 let biblioCollectionFilters = [];
@@ -3092,62 +3156,11 @@ function mangaMatchesTag(m, tag) {
   }
 })();
 
-let mangaImgCacheLoaded = false;
-function loadMangaImageCache() {
-  if (mangaImgCacheLoaded) return; // le cache mémoire est ensuite la source de vérité
-  mangaImgCacheLoaded = true;
-  try { var d = JSON.parse(localStorage.getItem('manga_img_cache')); if (d) Object.entries(d).forEach(function(e) { mangaImageCache.set(parseInt(e[0]), e[1]); }); } catch (e) {}
-}
-function saveMangaImageCache() {
-  if (!mangaCacheDirty) return; mangaCacheDirty = false;
-  if (mangaImageCache.size > MAX_IMG_CACHE) {
-    var entries = Array.from(mangaImageCache.entries());
-    mangaImageCache = new Map(entries.slice(entries.length - MAX_IMG_CACHE));
-  }
-  try { localStorage.setItem('manga_img_cache', JSON.stringify(Object.fromEntries(mangaImageCache))); } catch (e) {}
-}
-function queueMangaImage(id) {
-  if (mangaImageCache.has(id) || mangaImageQueue.indexOf(id) !== -1) return;
-  mangaImageQueue.push(id); if (!mangaImageLoading) processMangaImageQueue();
-}
-function processMangaImageQueue() {
-  if (mangaImageQueue.length === 0) { mangaImageLoading = false; saveMangaImageCache(); return; }
-  mangaImageLoading = true;
-  var id = mangaImageQueue.shift();
-  fetch('https://api.jikan.moe/v4/manga/' + id)
-    .then(function(r) { if (!r.ok) { var err = new Error('HTTP ' + r.status); err.status = r.status; throw err; } return r.json(); })
-    .then(function(data) {
-      if (data.data && data.data.images) {
-        var url = data.data.images.jpg?.image_url || data.data.images.webp?.image_url;
-        if (url) { mangaImageCache.set(id, url); mangaCacheDirty = true; replaceMangaPlaceholder(id, url); }
-      }
-    })
-    .catch(function(e) { if (e && e.status === 404) failMangaImagePlaceholder(id); })
-    .finally(function() { setTimeout(processMangaImageQueue, 350); saveMangaImageCache(); });
-}
-function replaceMangaPlaceholder(mangaId, url) {
-  var card = document.querySelector('.manga-card[data-id="' + mangaId + '"]');
-  if (!card) return; var ph = card.querySelector('.manga-placeholder'); if (!ph) return;
-  var img = document.createElement('img'); img.src = url; img.alt = '';
-  img.style.cssText = 'width:100%;height:220px;object-fit:cover;object-position:top;border-radius:2px;box-shadow:0 4px 8px var(--shadow-color);display:block;opacity:0;transition:opacity 0.4s;';
-  img.onload = function() { ph.replaceWith(img); requestAnimationFrame(function() { img.style.opacity = '1'; }); };
-  img.onerror = function() { img.remove(); };
-}
-
-// Marque le placeholder manga comme "image introuvable" (404)
-function failMangaImagePlaceholder(mangaId) {
-  var card = document.querySelector('.manga-card[data-id="' + mangaId + '"]');
-  if (!card) return;
-  var placeholder = card.querySelector('.anime-placeholder');
-  if (placeholder) placeholder.classList.add('img-failed');
-}
-
 function generateManga() {
   if (typeof mangaData === 'undefined') {
     document.getElementById('mangaContent').innerHTML = '<p class="empty-state">aucun résultat</p>';
     return;
   }
-  loadMangaImageCache();
   var total = 0; for (var a in mangaData) total += mangaData[a].length;
   document.getElementById('manga-counter').textContent = total + " manga lu" + (total !== 1 ? "s" : "");
 
@@ -3358,12 +3371,8 @@ function renderManga() {
       }
 
       var imgBlock;
-      if (mangaImageCache.has(m.id)) {
-                imgBlock = '<img loading="lazy" src="' + mangaImageCache.get(m.id) + '" alt="" class="manga-img-render">';
-      } else {
-        imgBlock = '<div class="manga-placeholder anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>';
-        queueMangaImage(m.id);
-      }
+      var phManga = '<div class="manga-placeholder anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>';
+      imgBlock = '<img loading="lazy" src="' + coverSrc('manga', m.id, m.title, m.img) + '" alt="" class="manga-img-render" data-ph="' + encodeURIComponent(phManga) + '" onerror="coverImgFallback(this)">';
 
       var card = document.createElement('a');
       card.href = 'https://myanimelist.net/manga/' + m.id; card.target = '_blank';
@@ -3456,12 +3465,8 @@ function renderManga() {
       }
 
       var imgBlock;
-      if (mangaImageCache.has(m.id)) {
-                imgBlock = '<img loading="lazy" src="' + mangaImageCache.get(m.id) + '" alt="" class="manga-img-render">';
-      } else {
-        imgBlock = '<div class="manga-placeholder anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>';
-        queueMangaImage(m.id);
-      }
+      var phManga = '<div class="manga-placeholder anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>';
+      imgBlock = '<img loading="lazy" src="' + coverSrc('manga', m.id, m.title, m.img) + '" alt="" class="manga-img-render" data-ph="' + encodeURIComponent(phManga) + '" onerror="coverImgFallback(this)">';
 
       var card = document.createElement('a');
       card.href = 'https://myanimelist.net/manga/' + m.id; card.target = '_blank';
@@ -3490,7 +3495,7 @@ function notesOf(items) {
 }
 
 // ── PANTHÉON : toutes les œuvres notées 5/5, une ligne carrousel par famille ──
-// Covers animes/mangas : caches localStorage (remplis par les pages animes/mangas, via Jikan) — lecture passive, aucune requête ici.
+// Covers animes/mangas : 100 % locales (journal + covers/ par id MAL) — lecture passive, aucune requête.
 function buildPantheon(container) {
   var familles = [
     { nom: 'animes',  icon: '🌸', data: (typeof animeList !== 'undefined' ? animeList : null) },
@@ -3531,8 +3536,8 @@ function buildPantheon(container) {
       cell.className = 'pantheon-cover';
       cell.title = (it.title || '') + ' — 5/5';
       var cov = it.cover
-        || (typeof animeImageCache !== 'undefined' && it.id && animeImageCache.has(it.id) ? animeImageCache.get(it.id) : '')
-        || (typeof mangaImageCache !== 'undefined' && it.id && mangaImageCache.has(it.id) ? mangaImageCache.get(it.id) : '');
+        || (r.nom === 'animes' && it.id ? coverSrc('anime', it.id, it.title, it.img) : '')
+        || (r.nom === 'mangas' && it.id ? coverSrc('manga', it.id, it.title, it.img) : '');
       if (cov) {
         var img = document.createElement('img');
         img.src = cov; img.alt = ''; img.loading = 'lazy';
@@ -4111,9 +4116,9 @@ function renderCurrently() {
 
   function coverOf(m) {
     if (!m.item) return '';
-    return m.item.cover
-      || (m.cat === 'Anime' && typeof animeImageCache !== 'undefined' && animeImageCache.has(m.item.id) ? animeImageCache.get(m.item.id) : '')
-      || (m.cat === 'Manga' && typeof mangaImageCache !== 'undefined' && mangaImageCache.has(m.item.id) ? mangaImageCache.get(m.item.id) : '');
+    if (m.cat === 'Anime' && m.item.id) return coverSrc('anime', m.item.id, m.item.title, m.item.img);
+    if (m.cat === 'Manga' && m.item.id) return coverSrc('manga', m.item.id, m.item.title, m.item.img);
+    return m.item.cover || '';
   }
 
   function showHint(html) {
@@ -4167,7 +4172,7 @@ function renderCurrently() {
         imgHtml = '<div class="gs-creator-avatar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>';
       } else {
         const cov = coverOf(m);
-        imgHtml = cov ? '<img src="' + cov + '" alt="">' : '<div style="width:32px;height:48px;background:var(--border-color);border-radius:3px;flex-shrink:0;"></div>';
+        imgHtml = cov ? '<img src="' + cov + '" alt="" onerror="coverImgFallback(this)">' : '<div style="width:32px;height:48px;background:var(--border-color);border-radius:3px;flex-shrink:0;"></div>';
       }
       const subHtml = m.isCreator ? escapeHtml(m.sub) : escapeHtml(m.cat.toLowerCase() + (m.sub ? ' · ' + m.sub : ''));
       el.innerHTML = dot + imgHtml + '<div class="gs-item-info"><div class="gs-item-title">' + highlight(m.title, tokens) + '</div><div class="gs-item-sub">' + subHtml + '</div></div>';
