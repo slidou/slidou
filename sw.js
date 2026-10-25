@@ -14,7 +14,7 @@
    suffit, ce worker se revalide tout seul à chaque visite.
    ═══════════════════════════════════════════════════════════════ */
 
-var VERSION = 'v14';  // v14 : perchoir ambulant — la perruche redécolle vers d'autres coins de l'écran
+var VERSION = 'v18';  // v18 : chapeau fantôme retiré du perchoir (.ba-perch n'est plus habillé), costume réservé aux SVG d'oiseau
 var SHELL_CACHE = 'slidou-shell-' + VERSION;
 var IMG_CACHE = 'slidou-img-' + VERSION;
 var MEDIA_CACHE = 'slidou-media-' + VERSION;
@@ -29,6 +29,11 @@ var CRITICAL_ASSETS = [
   'index.html',
   'style.css',
   'script.js',
+  'season.js',
+  'season.css',
+  /* URLs versionnées réellement demandées par index.html (hors-ligne) */
+  'season.js?v=18',
+  'season.css?v=18',
   'player-data.js',
   'anime-data.js',
   'manga-data.js',
