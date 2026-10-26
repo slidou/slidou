@@ -4262,3 +4262,412 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     });
   });
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Carte Wrapped — l'année en image partageable (chantier 13, v19)
+   ─────────────────────────────────────────────────────────────
+   Bouton « carte à partager » dans le bilan → canvas 4:5 (1080×
+   1350, export 2×) dessiné à la main : avatar + wordmark, année
+   héros, œuvres terminées, heatmap, 3 coups de cœur 5/5 (ordre
+   chronologique, variété d'étagère, floutés écartés), stats
+   signature, signature perruche. Switch jour/nuit dans la modale,
+   export PNG local (zéro dépendance, zéro requête externe).
+   ═══════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var W = 1080, H = 1350, SCALE = 2;
+
+  var WRAPPED_MODES = {
+    jour: {
+      bg: '#f4f1ea', ink: '#2b2b2b', secondary: 'rgba(43,43,43,.62)',
+      faint: 'rgba(43,43,43,.30)', filet: 'rgba(43,43,43,.40)', filetSoft: 'rgba(43,43,43,.18)',
+      hm: ['rgba(43,91,158,.10)', 'rgba(43,91,158,.28)', 'rgba(43,91,158,.48)', 'rgba(43,91,158,.68)', 'rgba(43,91,158,.92)'],
+      hmOff: 'rgba(43,43,43,.05)', accent: '#b8860b'
+    },
+    nuit: {
+      bg: '#121212', ink: '#e0e0e0', secondary: 'rgba(224,224,224,.62)',
+      faint: 'rgba(224,224,224,.32)', filet: 'rgba(224,224,224,.36)', filetSoft: 'rgba(224,224,224,.16)',
+      hm: ['rgba(123,170,247,.12)', 'rgba(123,170,247,.30)', 'rgba(123,170,247,.50)', 'rgba(123,170,247,.70)', 'rgba(123,170,247,.95)'],
+      hmOff: 'rgba(224,224,224,.06)', accent: '#f5c542'
+    }
+  };
+
+  function budgieURI(color) {
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="22 12 56 88">' +
+      '<g fill="' + color + '">' +
+      '<ellipse cx="50" cy="65" rx="22" ry="28"/>' +
+      '<circle cx="50" cy="35" r="18"/>' +
+      '<path d="M28,55 Q40,50 35,80 Q40,75 45,75 Q42,60 28,55Z"/>' +
+      '<path d="M64,36 L57,44 L71,44 Z"/>' +
+      '<rect x="42" y="90" width="4.5" height="7" rx="2.2"/>' +
+      '<rect x="53.5" y="90" width="4.5" height="7" rx="2.2"/>' +
+      '</g></svg>';
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  }
+
+  function loadImg(src) {
+    return new Promise(function (res) {
+      if (!src) { res(null); return; }
+      var im = new Image();
+      var done = false;
+      var t = setTimeout(function () { if (!done) { done = true; res(null); } }, 6000);
+      im.onload = function () { if (!done) { done = true; clearTimeout(t); res(im); } };
+      im.onerror = function () { if (!done) { done = true; clearTimeout(t); res(null); } };
+      im.src = src;
+    });
+  }
+
+  function wrappedFonts() {
+    var l = [];
+    try { l.push(document.fonts.load('700 92px "Space Grotesk"')); } catch (e) {}
+    try { l.push(document.fonts.load('500 25px "Space Grotesk"')); } catch (e) {}
+    try { l.push(document.fonts.load('170px "IM Fell English"')); } catch (e) {}
+    try { l.push(document.fonts.load('italic 28px "IM Fell English"')); } catch (e) {}
+    return Promise.all(l).catch(function () {});
+  }
+
+  function wrappedCollect(yearStr) {
+    var yearEntries = journal.filter(function (e) { return (e.d || '').startsWith(yearStr); })
+      .slice().sort(function (a, b) { return a.d < b.d ? -1 : a.d > b.d ? 1 : 0; });
+    if (!yearEntries.length) return null;
+
+    var works = {};
+    yearEntries.forEach(function (e) {
+      var k = e.t + '|' + e.title;
+      if (!works[k]) works[k] = { t: e.t, title: e.title, img: e.img, blur: !!e.blur, first: e.d, entries: [] };
+      works[k].entries.push(e);
+    });
+
+    var finished = {}, ongoing = {}, endless = [];
+    RECAP_CATS.forEach(function (t) { finished[t] = []; ongoing[t] = []; });
+    Object.values(works).forEach(function (w) {
+      if (w.t === 'anime' && !w.entries.some(function (e) { return recapIsMainAnime(e.note); })) return;
+      if (w.t === 'jeu' && ENDLESS_GAMES.indexOf(w.title) !== -1) { endless.push(w); return; }
+      var last = w.entries[w.entries.length - 1];
+      (last.status === 'en cours' ? ongoing[w.t] : finished[w.t]).push(w);
+    });
+
+    var totalFinished = RECAP_CATS.reduce(function (n, t) { return n + finished[t].length; }, 0);
+    var totalOngoing = RECAP_CATS.reduce(function (n, t) { return n + ongoing[t].length; }, 0);
+    var detail = RECAP_CATS.map(function (t) { return finished[t]; }).filter(function (a) { return a.length > 0; })
+      .map(function (arr) { return arr.length + ' ' + (arr.length > 1 ? RECAP_PLURAL[arr[0].t] : arr[0].t); }).join('  ·  ');
+
+    /* heatmap : mêmes paliers que le bilan */
+    var counts = {};
+    yearEntries.forEach(function (e) { counts[e.d] = (counts[e.d] || 0) + 1; });
+    var start = Date.UTC(+yearStr, 0, 1);
+    var totalDays = Math.round((Date.UTC(+yearStr + 1, 0, 1) - start) / 86400000);
+    var offset = (new Date(start).getUTCDay() + 6) % 7;
+    var weeks = Math.ceil((offset + totalDays) / 7);
+    var cells = [];
+    for (var wI = 0; wI < weeks; wI++) {
+      for (var dI = 0; dI < 7; dI++) {
+        var di = wI * 7 + dI - offset;
+        if (di < 0 || di >= totalDays) { cells.push(-1); continue; }
+        var c = counts[new Date(start + di * 86400000).toISOString().slice(0, 10)] || 0;
+        cells.push(c >= 7 ? 4 : c >= 4 ? 3 : c >= 2 ? 2 : c >= 1 ? 1 : 0);
+      }
+    }
+    var MONTHS = ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'août', 'sep', 'oct', 'nov', 'déc'];
+    var monthLabels = new Array(weeks).fill('');
+    for (var m = 0; m < 12; m++) {
+      var w2 = Math.floor(((Date.UTC(+yearStr, m, 1) - start) / 86400000 + offset) / 7);
+      if (monthLabels[w2] === '') monthLabels[w2] = MONTHS[m];
+    }
+
+    /* coups de cœur 5/5 — hors couvertures floutées (carte publique) */
+    var noteLookup = {};
+    function feed(type, items) {
+      (items || []).forEach(function (it) {
+        if (it && it.title && typeof it.note === 'number') noteLookup[type + '|' + it.title.toLowerCase()] = it.note;
+      });
+    }
+    try { Object.values(books).forEach(function (arr) { feed('livre', arr); }); } catch (e) {}
+    try { Object.values(films).forEach(function (arr) { feed('film', arr); }); } catch (e) {}
+    try { Object.values(musique).forEach(function (arr) { feed('musique', arr); }); } catch (e) {}
+    try { feed('jeu', Array.isArray(games) ? games : []); } catch (e) {}
+    var favs = [];
+    RECAP_CATS.forEach(function (t) {
+      finished[t].forEach(function (w) {
+        if (!w.blur && noteLookup[t + '|' + w.title.toLowerCase()] === 5) favs.push(w);
+      });
+    });
+    favs.sort(function (a, b) { return a.first < b.first ? -1 : a.first > b.first ? 1 : 0; });
+    var picks = favs.slice(0, 3);
+    if (picks.length === 3 && picks.every(function (w) { return w.t === picks[0].t; })) {
+      var alt = favs.slice(3).find(function (w) { return w.t !== picks[0].t; });
+      if (alt) picks[2] = alt;
+    }
+
+    /* stats signature : épisodes, chapitres, en cours */
+    var ep = 0;
+    yearEntries.forEach(function (e) {
+      if (e.t === 'anime' && recapIsMainAnime(e.note)) ep += recapUnits(e.note);
+    });
+    var chapitres = 0;
+    Object.values(works).forEach(function (w) {
+      if (w.t !== 'manga') return;
+      var prev = 0;
+      w.entries.forEach(function (e) {
+        var m3 = (e.note || '').match(/(\d+(?:-\d+)*)\/(\d+|\?)/);
+        if (!m3) return;
+        var nums = m3[1].split('-').map(Number);
+        var pos = nums[nums.length - 1];
+        chapitres += (prev === 0 ? nums.length : Math.max(1, pos - prev));
+        prev = pos;
+      });
+    });
+    function fr(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+    var stats = [];
+    if (ep >= 50) stats.push('~' + fr(ep) + ' épisodes vus');
+    if (chapitres >= 50) stats.push('~' + fr(chapitres) + ' chapitres lus');
+    if (totalOngoing > 0) stats.push(totalOngoing + ' œuvre' + (totalOngoing > 1 ? 's' : '') + ' encore en cours');
+
+    return { year: yearStr, totalFinished: totalFinished, detail: detail, cells: cells, weeks: weeks,
+             monthLabels: monthLabels, picks: picks, stats: stats.slice(0, 2) };
+  }
+
+  function rr(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function fitDraw(ctx, img, x, y, w, h, r) {
+    ctx.save();
+    rr(ctx, x, y, w, h, r); ctx.clip();
+    if (img) {
+      var ir = img.width / img.height, tr = w / h, dw, dh;
+      if (ir > tr) { dh = h; dw = h * ir; } else { dw = w; dh = w / ir; }
+      ctx.drawImage(img, x + (w - dw) / 2, y + (h - dh) / 2, dw, dh);
+    } else {
+      ctx.fillStyle = 'rgba(128,118,100,.18)';
+      ctx.fillRect(x, y, w, h);
+    }
+    ctx.restore();
+  }
+
+  function ellipsize(ctx, s, max) {
+    if (ctx.measureText(s).width <= max) return s;
+    while (s.length > 1 && ctx.measureText(s + '…').width > max) s = s.slice(0, -1);
+    return s + '…';
+  }
+
+  function drawWrapped(canvas, data, mode, imgs) {
+    var P = WRAPPED_MODES[mode];
+    var ctx = canvas.getContext('2d');
+    ctx.setTransform(SCALE, 0, 0, SCALE, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    ctx.textBaseline = 'alphabetic';
+
+    /* fond + double filet */
+    ctx.fillStyle = P.bg; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = P.filet; ctx.lineWidth = 2;
+    ctx.strokeRect(30, 30, W - 60, H - 60);
+    ctx.strokeStyle = P.filetSoft; ctx.lineWidth = 1;
+    ctx.strokeRect(42, 42, W - 84, H - 84);
+
+    /* ── en-tête : avatar rond + wordmark ── */
+    var ax = 98, ay = 100, ar = 38;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(ax, ay, ar, 0, Math.PI * 2); ctx.clip();
+    if (imgs.avatar) {
+      var im = imgs.avatar, ir = im.width / im.height, dw, dh;
+      if (ir > 1) { dh = ar * 2; dw = dh * ir; } else { dw = ar * 2; dh = dw / ir; }
+      ctx.drawImage(im, ax - dw / 2, ay - dh / 2, dw, dh);
+    } else {
+      ctx.fillStyle = P.faint; ctx.fillRect(ax - ar, ay - ar, ar * 2, ar * 2);
+      ctx.fillStyle = P.bg; ctx.font = '44px "IM Fell English"';
+      ctx.textAlign = 'center'; ctx.fillText('S', ax, ay + 16);
+    }
+    ctx.restore();
+    ctx.strokeStyle = P.filet; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(ax, ay, ar, 0, Math.PI * 2); ctx.stroke();
+    ctx.strokeStyle = P.filetSoft; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(ax, ay, ar + 8, 0, Math.PI * 2); ctx.stroke();
+
+    ctx.fillStyle = P.secondary;
+    ctx.font = '500 21px "Space Grotesk"';
+    try { ctx.letterSpacing = '7px'; } catch (e) {}
+    ctx.textAlign = 'right';
+    ctx.fillText('SLIDOU.ME', W - 74, 108);
+    try { ctx.letterSpacing = '0px'; } catch (e) {}
+
+    /* ── année héros ── */
+    ctx.fillStyle = P.ink;
+    ctx.font = '170px "IM Fell English"';
+    ctx.textAlign = 'center';
+    ctx.fillText(data.year, W / 2, 356);
+
+    /* ── œuvres terminées ── */
+    ctx.font = '700 92px "Space Grotesk"';
+    ctx.fillText(String(data.totalFinished), W / 2, 478);
+    ctx.fillStyle = P.secondary;
+    ctx.font = '500 24px "Space Grotesk"';
+    try { ctx.letterSpacing = '4px'; } catch (e) {}
+    ctx.fillText('ŒUVRES TERMINÉES', W / 2, 522);
+    try { ctx.letterSpacing = '0px'; } catch (e) {}
+    if (data.detail) {
+      var fs = 25;
+      ctx.font = fs + 'px "Space Grotesk"';
+      while (ctx.measureText(data.detail).width > 920 && fs > 16) { fs--; ctx.font = fs + 'px "Space Grotesk"'; }
+      ctx.fillText(data.detail, W / 2, 568);
+    }
+
+    /* ── heatmap ── */
+    ctx.fillStyle = P.secondary;
+    ctx.font = '500 19px "Space Grotesk"';
+    try { ctx.letterSpacing = '5px'; } catch (e) {}
+    ctx.fillText("ACTIVITÉ DE L'ANNÉE", W / 2, 640);
+    try { ctx.letterSpacing = '0px'; } catch (e) {}
+    var cw = 11.5, gap = 3.4, step = cw + gap;
+    var gw = data.weeks * step - gap;
+    var x0 = (W - gw) / 2, gy = 700;
+    ctx.font = '15px "Space Grotesk"';
+    ctx.fillStyle = P.faint;
+    ctx.textAlign = 'left';
+    for (var wI = 0; wI < data.weeks; wI++) {
+      if (data.monthLabels[wI]) ctx.fillText(data.monthLabels[wI], x0 + wI * step, gy - 14);
+    }
+    for (var i = 0; i < data.cells.length; i++) {
+      var lvl = data.cells[i];
+      if (lvl < 0) continue;
+      var cx = x0 + Math.floor(i / 7) * step, cy = gy + (i % 7) * step;
+      ctx.fillStyle = lvl === 0 ? P.hmOff : P.hm[lvl];
+      rr(ctx, cx, cy, cw, cw, 3); ctx.fill();
+    }
+
+    /* ── coups de cœur ── */
+    var hasFavs = data.picks.length > 0;
+    var favTop = 846;
+    if (hasFavs) {
+      ctx.fillStyle = P.secondary;
+      ctx.textAlign = 'center';
+      ctx.font = '500 19px "Space Grotesk"';
+      try { ctx.letterSpacing = '5px'; } catch (e) {}
+      ctx.fillText('COUPS DE CŒUR · 5/5', W / 2, favTop);
+      try { ctx.letterSpacing = '0px'; } catch (e) {}
+      var ch = 230, cwd = Math.round(ch * 2 / 3), gapC = 46;
+      var total = data.picks.length * cwd + (data.picks.length - 1) * gapC;
+      var x = (W - total) / 2, y = favTop + 28;
+      for (var f = 0; f < data.picks.length; f++) {
+        fitDraw(ctx, imgs.covers[f] || null, x, y, cwd, ch, 8);
+        ctx.strokeStyle = P.filetSoft; ctx.lineWidth = 1;
+        rr(ctx, x + .5, y + .5, cwd - 1, ch - 1, 8); ctx.stroke();
+        ctx.fillStyle = P.secondary;
+        ctx.font = 'italic 21px "IM Fell English"';
+        ctx.fillText(ellipsize(ctx, data.picks[f].title, cwd + 40), x + cwd / 2, y + ch + 30);
+        x += cwd + gapC;
+      }
+    }
+
+    /* ── stats signature ── */
+    var sy = hasFavs ? favTop + 28 + 230 + 76 : 900;
+    ctx.fillStyle = P.secondary;
+    ctx.textAlign = 'center';
+    for (var s = 0; s < data.stats.length; s++) {
+      ctx.font = '500 27px "Space Grotesk"';
+      ctx.fillText(data.stats[s], W / 2, sy + s * 38);
+    }
+
+    /* ── signature : perruche + devise ── */
+    var dev = 'l\u2019antre culturelle';
+    ctx.font = 'italic 28px "IM Fell English"';
+    var tw = ctx.measureText(dev).width;
+    var bh = 44, bw = bh * 52 / 88;
+    var gtot = bw + 22 + tw;
+    var gleft = W / 2 - gtot / 2;
+    if (imgs.budgie) ctx.drawImage(imgs.budgie, gleft, 1272 - bh + 8, bw, bh);
+    ctx.fillStyle = P.secondary;
+    ctx.textAlign = 'left';
+    ctx.fillText(dev, gleft + bw + 22, 1276);
+  }
+
+  /* ── modale ── */
+  var refs = null, lastData = null, lastMode = null;
+
+  function ensureModal() {
+    if (refs) return refs;
+    var ov = document.createElement('div');
+    ov.className = 'wrapped-overlay';
+    ov.innerHTML =
+      '<div class="wrapped-dialog" role="dialog" aria-label="Carte wrapped">' +
+        '<button class="wrapped-close" aria-label="Fermer">×</button>' +
+        '<div class="wrapped-stage"><canvas width="' + (W * SCALE) + '" height="' + (H * SCALE) + '"></canvas></div>' +
+        '<div class="wrapped-actions">' +
+          '<button class="wrapped-mode" title="Changer d\u2019ambiance">🌙</button>' +
+          '<button class="wrapped-dl">télécharger PNG</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(ov);
+    refs = { ov: ov, canvas: ov.querySelector('canvas'), mode: ov.querySelector('.wrapped-mode'), dl: ov.querySelector('.wrapped-dl') };
+
+    ov.addEventListener('click', function (e) { if (e.target === ov) closeWrapped(); });
+    ov.querySelector('.wrapped-close').addEventListener('click', closeWrapped);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && refs && refs.ov.parentNode) closeWrapped();
+    });
+    refs.mode.addEventListener('click', function () {
+      lastMode = lastMode === 'jour' ? 'nuit' : 'jour';
+      refs.mode.textContent = lastMode === 'jour' ? '🌙' : '☀️';
+      redraw();
+    });
+    refs.dl.addEventListener('click', function () {
+      if (!lastData) return;
+      refs.canvas.toBlob(function (blob) {
+        if (!blob) return;
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'slidou-wrapped-' + lastData.year + '.png';
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+      }, 'image/png');
+    });
+    return refs;
+  }
+
+  function redraw() {
+    if (!lastData) return;
+    drawWrapped(refs.canvas, lastData, lastMode, currentImgs);
+  }
+
+  var currentImgs = { avatar: null, covers: [], budgie: null };
+
+  function openWrapped() {
+    var data = wrappedCollect(recapYear);
+    if (!data) return;
+    lastData = data;
+    lastMode = document.body.classList.contains('dark-mode') ? 'nuit' : 'jour';
+    var m = ensureModal();
+    m.mode.textContent = lastMode === 'jour' ? '🌙' : '☀️';
+    m.ov.style.display = 'flex';
+    wrappedFonts().then(function () {
+      redraw(); /* premier trait immédiat */
+      var jobs = [loadImg('pfp.jpg')];
+      for (var i = 0; i < 3; i++) {
+        jobs.push(i < data.picks.length ? loadImg(data.picks[i].img) : Promise.resolve(null));
+      }
+      jobs.push(loadImg(budgieURI(WRAPPED_MODES[lastMode].ink === '#2b2b2b' ? '#2b2b2b' : '#e0e0e0')));
+      return Promise.all(jobs);
+    }).then(function (out) {
+      if (out) {
+        currentImgs = { avatar: out[0], covers: [out[1], out[2], out[3]], budgie: out[4] };
+        redraw();
+      }
+    });
+  }
+
+  function closeWrapped() {
+    if (refs) refs.ov.style.display = 'none';
+  }
+
+  var btn = document.getElementById('wrapped-open-btn');
+  if (btn) btn.addEventListener('click', openWrapped);
+
+  window.slidouWrapped = { open: openWrapped, collect: wrappedCollect, modes: WRAPPED_MODES };
+})();

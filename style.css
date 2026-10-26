@@ -2266,3 +2266,51 @@ h2.collapsed-creator .creator-arrow {
   .budgie-ambient * { animation: none !important; }
   .budgie-ambient { transition: opacity 0.25s ease; }
 }
+
+/* ═══════ Carte Wrapped (chantier 13) ═══════ */
+.recap-wrapped-row { display: flex; justify-content: flex-end; margin: -6px 0 10px; }
+.wrapped-open-btn {
+  background: none; border: 1px solid var(--border-color); color: var(--secondary-text);
+  border-radius: 999px; padding: 5px 14px; font-size: 13px; cursor: pointer;
+  font-family: inherit; letter-spacing: .4px; transition: color .2s, border-color .2s;
+}
+.wrapped-open-btn:hover { color: var(--text-color); border-color: var(--text-color); }
+
+.wrapped-overlay {
+  position: fixed; inset: 0; z-index: 3600; display: none;
+  align-items: center; justify-content: center; padding: 20px;
+  background: rgba(20,16,10,.55); backdrop-filter: blur(4px);
+  animation: wrappedIn .18s ease;
+}
+@keyframes wrappedIn { from { opacity: 0; } to { opacity: 1; } }
+.wrapped-dialog {
+  position: relative; background: var(--bg-color); border: 1px solid var(--border-color);
+  border-radius: 12px; padding: 18px 18px 14px; max-width: 94vw;
+  box-shadow: 0 18px 60px rgba(0,0,0,.35);
+}
+.wrapped-stage canvas {
+  display: block; max-height: 74vh; max-width: 100%; width: auto; height: auto;
+  border: 1px solid var(--border-color); border-radius: 8px;
+}
+.wrapped-actions { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 14px; }
+.wrapped-mode {
+  background: none; border: none; font-size: 20px; cursor: pointer;
+  color: var(--text-color); transition: transform .2s;
+}
+.wrapped-mode:hover { transform: scale(1.2); }
+.wrapped-dl {
+  background: var(--text-color); color: var(--bg-color); border: none; border-radius: 8px;
+  padding: 9px 18px; font-family: inherit; font-size: 14px; cursor: pointer; letter-spacing: .4px;
+}
+.wrapped-dl:hover { opacity: .85; }
+.wrapped-close {
+  position: absolute; top: 8px; right: 12px; background: none; border: none;
+  font-size: 26px; line-height: 1; cursor: pointer; color: var(--secondary-text);
+}
+.wrapped-close:hover { color: var(--text-color); }
+@media (prefers-reduced-motion: reduce) { .wrapped-overlay { animation: none; } }
+@media (max-width: 720px) {
+  .wrapped-dialog { padding: 10px 10px 10px; }
+  .wrapped-stage canvas { max-height: 64vh; }
+  .wrapped-actions { gap: 12px; margin-top: 10px; }
+}
