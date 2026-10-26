@@ -1001,4 +1001,6 @@ const journalData = [
 { d: "2026-10-24", t: "manga", title: "No.5", img: "manga/no5.jpg", note: "20-21/37", status: "en cours" },
 { d: "2026-10-25", t: "musique", title: "垃圾场", img: "music/垃圾场.webp", note: "première écoute" },
 { d: "2026-10-25", t: "manga", title: "No.5", img: "manga/no5.jpg", note: "22-26/37", status: "en cours" },
+{ d: "2026-10-25", t: "anime", title: "Docchi ni Suru?", img: "anime/docchi.jpg", note: "short" },
+{ d: "2026-10-26", t: "livre", title: "The Human Chair", img: "books/thehumanchair.jpg", note: "je l'ai lu en one shot et ce fut glaçant" },
 ];

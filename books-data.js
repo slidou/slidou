@@ -495,5 +495,8 @@ Et je dois bien l’avouer, ça fait très bizarre de lire un roman aussi incisi
   ],
   "ANTOINE GOYA": [
     { title: "Ma dark romance avec wakamatsu", note: 3.5, cover: "books/mdw.jpg", link: "https://www.goodreads.com/book/show/254191594-ma-dark-romance-avec-wakamatsu" }
+  ],
+  "Edogawa Rampo": [
+    { title: "The Human Chair", note: 3.5, cover: "books/thehumanchair.jpg", link: "https://www.goodreads.com/book/show/36155169-the-human-chair" }
   ]
 };
