@@ -1003,4 +1003,9 @@ const journalData = [
 { d: "2026-10-25", t: "manga", title: "No.5", img: "manga/no5.jpg", note: "22-26/37", status: "en cours" },
 { d: "2026-10-25", t: "anime", title: "Docchi ni Suru?", img: "anime/docchi.jpg", note: "short" },
 { d: "2026-10-26", t: "livre", title: "The Human Chair", img: "books/thehumanchair.jpg", note: "je l'ai lu en one shot et ce fut glaçant" },
+{ d: "2026-10-26", t: "anime", title: "Zombie Zombie Zombie", img: "anime/zombie.jpg", note: "music" },
+{ d: "2026-10-26", t: "anime", title: "Chiisana Bokura", img: "anime/chiisanabokura.jpg", note: "music" },
+{ d: "2026-10-26", t: "anime", title: "Tsuru ga Mau Yoru ni", img: "anime/tsurugamau.jpg", note: "short" },
+{ d: "2026-10-26", t: "anime", title: "Ephemere", img: "anime/ephemere.jpg", note: "short" },
+{ d: "2026-10-26", t: "anime", title: "Kanshajou", img: "anime/kanshajou.jpg", note: "music" },
 ];

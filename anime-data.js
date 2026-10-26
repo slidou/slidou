@@ -7915,5 +7915,10 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 62914, title: "Furyou Ritsu", note: null, tags: ["short","archived"] },
   { id: 62515, title: "Com Rade Zhi Ni Hao", note: 0.5, tags: ["short","archived"] },
   { id: 6797, title: "Docchi ni Suru?", note: null, tags: ["short","archived"] },
+  { id: 65254, title: "Zombie Zombie Zombie", note: 2.5, tags: ["music","archived"] },
+  { id: 65257, title: "Chiisana Bokura", note: 3.5, tags: ["music","+","archived"] },
+  { id: 55302, title: "Tsuru ga Mau Yoru ni", note: 2.5, tags: ["short","archived"] },
+  { id: 58321, title: "Ephemere", note: 3, tags: ["short","archived"] },
+  { id: 56159, title: "Kanshajou", note: 3, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
