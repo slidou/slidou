@@ -706,7 +706,6 @@ const mangaData = {
   ],
   "Remu": [
     { id: 174187, title: "Gal Milk", note: 4, tags: ["hentai"] },
-    { id: 174186, title: "Kanmoku no Ko", note: 4, tags: ["hentai"] },
     { id: 174602, title: "Yotogi-mura: Aru Inaka no Kishuu", note: 4.5, tags: ["one-shot","hentai"] },
   ],
   "shuz": [

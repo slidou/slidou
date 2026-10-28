@@ -14,7 +14,7 @@
    suffit, ce worker se revalide tout seul à chaque visite.
    ═══════════════════════════════════════════════════════════════ */
 
-var VERSION = 'v19';  // v18 : chapeau fantôme retiré du perchoir (.ba-perch n'est plus habillé), costume réservé aux SVG d'oiseau
+var VERSION = 'v22';  // v22 : covers entières sur fond d'elles-mêmes flouté (continuité cover) + contours gem / coup de cœur rétablis
 var SHELL_CACHE = 'slidou-shell-' + VERSION;
 var IMG_CACHE = 'slidou-img-' + VERSION;
 var MEDIA_CACHE = 'slidou-media-' + VERSION;

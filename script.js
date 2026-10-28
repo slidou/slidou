@@ -4262,7 +4262,6 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     });
   });
 }
-
 /* ═══════════════════════════════════════════════════════════════
    Carte Wrapped — l'année en image partageable (chantier 13, v19)
    ─────────────────────────────────────────────────────────────
@@ -4670,4 +4669,98 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
   if (btn) btn.addEventListener('click', openWrapped);
 
   window.slidouWrapped = { open: openWrapped, collect: wrappedCollect, modes: WRAPPED_MODES };
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   v22 — COVER STACK (continuité de la cover + contours gem/coup de cœur)
+   ─────────────────────────────────────────────────────────────
+   Enveloppe chaque cover des zones concernées dans un « stack » :
+   • fond = la même image zoomée + floutée (peinte uniquement quand la
+     cover est réellement chargée — le lazy loading est préservé) ;
+   • devant = la cover entière (object-fit: contain).
+   Œuvre masquée (blur) → fond renforcé blur 30px : rien n'est révélé.
+   Aucune fonction de rendu existante n'est modifiée : un observateur
+   traite le DOM après chaque affichage (recherches, filtres, popup…).
+   ═══════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  /* Zones couvertes (périmètre v21) : pages animes / mangas / livres /
+     films / séries, dernières activités, popup du calendrier,
+     coups de cœur + galeries du bilan. */
+  var ZONE_SELECTOR = [
+    '#animeContent .anime-card > img',
+    '#mangaContent .manga-card > img',
+    '#bibliographyContent .book-card > img',
+    '#filmsContent .book-card > img',
+    '#seriesContent .book-card > img',
+    '#home-dashboard .home-dash-card > img',
+    '#calendar-popup-content .popup-item > img',
+    '#recap-favorites .book-card > img',
+    '#recap-visual .book-card > img'
+  ].join(',');
+
+  /* Musique → slot carré (dernières activités + galeries du bilan) */
+  function isSquare(img) {
+    var card = img.parentElement;
+    if (!card || !card.classList) return false;
+    return card.classList.contains('dash-card-square') ||
+           card.classList.contains('recap-music-card');
+  }
+
+  function wrapImg(img) {
+    if (img.getAttribute('data-cs')) return;
+    img.setAttribute('data-cs', '1');
+    var parent = img.parentNode;
+    if (!parent) return;
+
+    var stack = document.createElement('span');
+    stack.className = 'cover-stack' + (isSquare(img) ? ' ratio-square' : '');
+
+    var blur = document.createElement('span');
+    blur.className = 'cover-blur';
+    stack.appendChild(blur);
+
+    parent.insertBefore(stack, img);
+    stack.appendChild(img);
+
+    /* Le fond ne se peint qu'une fois la cover chargée (lazy préservé) */
+    var paint = function () {
+      var src = img.currentSrc || img.src;
+      if (src) blur.style.backgroundImage = 'url("' + src + '")';
+    };
+    if (img.complete && img.naturalWidth > 0) paint();
+    else img.addEventListener('load', paint, { once: true });
+
+    /* Cover en erreur → pas de fond (le placeholder prend le relais) */
+    img.addEventListener('error', function () {
+      blur.style.backgroundImage = '';
+    }, { once: true });
+
+    /* Œuvre masquée : le fond ne doit rien révéler */
+    var st = img.getAttribute('style') || '';
+    if (st.indexOf('blur') !== -1) stack.classList.add('blur-zone');
+  }
+
+  function scan() {
+    var imgs = document.querySelectorAll(ZONE_SELECTOR);
+    for (var i = 0; i < imgs.length; i++) {
+      var img = imgs[i];
+      if (img.hasAttribute('src') && img.getAttribute('src') !== '') wrapImg(img);
+    }
+  }
+
+  var pending = null;
+  function schedule() {
+    if (pending) return;
+    pending = setTimeout(function () {
+      pending = null;
+      scan();
+    }, 60);
+  }
+
+  scan();
+
+  var observer = new MutationObserver(schedule);
+  observer.observe(document.body, { childList: true, subtree: true });
 })();

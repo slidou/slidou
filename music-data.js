@@ -253,5 +253,8 @@ const musicData = {
   ],
   "劣": [
     { title: "垃圾场", note: 3, cover: "music/垃圾场.webp", link: "https://rateyourmusic.com/release/album/%E5%8A%A3/%E5%9E%83%E5%9C%BE%E5%9C%BA/" },
+  ],
+  "Yeat": [
+    { title: "Luh Leakyz Vol. 1", note: 3, cover: "music/luh.webp", link: "https://rateyourmusic.com/release/mixtape/yeat/luh-leakyz-vol-1/" },
   ]
 };

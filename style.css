@@ -2265,9 +2265,7 @@ h2.collapsed-creator .creator-arrow {
   .budgie-ambient,
   .budgie-ambient * { animation: none !important; }
   .budgie-ambient { transition: opacity 0.25s ease; }
-}
-
-/* ═══════ Carte Wrapped (chantier 13) ═══════ */
+}/* ═══════ Carte Wrapped (chantier 13) ═══════ */
 .recap-wrapped-row { display: flex; justify-content: flex-end; margin: -6px 0 10px; }
 .wrapped-open-btn {
   background: none; border: 1px solid var(--border-color); color: var(--secondary-text);
@@ -2313,4 +2311,66 @@ h2.collapsed-creator .creator-arrow {
   .wrapped-dialog { padding: 10px 10px 10px; }
   .wrapped-stage canvas { max-height: 64vh; }
   .wrapped-actions { gap: 12px; margin-top: 10px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   v22 — COVER STACK : la cover entière sur un fond d'elle-même floutée
+   ─────────────────────────────────────────────────────────────
+   • La cover s'affiche ENTIÈRE (object-fit: contain) dans un slot 2/3
+     (1/1 pour la musique) — plus aucune couverture coupée.
+   • Derrière, la même image zoomée + floutée : le « contour » est la
+     continuité de la cover (peint une fois la cover réellement chargée).
+   • Contours gem (bleu) et coup de cœur (rose) reportés sur le stack
+     → ils survivent à la nouvelle structure, comme avant.
+   • Œuvres masquées (blur) : fond renforcé (30px) pour ne rien révéler.
+   ═══════════════════════════════════════════════════════════════ */
+.cover-stack {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--sidebar-bg);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+.cover-stack.ratio-square { aspect-ratio: 1 / 1; }
+.cover-stack .cover-blur {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.18);
+  filter: blur(14px) saturate(1.25);
+}
+.cover-stack.blur-zone .cover-blur { filter: blur(30px) saturate(1.1); }
+.cover-stack > img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* Placeholder (cover absente) : remplit le slot, sans double ombre */
+.cover-stack > .anime-placeholder,
+.cover-stack > .manga-placeholder {
+  position: relative;
+  z-index: 1;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* ── Contours gem / coup de cœur (v22 : rétablis sur le stack) ── */
+.coup-de-coeur-card .cover-stack {
+  box-shadow: 0 0 0 2px rgba(236, 64, 122, 0.6), 0 0 12px rgba(236, 64, 122, 0.4), 0 4px 8px var(--shadow-color) !important;
+}
+.gem-card .cover-stack {
+  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.6), 0 0 12px rgba(66, 165, 245, 0.4), 0 4px 8px var(--shadow-color) !important;
 }

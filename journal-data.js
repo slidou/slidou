@@ -1008,4 +1008,6 @@ const journalData = [
 { d: "2026-10-26", t: "anime", title: "Tsuru ga Mau Yoru ni", img: "anime/tsurugamau.jpg", note: "short" },
 { d: "2026-10-26", t: "anime", title: "Ephemere", img: "anime/ephemere.jpg", note: "short" },
 { d: "2026-10-26", t: "anime", title: "Kanshajou", img: "anime/kanshajou.jpg", note: "music" },
+{ d: "2026-10-27", t: "manga", title: "No.5", img: "manga/no5.jpg", note: "27-30/37", status: "en cours" },
+{ d: "2026-10-27", t: "musique", title: "Luh Leakyz Vol. 1", img: "music/luh.webp", note: "première écoute entre guillemets vu que ce sont des leaks à la base" },
 ];
