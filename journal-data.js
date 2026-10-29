@@ -1010,4 +1010,10 @@ const journalData = [
 { d: "2026-10-26", t: "anime", title: "Kanshajou", img: "anime/kanshajou.jpg", note: "music" },
 { d: "2026-10-27", t: "manga", title: "No.5", img: "manga/no5.jpg", note: "27-30/37", status: "en cours" },
 { d: "2026-10-27", t: "musique", title: "Luh Leakyz Vol. 1", img: "music/luh.webp", note: "première écoute entre guillemets vu que ce sont des leaks à la base" },
+{ d: "2026-10-28", t: "anime", title: "Meogda", img: "anime/meogda.jpg", note: "short" },
+{ d: "2026-10-28", t: "anime", title: "Kusunoki: 500-nen no Kaze ni Fukarete", img: "anime/kusunoki.jpg", note: "music" },
+{ d: "2026-10-28", t: "anime", title: "Kusohamu-chan Happy Birthday!", img: "anime/kusohamu.jpg", note: "short" },
+{ d: "2026-10-29", t: "anime", title: "Anime to Susume!", img: "anime/animetosusume.jpg", note: "commercial" },
+{ d: "2026-10-29", t: "anime", title: "Kicks and Punk", img: "anime/kicksandpunk.jpg", note: "short" },
+{ d: "2026-10-29", t: "anime", title: "Bridge: My Little Friends", img: "anime/bridgefriends.jpg", note: "short" },
 ];

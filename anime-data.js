@@ -7920,5 +7920,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 55302, title: "Tsuru ga Mau Yoru ni", note: 2.5, tags: ["short","archived"] },
   { id: 58321, title: "Ephemere", note: 3, tags: ["short","archived"] },
   { id: 56159, title: "Kanshajou", note: 3, tags: ["music","archived"] },
+  { id: 51749, title: "Meogda", note: 3, tags: ["short","archived"] },
+  { id: 61779, title: "Kusunoki: 500-nen no Kaze ni Fukarete", note: 2.5, tags: ["music","archived"] },
+  { id: 56612, title: "Kusohamu-chan Happy Birthday!", note: null, tags: ["short","+","archived"] },
+  { id: 62293, title: "Anime to Susume!", note: null, tags: ["short","commercial","archived"] },
+  { id: 58320, title: "Kicks and Punk", note: 2.5, tags: ["short","archived"] },
+  { id: 58319, title: "Bridge: My Little Friends", note: 2.5, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
