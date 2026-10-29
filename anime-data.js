@@ -7926,5 +7926,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 62293, title: "Anime to Susume!", note: null, tags: ["short","commercial","archived"] },
   { id: 58320, title: "Kicks and Punk", note: 2.5, tags: ["short","archived"] },
   { id: 58319, title: "Bridge: My Little Friends", note: 2.5, tags: ["short","archived"] },
+  { id: 23267, title: "Osaru no Tairyou", note: null, tags: ["short","archived"] },
+  { id: 57084, title: "Orangeback + Hoo-D Pilot", note: 2.5, tags: ["short","archived"] },
+  { id: 65278, title: "Nyan Nyan Kyururun! Neko Noudo", note: 3, tags: ["music","archived"] },
+  { id: 65277, title: "Mugamuchu", note: 3.5, tags: ["music","+","archived"] },
+  { id: 35778, title: "Ookami Heart", note: 3, tags: ["music","+","archived"] },
+  { id: 38048, title: "Oshiete♡Namie-sensei!", note: null, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

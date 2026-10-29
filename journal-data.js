@@ -1016,4 +1016,10 @@ const journalData = [
 { d: "2026-10-29", t: "anime", title: "Anime to Susume!", img: "anime/animetosusume.jpg", note: "commercial" },
 { d: "2026-10-29", t: "anime", title: "Kicks and Punk", img: "anime/kicksandpunk.jpg", note: "short" },
 { d: "2026-10-29", t: "anime", title: "Bridge: My Little Friends", img: "anime/bridgefriends.jpg", note: "short" },
+{ d: "2026-10-29", t: "anime", title: "Osaru no Tairyou", img: "anime/osarunotairyou.jpg", note: "short" },
+{ d: "2026-10-29", t: "anime", title: "Orangeback + Hoo-D Pilot", img: "anime/orangeback.jpg", note: "short" },
+{ d: "2026-10-29", t: "anime", title: "Nyan Nyan Kyururun! Neko Noudo", img: "anime/kyururun.jpg", note: "music" },
+{ d: "2026-10-29", t: "anime", title: "Mugamuchu", img: "anime/mugamuchu.jpg", note: "music" },
+{ d: "2026-10-29", t: "anime", title: "Ookami Heart", img: "anime/ookamiheart.jpg", note: "music" },
+{ d: "2026-10-29", t: "anime", title: "Oshiete♡Namie-sensei!", img: "anime/oshieteNamie.jpg", note: "short" },
 ];

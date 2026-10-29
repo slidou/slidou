@@ -14,7 +14,7 @@
    suffit, ce worker se revalide tout seul à chaque visite.
    ═══════════════════════════════════════════════════════════════ */
 
-var VERSION = 'v22';  // v22 : covers entières sur fond d'elles-mêmes flouté (continuité cover) + contours gem / coup de cœur rétablis
+var VERSION = 'v23';  // v23 : chantier 5 — filtres manga « single volume » / « several volumes » (hentai exclus, comme d'hab)
 var SHELL_CACHE = 'slidou-shell-' + VERSION;
 var IMG_CACHE = 'slidou-img-' + VERSION;
 var MEDIA_CACHE = 'slidou-media-' + VERSION;

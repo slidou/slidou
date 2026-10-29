@@ -3111,7 +3111,7 @@ function animeMatchesTag(a, tag) {
 }
 function mangaMatchesTag(m, tag) {
   if (m.tags.indexOf(tag) === -1) return false;
-  if (tag === 'one-shot' && m.tags.indexOf('hentai') !== -1) return false;
+  if ((tag === 'one-shot' || tag === 'single volume' || tag === 'several volumes') && m.tags.indexOf('hentai') !== -1) return false;
   return true;
 }
 // Restauration des préférences (une seule fois, avant le premier rendu de page)
@@ -3206,7 +3206,7 @@ mangaData[a].forEach(function(m) {
   allBtn.addEventListener('click', function() { mangaActiveTags = []; savePrefs('manga', { tags: mangaActiveTags }); renderMangaFilters(); renderManga(); });
   fC.appendChild(allBtn);
 
-  var fmtTags = ['one-shot', 'hentai'];
+  var fmtTags = ['one-shot', 'single volume', 'several volumes', 'hentai'];
   var quaTags = ['favorite', 'gem'];
 
   var mangaTagCount = {};
@@ -3214,7 +3214,7 @@ mangaData[a].forEach(function(m) {
     mangaData[a].forEach(function(m) {
       var isHentai = m.tags.indexOf('hentai') !== -1;
       m.tags.forEach(function(t) {
-        if (t === 'one-shot' && isHentai) return;
+        if ((t === 'one-shot' || t === 'single volume' || t === 'several volumes') && isHentai) return;
         mangaTagCount[t] = (mangaTagCount[t] || 0) + 1;
       });
     });
