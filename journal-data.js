@@ -1024,4 +1024,10 @@ const journalData = [
 { d: "2026-10-29", t: "anime", title: "Oshiete♡Namie-sensei!", img: "anime/oshieteNamie.jpg", note: "short" },
 { d: "2026-10-30", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1197/?", status: "en cours" },
 { d: "2026-10-30", t: "anime", title: "Steel Ball Run: JoJo no Kimyou na Bouken", img: "anime/jojo7.jpg", note: "normal episode, 7/?", status: "en cours" },
+{ d: "2026-10-30", t: "anime", title: "Hatenai Tabi", img: "anime/hatenai.jpg", note: "music" },
+{ d: "2026-10-30", t: "anime", title: "Oto no Niwa", img: "anime/otononiwa.jpg", note: "music" },
+{ d: "2026-10-30", t: "anime", title: "Oshiri no Yama wa Everest", img: "anime/everest.jpg", note: "music" },
+{ d: "2026-10-30", t: "anime", title: "Oshizuka ni", img: "anime/oshizuka.jpg", note: "short" },
+{ d: "2026-10-30", t: "anime", title: "Otenki Pokojiro", img: "anime/pokojiro.jpg", note: "short episode, 1-3/3" },
+{ d: "2026-10-30", t: "anime", title: "Owanko", img: "anime/owanko.jpg", note: "short episode, 1-7/7" },
 ];

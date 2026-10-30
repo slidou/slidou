@@ -7932,5 +7932,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 65277, title: "Mugamuchu", note: 3.5, tags: ["music","+","archived"] },
   { id: 35778, title: "Ookami Heart", note: 3, tags: ["music","+","archived"] },
   { id: 38048, title: "Oshiete♡Namie-sensei!", note: null, tags: ["short","archived"] },
+  { id: 65282, title: "Hatenai Tabi", note: 3, tags: ["music","archived"] },
+  { id: 59545, title: "Oto no Niwa", note: 2.5, tags: ["music","archived"] },
+  { id: 41673, title: "Oshiri no Yama wa Everest", note: 0.5, tags: ["music","archived"] },
+  { id: 29796, title: "Oshizuka ni", note: null, tags: ["short","archived"] },
+  { id: 56533, title: "Otenki Pokojiro", note: 0.5, tags: ["short episode","archived"] },
+  { id: 30905, title: "Owanko", note: null, tags: ["short episode","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
