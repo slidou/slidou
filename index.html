@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Slidou — l'antre culturelle</title>
   <meta name="description" content="Slidou — l'antre culturelle : livres, films, séries, jeux, musique, anime et manga consommés, notés et chroniqués.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="season.css?v=18">
+  <link rel="stylesheet" href="mobile.css">
   <link rel="icon" href="pfp.jpg" type="image/jpeg">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -315,6 +316,28 @@
 
   </main>
 
+</div>
+
+<!-- ── v24 : Navigation mobile — barre du bas (masquée sur PC) ── -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Navigation mobile">
+  <a href="#" class="mobile-nav-btn" data-page="home"><span class="mn-ico">🏠</span><span class="mn-label">accueil</span></a>
+  <a href="#" class="mobile-nav-btn" data-page="bibliographie"><span class="mn-ico">📚</span><span class="mn-label">biblio</span></a>
+  <a href="#" class="mobile-nav-btn" data-page="ecrans"><span class="mn-ico">🎬</span><span class="mn-label">écrans</span></a>
+  <a href="#" class="mobile-nav-btn" data-page="anime"><span class="mn-ico">🌸</span><span class="mn-label">anime</span></a>
+  <a href="#" class="mobile-nav-btn" data-page="manga"><span class="mn-ico">📖</span><span class="mn-label">manga</span></a>
+</nav>
+
+<!-- ── v24 : Feuille « plus » — secondes sections (masquée sur PC) ── -->
+<div class="mobile-plus-sheet" id="mobile-plus-sheet">
+  <div class="mobile-plus-panel">
+    <button class="mobile-plus-close" type="button" aria-label="fermer">&times;</button>
+    <div class="mobile-plus-title">plus</div>
+    <a href="#" class="mobile-plus-item" id="mobile-plus-search"><span class="mn-ico">🔎</span>Recherche globale</a>
+    <a href="#" class="mobile-plus-item" data-page="jeux"><span class="mn-ico">🎮</span>Jeux vidéo</a>
+    <a href="#" class="mobile-plus-item" data-page="musique"><span class="mn-ico">🎵</span>Musique</a>
+    <a href="#" class="mobile-plus-item" data-page="statistiques"><span class="mn-ico">📊</span>Statistiques</a>
+    <a href="#" class="mobile-plus-item" data-page="apropos"><span class="mn-ico">🦜</span>À propos</a>
+  </div>
 </div>
 
 <div class="review-popup" id="review-popup">

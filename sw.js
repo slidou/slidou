@@ -14,7 +14,7 @@
    suffit, ce worker se revalide tout seul à chaque visite.
    ═══════════════════════════════════════════════════════════════ */
 
-var VERSION = 'v23';  // v23 : chantier 5 — filtres manga « single volume » / « several volumes » (hentai exclus, comme d'hab)
+var VERSION = 'v25';  // v25 : v24.1 entrée « Recherche globale » dans la feuille plus ; v24 : refonte mobile — mobile.css (nav basse + bottom-sheets) ; v23 : filtres manga single/several volumes
 var SHELL_CACHE = 'slidou-shell-' + VERSION;
 var IMG_CACHE = 'slidou-img-' + VERSION;
 var MEDIA_CACHE = 'slidou-media-' + VERSION;
@@ -28,6 +28,7 @@ var CRITICAL_ASSETS = [
   './',
   'index.html',
   'style.css',
+  'mobile.css',
   'script.js',
   'season.js',
   'season.css',

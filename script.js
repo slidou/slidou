@@ -231,6 +231,9 @@ function navigateTo(page) {
   }
 
   budgieOnNavigate(page); // perruches passives : arrivée / retour au nid
+
+  // v24 : synchronise l'état actif de la barre de navigation mobile
+  if (typeof window.slidouSyncMobileNav === 'function') window.slidouSyncMobileNav(page);
 }
 
 document.querySelectorAll('[data-page]').forEach(link => {
@@ -3111,7 +3114,7 @@ function animeMatchesTag(a, tag) {
 }
 function mangaMatchesTag(m, tag) {
   if (m.tags.indexOf(tag) === -1) return false;
-  if ((tag === 'one-shot' || tag === 'single volume' || tag === 'several volumes') && m.tags.indexOf('hentai') !== -1) return false;
+  if (tag === 'one-shot' && m.tags.indexOf('hentai') !== -1) return false;
   return true;
 }
 // Restauration des préférences (une seule fois, avant le premier rendu de page)
@@ -3206,7 +3209,7 @@ mangaData[a].forEach(function(m) {
   allBtn.addEventListener('click', function() { mangaActiveTags = []; savePrefs('manga', { tags: mangaActiveTags }); renderMangaFilters(); renderManga(); });
   fC.appendChild(allBtn);
 
-  var fmtTags = ['one-shot', 'single volume', 'several volumes', 'hentai'];
+  var fmtTags = ['one-shot', 'hentai'];
   var quaTags = ['favorite', 'gem'];
 
   var mangaTagCount = {};
@@ -3214,7 +3217,7 @@ mangaData[a].forEach(function(m) {
     mangaData[a].forEach(function(m) {
       var isHentai = m.tags.indexOf('hentai') !== -1;
       m.tags.forEach(function(t) {
-        if ((t === 'one-shot' || t === 'single volume' || t === 'several volumes') && isHentai) return;
+        if (t === 'one-shot' && isHentai) return;
         mangaTagCount[t] = (mangaTagCount[t] || 0) + 1;
       });
     });
@@ -4763,4 +4766,101 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 
   var observer = new MutationObserver(schedule);
   observer.observe(document.body, { childList: true, subtree: true });
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   v24 — NAVIGATION MOBILE : barre du bas + feuille « plus »
+   ─────────────────────────────────────────────────────────────
+   Pur ajout : aucun handler existant n'est modifié ou retiré.
+   • La barre basse réutilise les data-page → navigateTo() déjà
+     branché sur tous les [data-page] fonctionne tel quel.
+   • ☰ (menu-toggle) ouvre la feuille « plus » sur mobile ; sur PC
+     il reste caché et son ancien comportement est intact.
+   • L'état actif est resynchronisé à chaque navigateTo() via
+     window.slidouSyncMobileNav (appelé en fin de navigateTo).
+   ═══════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var mq = window.matchMedia('(max-width: 768px)');
+  var nav = document.getElementById('mobile-nav');
+  var sheet = document.getElementById('mobile-plus-sheet');
+
+  /* État actif de la barre basse (page courante) */
+  function syncMobileNav(page) {
+    if (!nav) return;
+    var btns = nav.querySelectorAll('.mobile-nav-btn');
+    for (var i = 0; i < btns.length; i++) {
+      if (btns[i].getAttribute('data-page') === page) btns[i].classList.add('active');
+      else btns[i].classList.remove('active');
+    }
+  }
+  window.slidouSyncMobileNav = syncMobileNav;
+
+  /* Feedback visuel immédiat au tap (navigateTo reconfirmera) */
+  if (nav) {
+    nav.addEventListener('click', function (e) {
+      var btn = e.target.closest('.mobile-nav-btn');
+      if (btn) syncMobileNav(btn.getAttribute('data-page'));
+    });
+  }
+
+  /* Feuille « plus » : ouverture / fermeture + blocage du scroll fond */
+  function openSheet() {
+    if (!sheet) return;
+    sheet.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSheet() {
+    if (!sheet) return;
+    sheet.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  var menuBtn = document.getElementById('menu-toggle');
+  if (menuBtn) {
+    menuBtn.addEventListener('click', function () {
+      if (!mq.matches) return; /* PC : ancien comportement du hamburger conservé */
+      if (sheet && sheet.classList.contains('open')) closeSheet();
+      else openSheet();
+    });
+  }
+
+  if (sheet) {
+    /* Tap sur le fond sombre ou sur ✕ → fermer */
+    sheet.addEventListener('click', function (e) {
+      if (e.target === sheet || e.target.closest('.mobile-plus-close')) closeSheet();
+    });
+    /* Navigation depuis la feuille → la fermer */
+    var sheetLinks = sheet.querySelectorAll('[data-page]');
+    for (var j = 0; j < sheetLinks.length; j++) {
+      sheetLinks[j].addEventListener('click', function () { closeSheet(); });
+    }
+  }
+
+  /* v24.1 — « Recherche globale » dans la feuille plus : ouvre la
+     palette plein écran (même action que la loupe du haut), puis
+     referme la feuille pour ne rien laisser derrière. Pur ajout :
+     on simule un tap sur le #search-toggle existant, aucun handler
+     de la palette n'est modifié. */
+  var sheetSearch = document.getElementById('mobile-plus-search');
+  if (sheetSearch) {
+    sheetSearch.addEventListener('click', function (e) {
+      e.preventDefault();
+      closeSheet();
+      var loupe = document.getElementById('search-toggle');
+      if (loupe) loupe.click();
+    });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSheet();
+  });
+
+  /* État actif correct dès l'arrivée (page restaurée de localStorage) */
+  window.addEventListener('load', function () {
+    var saved = null;
+    try { saved = localStorage.getItem('activePage'); } catch (err) { saved = null; }
+    syncMobileNav(saved || 'home');
+  });
 })();

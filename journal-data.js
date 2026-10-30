@@ -1022,4 +1022,6 @@ const journalData = [
 { d: "2026-10-29", t: "anime", title: "Mugamuchu", img: "anime/mugamuchu.jpg", note: "music" },
 { d: "2026-10-29", t: "anime", title: "Ookami Heart", img: "anime/ookamiheart.jpg", note: "music" },
 { d: "2026-10-29", t: "anime", title: "Oshiete♡Namie-sensei!", img: "anime/oshieteNamie.jpg", note: "short" },
+{ d: "2026-10-30", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1197/?", status: "en cours" },
+{ d: "2026-10-30", t: "anime", title: "Steel Ball Run: JoJo no Kimyou na Bouken", img: "anime/jojo7.jpg", note: "normal episode, 7/?", status: "en cours" },
 ];
