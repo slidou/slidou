@@ -16,7 +16,7 @@
 
   var SEASONS = {
     halloween: {
-      icon: '🎃', label: 'Joyeuse Halloween !',
+      icon: '🎃', label: 'Joyeux Halloween !', /* v37 : « Joyeux » et non « Joyeuse » */
       words: ['halloween'],
       burst: ['🍬', '🦇', '👻', '🎃']
     },
@@ -97,15 +97,14 @@
   /* Exposé pour débogage console : slidouSeason.surprise() */
   window.slidouSeason = { key: seasonKey, special: specialDay, surprise: function () { seasonSurprise(); } };
 
-  /* ── Jour spécial : favicon + titre de l'onglet ─────────────── */
+  /* ── Jour spécial : titre de l'onglet ─────────────────────────
+     v36 : le favicon ne participe plus — il reste le logo du site
+     en dur (pfp.jpg, ligne <link rel="icon"> de index.html). La
+     citrouille ponctuelle faisait doublon avec l'emblème de saison
+     affiché à côté du titre dans l'interface ; l'emoji de l'onglet,
+     lui, est conservé. */
   if (specialDay) {
     document.title = def.icon + ' ' + document.title;
-    var fav = document.querySelector('link[rel="icon"]');
-    if (fav) {
-      fav.href = 'data:image/svg+xml,' + encodeURIComponent(
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">' + def.icon + '</text></svg>'
-      );
-    }
   }
 
   /* ── Particules : chute continue et régulière ───────────────── */
@@ -198,8 +197,8 @@
     var clone = btn.cloneNode(true);
     btn.parentNode.replaceChild(clone, btn);
     clone.textContent = def.icon;
-    clone.title = 'Le thème de saison décide pour toi ' + def.icon;
-    clone.setAttribute('aria-label', 'Thème de saison (mode jour/nuit désactivé)');
+    clone.title = 'le thème de saison décide pour toi ' + def.icon;
+    clone.setAttribute('aria-label', 'thème de saison (mode jour/nuit désactivé)');
     var clicks = 0, timer = null;
     clone.addEventListener('click', function (e) {
       e.preventDefault();

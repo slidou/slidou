@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Slidou — l'antre culturelle</title>
+  <title>slidou — l'antre culturelle</title>
   <meta name="description" content="Slidou — l'antre culturelle : livres, films, séries, jeux, musique, anime et manga consommés, notés et chroniqués.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="season.css?v=18">
-  <link rel="stylesheet" href="mobile.css">
+  <link rel="stylesheet" href="style.css?v=37">
+  <link rel="stylesheet" href="season.css?v=37">
+  <link rel="stylesheet" href="mobile.css?v=37">
   <link rel="icon" href="pfp.jpg" type="image/jpeg">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -30,29 +30,29 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <div class="sidebar-header">
-      <h1>Slidou</h1>
+      <h1>slidou</h1>
       <div class="sidebar-header-actions">
-        <button id="search-toggle" title="recherche">🔎</button>
-        <button id="menu-toggle">☰</button>
-        <button id="theme-toggle">🌙</button>
+        <button id="search-toggle" title="recherche" aria-label="recherche" aria-expanded="false">🔎</button>
+        <button id="menu-toggle" title="menu" aria-label="menu" aria-expanded="false">☰</button>
+        <button id="theme-toggle" title="thème" aria-label="thème">🌙</button>
       </div>
     </div>
     <nav>
       <ul>
-        <li><a href="#" data-page="home" class="active">Accueil</a></li>
+        <li><a href="#" data-page="home" class="active">accueil</a></li>
         <li>
-          <input type="text" id="global-search" class="global-search-input" placeholder="🔎 recherche globale" readonly autocomplete="off" title="Ouvre la recherche (Ctrl+K)">
+          <input type="text" id="global-search" class="global-search-input" placeholder="🔎 recherche globale" readonly autocomplete="off" title="ouvre la recherche (Ctrl+K)" aria-label="recherche globale">
         </li>
         <li class="sidebar-separator"></li>
-        <li><a href="#" data-page="bibliographie">Bibliographie</a></li>
-        <li><a href="#" data-page="ecrans">Écrans</a></li>
-        <li><a href="#" data-page="jeux">Jeux vidéo</a></li>
-        <li><a href="#" data-page="musique">Musique</a></li>
-        <li><a href="#" data-page="anime">Anime</a></li>
-        <li><a href="#" data-page="manga">Manga</a></li>
+        <li><a href="#" data-page="bibliographie">bibliographie</a></li>
+        <li><a href="#" data-page="ecrans">écrans</a></li>
+        <li><a href="#" data-page="jeux">jeux vidéo</a></li>
+        <li><a href="#" data-page="musique">musique</a></li>
+        <li><a href="#" data-page="anime">anime</a></li>
+        <li><a href="#" data-page="manga">manga</a></li>
         <li class="sidebar-separator"></li>
-        <li><a href="#" data-page="statistiques">Statistiques</a></li>
-        <li><a href="#" data-page="apropos">À propos</a></li>
+        <li><a href="#" data-page="statistiques">statistiques</a></li>
+        <li><a href="#" data-page="apropos">à propos</a></li>
       </ul>
     </nav>
   </div>
@@ -65,14 +65,14 @@
       <div class="home-wrapper">
         <div class="home-dashboard" id="home-dashboard"></div>
 
-      <button id="toggle-recap-btn" class="home-recap-toggle">bilan 2026</button>
+      <button id="toggle-recap-btn" class="home-recap-toggle" aria-expanded="false" aria-controls="home-recap">bilan 2026</button>
 
       <!-- CONTENEUR DU RECAP (Caché par défaut) -->
       <div class="home-recap" id="home-recap">
         <div class="home-recap-nav">
-          <button class="calendar-nav-btn" id="recap-prev-year">‹</button>
+          <button class="calendar-nav-btn" id="recap-prev-year" title="année précédente" aria-label="année précédente">‹</button>
           <div class="home-month-title" id="recap-year-title">2026</div>
-          <button class="calendar-nav-btn" id="recap-next-year">›</button>
+          <button class="calendar-nav-btn" id="recap-next-year" title="année suivante" aria-label="année suivante">›</button>
         </div>
 
         <div class="recap-empty" id="recap-empty" style="display:none">aucune activité cette année</div>
@@ -109,23 +109,21 @@
           </div>
 
           <div class="text-content" id="recap-visual"></div>
-
-          <div class="recap-footer" id="recap-footer"></div>
         </div>
       </div>
 
         <div class="home-calendar-header">
-          <button class="calendar-nav-btn" id="btn-prev-month">‹</button>
+          <button class="calendar-nav-btn" id="btn-prev-month" title="mois précédent" aria-label="mois précédent">‹</button>
           <div>
             <div class="home-month-title" id="home-month-title"></div>
             <div class="home-streak" id="home-streak"></div>
           </div>
-          <button class="calendar-nav-btn" id="btn-next-month">›</button>
+          <button class="calendar-nav-btn" id="btn-next-month" title="mois suivant" aria-label="mois suivant">›</button>
         </div>
         <div class="home-calendar-grid" id="home-calendar-grid"></div>
       </div>
 
-      <div class="calendar-popup" id="calendar-popup">
+      <div class="calendar-popup" id="calendar-popup" role="dialog" aria-modal="true" aria-label="activité du jour">
         <div class="calendar-popup-content" id="calendar-popup-content"></div>
       </div>
     </div>
@@ -137,7 +135,7 @@
   <div class="anime-sort" id="biblio-sort"></div>
 </div>
       <div id="biblio-project-bar"></div>
-      <input type="text" id="search-biblio" class="search-bar" placeholder="Rechercher un livre, un auteur...">
+      <input type="text" id="search-biblio" class="search-bar" placeholder="rechercher un livre, un auteur…">
       <div id="biblio-filters" class="manga-filters"></div>
       <div id="bibliographyContent" class="text-content"></div>
     </div>
@@ -150,10 +148,11 @@
           <div class="anime-sort" id="ecrans-sort"></div>
         </div>
         <div id="ecrans-project-bar"></div>
-        <input type="text" id="search-ecrans" class="search-bar" placeholder="Rechercher un film, un réalisateur...">
+        <!-- v29 (H3) : la recherche couvre films ET séries — le placeholder le dit maintenant -->
+        <input type="text" id="search-ecrans" class="search-bar" placeholder="rechercher un film, une série, un réalisateur…">
         <div class="sub-nav">
-          <a href="#" class="sub-nav-link active" data-subpage="films">Films</a>
-          <a href="#" class="sub-nav-link" data-subpage="series">Séries</a>
+          <a href="#" class="sub-nav-link active" data-subpage="films" aria-current="true">films</a>
+          <a href="#" class="sub-nav-link" data-subpage="series">séries</a>
         </div>
         <div class="sub-page active" id="subpage-films">
           <div id="films-filters" class="manga-filters"></div>
@@ -174,7 +173,7 @@
 </div>
       <div id="jeux-project-bar"></div>
       <div id="jeux-filters" class="manga-filters"></div>
-      <input type="text" id="search-jeux" class="search-bar" placeholder="Rechercher un jeu, un développeur...">
+      <input type="text" id="search-jeux" class="search-bar" placeholder="rechercher un jeu, un développeur…">
       <div id="jeuxContent" class="text-content"></div>
     </div>
 
@@ -185,7 +184,7 @@
         <div class="anime-sort" id="musique-sort"></div>
       </div>
       <div id="musique-relisten-bar"></div>
-      <input type="text" id="search-musique" class="search-bar" placeholder="Rechercher un album, un artiste...">
+      <input type="text" id="search-musique" class="search-bar" placeholder="rechercher un album, un artiste…">
       <div class="player-widget" id="player-widget">
         <div class="player-now">
           <div class="player-track-info">
@@ -193,9 +192,9 @@
             <span class="player-artist"></span>
           </div>
           <div class="player-controls">
-            <button class="player-btn" id="player-prev">‹</button>
-            <button class="player-btn player-btn-play" id="player-play">▶</button>
-            <button class="player-btn" id="player-next">›</button>
+            <button class="player-btn" id="player-prev" title="piste précédente" aria-label="piste précédente">‹</button>
+            <button class="player-btn player-btn-play" id="player-play" title="lecture / pause" aria-label="lecture / pause">▶</button>
+            <button class="player-btn" id="player-next" title="piste suivante" aria-label="piste suivante">›</button>
           </div>
         </div>
         <audio id="player-audio"></audio>
@@ -218,7 +217,7 @@
     <div class="anime-sort" id="anime-sort"></div>
   </div>
   <div id="anime-project-bar"></div>
-  <input type="text" id="search-anime" class="search-bar" placeholder="Rechercher un anime...">
+  <input type="text" id="search-anime" class="search-bar" placeholder="rechercher un anime…">
   <div class="anime-tags-wrapper">
     <div class="anime-tags" id="anime-tags"></div>
     <button id="toggle-tags-btn" class="toggle-tags-btn" style="display:none;">plus de tags</button>
@@ -234,7 +233,7 @@
   <div class="anime-sort" id="manga-sort"></div>
 </div>
   <div id="manga-project-bar"></div>
-  <input type="text" id="search-manga" class="search-bar" placeholder="Rechercher un manga, un auteur...">
+  <input type="text" id="search-manga" class="search-bar" placeholder="rechercher un manga, un auteur…">
   <div class="manga-filters" id="manga-filters"></div>
   <div id="mangaContent" class="text-content"></div>
 </div>
@@ -250,10 +249,10 @@
   <div class="apropos-layout">
 
     <!-- 1. LA GRANDE BANNIÈRE -->
-    <img src="image.jpg" alt="Bannière" class="apropos-bio-img">
+    <img src="image.jpg" alt="bannière" class="apropos-bio-img">
 
     <div class="apropos-col photo-col">
-      <img src="pfp.jpg" alt="Photo de profil" class="apropos-pfp">
+      <img src="pfp.jpg" alt="photo de profil" class="apropos-pfp">
       <h2 class="apropos-username">slidou</h2>
     </div>
     <div class="apropos-col bio-col">
@@ -283,18 +282,18 @@
           <div class="bird-name">pistachio</div>
           <div class="tamagotchi-cage" id="cage-pistachio"><div class="bird-wrapper" id="wrapper-pistachio"></div></div>
           <div class="tamagotchi-stats">
-            <div class="stat"><span>Faim</span><div class="bar"><div class="fill" id="stat-faim-pistachio"></div></div></div>
-            <div class="stat"><span>Bonheur</span><div class="bar"><div class="fill" id="stat-bonheur-pistachio"></div></div></div>
-            <div class="stat"><span>Énergie</span><div class="bar"><div class="fill" id="stat-energie-pistachio"></div></div></div>
+            <div class="stat"><span>faim</span><div class="bar"><div class="fill" id="stat-faim-pistachio"></div></div></div>
+            <div class="stat"><span>bonheur</span><div class="bar"><div class="fill" id="stat-bonheur-pistachio"></div></div></div>
+            <div class="stat"><span>énergie</span><div class="bar"><div class="fill" id="stat-energie-pistachio"></div></div></div>
           </div>
         </div>
         <div class="tamagotchi-bird-container">
           <div class="bird-name">ciel azur</div>
           <div class="tamagotchi-cage" id="cage-cielazur"><div class="bird-wrapper" id="wrapper-cielazur"></div></div>
           <div class="tamagotchi-stats">
-            <div class="stat"><span>Faim</span><div class="bar"><div class="fill" id="stat-faim-cielazur"></div></div></div>
-            <div class="stat"><span>Bonheur</span><div class="bar"><div class="fill" id="stat-bonheur-cielazur"></div></div></div>
-            <div class="stat"><span>Énergie</span><div class="bar"><div class="fill" id="stat-energie-cielazur"></div></div></div>
+            <div class="stat"><span>faim</span><div class="bar"><div class="fill" id="stat-faim-cielazur"></div></div></div>
+            <div class="stat"><span>bonheur</span><div class="bar"><div class="fill" id="stat-bonheur-cielazur"></div></div></div>
+            <div class="stat"><span>énergie</span><div class="bar"><div class="fill" id="stat-energie-cielazur"></div></div></div>
           </div>
         </div>
       </div>
@@ -319,7 +318,7 @@
 </div>
 
 <!-- ── v24 : Navigation mobile — barre du bas (masquée sur PC) ── -->
-<nav class="mobile-nav" id="mobile-nav" aria-label="Navigation mobile">
+<nav class="mobile-nav" id="mobile-nav" aria-label="navigation mobile">
   <a href="#" class="mobile-nav-btn" data-page="home"><span class="mn-ico">🏠</span><span class="mn-label">accueil</span></a>
   <a href="#" class="mobile-nav-btn" data-page="bibliographie"><span class="mn-ico">📚</span><span class="mn-label">biblio</span></a>
   <a href="#" class="mobile-nav-btn" data-page="ecrans"><span class="mn-ico">🎬</span><span class="mn-label">écrans</span></a>
@@ -332,26 +331,27 @@
   <div class="mobile-plus-panel">
     <button class="mobile-plus-close" type="button" aria-label="fermer">&times;</button>
     <div class="mobile-plus-title">plus</div>
-    <a href="#" class="mobile-plus-item" id="mobile-plus-search"><span class="mn-ico">🔎</span>Recherche globale</a>
-    <a href="#" class="mobile-plus-item" data-page="jeux"><span class="mn-ico">🎮</span>Jeux vidéo</a>
-    <a href="#" class="mobile-plus-item" data-page="musique"><span class="mn-ico">🎵</span>Musique</a>
-    <a href="#" class="mobile-plus-item" data-page="statistiques"><span class="mn-ico">📊</span>Statistiques</a>
-    <a href="#" class="mobile-plus-item" data-page="apropos"><span class="mn-ico">🦜</span>À propos</a>
+    <a href="#" class="mobile-plus-item" id="mobile-plus-search"><span class="mn-ico">🔎</span>recherche globale</a>
+    <a href="#" class="mobile-plus-item" data-page="jeux"><span class="mn-ico">🎮</span>jeux vidéo</a>
+    <a href="#" class="mobile-plus-item" data-page="musique"><span class="mn-ico">🎵</span>musique</a>
+    <a href="#" class="mobile-plus-item" data-page="statistiques"><span class="mn-ico">📊</span>statistiques</a>
+    <a href="#" class="mobile-plus-item" data-page="apropos"><span class="mn-ico">🦜</span>à propos</a>
   </div>
 </div>
 
-<div class="review-popup" id="review-popup">
+<!-- v29 (H1) : role/aria-modal alignés sur calendar-popup et search-palette -->
+<div class="review-popup" id="review-popup" role="dialog" aria-modal="true" aria-label="review">
   <div class="review-popup-content">
-    <button class="review-popup-close" id="review-popup-close">&times;</button>
+    <button class="review-popup-close" id="review-popup-close" title="fermer" aria-label="fermer">&times;</button>
     <div class="review-popup-title" id="review-popup-title"></div>
     <div class="review-popup-text" id="review-popup-text"></div>
   </div>
 </div>
 
 <!-- Palette de recherche globale (Ctrl+K) -->
-<div class="search-palette" id="search-palette" role="dialog" aria-modal="true" aria-label="Recherche globale">
+<div class="search-palette" id="search-palette" role="dialog" aria-modal="true" aria-label="recherche globale">
   <div class="search-palette-panel">
-    <input type="text" id="palette-input" class="search-palette-input" placeholder="🔎 rechercher un titre ou un créateur…" autocomplete="off">
+    <input type="text" id="palette-input" class="search-palette-input" placeholder="🔎 rechercher un titre ou un créateur…" autocomplete="off" aria-label="rechercher">
     <div class="search-palette-results" id="palette-results"></div>
     <div class="search-palette-footer"><span>↑ ↓ naviguer</span><span>↵ ouvrir</span><span>échap fermer</span></div>
   </div>
@@ -366,7 +366,7 @@
 <script src="series-data.js"></script>
 <script src="games-data.js"></script>
 <script src="music-data.js"></script>
-<script src="script.js"></script>
-<script src="season.js?v=18"></script>
+<script src="script.js?v=37"></script>
+<script src="season.js?v=37"></script>
 </body>
 </html>

@@ -1,13 +1,15 @@
 /* ═══════════════════════════════════════════════════════════════
-   slidou.me — mobile.css (v24 : refonte mobile complète)
+   slidou.me — mobile.css (v24 : refonte mobile · v26 : consolidation)
    ─────────────────────────────────────────────────────────────
-   PURE ADDITION : ce fichier ne remplace rien, il s'ajoute.
+   v26 : les anciens blocs @media de style.css (pré-v24) ont été
+   purgés — 100 % de l'adaptation largeur vit désormais ICI.
    • Chargé APRÈS style.css et season.css → il gagne les égalités.
-   • 100 % des règles d'adaptation vivent dans
-     @media (max-width: 768px) → le PC est inchangé au pixel près.
-   • Les deux seules choses définies hors media query sont les deux
-     nouveaux composants (barre basse + feuille « plus »), qui sont
-     masqués par défaut (display:none) → invisibles sur PC.
+   • Toutes les règles d'adaptation sont dans @media (max-width: 768px)
+     → le PC est inchangé au pixel près.
+   • La « section 0 » reprend telles quelles les règles historiques
+     déplacées de style.css : la cascade reste identique.
+   • Hors media query : uniquement les deux composants dédiés
+     (barre basse + feuille « plus »), masqués par défaut → invisibles sur PC.
 
    Au programme :
    1. Barre de navigation basse (pouce) + feuille « plus »
@@ -74,7 +76,7 @@
   overflow-y: auto;
   background: var(--bg-color);
   border-top: 1px solid var(--border-color);
-  border-radius: 18px 18px 0 0;
+  border-radius: 16px 16px 0 0;
   padding: 20px 18px calc(18px + env(safe-area-inset-bottom, 0px));
   box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.3);
   animation: mpsUp 0.22s cubic-bezier(0.3, 0.9, 0.4, 1);
@@ -126,6 +128,57 @@
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
 
+  /* ── 0. BASE HISTORIQUE (règles déplacées des anciens @media de style.css — v26) ──
+     Cascade préservée : ces règles arrivent AVANT les ajustements ci-dessous,
+     exactement comme quand elles vivaient dans style.css (chargé avant celui-ci). */
+  .wrapper { flex-direction: column; }
+  .book-card img { aspect-ratio: 2 / 3; object-fit: cover; }
+  #filmsContent .book-card img, #seriesContent .book-card img { height: auto; aspect-ratio: 2 / 3; object-fit: cover; }
+  /* v30 (A4) : le sélecteur .anime-card img est retiré — les img des cartes anime sont wrappées
+     par le cover-stack (v22, height:100% !important) qui fixe déjà le ratio 2/3 ; le .anime-placeholder
+     reste vivant ici pour les top-lists (non wrappées) */
+  .anime-placeholder { aspect-ratio: 2 / 3; height: auto; }
+  /* v31 (S5) : .manga-placeholder retiré — règle morte (motif A4 v30) : dans les cartes le
+     placeholder vit dans le cover-stack (100 %/100 % !important depuis la v22) et dans les
+     top-lists l'élément porte aussi .anime-placeholder (règle au-dessus, mêmes valeurs) */
+  .recap-music-card img { aspect-ratio: 1 / 1; height: auto; object-fit: cover; }
+  .recap-ecrans-card img { height: auto; aspect-ratio: 2 / 3; object-fit: cover; }
+
+  /* Calendrier : mode liste (historique) */
+  .home-calendar-grid { display: flex; flex-direction: column; gap: 4px; }
+  .calendar-day-header { display: none; }
+  .calendar-day.empty { display: none; }
+  .calendar-day { display: flex; flex-direction: row; align-items: center; aspect-ratio: unset; height: auto; padding: 8px; gap: 10px; }
+  .calendar-day img { width: 45px; height: 65px; object-fit: cover; position: relative; top: auto; left: auto; }
+  .calendar-day-num { position: relative; bottom: auto; left: auto; background: none; color: var(--secondary-text); padding: 0; z-index: 1; font-size: 12px; }
+  .calendar-badge { position: relative; top: auto; right: auto; margin-left: auto; background: var(--link-color); color: white; }
+
+  /* Lecteur musique : collé en bas (historique — ajusté plus bas avec la barre basse) */
+  .player-widget { position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; margin: 0; border-radius: 12px 12px 0 0; box-shadow: 0 -4px 15px var(--shadow-color); padding: 15px 20px; }
+  #page-musique { padding-bottom: 140px; }
+
+  /* Perruches : cages en colonne (historique) */
+  .tamagotchi-cages-wrapper { flex-direction: column; gap: 30px; }
+  .tamagotchi-bird-container { max-width: 100%; }
+
+  /* Statistiques : top 3 sous le graphique + panthéon/sévérité compacts (historique) */
+  .stats-main-flex { flex-direction: column; }
+  .stats-top { flex: unset; border-left: none; border-top: 1px solid var(--border-color); padding-left: 0; padding-top: 16px; margin-top: 16px; }
+  .sev-label { flex: 0 0 92px; font-size: 10px; }
+  .sev-val { flex: 0 0 36px; font-size: 12px; }
+  .sev-sub { margin-left: 104px; }
+  .sev-note { margin-left: 0; }
+  .pantheon { padding: 15px; }
+  /* v36 (S4) : format uniforme repris en mobile (62×92) */
+  .pantheon-cover { flex: 0 0 62px; width: 62px; height: 92px; }
+  .pantheon-cover img { width: 62px; height: 92px; }
+
+  /* Perruches passives : perchoir ambulant compact (historique — bottom réajusté plus bas) */
+  .budgie-ambient { right: var(--br, 6px); bottom: var(--bb, 6px); width: 58px; height: 74px; }
+  .ba-bird-holder { height: 58px; }
+  .budgie-ambient .ba-mark { font-size: 15px; top: -4px; right: 0; }
+  .budgie-ambient .ba-fx span { font-size: 12px; left: 12px; }
+
   /* ── Socle ── */
   :root { --mn-h: 58px; } /* hauteur de la barre basse (hors safe-area) */
   html { -webkit-text-size-adjust: 100%; }
@@ -151,7 +204,7 @@
   .sidebar-header { margin-bottom: 0; }
   .sidebar h1 { font-size: 21px; }
   .sidebar nav { display: none; } /* remplacée par la barre basse + « plus » */
-  .sidebar-header-actions { gap: 2px; }
+  .sidebar-header-actions { display: flex; gap: 2px; }
   #menu-toggle,
   #search-toggle,
   #theme-toggle {
@@ -161,6 +214,10 @@
     align-items: center;
     justify-content: center;
     font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
   }
 
   /* ── 2. BARRE BASSE VISIBLE + AIR SOUS LE CONTENU ── */
@@ -174,20 +231,21 @@
   .books { gap: 14px; }
   #filmsContent .books, #seriesContent .books { gap: 14px; }
   .book-card { width: calc(50% - 7px); }
-  #filmsContent .book-card, #seriesContent .book-card,
-  #jeuxContent .book-card, #musiqueContent .book-card { width: calc(50% - 7px); }
   .recap-music-card, .recap-ecrans-card { width: calc(50% - 7px); }
   /* Zones sans cover-stack (v22) : ratios gérés à la main */
   #jeuxContent .book-card img { height: auto; aspect-ratio: 3 / 4; }
   #musiqueContent .book-card img { height: auto; aspect-ratio: 1 / 1; }
   .anime-grid { gap: 12px; }
-  .book-title { font-size: 12.5px; }
+  .book-title { font-size: 13px; }
   .book-meta { letter-spacing: 1.5px; }
 
   /* ── 4. CIBLES TACTILES ≥ 44PX : CHIPS, TRIS, BOUTONS ── */
   .anime-tag-btn { padding: 11px 15px; font-size: 12px; }
   .anime-tag-section-tags { gap: 9px; }
   .anime-sort-btn { padding: 12px 8px; font-size: 12px; }
+  /* v30 (S3) : chips et tri mesuraient ~40px — on atteint la cible ≥44px annoncée par la section
+     (socle partagé : toutes les pages qui utilisent ces classes — biblio, écrans, jeux, musique, anime, manga) */
+  .anime-tag-btn, .anime-sort-btn { min-height: 44px; }
   .anime-sort { gap: 6px; }
   .anime-top-controls { gap: 8px; flex-wrap: wrap; }
   .counter { font-size: 11px; margin-bottom: 6px; }
@@ -275,7 +333,7 @@
   .popup-item { width: 92px; }
   .popup-item img { height: 128px; }
   .review-popup-title { font-size: 16px; margin-bottom: 14px; }
-  .review-popup-text { font-size: 14.5px; line-height: 1.7; }
+  .review-popup-text { font-size: 14px; line-height: 1.7; }
 
   /* ── 7. RECHERCHE : PALETTE PLEIN ÉCRAN ── */
   .search-palette { padding: 0; }
@@ -302,7 +360,7 @@
   /* ── 8. PLAYER MUSIQUE : AU-DESSUS DE LA BARRE BASSE ── */
   .player-widget {
     bottom: calc(var(--mn-h) + env(safe-area-inset-bottom, 0px));
-    border-radius: 14px 14px 0 0;
+    border-radius: 16px 16px 0 0;
     padding: 14px 18px 16px;
   }
   .player-btn { width: 44px; height: 44px; font-size: 18px; }
@@ -316,6 +374,9 @@
   .home-recap-nav { gap: 14px; margin-bottom: 28px; }
   .home-recap-toggle { padding: 10px 16px; font-size: 12px; }
   .wrapped-open-btn { padding: 9px 16px; font-size: 13px; }
+  /* v36 (W4) : bouton centré sous l'année — tiré un peu moins haut qu'en PC
+     (la marge du rang d'année est plus courte en mobile) */
+  .recap-wrapped-row { margin: -18px 0 20px; }
   .recap-headline { gap: 20px; margin-bottom: 34px; }
   .recap-stat-num { font-size: 46px; }
   .recap-stat-detail { max-width: none; }

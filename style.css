@@ -36,6 +36,19 @@ body.dark-mode {
   --hm-4: rgba(123, 170, 247, 0.85);
 }
 
+/* ── ÉCHELLE Z-INDEX (référence commune — v26) ──
+   0-3        contenu courant (badges, images, fills)
+   10         ombre/fond de cartes empilées
+   25-60      décor saisonnier (season.css) + perchoir des perruches (40-50)
+   50         player mobile (au-dessus des images, sous la barre basse)
+   900-950    barre haute + barre basse mobile (mobile.css)
+   1000       popups (calendrier, review)
+   2500       feuille « plus » mobile
+   3000       palette de recherche globale
+   3500       pluie de saison (au-dessus de tout, voulu)
+   3600       carte Wrapped
+   → ne pas introduire de valeur hors échelle sans nécessité. ── */
+
 /* ── BASE ── */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { 
@@ -84,6 +97,16 @@ body {
 .book-title { font-size: 14px; margin-top: 8px; font-weight: 700; line-height: 1.3; color: var(--text-color); }
 .book-meta { font-size: 16px; color: var(--star-color); margin-top: 6px; letter-spacing: 2px; }
 
+/* ── Placeholder de cover indisponible (biblio, 404) ── */
+.book-cover-ph {
+  width: 100%; height: 220px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--sidebar-bg);
+  color: var(--secondary-text);
+  border-radius: 2px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
 .old-note {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 10px;
@@ -104,7 +127,7 @@ body {
   margin-bottom: 80px;
   padding: 20px 40px;
   background: var(--quote-bg);
-  border-radius: 5px;
+  border-radius: 4px;
 }
 .quote-author { display: block; margin-top: 8px; font-style: normal; font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--secondary-text); font-weight: 500; }
 
@@ -117,7 +140,7 @@ body {
 .bio-col { text-align: center; border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color); padding: 0 30px; }
 .apropos-username { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 500; margin-bottom: 5px; text-transform: lowercase; color: var(--author-text); }
 .carrd-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 500; margin-bottom: 15px; color: var(--text-color); }
-.carrd-list { list-style: none; text-align: left; font-family: 'IM Fell English', serif; font-size: 15px; line-height: 1.8; padding: 0; }
+.carrd-list { list-style: none; text-align: left; font-family: 'IM Fell English', serif; font-size: 14px; line-height: 1.8; padding: 0; }
 .carrd-list li { margin-bottom: 5px; }
 .links-col { text-align: center; }
 .carrd-links-verticaux a { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--text-color); text-decoration: none; text-transform: lowercase; margin-bottom: 10px; border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 15px; transition: all 0.2s; }
@@ -141,22 +164,6 @@ body {
 .search-bar { width: 100%; max-width: 400px; padding: 10px 0; margin: 40px auto 20px auto; display: block; background: transparent; border: none; border-bottom: 1px solid var(--border-color); color: var(--text-color); font-family: 'Space Grotesk', sans-serif; font-size: 14px; text-align: center; outline: none; transition: border-color 0.2s; }
 .search-bar::placeholder { color: var(--secondary-text); opacity: 0.5; }
 .search-bar:focus { border-bottom: 1px solid var(--link-color); }
-
-/* ── MOBILE ── */
-@media(max-width:768px) {
-  .wrapper { flex-direction: column; }
-  .sidebar { width: 100%; flex-direction: column; align-items: flex-start; padding: 15px; height: auto; position: relative; }
-  .sidebar-header { margin-bottom: 0; }
-  #menu-toggle { display: block; background: none; border: none; font-size: 22px; cursor: pointer; color: var(--text-color); }
-  .sidebar-header-actions { display: flex; gap: 10px; }
-  .sidebar nav { width: 100%; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-  .sidebar nav.open { max-height: 400px; }
-  .sidebar ul { padding-top: 15px; width: 100%; }
-  .sidebar li { margin: 8px 0; }
-  .content { padding: 20px 10px; }
-  .book-card { width: 45%; }
-  .book-card img { aspect-ratio: 2 / 3; object-fit: cover; }
-}
 
 /* ── COMPTEURS ── */
 .counter {
@@ -202,10 +209,6 @@ body {
   object-position: center; 
   border-radius: 2px; 
   box-shadow: 0 4px 8px var(--shadow-color); 
-}
-
-@media(max-width:768px) {
-  #musiqueContent .book-card img { aspect-ratio: 1 / 1; object-fit: cover; }
 }
 
 /* ── TAMAGOTCHI ── */
@@ -359,20 +362,32 @@ body {
   border-radius: 2px;
 }
 
-/* Style de la liste "en ce moment" */
+/* Style de la liste "en ce moment" — v36 (V1) : présentation refaite.
+   Étiquette micro en capitales espacées à gauche (motif kicker du site),
+   titre de l'œuvre en IM Fell italique à droite, séparateurs discrets. */
 #currently-list li {
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 8px;
-  margin-bottom: 8px;
-  text-align: right; /* Le titre (strong) va se caler à droite */
+  padding: 11px 2px;
+  margin-bottom: 0;
+  text-align: right; /* le titre se cale à droite */
 }
-#currently-list li span {
-  opacity: 0.6;
-  font-size: 12px;
-  float: left; /* Le mot "jeu" ou "livre" reste calé à gauche */
+#currently-list li:first-child { padding-top: 2px; }
+#currently-list li:last-child { border-bottom: none; }
+#currently-list .cur-label {
+  float: left; /* l'étiquette reste calée à gauche */
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--secondary-text);
+  opacity: 0.75;
+  padding-top: 4px; /* aligne la micro-étiquette sur l'œil du texte */
 }
-#currently-list li strong {
-  font-weight: 400;
+#currently-list .cur-work {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--author-text);
+  line-height: 1.5;
 }
 
 /* ── TAMAGOTCHI ENCADRÉ ── */
@@ -406,9 +421,13 @@ body {
   gap: 15px; 
   justify-content: center; 
 }
+.home-empty { 
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 13px; 
+  color: var(--secondary-text); 
+}
 .home-dash-card { 
   width: 150px; 
-  text-decoration: none; 
   color: var(--text-color); 
   text-align: center; 
   transition: transform 0.2s; 
@@ -487,7 +506,7 @@ body {
   color: white; 
   font-size: 11px; 
   padding: 1px 5px; 
-  border-radius: 3px; 
+  border-radius: 2px; 
   z-index: 3; 
   pointer-events: none;
 }
@@ -500,7 +519,7 @@ body {
   font-family: 'Space Grotesk', sans-serif; 
   font-size: 10px; 
   padding: 2px 5px; 
-  border-radius: 10px; 
+  border-radius: 12px; 
   z-index: 2; 
 }
 
@@ -559,13 +578,23 @@ body {
   width: 100px; 
   text-align: center; 
 }
-.popup-item img { 
-  width: 100%; 
-  height: 140px; 
-  object-fit: cover; 
-  border-radius: 4px; 
-  box-shadow: 0 4px 8px var(--shadow-color); 
-  margin-bottom: 8px; 
+.popup-item img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  margin-bottom: 8px;
+}
+/* v35 (S2) : pochette musique du popup en carré pur (motif dash-card-square /
+   recap-music-card). Une fois enveloppée par le cover-stack v22, le slot carré
+   vient de ratio-square (isSquare) ; cette règle ne concerne que l'état avant
+   enveloppement, et sa spécificité passe au-dessus de .popup-item img (desktop
+   et mobile). */
+.popup-item.popup-music-square img {
+  aspect-ratio: 1 / 1;
+  height: auto;
+  object-fit: cover;
 }
 .popup-item-title { 
   font-family: 'Space Grotesk', sans-serif; 
@@ -594,17 +623,6 @@ body {
 .dot-anime { background: #EC407A; }
 .dot-serie { background: #26A69A; }
 .dot-manga { background: #FF7043; }
-
-@media(max-width:768px) {
-  #filmsContent .book-card, #seriesContent .book-card { width: 45%; }
-  #filmsContent .book-card img, #seriesContent .book-card img { height: auto; aspect-ratio: 2 / 3; object-fit: cover; }
-}
-@media(max-width:768px) {
-  .home-calendar-grid { gap: 4px; }
-  .calendar-day-num { font-size: 11px; }
-  .home-dashboard-grid { gap: 10px; }
-  .home-dash-card { width: 80px; }
-}
 
 .home-calendar-header {
   display: flex;
@@ -688,6 +706,15 @@ body {
 .anime-tag-btn.quality-tag { border-style: dashed; }
 .anime-tag-btn.quality-tag.active { border-style: solid; }
 
+/* Rangée du haut des filtres (tous / reviews…) — partagée biblio + écrans films/séries + anime (remplace le style inline v27/v29/v30) */
+.biblio-top-row { display: flex; gap: 8px; justify-content: center; margin-bottom: 10px; }
+/* v30 (A5) : sur anime, la rangée réutilise .biblio-top-row — le gap 18px de .anime-tags suffit
+   comme espacement et le wrap d'origine de la rangée est conservé */
+.anime-tags .biblio-top-row { margin-bottom: 0; flex-wrap: wrap; }
+/* v32 (A4) : sur musique, la rangée « tous » réutilise .biblio-top-row — l'inline d'origine
+   n'avait pas de margin-bottom et wrapait, on neutralise/force les mêmes valeurs */
+#musique-filters .biblio-top-row { margin-bottom: 0; flex-wrap: wrap; }
+
 .toggle-tags-btn {
   font-family: 'Space Grotesk', sans-serif; font-size: 11px;
   color: var(--secondary-text); background: none; border: none;
@@ -747,25 +774,8 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
   backdrop-filter: blur(4px);
 }
 
-/* ── BADGE FORMAT MUSIQUE ── */
-.music-format-badge {
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  background: rgba(0,0,0,0.65);
-  color: #fff;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 9px;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  z-index: 2;
-  backdrop-filter: blur(4px);
-}
-
-/* ── BADGE FORMAT FILM ── */
+/* ── BADGES FORMAT (musique / film) — v29 (A9) : un seul bloc, les deux règles étaient identiques ── */
+.music-format-badge,
 .film-format-badge {
   position: absolute;
   top: 6px;
@@ -773,7 +783,7 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
   background: rgba(0,0,0,0.65);
   color: #fff;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   padding: 2px 6px;
   border-radius: 4px;
@@ -839,12 +849,6 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
 }
 .load-more-btn:hover { border-color: var(--link-color); color: var(--link-color); }
 
-@media(max-width:768px) {
-  .anime-grid { gap: 10px; }
-  .anime-card img, .anime-placeholder { aspect-ratio: 2 / 3; height: auto; }
-  .manga-placeholder { aspect-ratio: 2 / 3; height: auto; }
-}
-
 .anime-top-controls {
   display: flex; justify-content: center; align-items: center;
   gap: 15px; margin-bottom: 10px;
@@ -862,6 +866,7 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
   cursor: pointer; text-transform: lowercase; transition: color 0.2s;
 }
 .anime-sort-btn:hover, .anime-sort-btn.active { color: var(--link-color); }
+.anime-sort-btn .sort-arrow { font-size: 8px; margin-left: 2px; opacity: 0.7; }
 
 .anime-card.hentai-card img,
 .anime-card.hentai-card .anime-placeholder,
@@ -870,13 +875,18 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
   filter: blur(6px);
   transition: filter 0.3s;
 }
-.anime-card.hentai-card:hover img,
-.anime-card.hentai-card:hover .anime-placeholder {
-  filter: blur(0);
-}
-.manga-card.hentai-card:hover img,
-.manga-card.hentai-card:hover .anime-placeholder {
-  filter: blur(0);
+/* v30 (H1, motif v27) : le défloutage au survol est borné PC — au doigt, un tap colle le
+   :hover et laissait l'œuvre défloutée définitivement ; désormais le flou reprend après le tap.
+   Transverse : la règle .manga-card sert au manga (tranche 6) sans toucher à son JS. */
+@media (hover: hover) {
+  .anime-card.hentai-card:hover img,
+  .anime-card.hentai-card:hover .anime-placeholder {
+    filter: blur(0);
+  }
+  .manga-card.hentai-card:hover img,
+  .manga-card.hentai-card:hover .anime-placeholder {
+    filter: blur(0);
+  }
 }
 
 #page-manga.active { display: block; padding-top: 40px; }
@@ -927,6 +937,19 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
 .popup-item.blur-entry:hover img {
   filter: blur(0);
 }
+.home-dash-card.blur-entry img {
+  filter: blur(6px);
+  transition: filter 0.3s;
+}
+/* Survol PC uniquement : le flou se lève et la carte réagit (au doigt : pas de survol) */
+@media (hover: hover) {
+  .home-dash-card.blur-entry:hover img {
+    filter: blur(0);
+  }
+  .home-dash-card:hover {
+    transform: scale(1.05);
+  }
+}
 
 @keyframes pageFadeIn {
   from { opacity: 0; transform: translateY(8px); }
@@ -952,18 +975,14 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
   width: 100%;
   height: 5px; /* Épaissi de 3px à 5px */
   background: var(--border-color);
-  border-radius: 3px;
+  border-radius: 2px;
   overflow: hidden;
 }
 .project-fill {
   height: 100%;
   background: var(--link-color);
-  border-radius: 3px;
+  border-radius: 2px;
   transition: width 0.5s ease;
-}
-
-.coup-de-coeur-card img {
-  box-shadow: 0 0 0 2px rgba(236, 64, 122, 0.6), 0 0 12px rgba(236, 64, 122, 0.4), 0 4px 8px var(--shadow-color);
 }
 
 .page:focus { outline: none; }
@@ -1027,7 +1046,7 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
 }
 .review-popup-text {
   font-family: 'IM Fell English', serif;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.8;
   color: var(--text-color);
   white-space: pre-line;
@@ -1143,7 +1162,7 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
 }
 .stats-vbar-count {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 9px;
+  font-size: 10px;
   color: var(--secondary-text);
   margin-bottom: 3px;
 }
@@ -1233,21 +1252,6 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
   opacity: 0.6;
   white-space: nowrap; /* Empêche le texte d'aller à la ligne */
   text-align: right; /* Aligne proprement à droite */
-}
-
-/* Sur mobile, on remet le Top 3 en dessous */
-@media(max-width:768px) {
-  .stats-main-flex {
-    flex-direction: column;
-  }
-  .stats-top {
-    flex: unset;
-    border-left: none;
-    border-top: 1px solid var(--border-color);
-    padding-left: 0;
-    padding-top: 16px;
-    margin-top: 16px;
-  }
 }
 
 .sidebar-separator {
@@ -1561,7 +1565,7 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
 }
 .hm-months span {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 9px;
+  font-size: 10px;
   color: var(--secondary-text);
   white-space: nowrap;
 }
@@ -1610,20 +1614,37 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
   font-size: 10px;
   color: var(--star-color);
   border: 1px solid var(--star-color);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 1px 8px;
   margin-left: 6px;
   vertical-align: middle;
 }
 
-/* ── Pied du bilan ── */
-.recap-footer {
-  margin-top: 50px;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 10px;
-  color: var(--secondary-text);
-  opacity: 0.8;
+/* ── v36 (C1) : catégories du bilan repliables (motif creator-toggle) ── */
+h2.recap-cat-toggle {
+  cursor: pointer;
+  user-select: none;
+  position: relative; /* pour coller la flèche à droite */
 }
+.recap-cat-arrow {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  opacity: 0.4;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  padding-bottom: 10px;
+}
+h2.recap-cat-toggle:hover .recap-cat-arrow { opacity: 0.8; }
+h2.recap-cat-toggle.recap-cat-closed .recap-cat-arrow {
+  transform: translateY(-50%) rotate(-90deg); /* replié */
+}
+
+/* ── v36 (A2) : bilan — le zoom de survol reste, mais les œuvres ne sont
+   pas cliquables : retour au curseur normal (plus d'indice « main ») ── */
+#recap-favorites .book-card,
+#recap-visual .book-card { cursor: default; }
 
 /* ── FORMAT MUSIQUE RECAP ── */
 .recap-music-card { width: 180px; }
@@ -1636,14 +1657,6 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
   box-shadow: 0 4px 8px var(--shadow-color); 
 }
 
-@media(max-width:768px) {
-  .recap-music-card img { 
-    aspect-ratio: 1 / 1; 
-    height: auto; 
-    object-fit: cover; 
-  }
-}
-
 /* ── FORMAT FILMS/SÉRIES RECAP ── */
 .recap-ecrans-card { width: 180px; }
 .recap-ecrans-card img { 
@@ -1651,98 +1664,10 @@ body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%);
   object-position: center; 
 }
 
-@media(max-width:768px) {
-  .recap-ecrans-card img { 
-    height: auto; 
-    aspect-ratio: 2 / 3; 
-    object-fit: cover; 
-  }
-}
-
 /* ── RETIRER LE FLOU AU SURVOL DANS LE RECAP ── */
 #recap-visual .book-card:hover img[style*="blur"] {
   filter: none !important; /* Force la suppression du flou au survol */
 }
-
-/* ── EXCLUSIF MOBILE (NE CHANGE RIEN AU PC) ── */
-@media(max-width:768px) {
-
-  /* 1. CALENDRIER : MODE LISTE */
-  .home-calendar-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .calendar-day-header {
-    display: none; /* On cache Dim, Lun, Mar... pour gagner de la place */
-  }
-  .calendar-day.empty {
-    display: none; /* On cache les jours vides du début du mois */
-  }
-  .calendar-day {
-    display: flex;
-    flex-direction: row; /* Image à gauche, texte à droite */
-    align-items: center;
-    aspect-ratio: unset; /* On enlève le carré */
-    height: auto;
-    padding: 8px;
-    gap: 10px;
-  }
-  .calendar-day img {
-    width: 45px;
-    height: 65px;
-    object-fit: cover;
-    position: relative; /* Enlève l'image de fond */
-    top: auto;
-    left: auto;
-  }
-  .calendar-day-num {
-    position: relative; /* Enlève la position en bas à gauche */
-    bottom: auto;
-    left: auto;
-    background: none;
-    color: var(--secondary-text);
-    padding: 0;
-    z-index: 1;
-    font-size: 12px;
-  }
-  .calendar-badge {
-    position: relative;
-    top: auto;
-    right: auto;
-    margin-left: auto; /* Pousse le badge tout à droite */
-    background: var(--link-color);
-    color: white;
-  }
-
-  /* 2. LECTEUR MUSIQUE : COLLE EN BAS */
-  .player-widget {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 50; /* Pour qu'il passe au-dessus des images */
-    margin: 0;
-    border-radius: 12px 12px 0 0;
-    box-shadow: 0 -4px 15px var(--shadow-color);
-    padding: 15px 20px;
-  }
-  /* On ajoute de l'espace tout en bas de la page Musique pour que le dernier album ne soit pas caché sous le lecteur */
-  #page-musique { 
-    padding-bottom: 140px; 
-  }
-
-  /* 3. PERRUCHES : COLONNE */
-  .tamagotchi-cages-wrapper {
-    flex-direction: column;
-    gap: 30px;
-  }
-  .tamagotchi-bird-container {
-    max-width: 100%; /* Prend toute la largeur dispo */
-  }
-
-}
-
 /* ── STATUTS JOURNAL ── */
 .popup-item-status {
   font-family: 'Space Grotesk', sans-serif;
@@ -1830,7 +1755,7 @@ h2.collapsed-creator .creator-arrow {
   display: flex; flex-direction: column;
   background: var(--bg-color);
   border: 1px solid var(--border-color);
-  border-radius: 14px;
+  border-radius: 16px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.35);
   overflow: hidden;
   animation: palette-in 0.15s ease;
@@ -1860,14 +1785,14 @@ h2.collapsed-creator .creator-arrow {
 }
 .gs-item {
   display: flex; align-items: center; gap: 12px;
-  padding: 8px; border-radius: 6px;
+  padding: 8px; border-radius: 8px;
   text-decoration: none; color: var(--text-color);
   transition: background 0.2s;
 }
 .gs-item:hover { background: var(--sidebar-bg); }
 .gs-item img {
   width: 32px; height: 48px; object-fit: cover;
-  border-radius: 3px; box-shadow: 0 1px 3px var(--shadow-color);
+  border-radius: 2px; box-shadow: 0 1px 3px var(--shadow-color);
   flex-shrink: 0;
 }
 .gs-item-info { flex: 1; min-width: 0; text-align: left; }
@@ -1893,7 +1818,7 @@ h2.collapsed-creator .creator-arrow {
   width: 32px;
   height: 48px;
   background: var(--sidebar-bg);
-  border-radius: 3px;
+  border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1909,9 +1834,6 @@ h2.collapsed-creator .creator-arrow {
 /* Bouton loupe : ouvre la palette de recherche sur mobile
    (le trigger sidebar n'y est pas toujours visible). */
 #search-toggle { display: none; }
-@media(max-width:768px) {
-  #search-toggle { display: block; background: none; border: none; font-size: 18px; cursor: pointer; color: var(--text-color); }
-}
 
   /* ── ÉTATS VIDES ── */
 .empty-state {
@@ -1922,13 +1844,46 @@ h2.collapsed-creator .creator-arrow {
   text-align: center;
 }
 
+/* ═══ v36 (G1) : contours lumineux gem / coup de cœur renforcés ═══
+   Même structure des deux côtés (anneau + double halo + particules
+   blanches scintillantes) — seule la couleur change : cohérence visuelle
+   entre toutes les catégories. Animations limitées à opacity/transform. */
 .coup-de-coeur-card img {
-  box-shadow: 0 0 0 2px rgba(236, 64, 122, 0.6), 0 0 12px rgba(236, 64, 122, 0.4), 0 4px 8px var(--shadow-color) !important;
+  box-shadow: 0 0 0 2px rgba(236, 64, 122, 0.78), 0 0 12px rgba(236, 64, 122, 0.55), 0 0 28px rgba(236, 64, 122, 0.35), 0 4px 8px var(--shadow-color) !important;
 }
-
-/* ── BADGE GEM (ANIME/MANGA) ── */
 .gem-card img {
-  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.6), 0 0 12px rgba(66, 165, 245, 0.4), 0 4px 8px var(--shadow-color) !important;
+  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.78), 0 0 12px rgba(66, 165, 245, 0.55), 0 0 28px rgba(66, 165, 245, 0.35), 0 4px 8px var(--shadow-color) !important;
+}
+/* ── particules de lumière blanches (2 points scintillants par carte) ── */
+.coup-de-coeur-card::before,
+.coup-de-coeur-card::after,
+.gem-card::before,
+.gem-card::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.95);
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  animation: badgeSparkle 3.4s ease-in-out infinite;
+}
+.coup-de-coeur-card::before,
+.gem-card::before { top: 7px; left: 9px; }
+.coup-de-coeur-card::after,
+.gem-card::after { top: 36px; right: 9px; animation-delay: 1.7s; }
+@keyframes badgeSparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.95; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coup-de-coeur-card::before,
+  .coup-de-coeur-card::after,
+  .gem-card::before,
+  .gem-card::after { animation: none; opacity: 0.4; }
 }
 
 /* ═══ PANTHÉON (STATS) — carrousels horizontaux des 5/5 ═══ */
@@ -1967,27 +1922,40 @@ h2.collapsed-creator .creator-arrow {
   scrollbar-color: var(--border-color) transparent;
 }
 .pantheon-strip::-webkit-scrollbar { height: 6px; }
-.pantheon-strip::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+.pantheon-strip::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 2px; }
 .pantheon-strip::-webkit-scrollbar-track { background: transparent; }
+/* v36 (S4) : format uniforme — chaque case fait exactement 74×110, les
+   couvertures larges sont recadrées (object-fit: cover), la grille reste
+   régulière et ne déborde plus. */
 .pantheon-cover {
-  flex: 0 0 auto;
+  flex: 0 0 74px;
+  width: 74px;
   height: 110px;
-  min-width: 74px;
   background: var(--sidebar-bg);
   border-radius: 4px;
   overflow: hidden;
 }
 .pantheon-cover img {
   display: block;
+  width: 74px;
   height: 110px;
-  width: auto;
-  max-width: 165px;
+  object-fit: cover;
+  object-position: center;
   transition: filter 0.15s;
   box-shadow: 0 0 0 1px rgba(184, 134, 11, 0.45), 0 4px 8px var(--shadow-color);
 }
 .pantheon-cover.no-cover { box-shadow: inset 0 0 0 1px var(--border-color); }
 .pantheon-cover.has-link { cursor: pointer; }
 .pantheon-cover.has-link:hover img { filter: brightness(1.12); }
+/* v36 (S1) : œuvres hentai — flou permanent, levé au survol PC uniquement
+   (même contrat que .hentai-card ; au doigt le voile ne se colle pas) */
+.pantheon-blur img {
+  filter: blur(9px) saturate(1.1);
+  transition: filter 0.3s;
+}
+@media (hover: hover) {
+  .pantheon-blur:hover img { filter: blur(0) saturate(1); }
+}
 
 /* ═══ SÉVÉRITÉ COMPARÉE (STATS) ═══ */
 .sev-block {
@@ -1995,6 +1963,14 @@ h2.collapsed-creator .creator-arrow {
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 50px;
+}
+/* v36 (S2) : ligne de lecture sous l'en-tête (remplace « comment tu notes… ») */
+.sev-intro {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+  margin: -12px 0 14px;
+  text-align: left;
 }
 .sev-head-note {
   font-family: 'Space Grotesk', sans-serif;
@@ -2023,10 +1999,10 @@ h2.collapsed-creator .creator-arrow {
   flex: 1 1 auto;
   height: 14px;
   background: var(--sidebar-bg);
-  border-radius: 7px;
+  border-radius: 8px;
   overflow: hidden;
 }
-.sev-fill { height: 100%; border-radius: 7px; }
+.sev-fill { height: 100%; border-radius: 8px; }
 .sev-val {
   flex: 0 0 42px;
   font-family: 'Space Grotesk', sans-serif;
@@ -2050,15 +2026,6 @@ h2.collapsed-creator .creator-arrow {
   color: var(--secondary-text);
   border-top: 1px solid var(--border-color);
   padding-top: 10px;
-}
-@media (max-width: 768px) {
-  .sev-label { flex: 0 0 92px; font-size: 10px; }
-  .sev-val { flex: 0 0 36px; font-size: 12px; }
-  .sev-sub { margin-left: 104px; }
-  .sev-note { margin-left: 0; }
-  .pantheon { padding: 15px; }
-  .pantheon-cover { height: 92px; min-width: 62px; }
-  .pantheon-cover img { height: 92px; }
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -2179,7 +2146,7 @@ h2.collapsed-creator .creator-arrow {
 .budgie-ambient.pose-sleep .ab-zzz { opacity: 1; }
 .budgie-ambient.pose-sleep .ab-zzz text {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   fill: var(--link-color);
   transform-box: fill-box;
@@ -2253,12 +2220,6 @@ h2.collapsed-creator .creator-arrow {
 
 /* ── Mobile : plus petite, s'efface pendant le scroll ── */
 .budgie-ambient.ba-scroll-hide { opacity: 0 !important; }
-@media (max-width: 768px) {
-  .budgie-ambient { right: var(--br, 6px); bottom: var(--bb, 6px); width: 58px; height: 74px; }
-  .ba-bird-holder { height: 58px; }
-  .budgie-ambient .ba-mark { font-size: 15px; top: -4px; right: 0; }
-  .budgie-ambient .ba-fx span { font-size: 12px; left: 12px; }
-}
 
 /* ── Accessibilité : mouvement réduit → apparitions fondues, poses statiques ── */
 @media (prefers-reduced-motion: reduce) {
@@ -2266,7 +2227,10 @@ h2.collapsed-creator .creator-arrow {
   .budgie-ambient * { animation: none !important; }
   .budgie-ambient { transition: opacity 0.25s ease; }
 }/* ═══════ Carte Wrapped (chantier 13) ═══════ */
-.recap-wrapped-row { display: flex; justify-content: flex-end; margin: -6px 0 10px; }
+/* v36 (W4) : le bouton passe sous le sélecteur d'année, parfaitement centré —
+   il s'insère dans la marge du rang d'année pour former un ensemble équilibré
+   [‹ année ›] puis [carte à partager] au-dessus du bandeau de chiffres. */
+.recap-wrapped-row { display: flex; justify-content: center; margin: -26px 0 24px; }
 .wrapped-open-btn {
   background: none; border: 1px solid var(--border-color); color: var(--secondary-text);
   border-radius: 999px; padding: 5px 14px; font-size: 13px; cursor: pointer;
@@ -2367,10 +2331,10 @@ h2.collapsed-creator .creator-arrow {
   border-radius: 0 !important;
   box-shadow: none !important;
 }
-/* ── Contours gem / coup de cœur (v22 : rétablis sur le stack) ── */
+/* ── Contours gem / coup de cœur (v22 : rétablis sur le stack ; v36 G1 : halos renforcés) ── */
 .coup-de-coeur-card .cover-stack {
-  box-shadow: 0 0 0 2px rgba(236, 64, 122, 0.6), 0 0 12px rgba(236, 64, 122, 0.4), 0 4px 8px var(--shadow-color) !important;
+  box-shadow: 0 0 0 2px rgba(236, 64, 122, 0.78), 0 0 12px rgba(236, 64, 122, 0.55), 0 0 28px rgba(236, 64, 122, 0.35), 0 4px 8px var(--shadow-color) !important;
 }
 .gem-card .cover-stack {
-  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.6), 0 0 12px rgba(66, 165, 245, 0.4), 0 4px 8px var(--shadow-color) !important;
+  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.78), 0 0 12px rgba(66, 165, 245, 0.55), 0 0 28px rgba(66, 165, 245, 0.35), 0 4px 8px var(--shadow-color) !important;
 }
