@@ -15,6 +15,7 @@ const musicData = {
   "Makala": [
     { title: "YAMOTO", note: 4.5, cover: "music/yamoto.webp", link: "https://rateyourmusic.com/release/album/makala/yamoto/", tags: ["réécoute"] },
     { title: "Radio Suicide", note: 3, cover: "music/radiosuicide.webp", link: "https://rateyourmusic.com/release/album/makala/radio-suicide/" },
+    { title: "Saïgon", note: 3.5, cover: "music/saïgon.webp", link: "https://rateyourmusic.com/release/single/makala/saigon/", format: "single", tags: ["réécoute"] },
   ],
   "Nujabes": [
     { title: "Luv(sic) Hexalogy", note: 5, cover: "music/luvsichexalogy.webp", link: "https://rateyourmusic.com/release/comp/nujabes-feat-shing02/luv_sic-hexalogy/", tags: ["réécoute","archived"] },

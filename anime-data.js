@@ -7938,5 +7938,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 29796, title: "Oshizuka ni", note: null, tags: ["short","archived"] },
   { id: 56533, title: "Otenki Pokojiro", note: 0.5, tags: ["short episode","archived"] },
   { id: 30905, title: "Owanko", note: null, tags: ["short episode","archived"] },
+  { id: 65296, title: "Emerald (2026)", note: 3.5, tags: ["music","archived"] },
+  { id: 54245, title: "Souzou Teki Shinka", note: null, tags: ["short","archived"] },
+  { id: 8968, title: "Shogi Hour", note: null, tags: ["short","archived"] },
+  { id: 21771, title: "Romantica Clock", note: null, tags: ["short","archived"] },
+  { id: 39994, title: "Tanabata no Oto", note: 3, tags: ["music","archived"] },
+  { id: 64221, title: "Ming Chao: Tiaowang Zhemen", note: null, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

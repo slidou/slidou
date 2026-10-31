@@ -40,7 +40,7 @@ const mangaData = {
     { id: 38981, title: "Onna Kyoushi Marikou no Gogo", note: null, tags: ["one-shot","hentai"] },
   ],
   "Matsumoto, Taiyou": [
-    { id: 130171, title: "Tokyo Higoro", note: 5, tags: ["several volumes","favorite","bought","archived","rank10"] },
+    { id: 130171, title: "Tokyo Higoro", note: 5, tags: ["several volumes","favorite","bought","archived","rank:10"] },
   ],
   "Tsukushi, Akihito": [
     { id: 110834, title: "Star Strings yori", note: null, tags: ["single volume"] },
