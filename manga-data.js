@@ -41,6 +41,7 @@ const mangaData = {
   ],
   "Matsumoto, Taiyou": [
     { id: 130171, title: "Tokyo Higoro", note: 5, tags: ["several volumes","favorite","bought","archived","rank:10"] },
+    { id: 10984, title: "No.5", note: 3.5, tags: ["several volumes","archived"] },
   ],
   "Tsukushi, Akihito": [
     { id: 110834, title: "Star Strings yori", note: null, tags: ["single volume"] },

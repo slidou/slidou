@@ -1041,4 +1041,10 @@ const journalData = [
 { d: "2026-10-31", t: "anime", title: "Romantica Clock", img: "anime/romantica.jpg", note: "short" },
 { d: "2026-10-31", t: "anime", title: "Tanabata no Oto", img: "anime/tanabata.jpg", note: "music" },
 { d: "2026-10-31", t: "anime", title: "Ming Chao: Tiaowang Zhemen", img: "anime/tiaowang.jpg", note: "short" },
+{ d: "2026-11-01", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "the beast battu avec eden", status: "en cours" },
+{ d: "2026-11-01", t: "manga", title: "No.5", img: "manga/no5.jpg", note: "34-37/37" },
+{ d: "2026-11-01", t: "anime", title: "No.5", img: "anime/no5.jpg", note: "re-watched, short" },
+{ d: "2026-11-01", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-11-01", t: "livre", title: "Choses que je croyais perdues", img: "books/chosesperdues.jpg", note: "lu en une journée, c'était bien" },
+{ d: "2026-11-01", t: "anime", title: "Inaka ni wa Kore Kurai Shika Goraku ga Nai", img: "anime/inaka.jpg", note: "hentai, 2/?", blur: true, status: "en cours" },
 ];

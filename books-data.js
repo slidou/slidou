@@ -498,5 +498,8 @@ Et je dois bien l’avouer, ça fait très bizarre de lire un roman aussi incisi
   ],
   "Edogawa Rampo": [
     { title: "The Human Chair", note: 3.5, cover: "books/thehumanchair.jpg", link: "https://www.goodreads.com/book/show/36155169-the-human-chair" }
+  ],
+  "Clémentine Mélois": [
+    { title: "Choses que je croyais perdues", note: 3.5, cover: "books/chosesperdues.jpg", link: "https://www.goodreads.com/book/show/249071623-choses-que-je-croyais-perdues" }
   ]
 };

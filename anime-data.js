@@ -4538,7 +4538,7 @@ const animeList = [
   { id: 55870, title: "No Proof", note: 3, tags: ["music"] },
   { id: 56778, title: "No Waifu No Life!", note: 4.5, tags: ["hentai","normal episode"] },
   { id: 50088, title: "No.2", note: 2, tags: ["music"] },
-  { id: 57179, title: "No.5", note: null, tags: ["short"] },
+  { id: 57179, title: "No.5", note: null, tags: ["short","re-watched","archived"] },
   { id: 8724, title: "Nobiro Nobiro Daisuki na Ki", note: 3, tags: ["music"] },
   { id: 41453, title: "Noctambulist", note: 3.5, tags: ["music"] },
   { id: 58215, title: "NocturnaL", note: 4, tags: ["hentai","normal episode"] },
