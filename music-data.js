@@ -80,6 +80,7 @@ const musicData = {
   ],
   "Ateyaba": [
     { title: "Ateyaba", note: 3.5, cover: "music/ateyaba.webp", link: "https://rateyourmusic.com/release/album/joke/ateyaba/" },
+    { title: "Delorean Music", note: 4, cover: "music/delorean.webp", link: "https://rateyourmusic.com/release/ep/joke/delorean-music/", format: "ep" },
   ],
   "RADWIMPS": [
     { title: "Keitaidenwa", note: 3.5, cover: "music/keitaidenwa.webp", link: "https://rateyourmusic.com/release/single/radwimps/%E6%90%BA%E5%B8%AF%E9%9B%BB%E8%A9%B1-keitaidenwa/", format: "single" },
