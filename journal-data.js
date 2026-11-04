@@ -1058,4 +1058,9 @@ const journalData = [
 { d: "2026-11-03", t: "anime", title: "Tan Tan Tan", img: "anime/tantantan.jpg", note: "music" },
 { d: "2026-11-03", t: "anime", title: "Jogeum Deo Gakkai", img: "anime/jogeum.jpg", note: "music" },
 { d: "2026-11-03", t: "anime", title: "Sweet Paradise", img: "anime/sweetparadise.jpg", note: "music" },
+{ d: "2026-11-03", t: "film", title: "Primetime", img: "films/primetime.webp", note: "" },
+{ d: "2026-11-04", t: "anime", title: "Yuuhi ga Ochite", img: "anime/yuuhi.jpg", note: "music" },
+{ d: "2026-11-04", t: "anime", title: "Yasashii Hero", img: "anime/yasashii.jpg", note: "music" },
+{ d: "2026-11-04", t: "anime", title: "Yugesho", img: "anime/yugesho.jpg", note: "short" },
+{ d: "2026-11-04", t: "anime", title: "The Horrors' Horror Home", img: "anime/horrors.jpg", note: "short" },
 ];

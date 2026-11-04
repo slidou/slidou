@@ -375,4 +375,7 @@ const filmsData = {
   "Nanako Hirose": [
     { title: "book-paper-scissors", note: 4, cover: "films/bps.jpg", link: "https://www.senscritique.com/film/book_paper_scissors/41323664", tags: ["documentaire","archived"] },
   ],
+  "Lance Oppenheim": [
+    { title: "Primetime", note: 2, cover: "films/primetime.webp", link: "https://www.senscritique.com/film/primetime/134875883", tags: ["archived"] },
+  ],
 };

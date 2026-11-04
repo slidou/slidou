@@ -7954,5 +7954,9 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 56611, title: "Tan Tan Tan", note: 1.5, tags: ["music","archived"] },
   { id: 65310, title: "Jogeum Deo Gakkai", note: 3.5, tags: ["music","archived"] },
   { id: 65311, title: "Sweet Paradise", note: 3, tags: ["music","archived"] },
+  { id: 57428, title: "Yuuhi ga Ochite", note: 1.5, tags: ["music","archived"] },
+  { id: 58388, title: "Yasashii Hero", note: 3, tags: ["music","archived"] },
+  { id: 49697, title: "Yugesho", note: null, tags: ["short","archived"] },
+  { id: 63558, title: "The Horrors' Horror Home", note: 3.5, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
