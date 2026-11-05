@@ -7958,5 +7958,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 58388, title: "Yasashii Hero", note: 3, tags: ["music","archived"] },
   { id: 49697, title: "Yugesho", note: null, tags: ["short","archived"] },
   { id: 63558, title: "The Horrors' Horror Home", note: 3.5, tags: ["short","archived"] },
+  { id: 65314, title: "Mirror Mirror", note: 3.5, tags: ["music","archived"] },
+  { id: 59605, title: "Koeda-chan", note: null, tags: ["short episode","archived"] },
+  { id: 9337, title: "Mayo Elle Otokonoko", note: null, tags: ["short","archived"] },
+  { id: 54953, title: "Mendako no Menmen", note: null, tags: ["short episode","archived"] },
+  { id: 49124, title: "Omoigumo", note: null, tags: ["short","archived"] },
+  { id: 10448, title: "Rain Town", note: 3.5, tags: ["short","gem","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

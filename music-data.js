@@ -258,5 +258,8 @@ const musicData = {
   ],
   "Yeat": [
     { title: "Luh Leakyz Vol. 1", note: 3, cover: "music/luh.webp", link: "https://rateyourmusic.com/release/mixtape/yeat/luh-leakyz-vol-1/" },
+  ],
+  "Legend Yae": [
+    { title: "Drugs & a Mic", note: 2.5, cover: "music/drugsmic.webp", link: "https://rateyourmusic.com/release/ep/legend-yae/drugs-and-a-mic/" },
   ]
 };

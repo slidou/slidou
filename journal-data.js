@@ -1063,4 +1063,11 @@ const journalData = [
 { d: "2026-11-04", t: "anime", title: "Yasashii Hero", img: "anime/yasashii.jpg", note: "music" },
 { d: "2026-11-04", t: "anime", title: "Yugesho", img: "anime/yugesho.jpg", note: "short" },
 { d: "2026-11-04", t: "anime", title: "The Horrors' Horror Home", img: "anime/horrors.jpg", note: "short" },
+{ d: "2026-11-05", t: "anime", title: "Mirror Mirror", img: "anime/mirror.jpg", note: "music" },
+{ d: "2026-11-05", t: "anime", title: "Koeda-chan", img: "anime/koeda-chan.jpg", note: "short episode, 1-7/7" },
+{ d: "2026-11-05", t: "anime", title: "Mayo Elle Otokonoko", img: "anime/mayo.jpg", note: "short" },
+{ d: "2026-11-05", t: "anime", title: "Mendako no Menmen", img: "anime/mendako.jpg", note: "short episode, 1-10/10" },
+{ d: "2026-11-05", t: "anime", title: "Omoigumo", img: "anime/omoigumo.jpg", note: "short" },
+{ d: "2026-11-05", t: "anime", title: "Rain Town", img: "anime/raintown.jpg", note: "short" },
+{ d: "2026-11-05", t: "musique", title: "Drugs & a Mic", img: "music/drugsmic.webp", note: "première écoute mais je connaissais déjà le son ETC" },
 ];
