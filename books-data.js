@@ -501,5 +501,10 @@ Et je dois bien l’avouer, ça fait très bizarre de lire un roman aussi incisi
   ],
   "Clémentine Mélois": [
     { title: "Choses que je croyais perdues", note: 3.5, cover: "books/chosesperdues.jpg", link: "https://www.goodreads.com/book/show/249071623-choses-que-je-croyais-perdues" }
+  ],
+  "Édouard Levé": [
+    { title: "Suicide", note: 3.5, cover: "books/suicide.jpg", link: "https://www.goodreads.com/book/show/4604185-suicide", review: `Si vous avez aimé ce livre, notamment pour son style d'écriture froid, presque clinique, et son utilisation de la deuxième personne du singulier tout au long du récit, comme si nous étions les observateurs extérieurs d'un sujet pensant, ainsi que pour ce sentiment d'être de trop dans sa propre existence, je vous conseille Un homme qui dort de Georges Perec. Le film est excellent également.
+
+"Cet égoïsme de ton suicide te déplaisait. Mais dans la balance, l'accalmie de ta mort l'emporta sur l'agitation douloureuse de ta vie."` },
   ]
 };

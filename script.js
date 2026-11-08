@@ -316,7 +316,8 @@ const quotes = [
   { text: "L'ironie est le premier signe que la conscience prend conscience d'elle même.", author: "Fernando Pessoa" },
   { text: "On peut douter de tout sauf de la mort.", author: "Cioran" },
   { text: "La science peut seule éveiller dans les âmes, à défaut du soleil, l'astre de la raison.", author: "Lucrece" },
-  { text: "La justice sans la force est impuissante, la force sans la justice est tyrannique.", author: "Blaise Pascal" }
+  { text: "La justice sans la force est impuissante, la force sans la justice est tyrannique.", author: "Blaise Pascal" },
+  { text: "Cet égoïsme de ton suicide te déplaisait. Mais dans la balance, l'accalmie de ta mort l'emporta sur l'agitation douloureuse de ta vie. - Suicide", author: "Édouard Levé" }
 ];
 
 // ── Moteur de recherche ──

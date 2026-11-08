@@ -90,6 +90,7 @@ const musicData = {
   ],
   "Metro Boomin": [
     { title: "Heroes & Villains", note: 4.5, cover: "music/heroesvillains.webp", link: "https://rateyourmusic.com/release/album/metro-boomin/heroes-and-villains/", tags: ["réécoute"] },
+    { title: "Metro Boomin Presents Spider-Man: Across the Spider-Verse", note: 3.5, cover: "music/spiderman.webp", link: "https://rateyourmusic.com/release/album/metro-boomin/metro-boomin-presents-spider-man-across-the-spider-verse/" },
   ],
   "LinLin": [
     { title: "Disco Inferno", note: 3, cover: "music/discoinferno.webp", link: "https://rateyourmusic.com/release/album/linlin/disco-inferno/" },
@@ -240,6 +241,7 @@ const musicData = {
   ],
   "Huntrill": [
     { title: "Nouvelle Trap 2", note: 3.5, cover: "music/nouvelletrap2.webp", link: "https://rateyourmusic.com/release/album/huntrill/nouvelle-trap-2/", tags: ["réécoute"] },
+    { title: "Le bruit de la machine à billets", note: 3, cover: "music/machineàbillets.webp", link: "https://rateyourmusic.com/release/album/huntrill/le-bruit-de-la-machine-a-billets/" },
   ],
   "Laufey": [
     { title: "Bewitched", note: 3.5, cover: "music/bewitched.webp", link: "https://rateyourmusic.com/release/album/laufey/bewitched/" },
@@ -261,5 +263,20 @@ const musicData = {
   ],
   "Legend Yae": [
     { title: "Drugs & a Mic", note: 2.5, cover: "music/drugsmic.webp", link: "https://rateyourmusic.com/release/ep/legend-yae/drugs-and-a-mic/" },
+  ],
+  "Night Lovell": [
+    { title: "My Blood as the Ink", note: 3.5, cover: "music/blood.webp", link: "https://rateyourmusic.com/release/album/night-lovell/my-blood-as-the-ink/" },
+  ],
+  "Ravyn Lenae": [
+    { title: "Bird's Eye", note: 3, cover: "music/birdseye.webp", link: "https://rateyourmusic.com/release/album/ravyn-lenae/birds-eye/" },
+  ],
+  "XXXTENTACION": [
+    { title: "17", note: 4, cover: "music/17.webp", link: "https://rateyourmusic.com/release/album/xxxtentacion/17/" },
+  ],
+  "ADÉLA": [
+    { title: "Prima", note: 3, cover: "music/prima.webp", link: "https://rateyourmusic.com/release/album/adela/prima/" },
+  ],
+  "Faye Webster": [
+    { title: "I Know I'm Funny haha", note: 2.5, cover: "music/funny.webp", link: "https://rateyourmusic.com/release/album/faye-webster/i-know-im-funny-haha/" },
   ]
 };
