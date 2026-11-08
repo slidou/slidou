@@ -7982,5 +7982,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 53774, title: "Azicon Opening Animation", note: null, tags: ["short","archived"] },
   { id: 62275, title: "Stray Kids: Karma", note: null, tags: ["short","commercial","archived"] },
   { id: 50872, title: "Honekami", note: null, tags: ["short","archived"] },
+  { id: 65338, title: "Light Hole", note: null, tags: ["short","commercial","archived"] },
+  { id: 65343, title: "Beach Therapy", note: null, tags: ["short","archived"] },
+  { id: 65344, title: "Warning", note: null, tags: ["short","archived"] },
+  { id: 65345, title: "The Bullet", note: null, tags: ["short","archived"] },
+  { id: 65346, title: "Damage", note: null, tags: ["short","archived"] },
+  { id: 65347, title: "New Style", note: null, tags: ["short","+","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

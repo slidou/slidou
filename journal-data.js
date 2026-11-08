@@ -1101,4 +1101,11 @@ const journalData = [
 { d: "2026-11-08", t: "anime", title: "Stray Kids: Karma", img: "anime/karma.jpg", note: "commercial" },
 { d: "2026-11-08", t: "musique", title: "I Know I'm Funny haha", img: "music/funny.webp", note: "première écoute" },
 { d: "2026-11-08", t: "anime", title: "Honekami", img: "anime/honekami.jpg", note: "short" },
+{ d: "2026-11-08", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-11-08", t: "anime", title: "Light Hole", img: "anime/lighthole.jpg", note: "commercial" },
+{ d: "2026-11-08", t: "anime", title: "Beach Therapy", img: "anime/btherapy.jpg", note: "short" },
+{ d: "2026-11-08", t: "anime", title: "Warning", img: "anime/warning.jpg", note: "short" },
+{ d: "2026-11-08", t: "anime", title: "The Bullet", img: "anime/thebullet.jpg", note: "short" },
+{ d: "2026-11-08", t: "anime", title: "Damage", img: "anime/damage.jpg", note: "short" },
+{ d: "2026-11-08", t: "anime", title: "New Style", img: "anime/newstyle.jpg", note: "short" },
 ];
