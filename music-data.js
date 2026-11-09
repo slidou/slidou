@@ -278,5 +278,8 @@ const musicData = {
   ],
   "Faye Webster": [
     { title: "I Know I'm Funny haha", note: 2.5, cover: "music/funny.webp", link: "https://rateyourmusic.com/release/album/faye-webster/i-know-im-funny-haha/" },
+  ],
+  "Pinegrove": [
+    { title: "Everything So Far", note: 2.5, cover: "music/everythingsofar.webp", link: "https://rateyourmusic.com/release/comp/pinegrove/everything-so-far/" },
   ]
 };

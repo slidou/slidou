@@ -1108,4 +1108,5 @@ const journalData = [
 { d: "2026-11-08", t: "anime", title: "The Bullet", img: "anime/thebullet.jpg", note: "short" },
 { d: "2026-11-08", t: "anime", title: "Damage", img: "anime/damage.jpg", note: "short" },
 { d: "2026-11-08", t: "anime", title: "New Style", img: "anime/newstyle.jpg", note: "short" },
+{ d: "2026-11-08", t: "musique", title: "Everything So Far", img: "music/everythingsofar.webp", note: "première écoute" },
 ];
