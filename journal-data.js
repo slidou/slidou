@@ -1109,4 +1109,8 @@ const journalData = [
 { d: "2026-11-08", t: "anime", title: "Damage", img: "anime/damage.jpg", note: "short" },
 { d: "2026-11-08", t: "anime", title: "New Style", img: "anime/newstyle.jpg", note: "short" },
 { d: "2026-11-08", t: "musique", title: "Everything So Far", img: "music/everythingsofar.webp", note: "première écoute" },
+{ d: "2026-11-09", t: "livre", title: "Voyage au bout de la nuit", img: "books/voyage.jpg", note: "poursuite de la lecture", status: "en cours" },
+{ d: "2026-11-10", t: "anime", title: "Like 1", img: "anime/like1.jpg", note: "music" },
+{ d: "2026-11-10", t: "anime", title: "Leichte Chousaroku", img: "anime/chousaroku.jpg", note: "short" },
+{ d: "2026-11-10", t: "anime", title: "Keiko wa", img: "anime/keikowa.jpg", note: "short" },
 ];

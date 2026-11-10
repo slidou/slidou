@@ -7988,5 +7988,8 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 65345, title: "The Bullet", note: null, tags: ["short","archived"] },
   { id: 65346, title: "Damage", note: null, tags: ["short","archived"] },
   { id: 65347, title: "New Style", note: null, tags: ["short","+","archived"] },
+  { id: 65354, title: "Like 1", note: 2.5, tags: ["music","archived"] },
+  { id: 62941, title: "Leichte Chousaroku", note: 3.5, tags: ["short","gem","archived"] },
+  { id: 54412, title: "Keiko wa", note: null, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
