@@ -7991,5 +7991,7 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 65354, title: "Like 1", note: 2.5, tags: ["music","archived"] },
   { id: 62941, title: "Leichte Chousaroku", note: 3.5, tags: ["short","gem","archived"] },
   { id: 54412, title: "Keiko wa", note: null, tags: ["short","archived"] },
+  { id: 64590, title: "Feng Zhong Zhi Ta", note: 3, tags: ["short film","archived"] },
+  { id: 65365, title: "Hao×2+Lie×2", note: 3, tags: ["music","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

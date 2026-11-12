@@ -1113,4 +1113,8 @@ const journalData = [
 { d: "2026-11-10", t: "anime", title: "Like 1", img: "anime/like1.jpg", note: "music" },
 { d: "2026-11-10", t: "anime", title: "Leichte Chousaroku", img: "anime/chousaroku.jpg", note: "short" },
 { d: "2026-11-10", t: "anime", title: "Keiko wa", img: "anime/keikowa.jpg", note: "short" },
+{ d: "2026-11-10", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-11-11", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "deux défis de faits", status: "en cours" },
+{ d: "2026-11-12", t: "anime", title: "Feng Zhong Zhi Ta", img: "anime/fengzhong.jpg", note: "short film" },
+{ d: "2026-11-12", t: "anime", title: "Hao×2+Lie×2", img: "anime/hao.jpg", note: "music" },
 ];
