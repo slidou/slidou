@@ -1117,4 +1117,13 @@ const journalData = [
 { d: "2026-11-11", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "deux défis de faits", status: "en cours" },
 { d: "2026-11-12", t: "anime", title: "Feng Zhong Zhi Ta", img: "anime/fengzhong.jpg", note: "short film" },
 { d: "2026-11-12", t: "anime", title: "Hao×2+Lie×2", img: "anime/hao.jpg", note: "music" },
+{ d: "2026-11-14", t: "anime", title: "Steel Ball Run: JoJo no Kimyou na Bouken", img: "anime/jojo7.jpg", note: "normal episode, 9/?", status: "en cours" },
+{ d: "2026-11-14", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-11-15", t: "film", title: "La Chinoise", img: "films/lachinoise.webp", note: "" },
+{ d: "2026-11-15", t: "anime", title: "My Life as a Dog", img: "anime/mylifeasadog.jpg", note: "short" },
+{ d: "2026-11-15", t: "anime", title: "Tomorrow's Leaves", img: "anime/tole.jpg", note: "short" },
+{ d: "2026-11-15", t: "anime", title: "Nennen", img: "anime/nennen.jpg", note: "short" },
+{ d: "2026-11-15", t: "anime", title: "Sangsil-ui Jib", img: "anime/sangsil.jpg", note: "short" },
+{ d: "2026-11-15", t: "anime", title: "Oni to Yanari", img: "anime/yanari.jpg", note: "short" },
+{ d: "2026-11-15", t: "anime", title: "Banana no Kawa de Subette Korobu Usagi Movie", img: "anime/banana.jpg", note: "short" },
 ];

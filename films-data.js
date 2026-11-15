@@ -63,6 +63,7 @@ const filmsData = {
     { title: "Vivre sa vie", note: 3.5, cover: "films/vivresavie.jpg", link: "https://www.senscritique.com/film/vivre_sa_vie/372817" },
     { title: "Deux ou trois choses que je sais d'elle", note: 0.5, cover: "films/deuxoutroischoses.jpg", link: "https://www.senscritique.com/film/deux_ou_trois_choses_que_je_sais_d_elle/438890" },
     { title: "Je vous salue, Sarajevo", note: null, cover: "films/sarajevo.jpg", link: "https://www.senscritique.com/film/je_vous_salue_sarajevo/495688", tags: ["court métrage"] },
+    { title: "La Chinoise", note: 3.5, cover: "films/lachinoise.webp", link: "https://www.senscritique.com/film/la_chinoise/392757", tags: ["archived"] },
   ],
   "Chad Stahelski": [
     { title: "John Wick", note: 3.5, cover: "films/johnwick.png", link: "https://www.senscritique.com/film/john_wick/11989542" },

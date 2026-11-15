@@ -7993,5 +7993,11 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 54412, title: "Keiko wa", note: null, tags: ["short","archived"] },
   { id: 64590, title: "Feng Zhong Zhi Ta", note: 3, tags: ["short film","archived"] },
   { id: 65365, title: "Hao×2+Lie×2", note: 3, tags: ["music","archived"] },
+  { id: 65410, title: "My Life as a Dog", note: 2.5, tags: ["short","archived"] },
+  { id: 49467, title: "Tomorrow's Leaves", note: 2.5, tags: ["short","archived"] },
+  { id: 65424, title: "Nennen", note: 1, tags: ["short","archived"] },
+  { id: 53682, title: "Sangsil-ui Jib", note: 3, tags: ["short","archived"] },
+  { id: 59535, title: "Oni to Yanari", note: null, tags: ["short","archived"] },
+  { id: 65439, title: "Banana no Kawa de Subette Korobu Usagi Movie", note: 0.5, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
