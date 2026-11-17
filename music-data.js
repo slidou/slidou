@@ -107,6 +107,7 @@ const musicData = {
     { title: "Matrix", note: 3.5, cover: "music/matrix.webp", link: "https://rateyourmusic.com/release/mixtape/josman/matrix/", format: "mixtape", tags: ["réécoute"] },
     { title: "Split", note: 3.5, cover: "music/split.webp", link: "https://rateyourmusic.com/release/album/josman/split/", tags: ["réécoute"] },
     { title: "J.000.$", note: 3.5, cover: "music/j000.webp", link: "https://rateyourmusic.com/release/mixtape/josman/j_000/", format: "mixtape", tags: ["réécoute"] },
+    { title: "Armistice", note: 2.5, cover: "music/armistice.webp", link: "https://rateyourmusic.com/release/single/josman/armistice/", format: "single", tags: ["réécoute"] },
   ],
   "Krisy [completed]": [
     { title: "Edward Risky", note: 3.5, cover: "music/edwardrisky.jpg", link: "https://rateyourmusic.com/release/album/krisy/edward-risky/" },
@@ -128,6 +129,7 @@ const musicData = {
   "Future": [
     { title: "The Real Me", note: 2, cover: "music/therealme.webp", link: "https://rateyourmusic.com/release/album/future/the-real-me/" },
     { title: "Future Hndrxx Presents: The WIZRD", note: 3, cover: "music/hndrxx.webp", link: "https://rateyourmusic.com/release/album/future/future-hndrxx-presents-the-wizrd/" },
+    { title: "Ya Hit", note: 3, cover: "music/yahit.webp", link: "https://rateyourmusic.com/release/single/future/ya-hit/", format: "single", tags: ["réécoute"] },
   ],
   "Nirvana": [
     { title: "Nevermind", note: 2.5, cover: "music/nevermind.webp", link: "https://rateyourmusic.com/release/album/nirvana/nevermind/" },
@@ -281,5 +283,11 @@ const musicData = {
   ],
   "Pinegrove": [
     { title: "Everything So Far", note: 2.5, cover: "music/everythingsofar.webp", link: "https://rateyourmusic.com/release/comp/pinegrove/everything-so-far/" },
+  ],
+  "underscores": [
+    { title: "U", note: 2.5, cover: "music/U.webp", link: "https://rateyourmusic.com/release/album/underscores/u/" },
+  ],
+  "Nemzzz": [
+    { title: "Gass", note: 3, cover: "music/gass.webp", link: "https://rateyourmusic.com/release/single/nemzzz/gass/", format: "single", tags: ["réécoute"] },
   ]
 };
