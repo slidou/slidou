@@ -1,5 +1,16 @@
 let showOnlyReviewsBiblio = false;
 
+// Le stockage peut être refusé ou plein : conserver la session en mémoire.
+const sessionPrefs = new Map();
+function readLocal(key) {
+  if (sessionPrefs.has(key)) return sessionPrefs.get(key);
+  try { return localStorage.getItem(key); } catch (e) { return null; }
+}
+function writeLocal(key, value) {
+  try { localStorage.setItem(key, value); sessionPrefs.delete(key); }
+  catch (e) { sessionPrefs.set(key, value); }
+}
+
 function filterByReview(data) {
   const result = {};
   for (const category in data) {
@@ -54,7 +65,7 @@ function sortEntriesByNote(entries) {
 const toggleBtn = document.getElementById('theme-toggle');
 const body = document.body;
 
-if (localStorage.getItem('theme') === 'dark') {
+if (readLocal('theme') === 'dark') {
   body.classList.add('dark-mode');
   toggleBtn.textContent = '☀️';
 }
@@ -64,16 +75,16 @@ toggleBtn.addEventListener('click', () => {
   
   if (body.classList.contains('dark-mode')) {
     toggleBtn.textContent = '☀️';
-    localStorage.setItem('theme', 'dark');
+    writeLocal('theme', 'dark');
   } else {
     toggleBtn.textContent = '🌙';
-    localStorage.setItem('theme', 'light');
+    writeLocal('theme', 'light');
   }
 });
 
 // ── Protection HTML ──
 function escapeHtml(str) {
-  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  return String(str == null ? '' : str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 
 // ── Helper pour le badge de format musique ──
@@ -113,7 +124,7 @@ function getCollectionBadges(item) {
 // role=button + tabindex + aria-expanded : les titres de créateurs se replient au clavier aussi
 function getCreatorHeader(name, count) {
   const isIntegral = name.indexOf('[completed]') !== -1;
-  const cleanName = name.replace(' [completed]', '');
+  const cleanName = escapeHtml(name.replace(' [completed]', ''));
   const arrow = '<span class="creator-arrow">▼</span>';
   
   if (isIntegral) {
@@ -124,6 +135,28 @@ function getCreatorHeader(name, count) {
 }
 
 // ── Review popup ──
+const dialogReturnFocus = new WeakMap();
+function focusDialog(dialog) {
+  if (!dialogReturnFocus.has(dialog)) dialogReturnFocus.set(dialog, document.activeElement);
+  const first = dialog.querySelector('input, button, [href], [tabindex="0"]');
+  if (first) first.focus({ preventScroll: true });
+}
+function restoreDialogFocus(dialog) {
+  const trigger = dialogReturnFocus.get(dialog);
+  dialogReturnFocus.delete(dialog);
+  if (trigger && trigger.isConnected) trigger.focus({ preventScroll: true });
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key !== 'Tab') return;
+  const dialog = [...document.querySelectorAll('[aria-modal="true"]')].reverse().find(el => el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden');
+  if (!dialog) return;
+  const items = [...dialog.querySelectorAll('button, input, [href], [tabindex="0"]')].filter(el => !el.disabled && el.getClientRects().length);
+  if (!items.length) return;
+  const first = items[0], last = items[items.length - 1];
+  if (!dialog.contains(document.activeElement) || (!e.shiftKey && document.activeElement === last) || (e.shiftKey && document.activeElement === first)) {
+    e.preventDefault(); (e.shiftKey ? last : first).focus();
+  }
+});
 document.addEventListener('click', function(e) {
   if (!e.target.classList.contains('review-btn')) return;
   e.preventDefault();
@@ -133,16 +166,21 @@ document.addEventListener('click', function(e) {
   document.getElementById('review-popup-title').textContent = titleData ? titleData.textContent : '';
   document.getElementById('review-popup-text').textContent = reviewData ? reviewData.textContent : '';
   document.getElementById('review-popup').classList.add('visible');
+  focusDialog(document.getElementById('review-popup'));
 });
 
 document.getElementById('review-popup').addEventListener('click', function(e) {
   if (e.target.id === 'review-popup' || e.target.id === 'review-popup-close') {
     document.getElementById('review-popup').classList.remove('visible');
+    restoreDialogFocus(document.getElementById('review-popup'));
   }
 });
 
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') document.getElementById('review-popup').classList.remove('visible');
+  if (e.key === 'Escape') {
+    document.getElementById('review-popup').classList.remove('visible');
+    restoreDialogFocus(document.getElementById('review-popup'));
+  }
 });
 
 // ── Système d'étoiles (gère les demis et les notes vides) ──
@@ -187,7 +225,7 @@ function navigateTo(page) {
   window.scrollTo({ top: 0, behavior: 'instant' });
   document.querySelector('.content').scrollTo({ top: 0, behavior: 'instant' });
 
-  localStorage.setItem('activePage', page);
+  writeLocal('activePage', page);
   
   if (page === 'home') initHome();
   if (page === 'bibliographie') {
@@ -353,6 +391,27 @@ function filterData(data, query) {
 // (cover 404 → placeholder .book-cover-ph via coverImgFallback, comme anime/manga)
 const BOOK_PLACEHOLDER = '<div class="book-cover-ph"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>';
 
+// Lien couvrant la carte et bouton review frères : deux cibles natives distinctes.
+function separateReviewLink(card) {
+  const review = card.querySelector('.review-btn');
+  if (!review) return card;
+  const wrapper = document.createElement('div');
+  for (const attr of card.attributes) {
+    if (!['href', 'target', 'rel'].includes(attr.name)) wrapper.setAttribute(attr.name, attr.value);
+  }
+  const link = document.createElement('a');
+  link.className = 'book-card-link';
+  link.href = card.href;
+  link.target = card.target;
+  link.rel = card.rel;
+  const title = card.querySelector('.book-title').textContent;
+  link.setAttribute('aria-label', title);
+  review.setAttribute('aria-label', 'lire la review de ' + title);
+  wrapper.appendChild(link);
+  while (card.firstChild) wrapper.appendChild(card.firstChild);
+  return wrapper;
+}
+
 function buildBookCard(book) {
   const card = document.createElement('a');
   card.href = book.link;
@@ -369,7 +428,7 @@ function buildBookCard(book) {
     + starsHtml
     + getOldNote(book)
     + reviewHtml;
-  return card;
+  return separateReviewLink(card);
 }
 
 // ── Cartes film & saison : un seul gabarit pour la vue tri et la vue par créateur ──
@@ -395,7 +454,7 @@ function buildFilmCard(movie) {
     + starsHtml
     + getOldNote(movie)
     + reviewHtml;
-  return card;
+  return separateReviewLink(card);
 }
 
 function buildSeasonCard(season, showName, compositeTitle) {
@@ -416,7 +475,7 @@ function buildSeasonCard(season, showName, compositeTitle) {
     + starsHtml
     + getOldNote(season)
     + reviewHtml;
-  return card;
+  return separateReviewLink(card);
 }
 
 
@@ -700,8 +759,8 @@ function setupEcransSort(subpage) {
         btn.appendChild(arrowSpan);
       }
 
-      if (subpage === 'films') generateFilms();
-      else if (subpage === 'series') generateSeries();
+      if (subpage === 'films') generateFilms(filterData(films, ecransSearchQuery), !!ecransSearchQuery);
+      else if (subpage === 'series') generateSeries(filterData(series, ecransSearchQuery), !!ecransSearchQuery);
     });
     sortContainer.appendChild(btn);
   });
@@ -1127,13 +1186,13 @@ function buildGameCard(game) {
   const starsHtml = game.note !== null ? '<div class="book-meta">' + getStars(game.note) + '</div>' : '';
   const reviewHtml = game.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(game.review) + '</span>' : '';
 
-  card.innerHTML = '<img loading="lazy" src="' + game.cover + '" alt="' + escapeHtml(game.title) + '">'
+  card.innerHTML = '<img loading="lazy" src="' + escapeHtml(game.cover) + '" alt="' + escapeHtml(game.title) + '">'
     + getCollectionBadges(game)
     + '<div class="book-title">' + escapeHtml(game.title) + '</div>'
     + starsHtml
     + getOldNote(game)
     + reviewHtml;
-  return card;
+  return separateReviewLink(card);
 }
 
 function generateGames(data = games, isSearch = false) {
@@ -1315,14 +1374,14 @@ function buildMusicCard(album) {
   const starsHtml = album.note !== null ? '<div class="book-meta">' + getStars(album.note) + '</div>' : '';
   const reviewHtml = album.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(album.review) + '</span>' : '';
 
-  card.innerHTML = '<img loading="lazy" src="' + album.cover + '" alt="' + escapeHtml(album.title) + '">'
+  card.innerHTML = '<img loading="lazy" src="' + escapeHtml(album.cover) + '" alt="' + escapeHtml(album.title) + '">'
     + getMusicFormatBadge(album)
     + getCollectionBadges(album)
     + '<div class="book-title">' + escapeHtml(album.title) + '</div>'
     + starsHtml
     + getOldNote(album)
     + reviewHtml;
-  return card;
+  return separateReviewLink(card);
 }
 
 function generateMusique(data = musique, isSearch = false) {
@@ -1665,18 +1724,21 @@ function getDefaultState() {
 
 function getBudgieState() {
   let state = null;
-  try { state = JSON.parse(localStorage.getItem(TAMAGOTCHI_KEY)); } catch (e) { state = null; }
-  if (!state || typeof state !== 'object') return getDefaultState();
+  try { state = JSON.parse(readLocal(TAMAGOTCHI_KEY)); } catch (e) { state = null; }
+  if (!state || typeof state !== 'object' || Array.isArray(state)) return getDefaultState();
   if (state.faim !== undefined) state = getDefaultState();
-  if (!state.friendSince) state.friendSince = Date.now();
-  if (!state.lastUpdate) state.lastUpdate = Date.now();
+  if (!Number.isFinite(state.friendSince) || state.friendSince <= 0) state.friendSince = Date.now();
+  if (!Number.isFinite(state.lastUpdate) || state.lastUpdate <= 0) state.lastUpdate = Date.now();
 
   const now = Date.now();
-  const elapsedMinutes = (now - state.lastUpdate) / (1000 * 60);
+  const elapsedMinutes = Math.max(0, now - state.lastUpdate) / (1000 * 60);
   const decay = elapsedMinutes * 0.055;
   
   ['pistachio', 'cielazur'].forEach(bird => {
-    if(!state[bird]) state[bird] = { faim: 80, bonheur: 80, energie: 80 };
+    if (!state[bird] || typeof state[bird] !== 'object' || Array.isArray(state[bird])) state[bird] = {};
+    ['faim', 'bonheur', 'energie'].forEach(key => {
+      state[bird][key] = Number.isFinite(state[bird][key]) ? Math.min(100, Math.max(0, state[bird][key])) : 80;
+    });
     state[bird].faim = Math.max(0, state[bird].faim - decay);
     state[bird].bonheur = Math.max(0, state[bird].bonheur - (decay * 0.8));
     state[bird].energie = Math.max(0, state[bird].energie - (decay * 0.3));
@@ -1688,7 +1750,7 @@ function getBudgieState() {
 
 function saveBudgieState(state) {
   state.lastUpdate = Date.now();
-  localStorage.setItem(TAMAGOTCHI_KEY, JSON.stringify(state));
+  writeLocal(TAMAGOTCHI_KEY, JSON.stringify(state));
 }
 
 function drawBudgie(birdId, state) {
@@ -1869,6 +1931,18 @@ document.getElementById('btn-dormir').addEventListener('click', () => {
 
 document.getElementById('cage-pistachio').addEventListener('click', () => petBird('pistachio'));
 document.getElementById('cage-cielazur').addEventListener('click', () => petBird('cielazur'));
+['pistachio', 'cielazur'].forEach(function(bird) {
+  const cage = document.getElementById('cage-' + bird);
+  cage.setAttribute('role', 'button');
+  cage.tabIndex = 0;
+  cage.setAttribute('aria-label', 'caresser ' + (bird === 'pistachio' ? 'Pistachio' : 'Ciel Azur'));
+  cage.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (!e.repeat) cage.click();
+    }
+  });
+});
 
 ['wrapper-pistachio', 'wrapper-cielazur'].forEach(id => {
   document.getElementById(id).addEventListener('animationend', () => {
@@ -2722,7 +2796,7 @@ function buildRecapHeatmap(yearStr, yearEntries) {
       const iso = dt.toISOString().slice(0, 10);
       const c = counts[iso] || 0;
       const lvl = c >= 7 ? 'hm-l4' : c >= 4 ? 'hm-l3' : c >= 2 ? 'hm-l2' : c >= 1 ? 'hm-l1' : 'hm-l0';
-      cellsHtml += '<span class="hm-cell ' + lvl + '" title="' + (dayIndex + 1) + ' ' + MONTHS[dt.getUTCMonth()] + ' · ' + c + (c > 1 ? ' activités' : ' activité') + '"></span>';
+      cellsHtml += '<span class="hm-cell ' + lvl + '" title="' + dt.getUTCDate() + ' ' + MONTHS[dt.getUTCMonth()] + ' · ' + c + (c > 1 ? ' activités' : ' activité') + '"></span>';
     }
   }
   host.innerHTML = '<div class="hm-inner"><div class="hm-months">' + monthsHtml + '</div><div class="hm-grid">' + cellsHtml + '</div></div>';
@@ -2809,7 +2883,7 @@ function renderCalendar() {
         <div class="calendar-day has-data${blurClass}" data-date="${dateStr}" role="button" tabindex="0" aria-label="activités du ${day} ${moisNoms[viewedMonth]} ${viewedYear}">
           ${statusDot}
           <div class="calendar-day-num">${day}</div>
-          <img loading="lazy" src="${dayEntries[0].img}" alt="${dayEntries[0].title}">
+          <img loading="lazy" src="${escapeHtml(dayEntries[0].img)}" alt="${escapeHtml(dayEntries[0].title)}">
           ${badge}
         </div>`;
     } else {
@@ -2874,7 +2948,7 @@ function openPopup(dateStr) {
   
   entries.forEach(item => {
     const dotClass = typeColors[item.t] || "";
-    const noteHtml = item.note ? `<div class="popup-item-note">${item.note}</div>` : '';
+    const noteHtml = item.note ? `<div class="popup-item-note">${escapeHtml(item.note)}</div>` : '';
     const blurClass = item.blur ? ' blur-entry' : '';
     const statusLabel = getStatusLabel(item);
     const statusClass = statusLabel === 'en cours' ? 'status-ongoing' : (statusLabel === 'abandonné' ? 'status-dropped' : 'status-done');
@@ -2895,10 +2969,12 @@ function openPopup(dateStr) {
   html += `</div>`;
   content.innerHTML = html;
   popup.classList.add('visible');
+  focusDialog(popup);
 }
 
 function closePopup() {
   document.getElementById('calendar-popup').classList.remove('visible');
+  restoreDialogFocus(document.getElementById('calendar-popup'));
 }
 
 // Event Listeners
@@ -2916,7 +2992,7 @@ document.getElementById('footer-year').textContent = new Date().getFullYear();
 // Au chargement, on restaure la bonne page
 window.addEventListener('load', () => {
   initHome();
-  const savedPage = localStorage.getItem('activePage');
+  const savedPage = readLocal('activePage');
   if (savedPage && savedPage !== 'home' && document.getElementById('page-' + savedPage)) {
     navigateTo(savedPage);
   } else {
@@ -3268,7 +3344,7 @@ function renderAnimeBatch() {
     // v30 (A4) : l'inline de style est supprimé — le CSS .anime-card img porte exactement ces valeurs
     // et le cover-stack (v22) l'écrase de toute façon : l'inline était du code mort depuis v22
     const phAnime = '<div class="anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>';
-    const imgBlock = '<img loading="lazy" src="' + coverSrc('anime', a.id, a.title, a.img) + '" alt="" data-ph="' + encodeURIComponent(phAnime) + '" onerror="coverImgFallback(this)">';
+    const imgBlock = '<img loading="lazy" src="' + escapeHtml(coverSrc('anime', a.id, a.title, a.img)) + '" alt="" data-ph="' + encodeURIComponent(phAnime) + '" onerror="coverImgFallback(this)">';
 
     const card = document.createElement('a');
     card.href = 'https://myanimelist.net/anime/' + a.id;
@@ -3282,7 +3358,7 @@ function renderAnimeBatch() {
     const reviewHtml = a.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(a.review) + '</span>' : '';
     // v30 (A1) : title échappé (motif v28/v29 — même gabarit que buildBookCard/buildFilmCard)
     card.innerHTML = imgBlock + badges + '<div class="book-title">' + escapeHtml(a.title) + '</div>' + starsHtml + getOldNote(a) + reviewHtml;
-    container.appendChild(card);
+    container.appendChild(separateReviewLink(card));
   }
 
   animeDisplayed = end;
@@ -3315,7 +3391,7 @@ function renderTopList(container, items, type) {
     const starsHtml = item.note !== null ? '<div class="top-stars">' + getStars(item.note) + '</div>' : '';
 
     const phTop = '<div class="' + (type === 'manga' ? 'manga-placeholder' : '') + ' anime-placeholder" style="--hue:' + hue + '"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>';
-    const imgBlock = '<img loading="lazy" src="' + coverSrc(type, item.id, item.title, item.img) + '" alt="" data-ph="' + encodeURIComponent(phTop) + '" onerror="coverImgFallback(this)">';
+    const imgBlock = '<img loading="lazy" src="' + escapeHtml(coverSrc(type, item.id, item.title, item.img)) + '" alt="" data-ph="' + encodeURIComponent(phTop) + '" onerror="coverImgFallback(this)">';
 
     const card = document.createElement('a');
     card.href = 'https://myanimelist.net/' + type + '/' + item.id;
@@ -3356,15 +3432,18 @@ let ecransSortDir = 1;
 // Chaque page stocke : tags/formats actifs, reviews, tri (mode + sens). Restauration silencieuse au chargement.
 const SLIDOU_PREFS_KEY = 'slidou-prefs';
 function getAllPrefs() {
-  try { return JSON.parse(localStorage.getItem(SLIDOU_PREFS_KEY)) || {}; } catch (e) { return {}; }
+  try {
+    const prefs = JSON.parse(readLocal(SLIDOU_PREFS_KEY));
+    return prefs && typeof prefs === 'object' && !Array.isArray(prefs) ? prefs : {};
+  } catch (e) { return {}; }
 }
 function savePrefs(page, patch) {
   try {
     const all = getAllPrefs();
-    const cur = all[page] || {};
+    const cur = all[page] && typeof all[page] === 'object' && !Array.isArray(all[page]) ? all[page] : {};
     for (const k in patch) cur[k] = patch[k];
     all[page] = cur;
-    localStorage.setItem(SLIDOU_PREFS_KEY, JSON.stringify(all));
+    writeLocal(SLIDOU_PREFS_KEY, JSON.stringify(all));
   } catch (e) {}
 }
 function toggleArr(arr, val) {
@@ -3392,6 +3471,16 @@ function mangaMatchesTag(m, tag) {
 // Restauration des préférences (une seule fois, avant le premier rendu de page)
 (function restoreSlidouPrefs() {
   const p = getAllPrefs();
+  const modes = { bibliographie: ['auteur', 'note', 'alpha'], films: ['réalisateur', 'note', 'alpha'], series: [], jeux: ['note', 'alpha'], musique: ['artiste', 'note', 'alpha'], anime: ['note', 'titre'], manga: ['auteur', 'note', 'alpha'] };
+  Object.keys(modes).forEach(page => {
+    const value = p[page];
+    if (!value || typeof value !== 'object' || Array.isArray(value)) { delete p[page]; return; }
+    ['tags', 'formats'].forEach(key => {
+      value[key] = Array.isArray(value[key]) ? value[key].filter(x => typeof x === 'string') : [];
+    });
+    if (!modes[page].includes(value.sortMode)) delete value.sortMode;
+    if (value.sortDir !== 1 && value.sortDir !== -1) delete value.sortDir;
+  });
   if (p['bibliographie']) {
     biblioCollectionFilters = (p['bibliographie'].tags || []).slice();
     showOnlyReviewsBiblio = !!p['bibliographie'].reviews;
@@ -3452,13 +3541,13 @@ function buildMangaCard(m) {
   const reviewHtml = m.review ? '<button class="review-btn">review</button><span class="review-data" style="display:none">' + escapeHtml(m.review) + '</span>' : '';
   const phManga = '<div class="manga-placeholder anime-placeholder" style="--hue:' + hue + '"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>';
 
-  card.innerHTML = '<img loading="lazy" src="' + coverSrc('manga', m.id, m.title, m.img) + '" alt="" class="manga-img-render" data-ph="' + encodeURIComponent(phManga) + '" onerror="coverImgFallback(this)">'
+  card.innerHTML = '<img loading="lazy" src="' + escapeHtml(coverSrc('manga', m.id, m.title, m.img)) + '" alt="" class="manga-img-render" data-ph="' + encodeURIComponent(phManga) + '" onerror="coverImgFallback(this)">'
     + getCollectionBadges(m)
     + '<div class="book-title">' + escapeHtml(m.title) + '</div>'
     + starsHtml
     + getOldNote(m)
     + reviewHtml;
-  return card;
+  return separateReviewLink(card);
 }
 
 function generateManga() {
@@ -4117,10 +4206,46 @@ function generateStats() {
 // v32 (A6) : var→const/let (zone musique, item parked « var musique » à échéance)
 let currentTrack = 0;
 let isPlaying = false;
+let playRequest = 0;
 const audio = document.getElementById('player-audio');
+const playerBar = document.getElementById('player-bar');
+
+function syncPlayerAccessibility() {
+  const btn = document.getElementById('player-play');
+  btn.setAttribute('aria-label', isPlaying ? 'mettre en pause' : 'lancer la lecture');
+  btn.setAttribute('aria-pressed', String(isPlaying));
+  const duration = Number.isFinite(audio.duration) && audio.duration > 0 ? audio.duration : 0;
+  playerBar.setAttribute('aria-disabled', String(!duration));
+  playerBar.setAttribute('aria-valuemax', String(duration));
+  playerBar.setAttribute('aria-valuenow', String(duration ? Math.min(duration, audio.currentTime) : 0));
+  playerBar.setAttribute('aria-valuetext', duration ? formatTime(audio.currentTime) + ' sur ' + formatTime(duration) : 'durée indisponible');
+}
+
+['play', 'pause', 'ended', 'error'].forEach(function(event) {
+  audio.addEventListener(event, function() {
+    isPlaying = !audio.paused && !audio.ended && !audio.error;
+    const btn = document.getElementById('player-play');
+    btn.textContent = isPlaying ? '❚❚' : '▶';
+    btn.classList.toggle('playing', isPlaying);
+    syncPlayerAccessibility();
+  });
+});
+['timeupdate', 'loadedmetadata', 'durationchange', 'emptied'].forEach(function(event) {
+  audio.addEventListener(event, syncPlayerAccessibility);
+});
+
+playerBar.addEventListener('keydown', function(e) {
+  const steps = { ArrowLeft: -5, ArrowDown: -5, ArrowRight: 5, ArrowUp: 5, PageDown: -10, PageUp: 10 };
+  if (!(e.key in steps) && e.key !== 'Home' && e.key !== 'End') return;
+  e.preventDefault();
+  if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
+  audio.currentTime = e.key === 'Home' ? 0 : e.key === 'End' ? audio.duration : Math.max(0, Math.min(audio.duration, audio.currentTime + steps[e.key]));
+  syncPlayerAccessibility();
+});
 
 function loadTrack(index) {
   if (typeof playerTracks === 'undefined' || playerTracks.length === 0) return;
+  playRequest++;
   currentTrack = index;
   const track = playerTracks[currentTrack];
   audio.src = track.file;
@@ -4132,6 +4257,7 @@ function loadTrack(index) {
   document.querySelector('.player-btn-play').textContent = '▶';
   document.querySelector('.player-btn-play').classList.remove('playing');
   isPlaying = false;
+  syncPlayerAccessibility();
 }
 
 function formatTime(sec) {
@@ -4152,12 +4278,15 @@ audio.addEventListener('timeupdate', function() {
 // Lance la lecture en absorbant les rejets de promesse (fichier manquant, politique autoplay…)
 // sinon chaque échec de play() génère une erreur "Unhandled rejection" dans la console
 function safePlay() {
+  const request = ++playRequest;
   const p = audio.play();
   if (p && p.catch) {
     p.catch(function() {
+      if (request !== playRequest) return;
       isPlaying = false;
       const btn = document.querySelector('.player-btn-play');
       if (btn) { btn.textContent = '▶'; btn.classList.remove('playing'); }
+      syncPlayerAccessibility();
     });
   }
 }
@@ -4181,6 +4310,7 @@ audio.addEventListener('ended', function() {
 document.getElementById('player-play').addEventListener('click', function() {
   if (typeof playerTracks === 'undefined' || playerTracks.length === 0) return;
   if (isPlaying) {
+    playRequest++;
     audio.pause();
     isPlaying = false;
     this.textContent = '▶';
@@ -4192,29 +4322,33 @@ document.getElementById('player-play').addEventListener('click', function() {
     this.textContent = '❚❚';
     this.classList.add('playing');
   }
+  syncPlayerAccessibility();
 });
 
 document.getElementById('player-prev').addEventListener('click', function() {
   if (typeof playerTracks === 'undefined' || playerTracks.length === 0) return;
   let idx = currentTrack - 1;
   if (idx < 0) idx = playerTracks.length - 1;
+  const resume = isPlaying;
   loadTrack(idx);
-  if (isPlaying) safePlay();
+  if (resume) document.getElementById('player-play').click();
 });
 
 document.getElementById('player-next').addEventListener('click', function() {
   if (typeof playerTracks === 'undefined' || playerTracks.length === 0) return;
   let idx = currentTrack + 1;
   if (idx >= playerTracks.length) idx = 0;
+  const resume = isPlaying;
   loadTrack(idx);
-  if (isPlaying) safePlay();
+  if (resume) document.getElementById('player-play').click();
 });
 
 document.getElementById('player-bar').addEventListener('click', function(e) {
-  if (audio.duration) {
+  if (Number.isFinite(audio.duration) && audio.duration > 0) {
     const rect = this.getBoundingClientRect();
-    const pct = (e.clientX - rect.left) / rect.width;
+    const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
     audio.currentTime = pct * audio.duration;
+    syncPlayerAccessibility();
   }
 });
 
@@ -4347,15 +4481,17 @@ function renderCurrently() {
   // Normalise en conservant la correspondance vers les indices d'origine (pour le surlignage)
   function normMap(str) {
     const src = String(str || '');
-    const nfd = src.normalize('NFD');
-    let out = '', map = [];
-    for (let i = 0; i < nfd.length; i++) {
-      const ch = nfd[i];
-      if (ch >= '\u0300' && ch <= '\u036f') continue; // diacritiques
-      out += ch.toLowerCase();
-      map.push(i);
+    let out = '', map = [], ends = [];
+    // Intervalles UTF-16 dans l'original, accent précomposé ou décomposé compris.
+    for (const match of src.matchAll(/.[\u0300-\u036f]*/gsu)) {
+      const chunk = match[0].normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      out += chunk;
+      for (let i = 0; i < chunk.length; i++) {
+        map.push(match.index);
+        ends.push(match.index + match[0].length);
+      }
     }
-    return { s: out, map: map };
+    return { s: out.toLowerCase(), map: map, ends: ends };
   }
 
   // Entoure de <mark> chaque fragment qui matche un token (indices remappés sur la chaîne d'origine)
@@ -4366,8 +4502,8 @@ function renderCurrently() {
     tokens.forEach(function(tk) {
       let from = 0, idx;
       while ((idx = nm.s.indexOf(tk, from)) !== -1) {
-        const s = nm.map[idx], e = nm.map[idx + tk.length - 1];
-        if (s !== undefined && e !== undefined) ranges.push([s, e + 1]);
+        const s = nm.map[idx], e = nm.ends[idx + tk.length - 1];
+        if (s !== undefined && e !== undefined) ranges.push([s, e]);
         from = idx + 1;
       }
     });
@@ -4496,7 +4632,7 @@ function renderCurrently() {
         imgHtml = '<div class="gs-creator-avatar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>';
       } else {
         const cov = coverOf(m);
-        imgHtml = cov ? '<img src="' + cov + '" alt="" onerror="coverImgFallback(this)">' : '<div style="width:32px;height:48px;background:var(--border-color);border-radius:3px;flex-shrink:0;"></div>';
+        imgHtml = cov ? '<img src="' + escapeHtml(cov) + '" alt="" onerror="coverImgFallback(this)">' : '<div style="width:32px;height:48px;background:var(--border-color);border-radius:3px;flex-shrink:0;"></div>';
       }
       const subHtml = m.isCreator ? escapeHtml(m.sub) : escapeHtml(m.cat.toLowerCase() + (m.sub ? ' · ' + m.sub : ''));
       el.innerHTML = dot + imgHtml + '<div class="gs-item-info"><div class="gs-item-title">' + highlight(m.title, tokens) + '</div><div class="gs-item-sub">' + subHtml + '</div></div>';
@@ -4536,6 +4672,7 @@ function renderCurrently() {
   }
 
   function openPalette() {
+    focusDialog(palette);
     palette.classList.add('open');
     if (mobileBtn) mobileBtn.setAttribute('aria-expanded', 'true');
     input.value = '';
@@ -4546,11 +4683,14 @@ function renderCurrently() {
     palette.classList.remove('open');
     if (mobileBtn) mobileBtn.setAttribute('aria-expanded', 'false');
     input.blur();
+    restoreDialogFocus(palette);
   }
 
   // Déclencheurs
   trigger.addEventListener('click', openPalette);
   if (mobileBtn) mobileBtn.addEventListener('click', openPalette);
+  const closeButton = document.getElementById('palette-close');
+  if (closeButton) closeButton.addEventListener('click', closePalette);
   palette.addEventListener('click', function(e) { if (e.target === palette) closePalette(); });
 
   // Raccourcis clavier globaux : Ctrl+K / ⌘K ouvre, Échap ferme
@@ -4913,7 +5053,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
   }
 
   /* ── modale ── */
-  var refs = null, lastData = null, lastMode = null;
+  var refs = null, lastData = null, lastMode = null, generation = 0;
 
   function ensureModal() {
     if (refs) return refs;
@@ -4945,11 +5085,12 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     });
     refs.dl.addEventListener('click', function () {
       if (!lastData) return;
+      var request = generation, year = lastData.year;
       refs.canvas.toBlob(function (blob) {
-        if (!blob) return;
+        if (!blob || request !== generation) return;
         var a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = 'slidou-wrapped-' + lastData.year + '.png';
+        a.download = 'slidou-wrapped-' + year + '.png';
         document.body.appendChild(a); a.click(); a.remove();
         setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
       }, 'image/png');
@@ -4967,12 +5108,18 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
   function openWrapped() {
     var data = wrappedCollect(recapYear);
     if (!data) return;
+    var request = ++generation;
+    currentImgs = { avatar: null, covers: [], budgie: null };
     lastData = data;
     lastMode = document.body.classList.contains('dark-mode') ? 'nuit' : 'jour';
     var m = ensureModal();
     m.mode.textContent = lastMode === 'jour' ? '🌙' : '☀️';
     m.ov.style.display = 'flex';
+    m.dl.disabled = true;
+    m.canvas.getContext('2d').clearRect(0, 0, m.canvas.width, m.canvas.height);
+    focusDialog(m.ov);
     wrappedFonts().then(function () {
+      if (request !== generation) return;
       redraw(); /* premier trait immédiat */
       var jobs = [loadImg('pfp.jpg')];
       for (var i = 0; i < 3; i++) {
@@ -4981,15 +5128,18 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
       jobs.push(loadImg(budgieURI()));
       return Promise.all(jobs);
     }).then(function (out) {
-      if (out) {
+      if (out && request === generation) {
         currentImgs = { avatar: out[0], covers: [out[1], out[2], out[3]], budgie: out[4] };
         redraw();
+        m.dl.disabled = false;
       }
     });
   }
 
   function closeWrapped() {
+    generation++;
     if (refs) refs.ov.style.display = 'none';
+    if (refs) restoreDialogFocus(refs.ov);
   }
 
   var btn = document.getElementById('wrapped-open-btn');
@@ -5137,12 +5287,14 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     sheet.classList.add('open');
     if (menuBtn) menuBtn.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
+    focusDialog(sheet);
   }
   function closeSheet() {
     if (!sheet) return;
     sheet.classList.remove('open');
     if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    restoreDialogFocus(sheet);
   }
 
   var menuBtn = document.getElementById('menu-toggle');
@@ -5188,7 +5340,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
   /* État actif correct dès l'arrivée (page restaurée de localStorage) */
   window.addEventListener('load', function () {
     var saved = null;
-    try { saved = localStorage.getItem('activePage'); } catch (err) { saved = null; }
+    saved = readLocal('activePage');
     syncMobileNav(saved || 'home');
   });
 })();

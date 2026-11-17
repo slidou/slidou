@@ -1147,4 +1147,8 @@ const journalData = [
 { d: "2026-11-17", t: "anime", title: "Noraneko", img: "anime/noraneko.jpg", note: "short" },
 { d: "2026-11-17", t: "anime", title: "Night Diver", img: "anime/nightdiver.jpg", note: "music" },
 { d: "2026-11-17", t: "anime", title: "The King of Fighters: Awaken PV", img: "anime/awaken.jpg", note: "short" },
+{ d: "2026-11-17", t: "livre", title: "Voyage au bout de la nuit", img: "books/voyage.jpg", note: "poursuite de la lecture", status: "en cours" },
+{ d: "2026-11-17", t: "anime", title: "Metamorphose (Music)", img: "anime/metamorphose.jpg", note: "music" },
+{ d: "2026-11-18", t: "anime", title: "Wander Burabura Bakkamu", img: "anime/bakkamu.jpg", note: "short" },
+{ d: "2026-11-18", t: "anime", title: "Nico/Agony", img: "anime/nico.jpg", note: "short" },
 ];

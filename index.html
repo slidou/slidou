@@ -135,7 +135,7 @@
   <div class="anime-sort" id="biblio-sort"></div>
 </div>
       <div id="biblio-project-bar"></div>
-      <input type="text" id="search-biblio" class="search-bar" placeholder="rechercher un livre, un auteur…">
+      <input type="text" id="search-biblio" class="search-bar" aria-label="rechercher un livre, un auteur…" placeholder="rechercher un livre, un auteur…">
       <div id="biblio-filters" class="manga-filters"></div>
       <div id="bibliographyContent" class="text-content"></div>
     </div>
@@ -149,7 +149,7 @@
         </div>
         <div id="ecrans-project-bar"></div>
         <!-- v29 (H3) : la recherche couvre films ET séries — le placeholder le dit maintenant -->
-        <input type="text" id="search-ecrans" class="search-bar" placeholder="rechercher un film, une série, un réalisateur…">
+        <input type="text" id="search-ecrans" class="search-bar" aria-label="rechercher un film, une série, un réalisateur…" placeholder="rechercher un film, une série, un réalisateur…">
         <div class="sub-nav">
           <a href="#" class="sub-nav-link active" data-subpage="films" aria-current="true">films</a>
           <a href="#" class="sub-nav-link" data-subpage="series">séries</a>
@@ -173,7 +173,7 @@
 </div>
       <div id="jeux-project-bar"></div>
       <div id="jeux-filters" class="manga-filters"></div>
-      <input type="text" id="search-jeux" class="search-bar" placeholder="rechercher un jeu, un développeur…">
+      <input type="text" id="search-jeux" class="search-bar" aria-label="rechercher un jeu, un développeur…" placeholder="rechercher un jeu, un développeur…">
       <div id="jeuxContent" class="text-content"></div>
     </div>
 
@@ -184,10 +184,10 @@
         <div class="anime-sort" id="musique-sort"></div>
       </div>
       <div id="musique-relisten-bar"></div>
-      <input type="text" id="search-musique" class="search-bar" placeholder="rechercher un album, un artiste…">
+      <input type="text" id="search-musique" class="search-bar" aria-label="rechercher un album, un artiste…" placeholder="rechercher un album, un artiste…">
       <div class="player-widget" id="player-widget">
         <div class="player-now">
-          <div class="player-track-info">
+          <div class="player-track-info" aria-live="polite" aria-atomic="true">
             <span class="player-title">rien en lecture</span>
             <span class="player-artist"></span>
           </div>
@@ -200,7 +200,7 @@
         <audio id="player-audio"></audio>
         <div class="player-progress">
           <span class="player-time" id="player-time-current">0:00</span>
-          <div class="player-bar" id="player-bar">
+          <div class="player-bar" id="player-bar" role="slider" tabindex="0" aria-label="position de lecture" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" aria-valuetext="durée indisponible" aria-disabled="true">
             <div class="player-bar-fill" id="player-bar-fill"></div>
           </div>
           <span class="player-time" id="player-time-total">0:00</span>
@@ -217,7 +217,7 @@
     <div class="anime-sort" id="anime-sort"></div>
   </div>
   <div id="anime-project-bar"></div>
-  <input type="text" id="search-anime" class="search-bar" placeholder="rechercher un anime…">
+  <input type="text" id="search-anime" class="search-bar" aria-label="rechercher un anime…" placeholder="rechercher un anime…">
   <div class="anime-tags-wrapper">
     <div class="anime-tags" id="anime-tags"></div>
     <button id="toggle-tags-btn" class="toggle-tags-btn" style="display:none;">plus de tags</button>
@@ -233,7 +233,7 @@
   <div class="anime-sort" id="manga-sort"></div>
 </div>
   <div id="manga-project-bar"></div>
-  <input type="text" id="search-manga" class="search-bar" placeholder="rechercher un manga, un auteur…">
+  <input type="text" id="search-manga" class="search-bar" aria-label="rechercher un manga, un auteur…" placeholder="rechercher un manga, un auteur…">
   <div class="manga-filters" id="manga-filters"></div>
   <div id="mangaContent" class="text-content"></div>
 </div>
@@ -327,7 +327,7 @@
 </nav>
 
 <!-- ── v24 : Feuille « plus » — secondes sections (masquée sur PC) ── -->
-<div class="mobile-plus-sheet" id="mobile-plus-sheet">
+<div class="mobile-plus-sheet" id="mobile-plus-sheet" role="dialog" aria-modal="true" aria-label="plus">
   <div class="mobile-plus-panel">
     <button class="mobile-plus-close" type="button" aria-label="fermer">&times;</button>
     <div class="mobile-plus-title">plus</div>
@@ -352,6 +352,7 @@
 <div class="search-palette" id="search-palette" role="dialog" aria-modal="true" aria-label="recherche globale">
   <div class="search-palette-panel">
     <input type="text" id="palette-input" class="search-palette-input" placeholder="🔎 rechercher un titre ou un créateur…" autocomplete="off" aria-label="rechercher">
+    <button type="button" id="palette-close" class="review-popup-close palette-close" aria-label="fermer la recherche">&times;</button>
     <div class="search-palette-results" id="palette-results"></div>
     <div class="search-palette-footer"><span>↑ ↓ naviguer</span><span>↵ ouvrir</span><span>échap fermer</span></div>
   </div>

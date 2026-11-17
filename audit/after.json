@@ -1,0 +1,984 @@
+{
+  "phase": "after",
+  "browsers": [
+    {
+      "name": "chrome",
+      "version": "157.0.8103.51"
+    },
+    {
+      "name": "edge",
+      "version": "157.0.4341.60"
+    },
+    {
+      "name": "firefox",
+      "unavailable": "browserType.launch: Executable doesn't exist at C:\\Users\\akrmm\\AppData\\Local\\ms-playwright\\firefox-1538\\firefox\\firefox.exe"
+    },
+    {
+      "name": "webkit",
+      "unavailable": "browserType.launch: Executable doesn't exist at C:\\Users\\akrmm\\AppData\\Local\\ms-playwright\\webkit-2336\\Playwright.exe"
+    }
+  ],
+  "pages": [
+    {
+      "name": "home",
+      "width": 320,
+      "height": 640,
+      "scrollWidth": 320,
+      "overflow": false,
+      "images": 0,
+      "dom": 465
+    },
+    {
+      "name": "bibliographie",
+      "width": 320,
+      "height": 640,
+      "scrollWidth": 320,
+      "overflow": false,
+      "images": 0,
+      "dom": 1278
+    },
+    {
+      "name": "ecrans",
+      "width": 320,
+      "height": 640,
+      "scrollWidth": 320,
+      "overflow": false,
+      "images": 0,
+      "dom": 3045
+    },
+    {
+      "name": "jeux",
+      "width": 320,
+      "height": 640,
+      "scrollWidth": 320,
+      "overflow": false,
+      "images": 0,
+      "dom": 3272
+    },
+    {
+      "name": "musique",
+      "width": 320,
+      "height": 640,
+      "scrollWidth": 320,
+      "overflow": false,
+      "images": 0,
+      "dom": 4651
+    },
+    {
+      "name": "anime",
+      "width": 320,
+      "height": 640,
+      "scrollWidth": 320,
+      "overflow": false,
+      "images": 0,
+      "dom": 5042
+    },
+    {
+      "name": "manga",
+      "width": 320,
+      "height": 640,
+      "scrollWidth": 320,
+      "overflow": false,
+      "images": 0,
+      "dom": 8042
+    },
+    {
+      "name": "statistiques",
+      "width": 320,
+      "height": 640,
+      "scrollWidth": 320,
+      "overflow": false,
+      "images": 0,
+      "dom": 8988
+    },
+    {
+      "name": "apropos",
+      "width": 320,
+      "height": 640,
+      "scrollWidth": 320,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "home",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "bibliographie",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "ecrans",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "jeux",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "musique",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "anime",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "manga",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "statistiques",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "apropos",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "home",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "bibliographie",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "ecrans",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "jeux",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "musique",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "anime",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "manga",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "statistiques",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "apropos",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "home",
+      "width": 768,
+      "height": 1024,
+      "scrollWidth": 768,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "bibliographie",
+      "width": 768,
+      "height": 1024,
+      "scrollWidth": 768,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "ecrans",
+      "width": 768,
+      "height": 1024,
+      "scrollWidth": 768,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "jeux",
+      "width": 768,
+      "height": 1024,
+      "scrollWidth": 768,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "musique",
+      "width": 768,
+      "height": 1024,
+      "scrollWidth": 768,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "anime",
+      "width": 768,
+      "height": 1024,
+      "scrollWidth": 768,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "manga",
+      "width": 768,
+      "height": 1024,
+      "scrollWidth": 768,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "statistiques",
+      "width": 768,
+      "height": 1024,
+      "scrollWidth": 768,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "apropos",
+      "width": 768,
+      "height": 1024,
+      "scrollWidth": 768,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "home",
+      "width": 1024,
+      "height": 768,
+      "scrollWidth": 1024,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "bibliographie",
+      "width": 1024,
+      "height": 768,
+      "scrollWidth": 1024,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "ecrans",
+      "width": 1024,
+      "height": 768,
+      "scrollWidth": 1024,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "jeux",
+      "width": 1024,
+      "height": 768,
+      "scrollWidth": 1024,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "musique",
+      "width": 1024,
+      "height": 768,
+      "scrollWidth": 1024,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "anime",
+      "width": 1024,
+      "height": 768,
+      "scrollWidth": 1024,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "manga",
+      "width": 1024,
+      "height": 768,
+      "scrollWidth": 1024,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "statistiques",
+      "width": 1024,
+      "height": 768,
+      "scrollWidth": 1024,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "apropos",
+      "width": 1024,
+      "height": 768,
+      "scrollWidth": 1024,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "home",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "bibliographie",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "ecrans",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "jeux",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "musique",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "anime",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "manga",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "statistiques",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "apropos",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "home",
+      "width": 1920,
+      "height": 1080,
+      "scrollWidth": 1920,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "bibliographie",
+      "width": 1920,
+      "height": 1080,
+      "scrollWidth": 1920,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "ecrans",
+      "width": 1920,
+      "height": 1080,
+      "scrollWidth": 1920,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "jeux",
+      "width": 1920,
+      "height": 1080,
+      "scrollWidth": 1920,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "musique",
+      "width": 1920,
+      "height": 1080,
+      "scrollWidth": 1920,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "anime",
+      "width": 1920,
+      "height": 1080,
+      "scrollWidth": 1920,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "manga",
+      "width": 1920,
+      "height": 1080,
+      "scrollWidth": 1920,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "statistiques",
+      "width": 1920,
+      "height": 1080,
+      "scrollWidth": 1920,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    },
+    {
+      "name": "apropos",
+      "width": 1920,
+      "height": 1080,
+      "scrollWidth": 1920,
+      "overflow": false,
+      "images": 0,
+      "dom": 9021
+    }
+  ],
+  "errors": [],
+  "scenarios": [
+    {
+      "name": "empty-search-bibliographie",
+      "ok": true
+    },
+    {
+      "name": "empty-search-ecrans",
+      "ok": true
+    },
+    {
+      "name": "empty-search-jeux",
+      "ok": true
+    },
+    {
+      "name": "empty-search-musique",
+      "ok": true
+    },
+    {
+      "name": "empty-search-anime",
+      "ok": true
+    },
+    {
+      "name": "empty-search-manga",
+      "ok": true
+    },
+    {
+      "name": "search-html-escaped",
+      "ok": true
+    },
+    {
+      "name": "screen-sort-preserves-search-films",
+      "ok": true
+    },
+    {
+      "name": "screen-sort-preserves-search-series",
+      "ok": true
+    },
+    {
+      "name": "anime-favorites",
+      "ok": true
+    },
+    {
+      "name": "preferences-reload",
+      "ok": true
+    },
+    {
+      "name": "birds-actions",
+      "ok": true
+    },
+    {
+      "name": "wrapped-export",
+      "ok": true
+    },
+    {
+      "name": "next-keeps-playing",
+      "ok": true
+    },
+    {
+      "name": "previous-keeps-playing",
+      "ok": true
+    },
+    {
+      "name": "next-preserves-pause",
+      "ok": true
+    },
+    {
+      "name": "calendar-focus-contained",
+      "ok": true
+    },
+    {
+      "name": "calendar-focus-restored",
+      "ok": true
+    },
+    {
+      "name": "mobile-menu-focus-contained",
+      "ok": true
+    },
+    {
+      "name": "anime-load-more",
+      "ok": true
+    },
+    {
+      "name": "storage-denied",
+      "ok": true,
+      "errors": [],
+      "finite": true
+    },
+    {
+      "name": "invalid-prefs",
+      "ok": true,
+      "errors": [],
+      "finite": true
+    },
+    {
+      "name": "invalid-birds",
+      "ok": true,
+      "errors": [],
+      "finite": true
+    },
+    {
+      "name": "season-halloween",
+      "ok": true
+    },
+    {
+      "name": "season-noel",
+      "ok": true
+    },
+    {
+      "name": "season-valentin",
+      "ok": true
+    },
+    {
+      "name": "offline-reload",
+      "ok": true
+    }
+  ],
+  "performance": {
+    "navigation": {
+      "name": "http://127.0.0.1:55247/",
+      "entryType": "navigation",
+      "startTime": 0,
+      "duration": 253.90000009536743,
+      "navigationId": 2971,
+      "initiatorType": "navigation",
+      "deliveryType": "",
+      "nextHopProtocol": "http/1.1",
+      "renderBlockingStatus": "non-blocking",
+      "contentType": "text/html",
+      "contentEncoding": "",
+      "workerStart": 0,
+      "workerRouterEvaluationStart": 0,
+      "workerCacheLookupStart": 0,
+      "workerMatchedSourceType": "",
+      "workerFinalSourceType": "",
+      "redirectStart": 0,
+      "redirectEnd": 0,
+      "fetchStart": 0.5,
+      "domainLookupStart": 0.5,
+      "domainLookupEnd": 0.5,
+      "connectStart": 0.5,
+      "secureConnectionStart": 0,
+      "connectEnd": 0.5,
+      "requestStart": 1.299999713897705,
+      "responseStart": 2.1999998092651367,
+      "firstInterimResponseStart": 0,
+      "finalResponseHeadersStart": 2.1999998092651367,
+      "responseEnd": 2.5,
+      "transferSize": 18609,
+      "encodedBodySize": 18309,
+      "decodedBodySize": 18309,
+      "responseStatus": 200,
+      "serverTiming": [],
+      "unloadEventStart": 0,
+      "unloadEventEnd": 0,
+      "domInteractive": 153,
+      "domContentLoadedEventStart": 153,
+      "domContentLoadedEventEnd": 153.09999990463257,
+      "domComplete": 250.09999990463257,
+      "loadEventStart": 250.09999990463257,
+      "loadEventEnd": 253.90000009536743,
+      "type": "navigate",
+      "redirectCount": 0,
+      "activationStart": 0,
+      "criticalCHRestart": 0,
+      "notRestoredReasons": null,
+      "confidence": {
+        "randomizedTriggerRate": 0.4994798,
+        "value": "low"
+      }
+    },
+    "paint": [
+      {
+        "name": "first-paint",
+        "entryType": "paint",
+        "startTime": 148,
+        "duration": 0,
+        "navigationId": 2971,
+        "paintTime": 130,
+        "presentationTime": 148
+      },
+      {
+        "name": "first-contentful-paint",
+        "entryType": "paint",
+        "startTime": 148,
+        "duration": 0,
+        "navigationId": 2971,
+        "paintTime": 130,
+        "presentationTime": 148
+      }
+    ],
+    "resources": [
+      {
+        "name": "css2?family=IM+Fell+English:ital@0;1&family=Space+Grotesk:wght@400;500&display=swap",
+        "bytes": 879,
+        "duration": 96.40000009536743
+      },
+      {
+        "name": "season.css?v=37",
+        "bytes": 10634,
+        "duration": 6.800000190734863
+      },
+      {
+        "name": "style.css?v=37",
+        "bytes": 72516,
+        "duration": 7.099999904632568
+      },
+      {
+        "name": "mobile.css?v=37",
+        "bytes": 18596,
+        "duration": 7.200000286102295
+      },
+      {
+        "name": "image.jpg",
+        "bytes": 38138,
+        "duration": 7.700000286102295
+      },
+      {
+        "name": "pfp.jpg",
+        "bytes": 304428,
+        "duration": 7.799999713897705
+      },
+      {
+        "name": "player-data.js",
+        "bytes": 567,
+        "duration": 8.5
+      },
+      {
+        "name": "manga-data.js",
+        "bytes": 43003,
+        "duration": 9.5
+      },
+      {
+        "name": "books-data.js",
+        "bytes": 63738,
+        "duration": 10.199999809265137
+      },
+      {
+        "name": "journal-data.js",
+        "bytes": 143379,
+        "duration": 10.099999904632568
+      },
+      {
+        "name": "anime-data.js",
+        "bytes": 647995,
+        "duration": 10.699999809265137
+      },
+      {
+        "name": "films-data.js",
+        "bytes": 32937,
+        "duration": 10.299999713897705
+      },
+      {
+        "name": "series-data.js",
+        "bytes": 1902,
+        "duration": 10.199999809265137
+      },
+      {
+        "name": "games-data.js",
+        "bytes": 7190,
+        "duration": 11.599999904632568
+      },
+      {
+        "name": "music-data.js",
+        "bytes": 26659,
+        "duration": 12.400000095367432
+      },
+      {
+        "name": "season.js?v=37",
+        "bytes": 16791,
+        "duration": 12.400000095367432
+      },
+      {
+        "name": "script.js?v=37",
+        "bytes": 252047,
+        "duration": 12.800000190734863
+      },
+      {
+        "name": "voyage.jpg",
+        "bytes": 486328,
+        "duration": 2.4000000953674316
+      },
+      {
+        "name": "onepiecesaison2.jpg",
+        "bytes": 234781,
+        "duration": 3.799999713897705
+      },
+      {
+        "name": "lachinoise.webp",
+        "bytes": 28380,
+        "duration": 3.1999998092651367
+      },
+      {
+        "name": "awaken.jpg",
+        "bytes": 12621,
+        "duration": 4
+      },
+      {
+        "name": "onepiece.jpg",
+        "bytes": 195099,
+        "duration": 4.5
+      },
+      {
+        "name": "isaac.jpg",
+        "bytes": 988600,
+        "duration": 7.700000286102295
+      },
+      {
+        "name": "U.webp",
+        "bytes": 129384,
+        "duration": 5.400000095367432
+      },
+      {
+        "name": "delorean.webp",
+        "bytes": 15886,
+        "duration": 5.600000381469727
+      },
+      {
+        "name": "fortniteop.jpg",
+        "bytes": 22223,
+        "duration": 5.900000095367432
+      },
+      {
+        "name": "yuuhi.jpg",
+        "bytes": 12940,
+        "duration": 5.899999618530273
+      },
+      {
+        "name": "mirror.jpg",
+        "bytes": 22825,
+        "duration": 6.899999618530273
+      },
+      {
+        "name": "jojo7.jpg",
+        "bytes": 49170,
+        "duration": 7
+      },
+      {
+        "name": "like1.jpg",
+        "bytes": 15122,
+        "duration": 7.199999809265137
+      },
+      {
+        "name": "fengzhong.jpg",
+        "bytes": 32502,
+        "duration": 7.299999713897705
+      },
+      {
+        "name": "orochi.jpg",
+        "bytes": 41916,
+        "duration": 7.699999809265137
+      },
+      {
+        "name": "pfp.jpg",
+        "bytes": 304428,
+        "duration": 6.800000190734863
+      }
+    ]
+  },
+  "focusDebug": {
+    "active": "<button class=\"popup-close\" id=\"popup-close-btn\" title=\"fermer\" aria-label=\"fermer\">×</button>",
+    "modals": [
+      {
+        "id": "calendar-popup",
+        "cls": "calendar-popup visible",
+        "display": "flex",
+        "rects": 1
+      },
+      {
+        "id": "mobile-plus-sheet",
+        "cls": "mobile-plus-sheet",
+        "display": "none",
+        "rects": 0
+      },
+      {
+        "id": "review-popup",
+        "cls": "review-popup",
+        "display": "none",
+        "rects": 0
+      },
+      {
+        "id": "search-palette",
+        "cls": "search-palette",
+        "display": "none",
+        "rects": 0
+      },
+      {
+        "id": "",
+        "cls": "wrapped-dialog",
+        "display": "block",
+        "rects": 0
+      }
+    ]
+  }
+}

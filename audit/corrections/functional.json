@@ -1,0 +1,538 @@
+{
+  "checks": [
+    {
+      "name": "wrapped-race-reference",
+      "ok": true,
+      "details": [
+        {
+          "year": "2024",
+          "avatar": null
+        },
+        {
+          "year": "2025",
+          "avatar": null
+        },
+        {
+          "year": "2025",
+          "avatar": "B"
+        },
+        {
+          "year": "2025",
+          "avatar": "A"
+        }
+      ]
+    },
+    {
+      "name": "wrapped-race-corrigé",
+      "ok": true,
+      "details": [
+        {
+          "year": "2024",
+          "avatar": null
+        },
+        {
+          "year": "2025",
+          "avatar": null
+        },
+        {
+          "year": "2025",
+          "avatar": "B"
+        }
+      ]
+    },
+    {
+      "name": "wrapped-fermeture-invalide-chargement",
+      "ok": true
+    },
+    {
+      "name": "structure-livre",
+      "ok": true
+    },
+    {
+      "name": "focus-review-livre",
+      "ok": true
+    },
+    {
+      "name": "review-livre",
+      "ok": true
+    },
+    {
+      "name": "retour-review-livre",
+      "ok": true
+    },
+    {
+      "name": "fiche-livre",
+      "ok": true
+    },
+    {
+      "name": "fiche-souris-livre",
+      "ok": true
+    },
+    {
+      "name": "structure-film",
+      "ok": true
+    },
+    {
+      "name": "focus-review-film",
+      "ok": true
+    },
+    {
+      "name": "review-film",
+      "ok": true
+    },
+    {
+      "name": "retour-review-film",
+      "ok": true
+    },
+    {
+      "name": "fiche-film",
+      "ok": true
+    },
+    {
+      "name": "fiche-souris-film",
+      "ok": true
+    },
+    {
+      "name": "structure-série",
+      "ok": true
+    },
+    {
+      "name": "focus-review-série",
+      "ok": true
+    },
+    {
+      "name": "review-série",
+      "ok": true
+    },
+    {
+      "name": "retour-review-série",
+      "ok": true
+    },
+    {
+      "name": "fiche-série",
+      "ok": true
+    },
+    {
+      "name": "fiche-souris-série",
+      "ok": true
+    },
+    {
+      "name": "structure-jeu",
+      "ok": true
+    },
+    {
+      "name": "focus-review-jeu",
+      "ok": true
+    },
+    {
+      "name": "review-jeu",
+      "ok": true
+    },
+    {
+      "name": "retour-review-jeu",
+      "ok": true
+    },
+    {
+      "name": "fiche-jeu",
+      "ok": true
+    },
+    {
+      "name": "fiche-souris-jeu",
+      "ok": true
+    },
+    {
+      "name": "structure-musique",
+      "ok": true
+    },
+    {
+      "name": "focus-review-musique",
+      "ok": true
+    },
+    {
+      "name": "review-musique",
+      "ok": true
+    },
+    {
+      "name": "retour-review-musique",
+      "ok": true
+    },
+    {
+      "name": "fiche-musique",
+      "ok": true
+    },
+    {
+      "name": "fiche-souris-musique",
+      "ok": true
+    },
+    {
+      "name": "structure-manga",
+      "ok": true
+    },
+    {
+      "name": "focus-review-manga",
+      "ok": true
+    },
+    {
+      "name": "review-manga",
+      "ok": true
+    },
+    {
+      "name": "retour-review-manga",
+      "ok": true
+    },
+    {
+      "name": "fiche-manga",
+      "ok": true
+    },
+    {
+      "name": "fiche-souris-manga",
+      "ok": true
+    },
+    {
+      "name": "structure-anime",
+      "ok": true
+    },
+    {
+      "name": "review-anime",
+      "ok": true
+    },
+    {
+      "name": "cage-clavier-pistachio",
+      "ok": true
+    },
+    {
+      "name": "focus-cage-pistachio",
+      "ok": true
+    },
+    {
+      "name": "cage-clavier-cielazur",
+      "ok": true
+    },
+    {
+      "name": "focus-cage-cielazur",
+      "ok": true
+    },
+    {
+      "name": "commandes-perruches",
+      "ok": true
+    },
+    {
+      "name": "lecture-aria",
+      "ok": true
+    },
+    {
+      "name": "progression-clavier",
+      "ok": true,
+      "details": {
+        "time": 5,
+        "duration": 151.414979
+      }
+    },
+    {
+      "name": "home",
+      "ok": true
+    },
+    {
+      "name": "piste-focus",
+      "ok": true
+    },
+    {
+      "name": "pause-aria",
+      "ok": true
+    },
+    {
+      "name": "piste-en-pause",
+      "ok": true
+    },
+    {
+      "name": "png-valide",
+      "ok": true,
+      "details": {
+        "width": 2160,
+        "height": 2700
+      }
+    },
+    {
+      "name": "wrapped-focus",
+      "ok": true
+    },
+    {
+      "name": "surlignage-Été indien",
+      "ok": true
+    },
+    {
+      "name": "surlignage-école",
+      "ok": true
+    },
+    {
+      "name": "surlignage-école",
+      "ok": true
+    },
+    {
+      "name": "surlignage-😀 Été",
+      "ok": true
+    },
+    {
+      "name": "surlignage-Été",
+      "ok": true
+    },
+    {
+      "name": "surlignage-Amélie",
+      "ok": true
+    },
+    {
+      "name": "dates-limites-et-bissextile",
+      "ok": true,
+      "details": [
+        {
+          "date": "2023-01-01",
+          "title": "1 jan · 0 activité"
+        },
+        {
+          "date": "2023-01-31",
+          "title": "31 jan · 0 activité"
+        },
+        {
+          "date": "2023-02-01",
+          "title": "1 fév · 0 activité"
+        },
+        {
+          "date": "2023-02-28",
+          "title": "28 fév · 0 activité"
+        },
+        {
+          "date": "2023-03-01",
+          "title": "1 mar · 0 activité"
+        },
+        {
+          "date": "2023-12-31",
+          "title": "31 déc · 0 activité"
+        },
+        {
+          "date": "2024-01-01",
+          "title": "1 jan · 0 activité"
+        },
+        {
+          "date": "2024-01-31",
+          "title": "31 jan · 0 activité"
+        },
+        {
+          "date": "2024-02-01",
+          "title": "1 fév · 0 activité"
+        },
+        {
+          "date": "2024-02-28",
+          "title": "28 fév · 0 activité"
+        },
+        {
+          "date": "2024-02-29",
+          "title": "29 fév · 0 activité"
+        },
+        {
+          "date": "2024-03-01",
+          "title": "1 mar · 0 activité"
+        },
+        {
+          "date": "2024-12-31",
+          "title": "31 déc · 0 activité"
+        },
+        {
+          "date": "2025-01-01",
+          "title": "1 jan · 0 activité"
+        },
+        {
+          "date": "2025-01-31",
+          "title": "31 jan · 0 activité"
+        },
+        {
+          "date": "2025-02-01",
+          "title": "1 fév · 0 activité"
+        },
+        {
+          "date": "2025-02-28",
+          "title": "28 fév · 0 activité"
+        },
+        {
+          "date": "2025-03-01",
+          "title": "1 mar · 0 activité"
+        },
+        {
+          "date": "2025-12-31",
+          "title": "31 déc · 0 activité"
+        },
+        {
+          "date": "2026-01-01",
+          "title": "1 jan · 0 activité"
+        },
+        {
+          "date": "2026-01-31",
+          "title": "31 jan · 0 activité"
+        },
+        {
+          "date": "2026-02-01",
+          "title": "1 fév · 0 activité"
+        },
+        {
+          "date": "2026-02-28",
+          "title": "28 fév · 0 activité"
+        },
+        {
+          "date": "2026-03-01",
+          "title": "1 mar · 0 activité"
+        },
+        {
+          "date": "2026-12-31",
+          "title": "31 déc · 0 activité"
+        }
+      ]
+    },
+    {
+      "name": "dates-journal",
+      "ok": true
+    },
+    {
+      "name": "recherche-et-navigation",
+      "ok": true
+    },
+    {
+      "name": "fermeture-mobile-toucher",
+      "ok": true
+    },
+    {
+      "name": "retour-focus-mobile",
+      "ok": true
+    },
+    {
+      "name": "fermeture-mobile-clavier",
+      "ok": true
+    },
+    {
+      "name": "hors-ligne-shell",
+      "ok": true
+    },
+    {
+      "name": "aucune-erreur-js",
+      "ok": true,
+      "details": []
+    }
+  ],
+  "visual": [],
+  "errors": [],
+  "browser": "157.0.8103.51",
+  "highlight": [
+    {
+      "text": "Été indien",
+      "html": "Été <mark>indien</mark>"
+    },
+    {
+      "text": "Amélie",
+      "html": "<mark>Amélie</mark>"
+    },
+    {
+      "text": "école",
+      "html": "é<mark>cole</mark>"
+    }
+  ],
+  "calendar": [
+    {
+      "date": "2023-01-01",
+      "title": "1 jan · 0 activité"
+    },
+    {
+      "date": "2023-01-31",
+      "title": "31 jan · 0 activité"
+    },
+    {
+      "date": "2023-02-01",
+      "title": "1 fév · 0 activité"
+    },
+    {
+      "date": "2023-02-28",
+      "title": "28 fév · 0 activité"
+    },
+    {
+      "date": "2023-03-01",
+      "title": "1 mar · 0 activité"
+    },
+    {
+      "date": "2023-12-31",
+      "title": "31 déc · 0 activité"
+    },
+    {
+      "date": "2024-01-01",
+      "title": "1 jan · 0 activité"
+    },
+    {
+      "date": "2024-01-31",
+      "title": "31 jan · 0 activité"
+    },
+    {
+      "date": "2024-02-01",
+      "title": "1 fév · 0 activité"
+    },
+    {
+      "date": "2024-02-28",
+      "title": "28 fév · 0 activité"
+    },
+    {
+      "date": "2024-02-29",
+      "title": "29 fév · 0 activité"
+    },
+    {
+      "date": "2024-03-01",
+      "title": "1 mar · 0 activité"
+    },
+    {
+      "date": "2024-12-31",
+      "title": "31 déc · 0 activité"
+    },
+    {
+      "date": "2025-01-01",
+      "title": "1 jan · 0 activité"
+    },
+    {
+      "date": "2025-01-31",
+      "title": "31 jan · 0 activité"
+    },
+    {
+      "date": "2025-02-01",
+      "title": "1 fév · 0 activité"
+    },
+    {
+      "date": "2025-02-28",
+      "title": "28 fév · 0 activité"
+    },
+    {
+      "date": "2025-03-01",
+      "title": "1 mar · 0 activité"
+    },
+    {
+      "date": "2025-12-31",
+      "title": "31 déc · 0 activité"
+    },
+    {
+      "date": "2026-01-01",
+      "title": "1 jan · 0 activité"
+    },
+    {
+      "date": "2026-01-31",
+      "title": "31 jan · 0 activité"
+    },
+    {
+      "date": "2026-02-01",
+      "title": "1 fév · 0 activité"
+    },
+    {
+      "date": "2026-02-28",
+      "title": "28 fév · 0 activité"
+    },
+    {
+      "date": "2026-03-01",
+      "title": "1 mar · 0 activité"
+    },
+    {
+      "date": "2026-12-31",
+      "title": "31 déc · 0 activité"
+    }
+  ]
+}

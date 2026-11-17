@@ -1,0 +1,101 @@
+{
+  "files": 8960,
+  "totalBytes": 209019685,
+  "counts": {
+    "booksData": 87,
+    "filmsData": 180,
+    "seriesData": 10,
+    "gamesData": 55,
+    "musicData": 152,
+    "animeList": 8002,
+    "mangaData": 399,
+    "journalData": 1148,
+    "playerTracks": 3
+  },
+  "missing": [],
+  "issues": [],
+  "external": 489,
+  "largest": [
+    {
+      "path": "music/les.mp3",
+      "bytes": 12092958
+    },
+    {
+      "path": "music/avectoi.mp3",
+      "bytes": 7365594
+    },
+    {
+      "path": "music/parisiennehighlevel.mp3",
+      "bytes": 5442982
+    },
+    {
+      "path": "films/reservoirdogs.png",
+      "bytes": 4206998
+    },
+    {
+      "path": "films/johnwick3.png",
+      "bytes": 3055441
+    },
+    {
+      "path": "films/minecraft.png",
+      "bytes": 2848300
+    },
+    {
+      "path": "films/parasite.png",
+      "bytes": 2719530
+    },
+    {
+      "path": "series/onepiece.png",
+      "bytes": 2670224
+    },
+    {
+      "path": "games/valorant.png",
+      "bytes": 2668928
+    },
+    {
+      "path": "films/acrossspiderverse.png",
+      "bytes": 2623706
+    },
+    {
+      "path": "films/busan.png",
+      "bytes": 2596686
+    },
+    {
+      "path": "films/bulletrain.png",
+      "bytes": 2557155
+    },
+    {
+      "path": "films/perfectdays.png",
+      "bytes": 2473400
+    },
+    {
+      "path": "films/matrix.png",
+      "bytes": 2447856
+    },
+    {
+      "path": "films/shutterisland.png",
+      "bytes": 2106658
+    },
+    {
+      "path": "films/oldboy.png",
+      "bytes": 2027868
+    },
+    {
+      "path": "films/laplanetesauvage.png",
+      "bytes": 1815812
+    },
+    {
+      "path": "series/alice.png",
+      "bytes": 1735226
+    },
+    {
+      "path": "films/johnwick.png",
+      "bytes": 1688331
+    },
+    {
+      "path": "films/johnwick2.png",
+      "bytes": 1650530
+    }
+  ],
+  "unreferencedCandidates": 13
+}

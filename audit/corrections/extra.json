@@ -1,0 +1,86 @@
+[
+  {
+    "name": "ecrans-geometrie-identique",
+    "ok": true,
+    "details": {
+      "sameReferenceChangedPixels": 0
+    }
+  },
+  {
+    "name": "ecrans-rasterisation",
+    "details": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "wrapped-rendu-jour-nuit-tolerance-10-pixels",
+    "ok": true,
+    "details": [
+      5,
+      3
+    ]
+  },
+  {
+    "name": "preferences-rechargement",
+    "ok": true
+  },
+  {
+    "name": "pause-externe-aria",
+    "ok": true
+  },
+  {
+    "name": "ancien-toBlob-ignore",
+    "ok": true
+  },
+  {
+    "name": "costumes-halloween",
+    "ok": true
+  },
+  {
+    "name": "caresse-saison-halloween",
+    "ok": true
+  },
+  {
+    "name": "interaction-cachee-halloween",
+    "ok": true
+  },
+  {
+    "name": "costumes-noel",
+    "ok": true
+  },
+  {
+    "name": "caresse-saison-noel",
+    "ok": true
+  },
+  {
+    "name": "interaction-cachee-noel",
+    "ok": true
+  },
+  {
+    "name": "costumes-valentin",
+    "ok": true
+  },
+  {
+    "name": "caresse-saison-valentin",
+    "ok": true
+  },
+  {
+    "name": "interaction-cachee-valentin",
+    "ok": true
+  },
+  {
+    "name": "nouveau-worker-deux-onglets",
+    "ok": true
+  },
+  {
+    "name": "medias-conserves-version-identique",
+    "ok": true
+  },
+  {
+    "name": "audio-hors-ligne",
+    "ok": true
+  }
+]

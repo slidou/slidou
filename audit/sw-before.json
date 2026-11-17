@@ -1,0 +1,53 @@
+[
+  {
+    "name": "bytes=2-4",
+    "ok": true
+  },
+  {
+    "name": "bytes=7-",
+    "ok": true
+  },
+  {
+    "name": "bytes=-3",
+    "ok": false,
+    "error": "Expected values to be strictly equal:\n\n200 !== 206\n"
+  },
+  {
+    "name": "bytes=8-99",
+    "ok": true
+  },
+  {
+    "name": "bytes=20-",
+    "ok": false,
+    "error": "Expected values to be strictly equal:\n\n206 !== 416\n"
+  },
+  {
+    "name": "bytes=7-3",
+    "ok": false,
+    "error": "Expected values to be strictly equal:\n\n206 !== 416\n"
+  },
+  {
+    "name": "bytes=-0",
+    "ok": false,
+    "error": "Expected values to be strictly equal:\n\n200 !== 416\n"
+  },
+  {
+    "name": "offline cache miss returns Response.error",
+    "ok": false,
+    "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- 'error'\n"
+  },
+  {
+    "name": "cache write failures do not break network",
+    "ok": true
+  },
+  {
+    "name": "revalidation lifetime follows cache write",
+    "ok": false,
+    "error": "The expression evaluated to a falsy value:\n\n  assert.ok(waiting)\n"
+  },
+  {
+    "name": "cold audio honours range and stores complete body",
+    "ok": false,
+    "error": "Expected values to be strictly equal:\n\n200 !== 206\n"
+  }
+]

@@ -98,13 +98,20 @@ self.addEventListener('activate', function(event) {
 
 /* ── Limitation FIFO d'un cache (anti-gonflement du quota) ────── */
 function trimCache(cacheName, maxEntries) {
-  caches.open(cacheName).then(function(cache) {
-    cache.keys().then(function(keys) {
+  return caches.open(cacheName).then(function(cache) {
+    return cache.keys().then(function(keys) {
       if (keys.length <= maxEntries) return;
       var excess = keys.length - maxEntries;
-      for (var i = 0; i < excess; i++) cache.delete(keys[i]);
+      return Promise.all(keys.slice(0, excess).map(function(key) { return cache.delete(key); }));
     });
   });
+}
+
+// Un cache indisponible ne doit pas rendre une réponse réseau inutilisable.
+function storeResponse(cache, request, response, cacheName, limit) {
+  return cache.put(request, response.clone()).then(function() {
+    if (limit) return trimCache(cacheName, limit);
+  }).catch(function() { /* quota/refus : la réponse réseau reste disponible */ });
 }
 
 /* ── Stratégies ───────────────────────────────────────────────── */
@@ -114,24 +121,25 @@ function networkFirst(request) {
   return caches.open(SHELL_CACHE).then(function(cache) {
     return fetch(request).then(function(response) {
       if (response && response.ok) {
-        cache.put(request, response.clone());
+        return storeResponse(cache, request, response).then(function() { return response; });
       }
       return response;
     }).catch(function() {
       return cache.match(request).then(function(cached) {
-        return cached || cache.match('index.html') || Response.error();
+        return cached || cache.match('index.html').then(function(fallback) { return fallback || Response.error(); });
       });
     });
-  });
+  }).catch(function() { return fetch(request); });
 }
 
 /* CACHE PUIS REVALIDATION : instantané + à jour au prochain passage */
-function staleWhileRevalidate(request, cacheName) {
-  return caches.open(cacheName).then(function(cache) {
+function staleWhileRevalidate(request, cacheName, event) {
+  var network;
+  var lookup = caches.open(cacheName).then(function(cache) {
     return cache.match(request).then(function(cached) {
-      var network = fetch(request).then(function(response) {
+      network = fetch(request).then(function(response) {
         if (response && response.ok) {
-          cache.put(request, response.clone());
+          return storeResponse(cache, request, response).then(function() { return response; });
         }
         return response;
       }).catch(function() {
@@ -142,6 +150,9 @@ function staleWhileRevalidate(request, cacheName) {
       });
     });
   });
+  // Enregistrer pendant le dispatch, avant que la réponse en cache ne termine l'événement.
+  event.waitUntil(lookup.then(function() { return network; }).catch(function() {}));
+  return lookup.catch(function() { return fetch(request); });
 }
 
 /* AUDIO : cache d'abord + gestion des requêtes Range (206).
@@ -154,31 +165,37 @@ function audioHandler(request) {
       if (cached) return serveRange(cached, request);
       /* Pas encore en cache : on télécharge le fichier complet */
       return fetch(request.url).then(function(response) {
-        if (response && response.ok) {
-          cache.put(request.url, response.clone());
-          trimCache(MEDIA_CACHE, MEDIA_LIMIT);
+        if (response && response.status === 200) {
+          return storeResponse(cache, request.url, response, MEDIA_CACHE, MEDIA_LIMIT).then(function() {
+            return serveRange(response, request);
+          });
         }
         return response;
       });
     });
-  });
+  }).catch(function() { return fetch(request); });
 }
 
 function serveRange(fullResponse, request) {
   var rangeHeader = request.headers.get('range');
   if (!rangeHeader) return fullResponse;
-  var match = /bytes=(\d+)-(\d+)?/.exec(rangeHeader);
-  if (!match) return fullResponse;
-  var start = Number(match[1]);
+  var match = /^bytes=(\d*)-(\d*)$/.exec(rangeHeader.trim());
+  // Une plage multiple/non reconnue peut être ignorée (réponse complète).
+  if (!match || (!match[1] && !match[2])) return fullResponse;
   return fullResponse.arrayBuffer().then(function(buffer) {
     var total = buffer.byteLength;
-    var end = match[2] ? Number(match[2]) : total - 1;
+    var start = match[1] ? Number(match[1]) : Math.max(0, total - Number(match[2]));
+    var end = match[1] && match[2] ? Math.min(Number(match[2]), total - 1) : total - 1;
+    if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start >= total || end < start) {
+      return new Response(null, { status: 416, headers: { 'Content-Range': 'bytes */' + total } });
+    }
     var slice = buffer.slice(start, end + 1);
     return new Response(slice, {
       status: 206,
       statusText: 'Partial Content',
       headers: {
         'Content-Type': fullResponse.headers.get('Content-Type') || 'audio/mpeg',
+        'Accept-Ranges': 'bytes',
         'Content-Range': 'bytes ' + start + '-' + (start + slice.byteLength - 1) + '/' + total,
         'Content-Length': String(slice.byteLength)
       }
@@ -194,13 +211,12 @@ function cacheFirst(request, cacheName, limit) {
       return fetch(request).then(function(response) {
         var cacheable = response && (response.ok || response.type === 'opaque');
         if (cacheable) {
-          cache.put(request, response.clone());
-          if (limit) trimCache(cacheName, limit);
+          return storeResponse(cache, request, response, cacheName, limit).then(function() { return response; });
         }
         return response;
       });
     });
-  });
+  }).catch(function() { return fetch(request); });
 }
 
 /* ── Routage des requêtes ─────────────────────────────────────── */
@@ -228,7 +244,7 @@ self.addEventListener('fetch', function(event) {
       return;
     }
     /* CSS / JS / données → instantané + revalidation */
-    event.respondWith(staleWhileRevalidate(request, SHELL_CACHE));
+    event.respondWith(staleWhileRevalidate(request, SHELL_CACHE, event));
     return;
   }
 

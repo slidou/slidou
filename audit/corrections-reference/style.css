@@ -1,0 +1,2340 @@
+/* ── VARIABLES DE COULEURS ── */
+:root {
+  --bg-color: #f4f1ea; /* Fond beige très doux (façon papier) */
+  --sidebar-bg: #e9e4d8; /* Beige un peu plus sombre pour séparer la sidebar */
+  --text-color: #2b2b2b; /* Texte principal plus sombre pour le contraste */
+  --secondary-text: #5c5c5c; /* Texte secondaire assombri (plus de #707070) */
+  --author-text: #111111; /* Titres presque noirs */
+  --border-color: #d6d0c4; /* Bordures plus visibles pour structurer */
+  --link-color: #2b5b9e; /* Un bleu un peu plus profond et moins agressif */
+  --star-color: #b8860b; /* Une étoile un chouïa plus sombre pour ressortir */
+  --shadow-color: rgba(40, 30, 10, 0.1); /* Ombres légèrement chaudes */
+  --quote-bg: #e9e4d8; /* Fond des citations assorti à la sidebar */
+  --hm-0: rgba(43, 91, 158, 0.07); /* Heatmap du bilan : rampes sur le bleu des liens */
+  --hm-1: rgba(43, 91, 158, 0.25);
+  --hm-2: rgba(43, 91, 158, 0.45);
+  --hm-3: rgba(43, 91, 158, 0.65);
+  --hm-4: rgba(43, 91, 158, 0.9);
+}
+
+/* ── MODE SOMBRE ── */
+body.dark-mode {
+  --bg-color: #121212;
+  --sidebar-bg: #1e1e1e;
+  --text-color: #e0e0e0;
+  --secondary-text: #a0a0a0;
+  --author-text: #ffffff;
+  --border-color: #333333;
+  --link-color: #7baaf7;
+  --star-color: #f5c542;
+  --shadow-color: rgba(0,0,0,0.4);
+  --quote-bg: #1e1e1e;
+  --hm-0: rgba(123, 170, 247, 0.06);
+  --hm-1: rgba(123, 170, 247, 0.22);
+  --hm-2: rgba(123, 170, 247, 0.4);
+  --hm-3: rgba(123, 170, 247, 0.6);
+  --hm-4: rgba(123, 170, 247, 0.85);
+}
+
+/* ── ÉCHELLE Z-INDEX (référence commune — v26) ──
+   0-3        contenu courant (badges, images, fills)
+   10         ombre/fond de cartes empilées
+   25-60      décor saisonnier (season.css) + perchoir des perruches (40-50)
+   50         player mobile (au-dessus des images, sous la barre basse)
+   900-950    barre haute + barre basse mobile (mobile.css)
+   1000       popups (calendrier, review)
+   2500       feuille « plus » mobile
+   3000       palette de recherche globale
+   3500       pluie de saison (au-dessus de tout, voulu)
+   3600       carte Wrapped
+   → ne pas introduire de valeur hors échelle sans nécessité. ── */
+
+/* ── BASE ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+  font-family: 'IM Fell English', serif; 
+  background: var(--bg-color); 
+  color: var(--text-color); 
+  transition: background 0.3s, color 0.3s;
+}
+
+.wrapper { display: flex; min-height: 100vh; }
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 200px; padding: 20px; background: var(--sidebar-bg);
+  font-family: 'Space Grotesk', sans-serif;
+  display: flex; flex-direction: column; align-items: flex-start;
+  position: sticky; top: 0; height: 100vh; transition: background 0.3s;
+}
+.sidebar-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.sidebar h1 { font-weight: 400; color: var(--text-color); }
+#theme-toggle { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text-color); transition: transform 0.2s; }
+#theme-toggle:hover { transform: scale(1.2); }
+.sidebar ul { list-style: none; }
+.sidebar li { margin: 10px 0; }
+.sidebar a { text-decoration: none; color: var(--secondary-text); transition: color 0.2s; }
+.sidebar a.active { color: var(--link-color); font-weight: 700; }
+.sidebar a:hover { color: var(--link-color); }
+
+/* ── Cacher le hamburger sur PC ── */
+#menu-toggle { display: none; }
+.sidebar-header-actions { display: contents; }
+
+/* ── Zone principale ── */
+.content { flex: 1; overflow-y: auto; padding: 0 20px; }
+.page { display: none; width: 100%; max-width: 900px; margin: 0 auto; text-align: center; }
+
+#page-bibliographie.active { display: block; padding-top: 40px; }
+
+/* ── Bibliographie (Layout général) ── */
+.text-content h2 { margin: 60px 0 20px; font-family:'Space Grotesk', sans-serif; font-size: 24px; color: var(--author-text); border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+.books { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 40px; }
+
+.book-card { width: 150px; text-decoration: none; color: var(--text-color); text-align: center; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+.book-card img { width: 100%; height: 220px; object-fit: cover; object-position: top left; box-shadow: 0 4px 8px var(--shadow-color); border-radius: 2px; }
+.book-card:hover { transform: scale(1.05); box-shadow: 0 8px 16px var(--shadow-color); }
+.book-title { font-size: 14px; margin-top: 8px; font-weight: 700; line-height: 1.3; color: var(--text-color); }
+.book-meta { font-size: 16px; color: var(--star-color); margin-top: 6px; letter-spacing: 2px; }
+
+/* ── Placeholder de cover indisponible (biblio, 404) ── */
+.book-cover-ph {
+  width: 100%; height: 220px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--sidebar-bg);
+  color: var(--secondary-text);
+  border-radius: 2px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.old-note {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  opacity: 0.5;
+  font-style: italic;
+  margin-top: 2px;
+  letter-spacing: 0;
+}
+
+/* ── Citation (Centrée, comme avant) ── */
+.random-quote {
+  text-align: center;
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--text-color);
+  margin-bottom: 80px;
+  padding: 20px 40px;
+  background: var(--quote-bg);
+  border-radius: 4px;
+}
+.quote-author { display: block; margin-top: 8px; font-style: normal; font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--secondary-text); font-weight: 500; }
+
+/* ── PAGE À PROPOS ── */
+#page-apropos.active { display: block; padding-top: 40px; }
+.apropos-layout { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 40px; max-width: 950px; margin: 0 auto; border: 1px solid var(--border-color); padding: 40px; border-radius: 8px; background: var(--bg-color); }
+.apropos-col { flex: 1; }
+.photo-col { text-align: center; }
+.apropos-pfp { width: 100%; max-width: 180px; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 2px; margin-bottom: 10px; }
+.bio-col { text-align: center; border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color); padding: 0 30px; }
+.apropos-username { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 500; margin-bottom: 5px; text-transform: lowercase; color: var(--author-text); }
+.carrd-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 500; margin-bottom: 15px; color: var(--text-color); }
+.carrd-list { list-style: none; text-align: left; font-family: 'IM Fell English', serif; font-size: 14px; line-height: 1.8; padding: 0; }
+.carrd-list li { margin-bottom: 5px; }
+.links-col { text-align: center; }
+.carrd-links-verticaux a { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--text-color); text-decoration: none; text-transform: lowercase; margin-bottom: 10px; border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 15px; transition: all 0.2s; }
+.carrd-links-verticaux a:hover { border-color: var(--link-color); color: var(--link-color); }
+
+/* ── PAGE ECRANS ── */
+#page-ecrans.active { display: block; padding-top: 40px; }
+.ecrans-content { max-width: 900px; margin: 0 auto; }
+.sub-nav { text-align: center; margin-bottom: 50px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+.sub-nav-link { font-family: 'Space Grotesk', sans-serif; font-size: 14px; color: var(--secondary-text); text-decoration: none; margin: 0 15px; padding-bottom: 5px; transition: color 0.2s; }
+.sub-nav-link.active { color: var(--link-color); font-weight: 700; border-bottom: 2px solid var(--link-color); }
+.sub-nav-link:hover { color: var(--link-color); }
+.sub-page { display: none; }
+.sub-page.active { display: block; }
+#filmsContent h2, #seriesContent h2 { margin: 60px 0 20px; font-family:'Space Grotesk', sans-serif; font-size: 24px; color: var(--author-text); border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+#filmsContent .books, #seriesContent .books { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-bottom: 40px; }
+#filmsContent .book-card, #seriesContent .book-card { width: 180px; }
+#filmsContent .book-card img, #seriesContent .book-card img { height: 270px; object-position: center; }
+
+/* ── BARRE DE RECHERCHE ── */
+.search-bar { width: 100%; max-width: 400px; padding: 10px 0; margin: 40px auto 20px auto; display: block; background: transparent; border: none; border-bottom: 1px solid var(--border-color); color: var(--text-color); font-family: 'Space Grotesk', sans-serif; font-size: 14px; text-align: center; outline: none; transition: border-color 0.2s; }
+.search-bar::placeholder { color: var(--secondary-text); opacity: 0.5; }
+.search-bar:focus { border-bottom: 1px solid var(--link-color); }
+
+/* ── COMPTEURS ── */
+.counter {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--secondary-text);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+/* ── MOYENNES ── */
+.show-average {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+  margin-top: -15px;
+  margin-bottom: 20px;
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── JEUX VIDÉO ── */
+#page-jeux.active { display: block; padding-top: 40px; }
+#jeuxContent .book-card { width: 210px; }
+#jeuxContent .book-card img { 
+  width: 100%; 
+  height: 280px; 
+  object-fit: cover; 
+  object-position: center; 
+  border-radius: 2px; 
+  box-shadow: 0 4px 8px var(--shadow-color); 
+}
+
+/* ── MUSIQUE ── */
+#page-musique.active { display: block; padding-top: 40px; }
+#musiqueContent .book-card { width: 180px; }
+#musiqueContent .book-card img { 
+  width: 100%; 
+  height: 180px; 
+  object-fit: cover; 
+  object-position: center; 
+  border-radius: 2px; 
+  box-shadow: 0 4px 8px var(--shadow-color); 
+}
+
+/* ── TAMAGOTCHI ── */
+.tamagotchi-container { 
+  flex: 0 0 100%; 
+  width: 100%; 
+  margin-top: 10px; 
+  padding-top: 30px; 
+  border-top: 1px solid var(--border-color); 
+  text-align: center; 
+}
+.bird-friendship {
+  font-family: 'IM Fell English', serif;
+  font-size: 13px;
+  color: var(--secondary-text);
+  font-style: italic;
+  margin-bottom: 20px;
+  min-height: 20px;
+}
+.tamagotchi-cages-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.tamagotchi-bird-container {
+  flex: 1;
+  max-width: 200px;
+}
+.bird-name {
+  font-family: 'IM Fell English', serif;
+  font-size: 14px;
+  color: var(--secondary-text);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+.tamagotchi-cage { 
+  height: 150px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin-bottom: 20px;
+  background: var(--bg-color);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: background 0.3s;
+  cursor: pointer; 
+  user-select: none; /* <-- CECI EMPÊCHE LE CARRÉ BLEU */
+  /* J'ai enlevé le "overflow: hidden" qui empêchait le Zzz de monter */
+}
+.tamagotchi-stats { 
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  gap: 10px; 
+  margin-bottom: 20px; 
+}
+.stat { 
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 11px; 
+  color: var(--secondary-text); 
+  text-transform: lowercase;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bar { 
+  width: 80px; 
+  height: 4px; 
+  background: var(--border-color); 
+  border-radius: 2px; 
+  margin-top: 5px; 
+  overflow: hidden; 
+}
+.fill { 
+  height: 100%; 
+  background: var(--link-color); 
+  transition: width 0.5s ease; 
+}
+.bird-harmony {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--link-color);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  text-transform: lowercase;
+}
+.bird-harmony.visible {
+  opacity: 1;
+}
+.bird-thought {
+  font-family: 'IM Fell English', serif;
+  font-size: 14px;
+  color: var(--secondary-text);
+  font-style: italic;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  min-height: 25px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.bird-thought.visible {
+  opacity: 1;
+}
+.tamagotchi-actions button { 
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 12px; 
+  color: var(--text-color); 
+  background: transparent; 
+  border: 1px solid var(--border-color); 
+  border-radius: 20px; 
+  padding: 8px 15px; 
+  margin: 0 5px; 
+  cursor: pointer; 
+  transition: all 0.2s; 
+  text-transform: lowercase; 
+}
+.tamagotchi-actions button:hover { 
+  border-color: var(--link-color); 
+  color: var(--link-color); 
+}
+
+/* Animation du petit saut quand on clique */
+.bird-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@keyframes birdJump {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(-10px); }
+  50% { transform: translateY(0); }
+  70% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+.bird-jump {
+  animation: birdJump 0.5s ease;
+}
+
+/* ── IMAGE BIO À PROPOS ── */
+.apropos-bio-img {
+  flex-basis: 100%;
+  width: 100%;
+  height: auto; /* Garde l'image entière, sans la couper */
+  display: block;
+  margin-bottom: 30px;
+  border-radius: 2px;
+}
+
+/* Style de la liste "en ce moment" — v36 (V1) : présentation refaite.
+   Étiquette micro en capitales espacées à gauche (motif kicker du site),
+   titre de l'œuvre en IM Fell italique à droite, séparateurs discrets. */
+#currently-list li {
+  border-bottom: 1px solid var(--border-color);
+  padding: 11px 2px;
+  margin-bottom: 0;
+  text-align: right; /* le titre se cale à droite */
+}
+#currently-list li:first-child { padding-top: 2px; }
+#currently-list li:last-child { border-bottom: none; }
+#currently-list .cur-label {
+  float: left; /* l'étiquette reste calée à gauche */
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--secondary-text);
+  opacity: 0.75;
+  padding-top: 4px; /* aligne la micro-étiquette sur l'œil du texte */
+}
+#currently-list .cur-work {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--author-text);
+  line-height: 1.5;
+}
+
+/* ── TAMAGOTCHI ENCADRÉ ── */
+.tamagotchi-container {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 25px;
+  margin-top: 30px; /* Un peu d'espace avec les liens au-dessus */
+}
+
+/* ── PAGE ACCUEIL (CALENDRIER) ── */
+#page-home.active { display: block; padding: 40px 20px; }
+.home-wrapper { max-width: 800px; margin: 0 auto; }
+
+/* Mini Dashboard */
+.home-dashboard { 
+  margin-bottom: 40px; 
+  padding-bottom: 20px; 
+  border-bottom: 1px solid var(--border-color); 
+}
+.home-dashboard-title { 
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 13px; 
+  color: var(--secondary-text); 
+  text-transform: uppercase; 
+  letter-spacing: 1px; 
+  margin-bottom: 20px; 
+}
+.home-dashboard-grid { 
+  display: flex; 
+  gap: 15px; 
+  justify-content: center; 
+}
+.home-empty { 
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 13px; 
+  color: var(--secondary-text); 
+}
+.home-dash-card { 
+  width: 150px; 
+  color: var(--text-color); 
+  text-align: center; 
+  transition: transform 0.2s; 
+}
+.home-dash-card img { 
+  width: 100%; 
+  border-radius: 4px; 
+  box-shadow: 0 4px 8px var(--shadow-color); 
+  margin-bottom: 8px; 
+}
+.dash-card-cover img { aspect-ratio: 2 / 3; object-fit: cover; }
+.dash-card-square img { aspect-ratio: 1 / 1; object-fit: cover; }
+
+/* Calendrier */
+.home-month-title { 
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 18px; 
+  font-weight: 500; 
+  color: var(--author-text); 
+  margin-bottom: 20px; 
+  text-transform: lowercase;
+}
+.home-calendar-grid { 
+  display: grid; 
+  grid-template-columns: repeat(7, 1fr); 
+  gap: 8px; 
+}
+.calendar-day-header { 
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 12px; 
+  color: var(--secondary-text); 
+  text-align: center; 
+  padding-bottom: 10px; 
+  text-transform: uppercase;
+}
+.calendar-day { 
+  aspect-ratio: 1 / 1; 
+  border-radius: 8px; 
+  background: var(--sidebar-bg); 
+  border: 1px solid var(--border-color); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  position: relative; 
+  overflow: hidden; 
+  transition: border-color 0.2s; 
+}
+.calendar-day.empty { 
+  background: transparent; 
+  border-color: transparent; 
+}
+.calendar-day.has-data { 
+  cursor: pointer; 
+}
+.calendar-day.has-data:hover { 
+  border-color: var(--link-color); 
+}
+.calendar-day img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  position: absolute; 
+  top: 0; left: 0; 
+}
+.calendar-day-num { 
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 14px; 
+  color: var(--secondary-text); 
+  z-index: 1; 
+}
+.calendar-day.has-data .calendar-day-num { 
+  position: absolute; 
+  bottom: 4px; 
+  left: 4px; 
+  background: rgba(0,0,0,0.6); 
+  color: white; 
+  font-size: 11px; 
+  padding: 1px 5px; 
+  border-radius: 2px; 
+  z-index: 3; 
+  pointer-events: none;
+}
+.calendar-badge { 
+  position: absolute; 
+  top: 4px; 
+  right: 4px; 
+  background: rgba(0,0,0,0.7); 
+  color: white; 
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 10px; 
+  padding: 2px 5px; 
+  border-radius: 12px; 
+  z-index: 2; 
+}
+
+/* Popup du jour */
+.calendar-popup { 
+  display: none; 
+  position: fixed; 
+  top: 0; left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background: rgba(0,0,0,0.6); 
+  z-index: 1000; 
+  justify-content: center; 
+  align-items: center; 
+}
+.calendar-popup.visible { 
+  display: flex; 
+}
+.calendar-popup-content { 
+  background: var(--bg-color); 
+  padding: 30px; 
+  border-radius: 12px; 
+  max-width: 600px; 
+  width: 90%; 
+  max-height: 80vh; 
+  overflow-y: auto; 
+  position: relative; 
+  border: 1px solid var(--border-color); 
+}
+.popup-close { 
+  position: absolute; 
+  top: 15px; 
+  right: 15px; 
+  background: none; 
+  border: none; 
+  color: var(--secondary-text); 
+  font-size: 24px; 
+  cursor: pointer; 
+}
+.popup-date { 
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 14px; 
+  color: var(--secondary-text); 
+  margin-bottom: 20px; 
+  text-transform: lowercase; 
+  border-bottom: 1px solid var(--border-color); 
+  padding-bottom: 10px; 
+}
+.popup-items { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 15px; 
+  justify-content: center; 
+}
+.popup-item { 
+  width: 100px; 
+  text-align: center; 
+}
+.popup-item img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  margin-bottom: 8px;
+}
+/* v35 (S2) : pochette musique du popup en carré pur (motif dash-card-square /
+   recap-music-card). Une fois enveloppée par le cover-stack v22, le slot carré
+   vient de ratio-square (isSquare) ; cette règle ne concerne que l'état avant
+   enveloppement, et sa spécificité passe au-dessus de .popup-item img (desktop
+   et mobile). */
+.popup-item.popup-music-square img {
+  aspect-ratio: 1 / 1;
+  height: auto;
+  object-fit: cover;
+}
+.popup-item-title { 
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 11px; 
+  color: var(--text-color); 
+  margin-bottom: 4px; 
+  line-height: 1.3; 
+}
+.popup-item-note { 
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 12px; 
+  color: var(--secondary-text); 
+  text-transform: lowercase;
+}
+.popup-type-dot { 
+  display: inline-block; 
+  width: 6px; 
+  height: 6px; 
+  border-radius: 50%; 
+  margin-right: 4px; 
+}
+.dot-film { background: #42A5F5; }
+.dot-livre { background: #ef5350; }
+.dot-jeu { background: #66BB6A; }
+.dot-musique { background: #AB47BC; }
+.dot-anime { background: #EC407A; }
+.dot-serie { background: #26A69A; }
+.dot-manga { background: #FF7043; }
+
+.home-calendar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.calendar-nav-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  font-size: 20px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.calendar-nav-btn:hover {
+  border-color: var(--link-color);
+  color: var(--link-color);
+}
+
+/* Labels du dashboard */
+.dash-label { 
+  display: block; 
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 12px; 
+  color: var(--link-color); 
+  text-transform: lowercase; 
+  margin-bottom: 2px;
+}
+.dash-title { 
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 14px; /* Taille normale lisible */
+  display: block; 
+  line-height: 1.4; 
+  color: var(--text-color);
+}
+/* ── FOOTER ── */
+.site-footer {
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 40px;
+  border-top: 1px solid var(--border-color);
+}
+.site-footer p {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--secondary-text);
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── PAGE ANIME ── */
+#page-anime.active { display: block; padding-top: 40px; }
+
+.anime-tags-wrapper { margin-bottom: 40px; text-align: center; }
+.anime-tags { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+
+.anime-tag-section { width: 100%; }
+.anime-tag-section-label {
+  font-family: 'Space Grotesk', sans-serif; font-size: 10px;
+  color: var(--secondary-text); text-transform: uppercase;
+  letter-spacing: 1.5px; margin-bottom: 10px; opacity: 0.5;
+}
+.anime-tag-section-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+.anime-tag-btn {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+  color: var(--secondary-text); background: transparent;
+  border: 1px solid var(--border-color); border-radius: 20px;
+  padding: 5px 13px; cursor: pointer; transition: all 0.2s; text-transform: lowercase;
+}
+.anime-tag-btn:hover { border-color: var(--link-color); color: var(--link-color); }
+.anime-tag-btn.active { background: var(--link-color); color: #fff; border-color: var(--link-color); }
+.anime-tag-btn.quality-tag { border-style: dashed; }
+.anime-tag-btn.quality-tag.active { border-style: solid; }
+
+/* Rangée du haut des filtres (tous / reviews…) — partagée biblio + écrans films/séries + anime (remplace le style inline v27/v29/v30) */
+.biblio-top-row { display: flex; gap: 8px; justify-content: center; margin-bottom: 10px; }
+/* v30 (A5) : sur anime, la rangée réutilise .biblio-top-row — le gap 18px de .anime-tags suffit
+   comme espacement et le wrap d'origine de la rangée est conservé */
+.anime-tags .biblio-top-row { margin-bottom: 0; flex-wrap: wrap; }
+/* v32 (A4) : sur musique, la rangée « tous » réutilise .biblio-top-row — l'inline d'origine
+   n'avait pas de margin-bottom et wrapait, on neutralise/force les mêmes valeurs */
+#musique-filters .biblio-top-row { margin-bottom: 0; flex-wrap: wrap; }
+
+.toggle-tags-btn {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+  color: var(--secondary-text); background: none; border: none;
+  cursor: pointer; text-transform: lowercase; text-decoration: underline; transition: color 0.2s;
+}
+.toggle-tags-btn:hover { color: var(--link-color); }
+
+.anime-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 40px; }
+
+.anime-card { position: relative; }
+.anime-card img {
+  width: 100%; height: 220px; object-fit: cover; object-position: center;
+  border-radius: 2px; box-shadow: 0 4px 8px var(--shadow-color); display: block;
+}
+.anime-placeholder {
+  width: 100%; height: 220px; border-radius: 2px;
+  display: flex; align-items: center; justify-content: center;
+  background: hsl(var(--hue), 15%, 90%);
+  color: transparent;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  position: relative;
+}
+.anime-placeholder::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border: 2px solid hsl(var(--hue), 20%, 70%);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: placeholderSpin 0.8s linear infinite;
+}
+body.dark-mode .anime-placeholder::after {
+  border-color: hsl(var(--hue), 20%, 40%);
+  border-top-color: transparent;
+}
+@keyframes placeholderSpin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+body.dark-mode .anime-placeholder { background: hsl(var(--hue), 15%, 18%); color: transparent; }
+
+/* Image introuvable (404 Jikan) : on arrête le spinner et on rend l'icône visible */
+.anime-placeholder.img-failed::after { display: none; }
+.anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 60%); }
+body.dark-mode .anime-placeholder.img-failed { color: hsl(var(--hue), 25%, 42%); }
+
+.anime-badges {
+  position: absolute; top: 6px; right: 6px;
+  display: flex; gap: 4px; z-index: 2;
+}
+.anime-badge {
+  width: 18px; height: 18px; padding: 2px;
+  background: rgba(0,0,0,0.65); border-radius: 50%; color: #fff;
+  backdrop-filter: blur(4px);
+}
+
+/* ── BADGES FORMAT (musique / film) — v29 (A9) : un seul bloc, les deux règles étaient identiques ── */
+.music-format-badge,
+.film-format-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+
+/* ── BADGE INTÉGRALE ── */
+.integral-title {
+  color: var(--star-color) !important;
+}
+.integral-badge {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 3px 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #fff;
+  background: linear-gradient(135deg, #B38728, #E0A93C, #C68A1E, #F0C75E, #A07214);
+  background-size: 200% auto;
+  border-radius: 12px;
+  vertical-align: middle;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(245, 197, 66, 0.5);
+  animation: pulseGlow 2.5s infinite ease-in-out;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* L'ombre qui sauve la lisibilité */
+}
+/* Le reflet qui traverse */
+.integral-badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
+  transform: skewX(-25deg);
+  animation: shine 3.5s infinite ease-in-out;
+}
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 5px rgba(245, 197, 66, 0.4); transform: scale(1); }
+  50% { box-shadow: 0 0 14px rgba(245, 197, 66, 0.8); transform: scale(1.08); }
+  100% { box-shadow: 0 0 5px rgba(245, 197, 66, 0.4); transform: scale(1); }
+}
+@keyframes shine {
+  0% { left: -50%; }
+  60% { left: 120%; }
+  100% { left: 120%; }
+}
+
+.load-more-btn {
+  font-family: 'Space Grotesk', sans-serif; font-size: 13px;
+  color: var(--text-color); background: transparent;
+  border: 1px solid var(--border-color); border-radius: 8px;
+  padding: 10px 25px; cursor: pointer; transition: all 0.2s;
+  text-transform: lowercase; margin-bottom: 40px;
+}
+.load-more-btn:hover { border-color: var(--link-color); color: var(--link-color); }
+
+.anime-top-controls {
+  display: flex; justify-content: center; align-items: center;
+  gap: 15px; margin-bottom: 10px;
+}
+.anime-sort {
+  display: flex; align-items: center; gap: 8px;
+}
+.anime-sort-label {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+  color: var(--secondary-text); opacity: 0.5; text-transform: lowercase;
+}
+.anime-sort-btn {
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px;
+  color: var(--secondary-text); background: none; border: none;
+  cursor: pointer; text-transform: lowercase; transition: color 0.2s;
+}
+.anime-sort-btn:hover, .anime-sort-btn.active { color: var(--link-color); }
+.anime-sort-btn .sort-arrow { font-size: 8px; margin-left: 2px; opacity: 0.7; }
+
+.anime-card.hentai-card img,
+.anime-card.hentai-card .anime-placeholder,
+.manga-card.hentai-card img,
+.manga-card.hentai-card .anime-placeholder {
+  filter: blur(6px);
+  transition: filter 0.3s;
+}
+/* v30 (H1, motif v27) : le défloutage au survol est borné PC — au doigt, un tap colle le
+   :hover et laissait l'œuvre défloutée définitivement ; désormais le flou reprend après le tap.
+   Transverse : la règle .manga-card sert au manga (tranche 6) sans toucher à son JS. */
+@media (hover: hover) {
+  .anime-card.hentai-card:hover img,
+  .anime-card.hentai-card:hover .anime-placeholder {
+    filter: blur(0);
+  }
+  .manga-card.hentai-card:hover img,
+  .manga-card.hentai-card:hover .anime-placeholder {
+    filter: blur(0);
+  }
+}
+
+#page-manga.active { display: block; padding-top: 40px; }
+.manga-filters { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-bottom: 40px; }
+.manga-card { position: relative; }
+.manga-img-render {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  display: block;
+}
+
+.top-list { display: flex; flex-direction: column; gap: 20px; max-width: 600px; margin: 0 auto 40px auto; }
+.top-item {
+  display: flex; align-items: center; gap: 20px; text-decoration: none; color: var(--text-color);
+  padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; transition: all 0.2s;
+}
+.top-item:hover { border-color: var(--link-color); transform: translateX(5px); }
+.top-rank {
+  font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 500;
+  color: var(--secondary-text); min-width: 40px; text-align: center; opacity: 0.4;
+}
+.top-item:nth-child(1) .top-rank { opacity: 1; color: var(--link-color); font-size: 32px; }
+.top-item:nth-child(2) .top-rank { opacity: 0.8; font-size: 30px; }
+.top-item:nth-child(3) .top-rank { opacity: 0.6; font-size: 28px; }
+.top-item img, .top-item .anime-placeholder, .top-item .manga-placeholder {
+  width: 60px; height: 85px; object-fit: cover; object-position: top; border-radius: 2px;
+  box-shadow: 0 2px 6px var(--shadow-color); flex-shrink: 0;
+}
+.top-info { flex: 1; }
+.top-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+.top-stars { font-size: 14px; color: var(--star-color); letter-spacing: 1px; }
+
+.calendar-day.blur-entry img {
+  filter: blur(6px);
+  transition: filter 0.3s;
+}
+.calendar-day.blur-entry:hover img {
+  filter: blur(0);
+}
+.popup-item.blur-entry img {
+  filter: blur(6px);
+  transition: filter 0.3s;
+}
+.popup-item.blur-entry:hover img {
+  filter: blur(0);
+}
+.home-dash-card.blur-entry img {
+  filter: blur(6px);
+  transition: filter 0.3s;
+}
+/* Survol PC uniquement : le flou se lève et la carte réagit (au doigt : pas de survol) */
+@media (hover: hover) {
+  .home-dash-card.blur-entry:hover img {
+    filter: blur(0);
+  }
+  .home-dash-card:hover {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.project-bar {
+  flex-basis: 100%; /* Force à aller à la ligne si c'est dans un flex */
+  max-width: 400px;
+  margin: 15px auto 30px auto; /* 15px au lieu de 0 pour l'espacer du tri */
+  text-align: left;
+}
+.project-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 6px;
+}
+.project-track {
+  width: 100%;
+  height: 5px; /* Épaissi de 3px à 5px */
+  background: var(--border-color);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.project-fill {
+  height: 100%;
+  background: var(--link-color);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.page:focus { outline: none; }
+
+.review-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6px;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 2px 8px;
+  cursor: pointer;
+  color: var(--secondary-text);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  text-transform: lowercase;
+  transition: all 0.2s;
+}
+.review-btn:hover {
+  border-color: var(--link-color);
+  color: var(--link-color);
+}
+.review-popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+.review-popup.visible { display: flex; }
+.review-popup-content {
+  background: var(--bg-color);
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  border: 1px solid var(--border-color);
+}
+.review-popup-close {
+  position: absolute;
+  top: 15px; right: 15px;
+  background: none; border: none;
+  color: var(--secondary-text); font-size: 24px; cursor: pointer;
+}
+.review-popup-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--author-text);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+.review-popup-text {
+  font-family: 'IM Fell English', serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-color);
+  white-space: pre-line;
+}
+
+/* ── PAGE STATISTIQUES ── */
+#page-statistiques.active { display: block; padding-top: 40px; }
+.stats-page-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  color: var(--author-text);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+  margin-bottom: 40px;
+}
+
+/* --- CARTES RÉSUMÉ --- */
+.stats-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.stats-card {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px 20px;
+  text-align: center;
+  min-width: 110px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.stats-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--link-color);
+}
+.stats-card-icon { font-size: 22px; margin-bottom: 8px; }
+.stats-card-count {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--author-text);
+  line-height: 1;
+}
+.stats-card-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+}
+.stats-card-avg {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--star-color);
+  margin-top: 4px;
+}
+
+/* --- GRAPHIQUES --- */
+.stats-section {
+  margin-bottom: 50px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px 20px 10px 30px;
+  position: relative;
+}
+.stats-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.stats-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--author-text);
+  text-transform: lowercase;
+}
+.stats-sep { width: 1px; height: 14px; background: var(--border-color); }
+.stats-moy {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--secondary-text);
+}
+.stats-total {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+  opacity: 0.5;
+  margin-left: auto;
+}
+.stats-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px; /* Espace fixe entre les barres */
+  height: 160px;
+  margin-left: 50px;
+  margin-bottom: 25px;
+  border-left: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-left: 10px;
+  justify-content: flex-start; /* Tire les barres à gauche */
+}
+.stats-vbar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 35px; /* Largeur fixe de 35px pour chaque barre */
+  height: 100%;
+  justify-content: flex-end;
+}
+.stats-vbar-count {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  margin-bottom: 3px;
+}
+.stats-vbar-fill {
+  width: 100%;
+  max-width: 40px;
+  min-height: 3px;
+  border-radius: 2px 2px 0 0;
+  transform-origin: bottom;
+  animation: barGrow 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* L'ANIMATION */
+}
+@keyframes barGrow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+.stats-vbar-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  margin-top: 5px;
+}
+.stats-axis-x {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  opacity: 0.4;
+  text-transform: lowercase;
+  text-align: center;
+  margin-left: 50px;
+  letter-spacing: 1px;
+}
+.stats-axis-y {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  opacity: 0.4;
+  text-transform: lowercase;
+  position: absolute;
+  left: 5px;
+  top: 45%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 1px;
+}
+
+/* --- CONTENEUR FLEX (Graphique + Top 3) --- */
+.stats-main-flex {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+.stats-chart-col {
+  flex: 1; /* Prend toute la place restante */
+  min-width: 0;
+}
+
+/* --- TOP 3 (Transformé en colonne à droite) --- */
+.stats-top {
+  flex: 0 0 200px; /* Largeur fixe de 200px pour la colonne de droite */
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+  border-left: 1px solid var(--border-color); /* Ligne de séparation verticale */
+  padding-left: 20px;
+}
+.stats-top-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0; /* Un peu plus d'aération vertical */
+}
+.stats-top-rank {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+}
+.stats-top-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--text-color);
+  flex: 1;
+}
+.stats-top-info {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+  opacity: 0.6;
+  white-space: nowrap; /* Empêche le texte d'aller à la ligne */
+  text-align: right; /* Aligne proprement à droite */
+}
+
+.sidebar-separator {
+  height: 1px;
+  background: var(--border-color);
+  margin: 20px 0;
+  width: 100%;
+}
+
+.player-widget {
+  max-width: 400px;
+  margin: 0 auto 30px auto;
+  padding: 18px 24px;
+  background: var(--quote-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  text-align: center;
+}
+.player-now {
+  margin-bottom: 16px;
+}
+.player-track-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+.player-title {
+  font-family: 'IM Fell English', serif;
+  font-size: 16px;
+  color: var(--text-color);
+}
+.player-artist {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--secondary-text);
+  font-style: italic;
+}
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.player-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.player-btn:hover {
+  border-color: var(--link-color);
+  color: var(--link-color);
+}
+.player-btn-play {
+  width: 42px;
+  height: 42px;
+  font-size: 18px;
+  border-color: var(--link-color);
+  color: var(--link-color);
+}
+.player-btn-play:hover {
+  background: var(--link-color);
+  color: #fff;
+}
+.player-btn-play.playing {
+  background: var(--link-color);
+  color: #fff;
+}
+.player-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.player-time {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  opacity: 0.5;
+  min-width: 32px;
+}
+.player-time-current { text-align: right; }
+.player-time-total { text-align: left; }
+.player-bar {
+  flex: 1;
+  height: 3px;
+  background: var(--border-color);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.player-bar-fill {
+  height: 100%;
+  background: var(--link-color);
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* ── ANIMATIONS PERRUCHES ── */
+/* Il faut que la cage soit "relative" pour que les animations restent à l'intérieur */
+.tamagotchi-cage { position: relative; overflow: hidden; }
+
+/* 1. Le Spin (Jouer) */
+@keyframes birdSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+.bird-spin { animation: birdSpin 0.6s ease-in-out; }
+
+/* 2. La graine qui tombe (Nourrir) */
+.falling-seed {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  pointer-events: none;
+  z-index: 10;
+  animation: fallSeed 0.8s ease-in forwards;
+}
+@keyframes fallSeed {
+  0% { top: 10px; opacity: 1; }
+  100% { top: 65%; opacity: 0; transform: translateX(-50%) translateY(10px); }
+}
+
+/* 3. Le Zzz qui flotte (Dormir) */
+.floating-zzz {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--link-color);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  animation: floatZzz 1.5s ease-in-out forwards;
+}
+@keyframes floatZzz {
+  0% { opacity: 0; transform: translateY(0) scale(0.8); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-20px) scale(1.2); }
+}
+
+/* 4. Le Cœur (Quand on caresse) */
+.pop-heart {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  font-size: 18px;
+  pointer-events: none;
+  z-index: 10;
+  animation: popHeart 0.8s ease-out forwards;
+}
+@keyframes popHeart {
+  0% { transform: scale(0); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; top: 10px; }
+}
+
+/* 5. Le rebond des barres de vie */
+.bar-bounce { animation: barBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes barBounce {
+  0% { transform: scaleY(1); }
+  40% { transform: scaleY(1.6); }
+  100% { transform: scaleY(1); }
+}
+
+/* ── STREAK ── */
+.home-calendar-header > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-streak {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+  min-height: 18px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.home-streak-count {
+  color: var(--link-color);
+  font-weight: 500;
+}
+
+.home-streak-paused {
+  opacity: 0.5;
+  font-style: italic;
+}
+
+/* ── RECAP ANNUEL ── */
+.home-recap-toggle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 5px 15px;
+  cursor: pointer;
+  text-transform: lowercase;
+  transition: all 0.2s;
+  margin: 0 auto 20px auto;
+  display: block;
+}
+.home-recap-toggle:hover {
+  border-color: var(--link-color);
+  color: var(--link-color);
+}
+
+.home-recap {
+  display: none; /* Caché par défaut */
+  text-align: center;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 40px;
+}
+.home-recap.visible {
+  display: block;
+}
+/* Classe qui va servir à cacher le calendrier quand on ouvre le recap */
+.hide-for-recap {
+  display: none !important;
+}
+
+.home-recap-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+/* ── Bandeau principal du bilan ── */
+.recap-headline {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+.recap-stat-num {
+  font-family: 'IM Fell English', serif;
+  font-size: 64px;
+  font-weight: 400;
+  color: var(--author-text);
+  line-height: 1;
+}
+.recap-stat-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--secondary-text);
+  text-transform: lowercase;
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+.recap-stat-detail {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--text-color);
+  line-height: 1.7;
+  margin-top: 8px;
+  max-width: 300px;
+}
+
+/* ── Sections du bilan ── */
+.recap-section { margin-top: 45px; }
+.recap-section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--secondary-text);
+  text-transform: lowercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.recap-empty {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--secondary-text);
+  padding: 30px 0 10px;
+}
+
+/* ── Heatmap annuelle (façon contributions) ── */
+.recap-heatmap { overflow-x: auto; padding-bottom: 8px; }
+.hm-inner { width: max-content; margin: 0 auto; }
+.hm-months {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 11px;
+  gap: 3px;
+  margin-bottom: 4px;
+}
+.hm-months span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  white-space: nowrap;
+}
+.hm-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, 11px);
+  grid-auto-columns: 11px;
+  gap: 3px;
+}
+.hm-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  display: block;
+}
+.hm-off { visibility: hidden; }
+.hm-l0 { background: var(--hm-0); }
+.hm-l1 { background: var(--hm-1); }
+.hm-l2 { background: var(--hm-2); }
+.hm-l3 { background: var(--hm-3); }
+.hm-l4 { background: var(--hm-4); }
+.recap-heatmap-legend {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: var(--secondary-text);
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.recap-heatmap-legend .hm-cell { width: 9px; height: 9px; }
+
+/* ── Précisions ── */
+.recap-precision-row {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--text-color);
+  line-height: 2;
+}
+
+/* ── Coups de cœur ── */
+.recap-fav-note {
+  display: inline-block;
+  font-size: 10px;
+  color: var(--star-color);
+  border: 1px solid var(--star-color);
+  border-radius: 12px;
+  padding: 1px 8px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* ── v36 (C1) : catégories du bilan repliables (motif creator-toggle) ── */
+h2.recap-cat-toggle {
+  cursor: pointer;
+  user-select: none;
+  position: relative; /* pour coller la flèche à droite */
+}
+.recap-cat-arrow {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  opacity: 0.4;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  padding-bottom: 10px;
+}
+h2.recap-cat-toggle:hover .recap-cat-arrow { opacity: 0.8; }
+h2.recap-cat-toggle.recap-cat-closed .recap-cat-arrow {
+  transform: translateY(-50%) rotate(-90deg); /* replié */
+}
+
+/* ── v36 (A2) : bilan — le zoom de survol reste, mais les œuvres ne sont
+   pas cliquables : retour au curseur normal (plus d'indice « main ») ── */
+#recap-favorites .book-card,
+#recap-visual .book-card { cursor: default; }
+
+/* ── FORMAT MUSIQUE RECAP ── */
+.recap-music-card { width: 180px; }
+.recap-music-card img { 
+  width: 100%; 
+  height: 180px; 
+  object-fit: cover; 
+  object-position: center; 
+  border-radius: 2px; 
+  box-shadow: 0 4px 8px var(--shadow-color); 
+}
+
+/* ── FORMAT FILMS/SÉRIES RECAP ── */
+.recap-ecrans-card { width: 180px; }
+.recap-ecrans-card img { 
+  height: 270px; 
+  object-position: center; 
+}
+
+/* ── RETIRER LE FLOU AU SURVOL DANS LE RECAP ── */
+#recap-visual .book-card:hover img[style*="blur"] {
+  filter: none !important; /* Force la suppression du flou au survol */
+}
+/* ── STATUTS JOURNAL ── */
+.popup-item-status {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  text-transform: lowercase;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+.status-ongoing { color: var(--link-color); font-style: italic; }
+.status-dropped { color: #e57373; font-style: italic; }
+.status-done { color: var(--secondary-text); opacity: 0.6; }
+
+.calendar-status-dot {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  z-index: 3;
+  pointer-events: none;
+}
+.calendar-status-dot.ongoing { background: var(--link-color); }
+.calendar-status-dot.dropped { background: #e57373; }
+
+/* ── POSITIONNEMENT DES BADGES SUR LES CARTES ── */
+.book-card { position: relative; }
+
+/* ── RÉDUIRE LES CRÉATEURS ── */
+h2.creator-toggle {
+  cursor: pointer;
+  user-select: none;
+  position: relative; /* Pour pouvoir coller la flèche à droite */
+}
+.creator-arrow {
+  position: absolute;
+  right: 0; /* Colle la flèche tout à droite */
+  top: 50%;
+  transform: translateY(-50%); /* Centre verticalement */
+  font-size: 10px;
+  opacity: 0.4;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  padding-bottom: 10px;
+}
+h2.creator-toggle:hover .creator-arrow {
+  opacity: 0.8;
+}
+h2.collapsed-creator .creator-arrow {
+  transform: translateY(-50%) rotate(-90deg); /* La flèche tourne quand c'est replié */
+}
+.hidden-books {
+  display: none !important; /* Cache la grille et la moyenne */
+}
+
+/* ── RECHERCHE GLOBALE ── */
+.global-search-input {
+  width: 100%;
+  margin: 5px 0; /* Réduit l'écart avec Accueil et la barre */
+  padding: 6px 10px; /* Aligne bien le texte à l'intérieur */
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box; /* Assure que la barre prend exactement la bonne largeur */
+}
+.global-search-input:focus { border-color: var(--link-color); }
+.global-search-input::placeholder { color: var(--secondary-text); opacity: 0.6; }
+
+/* ── PALETTE DE RECHERCHE GLOBALE (CTRL+K) ── */
+#global-search { cursor: pointer; }
+.search-palette {
+  display: none;
+  position: fixed; inset: 0; z-index: 3000;
+  background: rgba(0,0,0,0.45);
+  align-items: flex-start; justify-content: center;
+  padding: 10vh 15px 15px;
+}
+.search-palette.open { display: flex; }
+.search-palette-panel {
+  width: 560px; max-width: 100%; max-height: 72vh;
+  display: flex; flex-direction: column;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  overflow: hidden;
+  animation: palette-in 0.15s ease;
+}
+@keyframes palette-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+.search-palette-input {
+  width: 100%; box-sizing: border-box;
+  padding: 15px 18px;
+  border: none; border-bottom: 1px solid var(--border-color);
+  background: transparent; color: var(--text-color);
+  font-family: 'Space Grotesk', sans-serif; font-size: 16px; outline: none;
+  flex-shrink: 0;
+}
+.search-palette-input::placeholder { color: var(--secondary-text); opacity: 0.6; }
+.search-palette-results { overflow-y: auto; padding: 8px; flex: 1; }
+.search-palette-hint {
+  text-align: center; padding: 30px 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px; color: var(--secondary-text);
+}
+.gs-item.selected { background: var(--sidebar-bg); }
+.gs-item mark { background: none; color: var(--link-color); }
+.search-palette-footer {
+  padding: 8px 14px; border-top: 1px solid var(--border-color);
+  font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--secondary-text);
+  display: flex; gap: 16px; flex-shrink: 0;
+}
+.gs-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px; border-radius: 8px;
+  text-decoration: none; color: var(--text-color);
+  transition: background 0.2s;
+}
+.gs-item:hover { background: var(--sidebar-bg); }
+.gs-item img {
+  width: 32px; height: 48px; object-fit: cover;
+  border-radius: 2px; box-shadow: 0 1px 3px var(--shadow-color);
+  flex-shrink: 0;
+}
+.gs-item-info { flex: 1; min-width: 0; text-align: left; }
+.gs-item-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px; font-weight: 500;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: var(--author-text);
+}
+.gs-item-sub {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px; color: var(--secondary-text);
+  text-transform: lowercase;
+}
+.gs-no-results {
+  text-align: center; padding: 30px 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; color: var(--secondary-text);
+}
+
+/* ── AVATAR PAR DÉFAUT (RECHERCHE) ── */
+.gs-creator-avatar {
+  width: 32px;
+  height: 48px;
+  background: var(--sidebar-bg);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px var(--shadow-color);
+}
+.gs-creator-avatar svg {
+  width: 20px;
+  height: 20px;
+  color: var(--secondary-text);
+}
+
+/* Bouton loupe : ouvre la palette de recherche sur mobile
+   (le trigger sidebar n'y est pas toujours visible). */
+#search-toggle { display: none; }
+
+  /* ── ÉTATS VIDES ── */
+.empty-state {
+  color: var(--secondary-text);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  padding: 40px 0;
+  text-align: center;
+}
+
+/* ═══ v36 (G1) : contours lumineux gem / coup de cœur renforcés ═══
+   Même structure des deux côtés (anneau + double halo + particules
+   blanches scintillantes) — seule la couleur change : cohérence visuelle
+   entre toutes les catégories. Animations limitées à opacity/transform. */
+.coup-de-coeur-card img {
+  box-shadow: 0 0 0 2px rgba(236, 64, 122, 0.78), 0 0 12px rgba(236, 64, 122, 0.55), 0 0 28px rgba(236, 64, 122, 0.35), 0 4px 8px var(--shadow-color) !important;
+}
+.gem-card img {
+  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.78), 0 0 12px rgba(66, 165, 245, 0.55), 0 0 28px rgba(66, 165, 245, 0.35), 0 4px 8px var(--shadow-color) !important;
+}
+/* ── particules de lumière blanches (2 points scintillants par carte) ── */
+.coup-de-coeur-card::before,
+.coup-de-coeur-card::after,
+.gem-card::before,
+.gem-card::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.95);
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  animation: badgeSparkle 3.4s ease-in-out infinite;
+}
+.coup-de-coeur-card::before,
+.gem-card::before { top: 7px; left: 9px; }
+.coup-de-coeur-card::after,
+.gem-card::after { top: 36px; right: 9px; animation-delay: 1.7s; }
+@keyframes badgeSparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.95; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coup-de-coeur-card::before,
+  .coup-de-coeur-card::after,
+  .gem-card::before,
+  .gem-card::after { animation: none; opacity: 0.4; }
+}
+
+/* ═══ PANTHÉON (STATS) — carrousels horizontaux des 5/5 ═══ */
+.pantheon {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+.pantheon .stats-header { margin-bottom: 15px; }
+.pantheon-total {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--star-color);
+}
+.pantheon-row { margin-bottom: 18px; }
+.pantheon-row:last-child { margin-bottom: 5px; }
+.pantheon-row-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--secondary-text);
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.pantheon-row-count { font-size: 11px; color: var(--link-color); }
+.pantheon-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+.pantheon-strip::-webkit-scrollbar { height: 6px; }
+.pantheon-strip::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 2px; }
+.pantheon-strip::-webkit-scrollbar-track { background: transparent; }
+/* v36 (S4) : format uniforme — chaque case fait exactement 74×110, les
+   couvertures larges sont recadrées (object-fit: cover), la grille reste
+   régulière et ne déborde plus. */
+.pantheon-cover {
+  flex: 0 0 74px;
+  width: 74px;
+  height: 110px;
+  background: var(--sidebar-bg);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.pantheon-cover img {
+  display: block;
+  width: 74px;
+  height: 110px;
+  object-fit: cover;
+  object-position: center;
+  transition: filter 0.15s;
+  box-shadow: 0 0 0 1px rgba(184, 134, 11, 0.45), 0 4px 8px var(--shadow-color);
+}
+.pantheon-cover.no-cover { box-shadow: inset 0 0 0 1px var(--border-color); }
+.pantheon-cover.has-link { cursor: pointer; }
+.pantheon-cover.has-link:hover img { filter: brightness(1.12); }
+/* v36 (S1) : œuvres hentai — flou permanent, levé au survol PC uniquement
+   (même contrat que .hentai-card ; au doigt le voile ne se colle pas) */
+.pantheon-blur img {
+  filter: blur(9px) saturate(1.1);
+  transition: filter 0.3s;
+}
+@media (hover: hover) {
+  .pantheon-blur:hover img { filter: blur(0) saturate(1); }
+}
+
+/* ═══ SÉVÉRITÉ COMPARÉE (STATS) ═══ */
+.sev-block {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+/* v36 (S2) : ligne de lecture sous l'en-tête (remplace « comment tu notes… ») */
+.sev-intro {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+  margin: -12px 0 14px;
+  text-align: left;
+}
+.sev-head-note {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--secondary-text);
+}
+.sev-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.sev-label {
+  flex: 0 0 150px;
+  text-align: right;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--secondary-text);
+  text-transform: lowercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sev-asterisk { color: var(--star-color); }
+.sev-track {
+  flex: 1 1 auto;
+  height: 14px;
+  background: var(--sidebar-bg);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.sev-fill { height: 100%; border-radius: 8px; }
+.sev-val {
+  flex: 0 0 42px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--author-text);
+}
+.sev-sub {
+  margin: 0 0 10px 162px;
+  text-align: left;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--secondary-text);
+}
+.sev-note {
+  margin: 16px 0 0 162px;
+  text-align: left;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--secondary-text);
+  border-top: 1px solid var(--border-color);
+  padding-top: 10px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PERRUCHES PASSIVES — le perchoir ambulant
+   Une perruche quitte parfois sa cage (page à propos), vient
+   se poser en bas à droite pendant que l'on navigue, fait sa
+   vie (picore, lisse ses plumes, somnole…), puis rentre au nid.
+   100 % décoratif : pointer-events none, zéro impact sur la page.
+   ═══════════════════════════════════════════════════════════ */
+.budgie-ambient {
+  position: fixed;
+  right: var(--br, 18px); /* position pilotée par JS : le perchoir ambulant */
+  bottom: var(--bb, 10px);
+  width: 84px;
+  height: 104px;
+  z-index: 40; /* au-dessus du contenu, sous la palette (3000) et les popups (1000) */
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.budgie-ambient.ba-visible { opacity: 1; visibility: visible; }
+
+/* ── Vols d'aller-retour ── */
+.budgie-ambient.ba-fly-in { animation: budgieFlyIn 1.05s cubic-bezier(0.34, 0.72, 0.32, 1) both; }
+.budgie-ambient.ba-fly-out { animation: budgieFlyOut 0.85s ease-in both; }
+@keyframes budgieFlyIn {
+  0%   { opacity: 0; transform: translate(160px, -48px) rotate(14deg); }
+  55%  { opacity: 1; transform: translate(-12px, 5px) rotate(-5deg); }
+  76%  { transform: translate(3px, -2px) rotate(2deg); }
+  100% { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+}
+@keyframes budgieFlyOut {
+  0%   { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+  100% { opacity: 0; transform: translate(170px, -72px) rotate(16deg); }
+}
+/* ── Perchoir ambulant : elle redécolle vers un autre spot de la page ── */
+.budgie-ambient.ba-across { animation: budgieFlyAcross 1.15s cubic-bezier(0.45, 0.05, 0.35, 1) both; }
+@keyframes budgieFlyAcross {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  14%  { transform: translate(calc(var(--wx, 0px) * 0.08), -16px) rotate(-8deg); }
+  52%  { transform: translate(calc(var(--wx, 0px) * 0.55), calc(var(--wy, 0px) * 0.55 - 34px)) rotate(4deg); }
+  100% { transform: translate(var(--wx, 0px), var(--wy, 0px)) rotate(0deg); }
+}
+/* battement d'ailes pendant les vols */
+.budgie-ambient.flying .ab-wing { animation: abFlap 0.18s ease-in-out infinite alternate; }
+@keyframes abFlap {
+  from { transform: rotate(-34deg); }
+  to   { transform: rotate(18deg); }
+}
+/* petit amortissement d'atterrissage */
+.budgie-ambient.ba-landed .ab-all { animation: abLand 0.38s cubic-bezier(0.3, 1.6, 0.5, 1) 1; }
+@keyframes abLand {
+  0%   { transform: scaleY(0.9) scaleX(1.08); }
+  100% { transform: scaleY(1) scaleX(1); }
+}
+
+/* ── Le support : oiseau + branche ── */
+.ba-bird-zone { position: relative; width: 100%; }
+.ba-bird-holder { position: relative; width: 100%; height: 84px; margin-bottom: -4px; }
+.ba-bird-holder svg { width: 100%; height: 100%; display: block; }
+.ba-perch { display: block; width: 88%; margin: 0 auto; height: 14px; opacity: 0.9; }
+.ba-shadow { display: block; width: 34px; height: 4px; margin: 1px auto 0; border-radius: 50%; background: var(--shadow-color); transition: opacity 0.3s ease; }
+.budgie-ambient.flying .ba-shadow { opacity: 0; } /* pas d'ombre au sol en plein vol */
+
+/* ── Poses (classes posées sur .budgie-ambient, animations sur les groupes SVG) ── */
+.budgie-ambient .ab-all  { transform-box: fill-box; transform-origin: 50% 100%; animation: abBreathe 3.4s ease-in-out infinite; }
+.budgie-ambient .ab-head { transform-box: fill-box; transform-origin: 50% 96%; }
+.budgie-ambient .ab-wing { transform-box: fill-box; transform-origin: 78% 18%; }
+.budgie-ambient .ab-eye-open  { transform-box: fill-box; transform-origin: center; animation: abBlink 4.8s infinite; }
+.budgie-ambient .ab-eye-closed,
+.budgie-ambient .ab-zzz { opacity: 0; }
+@keyframes abBlink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  94%, 97% { transform: scaleY(0.08); }
+}
+@keyframes abBreathe {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.985); }
+}
+
+/* regarder autour */
+.budgie-ambient.pose-look .ab-head { animation: abLook 5.2s ease-in-out infinite; }
+@keyframes abLook {
+  0%, 100% { transform: rotate(0deg); }
+  22% { transform: rotate(-11deg); }
+  45% { transform: rotate(-11deg); }
+  68% { transform: rotate(7deg); }
+}
+
+/* picorer */
+.budgie-ambient.pose-peck .ab-all { animation: abPeck 3.1s ease-in-out infinite; }
+@keyframes abPeck {
+  0%, 62%, 100% { transform: rotate(0deg) translateY(0); }
+  8%  { transform: rotate(25deg) translateY(7px); }
+  16% { transform: rotate(0deg) translateY(0); }
+  26% { transform: rotate(25deg) translateY(7px); }
+  36% { transform: rotate(0deg) translateY(0); }
+  48% { transform: rotate(16deg) translateY(4px); }
+}
+
+/* lisser ses plumes */
+.budgie-ambient.pose-preen .ab-head { animation: abPreenHead 4.4s ease-in-out infinite; }
+.budgie-ambient.pose-preen .ab-wing { animation: abPreenWing 4.4s ease-in-out infinite; }
+@keyframes abPreenHead {
+  0%, 100% { transform: rotate(0deg); }
+  30%, 70% { transform: rotate(-24deg) translate(-2px, 1px); }
+}
+@keyframes abPreenWing {
+  0%, 100% { transform: rotate(0deg); }
+  30%, 70% { transform: rotate(-52deg); }
+}
+
+/* somnoler */
+.budgie-ambient.pose-sleep .ab-all { animation: abSleepBody 3.8s ease-in-out infinite; }
+.budgie-ambient.pose-sleep .ab-eye-open { opacity: 0; animation: none; }
+.budgie-ambient.pose-sleep .ab-eye-closed { opacity: 1; }
+.budgie-ambient.pose-sleep .ab-zzz { opacity: 1; }
+.budgie-ambient.pose-sleep .ab-zzz text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  fill: var(--link-color);
+  transform-box: fill-box;
+  animation: abZzzFloat 2.6s ease-in-out infinite;
+}
+.budgie-ambient.pose-sleep .ab-zzz text:nth-child(2) { animation-delay: 0.5s; }
+.budgie-ambient.pose-sleep .ab-zzz text:nth-child(3) { animation-delay: 1s; }
+@keyframes abZzzFloat {
+  0% { opacity: 0; transform: translateY(2px); }
+  35% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-7px); }
+}
+@keyframes abSleepBody {
+  0%, 100% { transform: translateY(4px) scaleY(1); }
+  50% { transform: translateY(4px) scaleY(0.96); }
+}
+
+/* ── Réactions ponctuelles ── */
+/* petit saut (chips de filtres, retrouvailles…) */
+.budgie-ambient.act-hop .ba-bird-holder { animation: abHop 0.55s cubic-bezier(0.3, 1.5, 0.5, 1) 1; }
+@keyframes abHop {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  35% { transform: translateY(-12px) scaleY(1.04); }
+  58% { transform: translateY(0) scaleY(0.92); }
+  78% { transform: translateY(0) scaleY(1); }
+}
+/* « ? » — recherche sans résultat */
+.budgie-ambient .ba-mark {
+  position: absolute;
+  top: -8px;
+  right: 4px;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--link-color);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.budgie-ambient.act-mark .ba-mark { opacity: 1; transform: scale(1) rotate(9deg); }
+.budgie-ambient.act-mark .ab-head { animation: abCurious 1.5s ease-in-out infinite; }
+@keyframes abCurious {
+  0%, 100% { transform: rotate(0deg); }
+  30%, 70% { transform: rotate(-13deg); }
+}
+/* cœurs / notes de musique qui montent */
+.budgie-ambient .ba-fx { position: absolute; inset: 0; }
+.budgie-ambient .ba-fx span {
+  position: absolute;
+  top: 4px;
+  left: 20px;
+  font-size: 16px;
+  pointer-events: none;
+  animation: baRise 1.05s ease-out forwards;
+}
+@keyframes baRise {
+  0% { opacity: 0; transform: translateY(6px) scale(0.5); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-28px) scale(1.15); }
+}
+
+/* ── Cage vide quand l'oiseau explore ── */
+.cage-away {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--secondary-text);
+  text-align: center;
+  padding: 0 8px;
+  opacity: 0.85;
+}
+
+/* ── Mobile : plus petite, s'efface pendant le scroll ── */
+.budgie-ambient.ba-scroll-hide { opacity: 0 !important; }
+
+/* ── Accessibilité : mouvement réduit → apparitions fondues, poses statiques ── */
+@media (prefers-reduced-motion: reduce) {
+  .budgie-ambient,
+  .budgie-ambient * { animation: none !important; }
+  .budgie-ambient { transition: opacity 0.25s ease; }
+}/* ═══════ Carte Wrapped (chantier 13) ═══════ */
+/* v36 (W4) : le bouton passe sous le sélecteur d'année, parfaitement centré —
+   il s'insère dans la marge du rang d'année pour former un ensemble équilibré
+   [‹ année ›] puis [carte à partager] au-dessus du bandeau de chiffres. */
+.recap-wrapped-row { display: flex; justify-content: center; margin: -26px 0 24px; }
+.wrapped-open-btn {
+  background: none; border: 1px solid var(--border-color); color: var(--secondary-text);
+  border-radius: 999px; padding: 5px 14px; font-size: 13px; cursor: pointer;
+  font-family: inherit; letter-spacing: .4px; transition: color .2s, border-color .2s;
+}
+.wrapped-open-btn:hover { color: var(--text-color); border-color: var(--text-color); }
+
+.wrapped-overlay {
+  position: fixed; inset: 0; z-index: 3600; display: none;
+  align-items: center; justify-content: center; padding: 20px;
+  background: rgba(20,16,10,.55); backdrop-filter: blur(4px);
+  animation: wrappedIn .18s ease;
+}
+@keyframes wrappedIn { from { opacity: 0; } to { opacity: 1; } }
+.wrapped-dialog {
+  position: relative; background: var(--bg-color); border: 1px solid var(--border-color);
+  border-radius: 12px; padding: 18px 18px 14px; max-width: 94vw;
+  box-shadow: 0 18px 60px rgba(0,0,0,.35);
+}
+.wrapped-stage canvas {
+  display: block; max-height: 74vh; max-width: 100%; width: auto; height: auto;
+  border: 1px solid var(--border-color); border-radius: 8px;
+}
+.wrapped-actions { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 14px; }
+.wrapped-mode {
+  background: none; border: none; font-size: 20px; cursor: pointer;
+  color: var(--text-color); transition: transform .2s;
+}
+.wrapped-mode:hover { transform: scale(1.2); }
+.wrapped-dl {
+  background: var(--text-color); color: var(--bg-color); border: none; border-radius: 8px;
+  padding: 9px 18px; font-family: inherit; font-size: 14px; cursor: pointer; letter-spacing: .4px;
+}
+.wrapped-dl:hover { opacity: .85; }
+.wrapped-close {
+  position: absolute; top: 8px; right: 12px; background: none; border: none;
+  font-size: 26px; line-height: 1; cursor: pointer; color: var(--secondary-text);
+}
+.wrapped-close:hover { color: var(--text-color); }
+@media (prefers-reduced-motion: reduce) { .wrapped-overlay { animation: none; } }
+@media (max-width: 720px) {
+  .wrapped-dialog { padding: 10px 10px 10px; }
+  .wrapped-stage canvas { max-height: 64vh; }
+  .wrapped-actions { gap: 12px; margin-top: 10px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   v22 — COVER STACK : la cover entière sur un fond d'elle-même floutée
+   ─────────────────────────────────────────────────────────────
+   • La cover s'affiche ENTIÈRE (object-fit: contain) dans un slot 2/3
+     (1/1 pour la musique) — plus aucune couverture coupée.
+   • Derrière, la même image zoomée + floutée : le « contour » est la
+     continuité de la cover (peint une fois la cover réellement chargée).
+   • Contours gem (bleu) et coup de cœur (rose) reportés sur le stack
+     → ils survivent à la nouvelle structure, comme avant.
+   • Œuvres masquées (blur) : fond renforcé (30px) pour ne rien révéler.
+   ═══════════════════════════════════════════════════════════════ */
+.cover-stack {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--sidebar-bg);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+.cover-stack.ratio-square { aspect-ratio: 1 / 1; }
+.cover-stack .cover-blur {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.18);
+  filter: blur(14px) saturate(1.25);
+}
+.cover-stack.blur-zone .cover-blur { filter: blur(30px) saturate(1.1); }
+.cover-stack > img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* Placeholder (cover absente) : remplit le slot, sans double ombre */
+.cover-stack > .anime-placeholder,
+.cover-stack > .manga-placeholder {
+  position: relative;
+  z-index: 1;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* ── Contours gem / coup de cœur (v22 : rétablis sur le stack ; v36 G1 : halos renforcés) ── */
+.coup-de-coeur-card .cover-stack {
+  box-shadow: 0 0 0 2px rgba(236, 64, 122, 0.78), 0 0 12px rgba(236, 64, 122, 0.55), 0 0 28px rgba(236, 64, 122, 0.35), 0 4px 8px var(--shadow-color) !important;
+}
+.gem-card .cover-stack {
+  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.78), 0 0 12px rgba(66, 165, 245, 0.55), 0 0 28px rgba(66, 165, 245, 0.35), 0 4px 8px var(--shadow-color) !important;
+}

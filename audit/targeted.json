@@ -1,0 +1,426 @@
+{
+  "phase": "targeted",
+  "browsers": [
+    {
+      "name": "chrome",
+      "version": "157.0.8103.51"
+    },
+    {
+      "name": "edge",
+      "version": "157.0.4341.60"
+    },
+    {
+      "name": "firefox",
+      "unavailable": "browserType.launch: Executable doesn't exist at C:\\Users\\akrmm\\AppData\\Local\\ms-playwright\\firefox-1538\\firefox\\firefox.exe"
+    },
+    {
+      "name": "webkit",
+      "unavailable": "browserType.launch: Executable doesn't exist at C:\\Users\\akrmm\\AppData\\Local\\ms-playwright\\webkit-2336\\Playwright.exe"
+    }
+  ],
+  "pages": [],
+  "errors": [],
+  "scenarios": [
+    {
+      "name": "empty-search-bibliographie",
+      "ok": true
+    },
+    {
+      "name": "empty-search-ecrans",
+      "ok": true
+    },
+    {
+      "name": "empty-search-jeux",
+      "ok": true
+    },
+    {
+      "name": "empty-search-musique",
+      "ok": true
+    },
+    {
+      "name": "empty-search-anime",
+      "ok": true
+    },
+    {
+      "name": "empty-search-manga",
+      "ok": true
+    },
+    {
+      "name": "search-html-escaped",
+      "ok": true
+    },
+    {
+      "name": "screen-sort-preserves-search-films",
+      "ok": true
+    },
+    {
+      "name": "screen-sort-preserves-search-series",
+      "ok": true
+    },
+    {
+      "name": "anime-favorites",
+      "ok": true
+    },
+    {
+      "name": "preferences-reload",
+      "ok": true
+    },
+    {
+      "name": "birds-actions",
+      "ok": true
+    },
+    {
+      "name": "wrapped-export",
+      "ok": true
+    },
+    {
+      "name": "next-keeps-playing",
+      "ok": true
+    },
+    {
+      "name": "previous-keeps-playing",
+      "ok": true
+    },
+    {
+      "name": "next-preserves-pause",
+      "ok": true
+    },
+    {
+      "name": "calendar-focus-contained",
+      "ok": true
+    },
+    {
+      "name": "calendar-focus-restored",
+      "ok": true
+    },
+    {
+      "name": "mobile-menu-focus-contained",
+      "ok": true
+    },
+    {
+      "name": "anime-load-more",
+      "ok": true
+    },
+    {
+      "name": "storage-denied",
+      "ok": true,
+      "errors": [],
+      "finite": true
+    },
+    {
+      "name": "invalid-prefs",
+      "ok": true,
+      "errors": [],
+      "finite": true
+    },
+    {
+      "name": "invalid-birds",
+      "ok": true,
+      "errors": [],
+      "finite": true
+    },
+    {
+      "name": "season-halloween",
+      "ok": true
+    },
+    {
+      "name": "season-noel",
+      "ok": true
+    },
+    {
+      "name": "season-valentin",
+      "ok": true
+    },
+    {
+      "name": "offline-reload",
+      "ok": true
+    }
+  ],
+  "stableVisual": [
+    {
+      "width": 390,
+      "changedPixels": 5964
+    },
+    {
+      "width": 1440,
+      "changedPixels": 11331
+    }
+  ],
+  "performance": {
+    "navigation": {
+      "name": "http://127.0.0.1:54583/",
+      "entryType": "navigation",
+      "startTime": 0,
+      "duration": 527.0999999046326,
+      "navigationId": 9518,
+      "initiatorType": "navigation",
+      "deliveryType": "",
+      "nextHopProtocol": "http/1.1",
+      "renderBlockingStatus": "non-blocking",
+      "contentType": "text/html",
+      "contentEncoding": "",
+      "workerStart": 0,
+      "workerRouterEvaluationStart": 0,
+      "workerCacheLookupStart": 0,
+      "workerMatchedSourceType": "",
+      "workerFinalSourceType": "",
+      "redirectStart": 0,
+      "redirectEnd": 0,
+      "fetchStart": 0.40000009536743164,
+      "domainLookupStart": 0.40000009536743164,
+      "domainLookupEnd": 0.40000009536743164,
+      "connectStart": 0.40000009536743164,
+      "secureConnectionStart": 0,
+      "connectEnd": 0.40000009536743164,
+      "requestStart": 1,
+      "responseStart": 1.9000000953674316,
+      "firstInterimResponseStart": 0,
+      "finalResponseHeadersStart": 1.9000000953674316,
+      "responseEnd": 2.200000286102295,
+      "transferSize": 18609,
+      "encodedBodySize": 18309,
+      "decodedBodySize": 18309,
+      "responseStatus": 200,
+      "serverTiming": [],
+      "unloadEventStart": 0,
+      "unloadEventEnd": 0,
+      "domInteractive": 140.40000009536743,
+      "domContentLoadedEventStart": 140.40000009536743,
+      "domContentLoadedEventEnd": 140.5,
+      "domComplete": 523.5999999046326,
+      "loadEventStart": 523.5999999046326,
+      "loadEventEnd": 527.0999999046326,
+      "type": "navigate",
+      "redirectCount": 0,
+      "activationStart": 0,
+      "criticalCHRestart": 0,
+      "notRestoredReasons": null,
+      "confidence": {
+        "randomizedTriggerRate": 0.4994798,
+        "value": "high"
+      }
+    },
+    "paint": [
+      {
+        "name": "first-paint",
+        "entryType": "paint",
+        "startTime": 128,
+        "duration": 0,
+        "navigationId": 9518,
+        "paintTime": 116.2000002861023,
+        "presentationTime": 128
+      },
+      {
+        "name": "first-contentful-paint",
+        "entryType": "paint",
+        "startTime": 128,
+        "duration": 0,
+        "navigationId": 9518,
+        "paintTime": 116.2000002861023,
+        "presentationTime": 128
+      }
+    ],
+    "resources": [
+      {
+        "name": "css2?family=IM+Fell+English:ital@0;1&family=Space+Grotesk:wght@400;500&display=swap",
+        "bytes": 879,
+        "duration": 79.69999980926514
+      },
+      {
+        "name": "style.css?v=37",
+        "bytes": 72516,
+        "duration": 4.400000095367432
+      },
+      {
+        "name": "mobile.css?v=37",
+        "bytes": 18596,
+        "duration": 3.6999998092651367
+      },
+      {
+        "name": "season.css?v=37",
+        "bytes": 10634,
+        "duration": 4
+      },
+      {
+        "name": "image.jpg",
+        "bytes": 38138,
+        "duration": 4.699999809265137
+      },
+      {
+        "name": "pfp.jpg",
+        "bytes": 304428,
+        "duration": 4.900000095367432
+      },
+      {
+        "name": "player-data.js",
+        "bytes": 567,
+        "duration": 9.599999904632568
+      },
+      {
+        "name": "anime-data.js",
+        "bytes": 647995,
+        "duration": 12.099999904632568
+      },
+      {
+        "name": "films-data.js",
+        "bytes": 32937,
+        "duration": 13.400000095367432
+      },
+      {
+        "name": "manga-data.js",
+        "bytes": 43003,
+        "duration": 11
+      },
+      {
+        "name": "books-data.js",
+        "bytes": 63738,
+        "duration": 11.599999904632568
+      },
+      {
+        "name": "journal-data.js",
+        "bytes": 143379,
+        "duration": 11.5
+      },
+      {
+        "name": "series-data.js",
+        "bytes": 1902,
+        "duration": 13.100000381469727
+      },
+      {
+        "name": "games-data.js",
+        "bytes": 7190,
+        "duration": 13.299999713897705
+      },
+      {
+        "name": "music-data.js",
+        "bytes": 26659,
+        "duration": 13.399999618530273
+      },
+      {
+        "name": "season.js?v=37",
+        "bytes": 16791,
+        "duration": 14.399999618530273
+      },
+      {
+        "name": "script.js?v=37",
+        "bytes": 252047,
+        "duration": 13.699999809265137
+      },
+      {
+        "name": "voyage.jpg",
+        "bytes": 486328,
+        "duration": 2.5
+      },
+      {
+        "name": "lachinoise.webp",
+        "bytes": 28380,
+        "duration": 3.3000001907348633
+      },
+      {
+        "name": "onepiecesaison2.jpg",
+        "bytes": 234781,
+        "duration": 3.9000000953674316
+      },
+      {
+        "name": "awaken.jpg",
+        "bytes": 12621,
+        "duration": 3.6000003814697266
+      },
+      {
+        "name": "onepiece.jpg",
+        "bytes": 195099,
+        "duration": 4.200000286102295
+      },
+      {
+        "name": "isaac.jpg",
+        "bytes": 988600,
+        "duration": 7
+      },
+      {
+        "name": "U.webp",
+        "bytes": 129384,
+        "duration": 6.299999713897705
+      },
+      {
+        "name": "delorean.webp",
+        "bytes": 15886,
+        "duration": 6
+      },
+      {
+        "name": "fortniteop.jpg",
+        "bytes": 22223,
+        "duration": 6.5
+      },
+      {
+        "name": "yuuhi.jpg",
+        "bytes": 12940,
+        "duration": 6.599999904632568
+      },
+      {
+        "name": "mirror.jpg",
+        "bytes": 22825,
+        "duration": 8.099999904632568
+      },
+      {
+        "name": "jojo7.jpg",
+        "bytes": 49170,
+        "duration": 7.900000095367432
+      },
+      {
+        "name": "like1.jpg",
+        "bytes": 15122,
+        "duration": 8.300000190734863
+      },
+      {
+        "name": "fengzhong.jpg",
+        "bytes": 32502,
+        "duration": 8.400000095367432
+      },
+      {
+        "name": "orochi.jpg",
+        "bytes": 41916,
+        "duration": 8.600000381469727
+      },
+      {
+        "name": "pfp.jpg",
+        "bytes": 304428,
+        "duration": 7.5
+      }
+    ]
+  },
+  "focusDebug": {
+    "active": "<button class=\"popup-close\" id=\"popup-close-btn\" title=\"fermer\" aria-label=\"fermer\">×</button>",
+    "modals": [
+      {
+        "id": "calendar-popup",
+        "cls": "calendar-popup visible",
+        "display": "flex",
+        "rects": 1
+      },
+      {
+        "id": "mobile-plus-sheet",
+        "cls": "mobile-plus-sheet",
+        "display": "none",
+        "rects": 0
+      },
+      {
+        "id": "review-popup",
+        "cls": "review-popup",
+        "display": "none",
+        "rects": 0
+      },
+      {
+        "id": "search-palette",
+        "cls": "search-palette",
+        "display": "none",
+        "rects": 0
+      },
+      {
+        "id": "",
+        "cls": "wrapped-dialog",
+        "display": "block",
+        "rects": 0
+      }
+    ]
+  }
+}

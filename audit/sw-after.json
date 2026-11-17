@@ -1,0 +1,50 @@
+[
+  {
+    "name": "bytes=2-4",
+    "ok": true
+  },
+  {
+    "name": "bytes=7-",
+    "ok": true
+  },
+  {
+    "name": "bytes=-3",
+    "ok": true
+  },
+  {
+    "name": "bytes=8-99",
+    "ok": true
+  },
+  {
+    "name": "bytes=20-",
+    "ok": true
+  },
+  {
+    "name": "bytes=7-3",
+    "ok": true
+  },
+  {
+    "name": "bytes=-0",
+    "ok": true
+  },
+  {
+    "name": "offline cache miss returns Response.error",
+    "ok": true
+  },
+  {
+    "name": "unavailable cache preserves network navigation",
+    "ok": true
+  },
+  {
+    "name": "cache write failures do not break network",
+    "ok": true
+  },
+  {
+    "name": "revalidation lifetime follows cache write",
+    "ok": true
+  },
+  {
+    "name": "cold audio honours range and stores complete body",
+    "ok": true
+  }
+]

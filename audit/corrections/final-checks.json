@@ -1,0 +1,40 @@
+{
+  "checks": [
+    {
+      "name": "ancien-html-nouveau-script",
+      "ok": true
+    },
+    {
+      "name": "dates-journal-actuel",
+      "ok": true,
+      "details": {
+        "ok": true,
+        "checked": 1150,
+        "years": [
+          "2026"
+        ]
+      }
+    },
+    {
+      "name": "aucune-erreur-js",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "donnees-protegees-inchangees-pendant-reprise",
+      "ok": true
+    }
+  ],
+  "errors": [],
+  "protectedHashes": {
+    "anime-data.js": "8b08b7d6cc7f7e3b4018b7d2116c40e8e3117283e1ceed0c19c9b271bcb730b5",
+    "books-data.js": "0ca96fe9638d3b4e06d3e9f84232a032d874c84957b1188746d5a824fad8434a",
+    "films-data.js": "b53de3f146fd4b9ebcb97fc4087b114210c890830258c0587d64de84e9055f2a",
+    "games-data.js": "cd291d2fc057652de7e2389218613eb92ccc8dadfba4ab624995ba3fc86a1d23",
+    "journal-data.js": "35d1df3786d8cbd98dd93e14008aaf01a290e7e26812302bc1ffcc20705d2298",
+    "manga-data.js": "efcb0b321a4d24b79e5d08ef9c7b6630ff4cbb5876afb70142a92a5e57ef2c50",
+    "music-data.js": "b6fe5178303d26f382eb0e95391548abf6ba540cac8dab039b04e8a64e1e5b2d",
+    "player-data.js": "03b62f7930af644e355f742316a50d7acf2255f5dd38fb5fc05ea6cc451281b1",
+    "series-data.js": "9812d35dd837ba3325d69c5f7b493026d9b2db69ed98616b2c5f2728a5602597"
+  }
+}

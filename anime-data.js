@@ -8015,5 +8015,8 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 35773, title: "Noraneko", note: null, tags: ["short","+","archived"] },
   { id: 61052, title: "Night Diver", note: 3, tags: ["music","+","archived"] },
   { id: 58047, title: "The King of Fighters: Awaken PV", note: null, tags: ["short","archived"] },
+  { id: 65464, title: "Metamorphose (Music)", note: 3, tags: ["music","archived"] },
+  { id: 55300, title: "Wander Burabura Bakkamu", note: null, tags: ["short","archived"] },
+  { id: 55299, title: "Nico/Agony", note: 1.5, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
