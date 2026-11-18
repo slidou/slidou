@@ -1151,4 +1151,7 @@ const journalData = [
 { d: "2026-11-17", t: "anime", title: "Metamorphose (Music)", img: "anime/metamorphose.jpg", note: "music" },
 { d: "2026-11-18", t: "anime", title: "Wander Burabura Bakkamu", img: "anime/bakkamu.jpg", note: "short" },
 { d: "2026-11-18", t: "anime", title: "Nico/Agony", img: "anime/nico.jpg", note: "short" },
+{ d: "2026-11-18", t: "anime", title: "Hachimitsu Suicide Machine", img: "anime/hachimitsu.jpg", note: "short" },
+{ d: "2026-11-18", t: "anime", title: "Tenjin", img: "anime/tenjin.jpg", note: "short" },
+{ d: "2026-11-18", t: "anime", title: "Nestlé CMs", img: "anime/nestlé.jpg", note: "commercial" },
 ];
