@@ -1154,4 +1154,11 @@ const journalData = [
 { d: "2026-11-18", t: "anime", title: "Hachimitsu Suicide Machine", img: "anime/hachimitsu.jpg", note: "short" },
 { d: "2026-11-18", t: "anime", title: "Tenjin", img: "anime/tenjin.jpg", note: "short" },
 { d: "2026-11-18", t: "anime", title: "Nestlé CMs", img: "anime/nestlé.jpg", note: "commercial" },
+{ d: "2026-11-18", t: "livre", title: "Voyage au bout de la nuit", img: "books/voyage.jpg", note: "poursuite de la lecture", status: "en cours" },
+{ d: "2026-11-18", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "", status: "en cours" },
+{ d: "2026-11-19", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "un challenge de fait", status: "en cours" },
+{ d: "2026-11-19", t: "anime", title: "Sayonara Lara", img: "anime/sayonaralara.jpg", note: "normal episode, 1/12", status: "en cours" },
+{ d: "2026-11-19", t: "manga", title: "One Piece", img: "manga/onepiece.jpg", note: "1199/?", status: "en cours" },
+{ d: "2026-11-19", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "un challenge de fait", status: "en cours" },
+{ d: "2026-11-19", t: "anime", title: "Sayonara Lara", img: "anime/sayonaralara.jpg", note: "normal episode, 2-3/12", status: "en cours" },
 ];
