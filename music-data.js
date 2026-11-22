@@ -289,5 +289,8 @@ const musicData = {
   ],
   "Nemzzz": [
     { title: "Gass", note: 3, cover: "music/gass.webp", link: "https://rateyourmusic.com/release/single/nemzzz/gass/", format: "single", tags: ["réécoute"] },
+  ],
+  "The Strokes": [
+    { title: "Reality Awaits", note: 3, cover: "music/realityawaits.webp", link: "https://rateyourmusic.com/release/album/the-strokes/reality-awaits/" },
   ]
 };
