@@ -1177,4 +1177,13 @@ const journalData = [
 { d: "2026-11-22", t: "anime", title: "Surprise 4 U.", img: "anime/surprise.jpg", note: "commercial" },
 { d: "2026-11-22", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "un challenge de fait", status: "en cours" },
 { d: "2026-11-22", t: "anime", title: "Sayonara Lara", img: "anime/sayonaralara.jpg", note: "normal episode, 5-6/12", status: "en cours" },
+{ d: "2026-11-22", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "un challenge de fait", status: "en cours" },
+{ d: "2026-11-22", t: "anime", title: "Jii Coro Comic", img: "anime/coro.jpg", note: "short" },
+{ d: "2026-11-22", t: "anime", title: "Magic Knight Rayearth Pilot", img: "anime/rayearth.jpg", note: "short" },
+{ d: "2026-11-22", t: "anime", title: "Ana no Naka", img: "anime/naka.jpg", note: "short" },
+{ d: "2026-11-22", t: "anime", title: "Onihei Pilot", img: "anime/oniheip.jpg", note: "short" },
+{ d: "2026-11-22", t: "anime", title: "Alita De Shi Lian", img: "anime/alita.jpg", note: "short" },
+{ d: "2026-11-22", t: "anime", title: "Keifuku-san", img: "anime/keifuku.jpg", note: "short" },
+{ d: "2026-11-22", t: "anime", title: "Ponsuke no Haru", img: "anime/ponsuke.jpg", note: "short" },
+{ d: "2026-11-23", t: "anime", title: "Sayonara Lara", img: "anime/sayonaralara.jpg", note: "normal episode, 7-8/12", status: "en cours" },
 ];

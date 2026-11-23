@@ -8031,5 +8031,12 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 43625, title: "Yue Dayue Xiang", note: 0.5, tags: ["short","archived"] },
   { id: 61180, title: "Pokemon to Ohayou Pokemon to Oyasumi", note: null, tags: ["short","+","archived"] },
   { id: 24237, title: "Surprise 4 U.", note: null, tags: ["short","commercial","archived"] },
+  { id: 35454, title: "Jii Coro Comic", note: 0.5, tags: ["short","archived"] },
+  { id: 38372, title: "Magic Knight Rayearth Pilot", note: null, tags: ["short","archived"] },
+  { id: 60030, title: "Ana no Naka", note: 0.5, tags: ["short","archived"] },
+  { id: 37680, title: "Onihei Pilot", note: null, tags: ["short","archived"] },
+  { id: 52754, title: "Alita De Shi Lian", note: 3.5, tags: ["short","gem","archived"] },
+  { id: 36156, title: "Keifuku-san", note: null, tags: ["short","archived"] },
+  { id: 23089, title: "Ponsuke no Haru", note: null, tags: ["short","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];
