@@ -827,5 +827,8 @@ const mangaData = {
   ],
   "OTOSAMA": [
     { id: 125892, title: "Furyou Taimashi Reina", note: 3.5, tags: ["several volumes","gem"] },
+  ],
+  "Toku": [
+    { id: 198116, title: "Dekaketsu Power Harassment Tenchou ni Shiboraretai!", note: 5, tags: ["several volumes","hentai"] },
   ]
 };

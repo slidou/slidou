@@ -8038,5 +8038,7 @@ They managed to make it suck even more than the manga, and I must admit, I wasn'
   { id: 52754, title: "Alita De Shi Lian", note: 3.5, tags: ["short","gem","archived"] },
   { id: 36156, title: "Keifuku-san", note: null, tags: ["short","archived"] },
   { id: 23089, title: "Ponsuke no Haru", note: null, tags: ["short","archived"] },
+  { id: 22123, title: "Inugami-san to Nekoyama-san", note: 2.5, tags: ["short episode","archived"] },
+  { id: 25861, title: "Inugami-san to Nekoyama-san: Nekoyama-san to Onsen Ryokou", note: 2.5, tags: ["short","+","archived"] },
   { id: 21, title: "One Piece", note: 5, tags: ["normal episode","favorite","rank:1"] },
 ];

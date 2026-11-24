@@ -1163,6 +1163,7 @@ const journalData = [
 { d: "2026-11-19", t: "anime", title: "Sayonara Lara", img: "anime/sayonaralara.jpg", note: "normal episode, 2-3/12", status: "en cours" },
 { d: "2026-11-20", t: "anime", title: "Sayonara Lara", img: "anime/sayonaralara.jpg", note: "normal episode, 4/12", status: "en cours" },
 { d: "2026-11-20", t: "anime", title: "Steel Ball Run: JoJo no Kimyou na Bouken", img: "anime/jojo7.jpg", note: "normal episode, 10/?", status: "en cours" },
+{ d: "2026-11-20", t: "manga", title: "Shouwaru Gal Shitsukerareru", img: "manga/shitsukerareru.jpg", note: "hentai, 1/2", blur: true, status: "en cours" },
 { d: "2026-11-21", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "trois challenges de fait", status: "en cours" },
 { d: "2026-11-21", t: "musique", title: "Reality Awaits", img: "music/realityawaits.webp", note: "première écoute" },
 { d: "2026-11-21", t: "anime", title: "Blame! Movie", img: "anime/blamemovie.jpg", note: "movie, c'était vraiment bien" },
@@ -1185,5 +1186,9 @@ const journalData = [
 { d: "2026-11-22", t: "anime", title: "Alita De Shi Lian", img: "anime/alita.jpg", note: "short" },
 { d: "2026-11-22", t: "anime", title: "Keifuku-san", img: "anime/keifuku.jpg", note: "short" },
 { d: "2026-11-22", t: "anime", title: "Ponsuke no Haru", img: "anime/ponsuke.jpg", note: "short" },
+{ d: "2026-11-22", t: "manga", title: "Shouwaru Gal Shitsukerareru", img: "manga/shitsukerareru.jpg", note: "hentai, 2/2", blur: true },
 { d: "2026-11-23", t: "anime", title: "Sayonara Lara", img: "anime/sayonaralara.jpg", note: "normal episode, 7-8/12", status: "en cours" },
+{ d: "2026-11-23", t: "jeu", title: "The Binding of Isaac: Repentance", img: "games/isaac.jpg", note: "un challenge de fait", status: "en cours" },
+{ d: "2026-11-23", t: "anime", title: "Inugami-san to Nekoyama-san", img: "anime/nekoyama.jpg", note: "short episode, 1-12/12" },
+{ d: "2026-11-23", t: "anime", title: "Inugami-san to Nekoyama-san: Nekoyama-san to Onsen Ryokou", img: "anime/nekoyamashort.jpg", note: "short" },
 ];
